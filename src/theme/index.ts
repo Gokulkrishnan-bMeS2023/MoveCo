@@ -6,8 +6,8 @@ const system = createSystem(defaultConfig, {
       colors: {
         brand: {
           50: { value: "#e5f4ff" },
-          500: { value: "#0077ff" },
-          900: { value: "#003e8a" },
+          500: { value: "#ff9100" },
+          900: { value: "#008a07" },
         },
       },
       fonts: {
