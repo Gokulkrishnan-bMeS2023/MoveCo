@@ -177,9 +177,9 @@ const OurInsurance = () => {
           {/* <Features /> */}
           <SimpleGrid
             mt={12}
-            columns={{ base: 1, sm: 2, lg: 4 }}
+            columns={{ base: 1, sm: 2, md: 4 }}
             gap={8}
-            justifyItems="center"
+            
           >
             {coverageFeatures.map((item, index) => (
               <Box
@@ -191,7 +191,6 @@ const OurInsurance = () => {
                 borderRadius="2xl"
                 p={8}
                 w="100%"
-                maxW="285px"
                 minH="340px"
                 display="flex"
                 flexDirection="column"
