@@ -18,4 +18,35 @@ export const UrlPages: AppRoute[] = [
     path: "/contact-us",
     component: lazy(() => import("../pages/ContactUs/ContactUs")),
   },
+  {
+    path: "/our-insurance",
+    component: lazy(() => import("../pages/AboutUs/OurInsurance")),
+  },
+  {
+    path: "/our-standard",
+    component: lazy(() => import("../pages/AboutUs/OurStandard")),
+  },
+  {
+    path: "/privacy-policy",
+    component: lazy(() => import("../pages/PrivacyPolicy/PrivacyPolicy")),
+  },
+  {
+    path: "/contact-us",
+    component: lazy(() => import("../pages/ContactUs/ContactUs")),
+  },
+  {
+    path: "/blog",
+    component: lazy(() => import("../pages/Blog/Blog")),
+  },
+  {
+    path: "professionalpackingservices",
+    component: lazy(
+      () =>
+        import("../pages/services/ProfessionalPackingServices/ProfessionalPackingServices"),
+    ),
+  },
+  {
+    path: "storages",
+    component: lazy(() => import("../pages/services/Storage/Storage")),
+  },
 ];
