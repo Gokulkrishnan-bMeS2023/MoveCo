@@ -7,7 +7,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <Box minH="80vh" display="flex" alignItems="center">
+    <Box minH="88vh" display="flex" alignItems="center">
       <Container maxW="100%" px={{ base: 4, md: 8 }}>
         <Stack
           mx="auto"

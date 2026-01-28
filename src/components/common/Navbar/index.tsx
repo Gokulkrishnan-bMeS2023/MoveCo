@@ -99,8 +99,8 @@ const NavItem = ({ label, items, path }: any) => {
           position="absolute"
           top="100%"
           left="0"
-          mt={2}
-          bg="white"
+          // mt={2}
+          bg="brand.white"
           py={2}
           minW="240px"
           rounded="md"
@@ -332,8 +332,8 @@ export const Navbar = () => {
         <Flex h="70px" align="center" justify="space-between">
           {/* LOGO */}
           <Text
-            fontSize={{ base: "xl", lg: "2xl" }}
-            fontWeight="bold"
+            textStyle={"size-xl"}
+            fontWeight="500"
             cursor="pointer"
             transition="all 0.3s ease"
             _hover={{
@@ -344,7 +344,7 @@ export const Navbar = () => {
             }}
             onClick={() => (window.location.href = "/")}
           >
-            Move <Span color="brand.primary">Co</Span>
+            Move<Span color="brand.primary">Co</Span>
           </Text>
 
           {/* DESKTOP NAV */}
