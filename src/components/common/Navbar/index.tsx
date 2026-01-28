@@ -1,6 +1,13 @@
 import { Box, Flex, Text, Stack, Span } from "@chakra-ui/react";
 import { useState } from "react";
-import { FiPhone, FiUser, FiMenu, FiX, FiUsers } from "react-icons/fi";
+import {
+  FiPhone,
+  FiUser,
+  FiMenu,
+  FiX,
+  FiUsers,
+  FiChevronDown,
+} from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 
@@ -52,6 +59,11 @@ const NavItem = ({ label, items, path }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
+  const handleNavigation = (navPath: string) => {
+    navigate(navPath);
+    setIsOpen(false);
+  };
+
   return (
     <Box
       position="relative"
@@ -64,7 +76,8 @@ const NavItem = ({ label, items, path }: any) => {
         fontWeight="600"
         cursor="pointer"
         color={isOpen ? "brand.primary" : "brand.secondary"}
-        onClick={() => navigate(path)}
+        onClick={() => handleNavigation(path)}
+        transition="color 0.3s ease"
         _after={{
           content: '""',
           position: "absolute",
@@ -75,7 +88,7 @@ const NavItem = ({ label, items, path }: any) => {
           bg: "brand.primary",
           borderRadius: "full",
           transform: "translateX(-50%)",
-          transition: "width 0.25s ease",
+          transition: "width 0.3s ease",
         }}
       >
         {label}
@@ -85,27 +98,59 @@ const NavItem = ({ label, items, path }: any) => {
         <Box
           position="absolute"
           top="100%"
-          left="25"
-          mt={1}
-          bg="brand.white"
+          left="0"
+          mt={2}
+          bg="white"
           py={2}
           minW="240px"
           rounded="md"
           shadow="lg"
           zIndex={1500}
+          border="1px solid"
+          borderColor="gray.100"
+          animation="slideDown 0.3s ease"
+          css={{
+            "@keyframes slideDown": {
+              from: {
+                opacity: 0,
+                transform: "translateY(-10px)",
+              },
+              to: {
+                opacity: 1,
+                transform: "translateY(0)",
+              },
+            },
+          }}
         >
-          {items.map((item: any) => (
+          {items.map((item: any, index: number) => (
             <Box
               key={item.label}
               px={4}
-              py={2}
-              fontWeight="600"
+              py={2.5}
+              fontWeight="500"
+              fontSize="sm"
               cursor="pointer"
-              _hover={{
-                bg: "brand.bgGray",
-                color: "brand.primary",
+              color="gray.700"
+              transition="all 0.3s ease"
+              animation={`fadeInLeft 0.3s ease ${index * 0.05}s both`}
+              css={{
+                "@keyframes fadeInLeft": {
+                  from: {
+                    opacity: 0,
+                    transform: "translateX(-10px)",
+                  },
+                  to: {
+                    opacity: 1,
+                    transform: "translateX(0)",
+                  },
+                },
               }}
-              onClick={() => navigate(item.path)}
+              _hover={{
+                bg: "brand.primary",
+                color: "white",
+                transform: "translateX(4px)",
+              }}
+              onClick={() => handleNavigation(item.path)}
             >
               {item.label}
             </Box>
@@ -118,52 +163,133 @@ const NavItem = ({ label, items, path }: any) => {
 
 /* ================= MOBILE NAV ITEM ================= */
 
-const MobileNavItem = ({ label, items, path }: any) => {
-  const [open, setOpen] = useState(false);
+const MobileNavItem = ({
+  label,
+  items,
+  path,
+  isOpen,
+  onToggle,
+  onNavigate,
+}: any) => {
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    if (items) {
+      onToggle();
+    } else {
+      navigate(path);
+      onNavigate(); // Close mobile menu
+    }
+  };
+
+  const handleItemClick = (itemPath: string) => {
+    navigate(itemPath);
+    onNavigate(); // Close mobile menu
+  };
+
   return (
-    <Box w="100%" textAlign="center" onClick={() => navigate(path)}>
-      <Box
-        position="relative"
-        display="inline-block"
+    <Box w="100%">
+      <Flex
+        align="center"
+        justify="space-between"
         cursor="pointer"
-        onClick={() => setOpen(!open)}
+        onClick={handleClick}
+        py={3}
+        px={4}
+        rounded="lg"
+        bg={isOpen ? "brand.primary/10" : "transparent"}
+        transition="all 0.3s ease"
+        _hover={{
+          bg: isOpen ? "brand.primary/15" : "gray.50",
+          transform: "translateX(2px)",
+        }}
+        _active={{
+          transform: "scale(0.98)",
+        }}
       >
         <Text
           fontWeight="600"
-          color={open ? "brand.primary" : "brand.secondary"}
+          fontSize="md"
+          color={isOpen ? "brand.primary" : "brand.secondary"}
+          transition="color 0.3s ease"
         >
           {label}
         </Text>
 
-        <Box
-          position="absolute"
-          left="50%"
-          bottom="-6px"
-          h="3px"
-          w={open ? "28px" : "0px"}
-          bg="brand.primary"
-          borderRadius="full"
-          transform="translateX(-50%)"
-          transition="width 0.25s ease"
-        />
-      </Box>
+        {items && (
+          <Box
+            transform={isOpen ? "rotate(180deg)" : "rotate(0deg)"}
+            transition="transform 0.4s ease"
+            color={isOpen ? "brand.primary" : "brand.secondary"}
+          >
+            <FiChevronDown size={20} />
+          </Box>
+        )}
+      </Flex>
 
-      {items && open && (
-        <Stack mt={4} gap={3} align="center">
-          {items.map((item: any) => (
-            <Text
-              key={item.label}
-              cursor="pointer"
-              _hover={{ color: "brand.primary" }}
-              onClick={() => navigate(item.path)}
-            >
-              {item.label}
-            </Text>
-          ))}
-        </Stack>
-      )}
+      {/* Submenu with animation */}
+      <Box
+        overflow="hidden"
+        maxH={isOpen ? "500px" : "0"}
+        opacity={isOpen ? 1 : 0}
+        transition="all 0.4s ease"
+      >
+        {items && (
+          <Stack
+            mt={2}
+            mb={2}
+            gap={1}
+            pl={4}
+            borderLeft="2px solid"
+            borderColor="brand.primary"
+            ml={4}
+          >
+            {items.map((item: any, index: number) => (
+              <Text
+                key={item.label}
+                cursor="pointer"
+                py={2}
+                px={3}
+                fontSize="sm"
+                fontWeight="500"
+                color="gray.600"
+                rounded="md"
+                transition="all 0.3s ease"
+                animation={
+                  isOpen ? `slideIn 0.3s ease ${index * 0.05}s both` : "none"
+                }
+                css={{
+                  "@keyframes slideIn": {
+                    from: {
+                      opacity: 0,
+                      transform: "translateX(-20px)",
+                    },
+                    to: {
+                      opacity: 1,
+                      transform: "translateX(0)",
+                    },
+                  },
+                }}
+                _hover={{
+                  color: "brand.primary",
+                  bg: "gray.50",
+                  transform: "translateX(4px)",
+                  shadow: "sm",
+                }}
+                _active={{
+                  transform: "translateX(2px) scale(0.98)",
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleItemClick(item.path);
+                }}
+              >
+                {item.label}
+              </Text>
+            ))}
+          </Stack>
+        )}
+      </Box>
     </Box>
   );
 };
@@ -172,24 +298,50 @@ const MobileNavItem = ({ label, items, path }: any) => {
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const handleSubmenuToggle = (label: string) => {
+    setOpenSubmenu(openSubmenu === label ? null : label);
+  };
+
+  const closeMobileMenu = () => {
+    setMenuOpen(false);
+    setOpenSubmenu(null);
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+    if (menuOpen) {
+      setOpenSubmenu(null);
+    }
+  };
 
   return (
     <Box pt={6}>
       <Box
-        bg="brand.white"
+        bg="white"
         mx={{ base: 6, lg: 8 }}
         px={{ base: 5, lg: 10 }}
         rounded="full"
         shadow="xl"
         position="relative"
         zIndex={1000}
+        transition="all 0.3s ease"
       >
         <Flex h="70px" align="center" justify="space-between">
           {/* LOGO */}
           <Text
-            textStyle="size-md"
+            fontSize={{ base: "xl", lg: "2xl" }}
+            fontWeight="bold"
             cursor="pointer"
+            transition="all 0.3s ease"
+            _hover={{
+              transform: "scale(1.05)",
+            }}
+            _active={{
+              transform: "scale(0.95)",
+            }}
             onClick={() => (window.location.href = "/")}
           >
             Move <Span color="brand.primary">Co</Span>
@@ -220,12 +372,19 @@ export const Navbar = () => {
               bg="brand.primary"
               p={3}
               rounded="full"
-              color="brand.white"
+              color="white"
               border="1px solid"
+              borderColor="brand.primary"
+              cursor="pointer"
+              transition="all 0.3s ease"
               _hover={{
-                bg: "brand.white",
+                bg: "white",
                 color: "brand.primary",
                 borderColor: "brand.primary",
+                transform: "rotate(15deg) scale(1.1)",
+              }}
+              _active={{
+                transform: "rotate(0deg) scale(0.95)",
               }}
             >
               <FiUsers size={20} />
@@ -233,22 +392,42 @@ export const Navbar = () => {
           </Flex>
 
           {/* MOBILE ICONS */}
-          <Flex display={{ base: "flex", lg: "none" }} gap={3}>
+          <Flex display={{ base: "flex", lg: "none" }} gap={3} align="center">
             <Box
               bg="brand.primary"
               p={2}
               rounded="full"
-              color="brand.white"
+              color="white"
               border="1px solid"
+              borderColor="brand.primary"
+              cursor="pointer"
+              transition="all 0.3s ease"
               _hover={{
-                bg: "brand.white",
+                bg: "white",
                 color: "brand.primary",
                 borderColor: "brand.primary",
+                transform: "scale(1.1)",
+              }}
+              _active={{
+                transform: "scale(0.9)",
               }}
             >
               <FiUser />
             </Box>
-            <Box onClick={() => setMenuOpen(!menuOpen)} fontSize="32px">
+            <Box
+              onClick={toggleMenu}
+              fontSize="28px"
+              cursor="pointer"
+              color="brand.secondary"
+              transition="all 0.3s ease"
+              _hover={{
+                color: "brand.primary",
+                transform: "scale(1.1)",
+              }}
+              _active={{
+                transform: "scale(0.9)",
+              }}
+            >
               {menuOpen ? <FiX /> : <FiMenu />}
             </Box>
           </Flex>
@@ -264,28 +443,91 @@ export const Navbar = () => {
             mt={4}
             bg="white"
             rounded="xl"
-            shadow="lg"
-            p={6}
+            shadow="2xl"
+            p={5}
             display={{ base: "block", lg: "none" }}
+            border="1px solid"
+            borderColor="gray.100"
+            maxH="calc(100vh - 150px)"
+            overflowY="auto"
+            animation="fadeInDown 0.4s ease"
+            css={{
+              "@keyframes fadeInDown": {
+                from: {
+                  opacity: 0,
+                  transform: "translateY(-20px)",
+                },
+                to: {
+                  opacity: 1,
+                  transform: "translateY(0)",
+                },
+              },
+              "&::-webkit-scrollbar": {
+                width: "6px",
+              },
+              "&::-webkit-scrollbar-track": {
+                background: "transparent",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                background: "var(--chakra-colors-brand-primary)",
+                borderRadius: "3px",
+              },
+            }}
           >
-            <Stack gap={5}>
-              {NAV_ITEMS.map((nav) => (
-                <MobileNavItem
+            <Stack gap={2}>
+              {NAV_ITEMS.map((nav, index) => (
+                <Box
                   key={nav.label}
-                  label={nav.label}
-                  items={nav.items}
-                  path={nav.path}
-                />
+                  animation={`fadeInUp 0.3s ease ${index * 0.08}s both`}
+                  css={{
+                    "@keyframes fadeInUp": {
+                      from: {
+                        opacity: 0,
+                        transform: "translateY(20px)",
+                      },
+                      to: {
+                        opacity: 1,
+                        transform: "translateY(0)",
+                      },
+                    },
+                  }}
+                >
+                  <MobileNavItem
+                    label={nav.label}
+                    items={nav.items}
+                    path={nav.path}
+                    isOpen={openSubmenu === nav.label}
+                    onToggle={() => handleSubmenuToggle(nav.label)}
+                    onNavigate={closeMobileMenu}
+                  />
+                </Box>
               ))}
 
-              <Button
-                label="Contact Us"
-                variant="outline"
-                leftIcon={<FiPhone />}
-                rounded="full"
-                w="fit-content"
-                alignSelf="center"
-              />
+              <Box
+                pt={4}
+                borderTop="1px solid"
+                borderColor="gray.100"
+                mt={2}
+                animation="fadeIn 0.5s ease 0.4s both"
+                css={{
+                  "@keyframes fadeIn": {
+                    from: { opacity: 0 },
+                    to: { opacity: 1 },
+                  },
+                }}
+              >
+                <Button
+                  label="Contact Us"
+                  variant="outline"
+                  leftIcon={<FiPhone />}
+                  rounded="full"
+                  w="full"
+                  onClick={() => {
+                    navigate("/contact-us");
+                    closeMobileMenu();
+                  }}
+                />
+              </Box>
             </Stack>
           </Box>
         )}
