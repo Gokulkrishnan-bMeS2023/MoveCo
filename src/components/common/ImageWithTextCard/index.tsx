@@ -1,4 +1,4 @@
-import { Box, Image, Heading, Text } from "@chakra-ui/react";
+import { Image, Heading, Text, Flex } from "@chakra-ui/react";
 
 interface ImageWithTextCardProps {
   imgUrl: string;
@@ -7,43 +7,44 @@ interface ImageWithTextCardProps {
   content: string;
 }
 
-const ImageWithTextCard = (props: ImageWithTextCardProps) => {
-  const { imgUrl, altText, heading, content } = props;
-
+const ImageWithTextCard = ({
+  imgUrl,
+  altText,
+  heading,
+  content,
+}: ImageWithTextCardProps) => {
   return (
-    <Box>
-      {/* Image */}
+    <Flex
+      direction="column"
+      height="100%"   
+    >
       <Image
         src={imgUrl}
         alt={altText}
         borderTopLeftRadius="2xl"
         borderTopRightRadius="2xl"
         width="100%"
+        objectFit="cover"
       />
 
-      {/* Text Container */}
-      <Box
-        backgroundColor="blackAlpha.800"
-        color="white"
-        padding={12}
+      <Flex
+        direction="column"
+        flex="1"       
+        bg="brand.primary"
+        color="brand.white"
+        p={8}
         borderBottomLeftRadius="2xl"
         borderBottomRightRadius="2xl"
       >
-        <Heading
-          fontSize={{ base: "2xl", lg: "3xl" }}
-          fontWeight="medium"
-        >
+        <Heading as="h3" mb={2}>
           {heading}
         </Heading>
 
-        <Text
-          fontSize={{ base: "lg", lg: "2xl" }}
-          marginTop={4}
-        >
+        <Text textStyle="size-lg">
           {content}
         </Text>
-      </Box>
-    </Box>
+      </Flex>
+    </Flex>
   );
 };
 

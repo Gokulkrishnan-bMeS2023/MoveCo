@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import system from "./theme";
 import App from "./app/App";
 import { Navbar } from "./components/common/Navbar";
+import { Footer } from "./components/common/Footer";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -12,6 +13,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <BrowserRouter>
         <Navbar />
         <App />
+        <Footer />
       </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>,

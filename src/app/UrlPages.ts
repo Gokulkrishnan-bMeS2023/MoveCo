@@ -49,4 +49,12 @@ export const UrlPages: AppRoute[] = [
     path: "storages",
     component: lazy(() => import("../pages/services/Storage/Storage")),
   },
+  {
+    path: "/client-testimonial",
+    component: lazy(() => import("../pages/ClientTestimonial/ClientTestimonial")),
+  },
+  {
+    path: "/video-review",
+    component: lazy(() => import("../pages/VideoReview/VideoReview")),
+  },
 ];

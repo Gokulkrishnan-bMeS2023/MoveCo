@@ -1,11 +1,12 @@
+
 import {
   Box,
   Flex,
   Heading,
   Text,
-  Button,
   Stack,
   Image,
+  Icon,
 } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
 import Customer1 from "../../../assets/client1.webp";
@@ -14,11 +15,13 @@ import Customer3 from "../../../assets/Customer3.jpg";
 import Customer4 from "../../../assets/Customer4.webp";
 import Customer5 from "../../../assets/Customer5.webp";
 import MainBannerBG from "../../../assets/main-banner-bg.png";
+import MainBannerMobileBG from "../../../assets/main-banner-mobile.jpg";
+import Button from "../Button/Button";
 
 const MainBanner = () => {
   return (
     <>
-      {/* DESKTOP */}
+      {/* ================== DESKTOP BANNER ================== */}
       <Box
         display={{ base: "none", lg: "block" }}
         minHeight="82vh"
@@ -32,124 +35,111 @@ const MainBanner = () => {
           minHeight="82vh"
           justifyContent="flex-end"
           alignItems="center"
-          color="white"
-          padding={6}
+          color="brand.white"
+          p={6}
         >
-          <Box width={{ base: "100%", lg: "45%" }}>
-            <Heading
-              fontSize={{ base: "2xl", lg: "3xl", xl: "5xl" }}
-              fontWeight="medium"
-              lineHeight="short"
-            >
-              Your{" "}
-              <Box
-                as="span"
-                backgroundImage="linear-gradient(to top, #22c55ebe 75%, transparent 0)"
-                backgroundSize="100% 75%"
-                backgroundPosition="bottom"
-                backgroundRepeat="no-repeat"
+          <Box width="45%">
+            <Stack gap={6}>
+              <Heading
+                as="h2"
               >
-                Authentic
+                Your{" "}
+                <Box
+                  as="span"
+                  backgroundImage="linear-gradient(to top, #22c55ebe 75%, transparent 0)"
+                  backgroundSize="100% 75%"
+                  backgroundPosition="bottom"
+                  backgroundRepeat="no-repeat"
+                >
+                  Authentic
+                </Box>
+                <br />
+                Local & Distant
+                <br />
+                Logistics Partner
+              </Heading>
+
+              <Text textStyle={"size-md"}>
+                Let us take care of packing & unpacking of your household goods,
+                make your shifting smooth
+              </Text>
+              <Box>
+                <Button
+                  variant="outline"
+                  label="Learn More"
+                />
               </Box>
-              <br />
-              Local & Distant
-              <br />
-              Logistics Partner
-            </Heading>
+              <Flex
+                p={4}
+                bg="rgba(255,255,255,0.2)"
+                borderRadius="xl"
+                width="85%"
+                gap={6}
+                flexWrap="wrap"
+                justifyContent={{ lg: "center", xl: "space-between" }}
+                alignItems="center"
+              >
+                {/* Customers */}
+                <Stack alignItems="center" gap={2}>
+                  <Heading as="h3">
+                    5000+
+                  </Heading>
+                  <Flex>
+                    {[Customer1, Customer2, Customer3, Customer4, Customer5].map(
+                      (img, i) => (
+                        <Image
+                          key={i}
+                          src={img}
+                          alt="customer"
+                          boxSize="30px"
+                          borderRadius="full"
+                          ml={i === 0 ? 0 : "-8px"}
+                        />
+                      )
+                    )}
+                  </Flex>
+                </Stack>
 
-            <Text paddingTop={4} opacity={0.75}>
-              Let us take care of packing & unpacking of your household goods,
-              make your shifting smooth
-            </Text>
-
-            <Button
-              marginTop={8}
-              size="lg"
-              backgroundColor="#ffd70a"
-              color="black"
-              _hover={{ backgroundColor: "#ffd70a" }}
-            >
-              Learn More
-            </Button>
-
-            {/* INFO BOX */}
-            <Flex
-              marginTop={{ base: 8, xl: 12 }}
-              padding={4}
-              backgroundColor="rgba(255,255,255,0.2)"
-              borderRadius="xl"
-              width="85%"
-              gap={6}
-              flexWrap="wrap"
-              justifyContent="space-between"
-            >
-              {/* CUSTOMERS */}
-              <Stack alignItems="center" gap={2}>
-                <Heading fontSize={{ base: "xl", lg: "3xl" }} fontWeight="bold">
-                  5000+
-                </Heading>
-
-                <Flex>
-                  {[Customer1, Customer2, Customer3, Customer4, Customer5].map(
-                    (img, i) => (
-                      <Image
-                        key={i}
-                        src={img}
-                        alt="customer"
-                        width="30px"
-                        height="30px"
-                        borderRadius="full"
-                        marginLeft={i === 0 ? "0" : "-8px"}
-                      />
-                    )
-                  )}
-                </Flex>
-              </Stack>
-
-              {/* RATING */}
-              <Stack alignItems="center" gap={2}>
-                <Flex>
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <FaStar key={i} size={22} color="#ffd70a" />
-                  ))}
-                </Flex>
-                <Text>Valuable Customers</Text>
-              </Stack>
-            </Flex>
+                {/* Rating */}
+                <Stack alignItems="center" gap={2}>
+                  <Flex>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Icon as={FaStar} key={i} boxSize="22px" color="brand.warning" />
+                    ))}
+                  </Flex>
+                  <Text textStyle="size-md">Valuable Customers</Text>
+                </Stack>
+              </Flex>
+            </Stack>
           </Box>
         </Flex>
       </Box>
 
-      {/* MOBILE */}
+      {/* ================== MOBILE BANNER ================== */}
       <Box
         display={{ base: "block", lg: "none" }}
-        backgroundImage="url('/shared/assets/main-banner-mobile.jpg')"
+        backgroundImage={`url(${MainBannerMobileBG})`}
         backgroundSize="cover"
         backgroundPosition="center"
         borderRadius="xl"
-        paddingX={8}
-        paddingY={12}
-        color="white"
+        px={6}
+        py={10}
+        color="brand.white"
       >
         <Stack gap={4}>
-          <Heading fontSize="2xl" fontWeight="medium">
+          <Heading as="h2">
             Your Authentic Local & Distant Logistics Partner
           </Heading>
 
-          <Text opacity={0.75}>
-            Let us take care of packing & unpacking of your household goods,
-            make your shifting smooth
+          <Text textStyle={"size-md"}>
+            Let us take care of packing & unpacking of your household goods, make your shifting smooth
           </Text>
-
-          <Button
-            size="lg"
-            backgroundColor="#ffd70a"
-            color="black"
-            alignSelf="flex-start"
-            _hover={{ backgroundColor: "#ffd70a" }}
-          >
-            Learn More
-          </Button>
+          <Box>
+            <Button
+              variant="primary"
+              label="Learn More"
+            />
+          </Box>
         </Stack>
       </Box>
     </>
