@@ -10,8 +10,6 @@ import {
   Flex,
   Separator,
   Card,
-  Textarea,
-  Field,
   Icon,
 } from "@chakra-ui/react";
 import {
@@ -20,12 +18,12 @@ import {
   FaMapMarkerAlt,
   FaUserFriends,
 } from "react-icons/fa";
- 
 import contactImage from "../../assets/contact.webp";
 import InputField from "../../components/common/Input/Input";
 import { useContactForms } from "./useContactForms";
 import Button from "../../components/common/Button/Button";
- 
+import Notes from "../../components/common/Notes/Notes";
+
 const ContactCard = ({
   city,
   address,
@@ -72,7 +70,7 @@ const ContactCard = ({
         <Heading size={{ base: "md", md: "lg" }} color="fg.emphasized">
           {city}
         </Heading>
- 
+
         {address && (
           <HStack align="start" gap={3}>
             <Box color="blue.500" mt={1} flexShrink={0}>
@@ -91,7 +89,7 @@ const ContactCard = ({
             </Text>
           </HStack>
         )}
- 
+
         <Stack gap={2}>
           <HStack gap={3}>
             <Box color="blue.500">
@@ -105,7 +103,7 @@ const ContactCard = ({
               {office}
             </Text>
           </HStack>
- 
+
           {tollFree && (
             <Text ml={7} fontSize="sm" color="fg.muted">
               Toll Free: {tollFree}
@@ -116,7 +114,7 @@ const ContactCard = ({
     </Card.Root>
   );
 };
- 
+
 const ContactUsPage = () => {
   const {
     contactValues,
@@ -149,7 +147,7 @@ const ContactUsPage = () => {
           </Heading>
         </Box>
       </Box>
- 
+
       {/* Locations Section */}
       <Stack gap={{ base: 6, md: 8 }} mb={{ base: 12, md: 16, lg: 20 }}>
         <Box>
@@ -178,7 +176,7 @@ const ContactUsPage = () => {
             </Box>
           </Flex>
         </Box>
- 
+
         <SimpleGrid
           columns={{ base: 1, md: 2, lg: 3 }}
           gap={{ base: 4, md: 6, lg: 8 }}
@@ -193,7 +191,7 @@ const ContactUsPage = () => {
           <ContactCard city="Austin" office="512-366-7901" />
         </SimpleGrid>
       </Stack>
- 
+
       {/* Map Section */}
       <Stack gap={{ base: 4, md: 6 }} mb={{ base: 12, md: 16, lg: 20 }}>
         <Box maxW="600px" w="100%">
@@ -207,7 +205,7 @@ const ContactUsPage = () => {
             Located in Lewisville, Texas
           </Text>
         </Box>
- 
+
         <Card.Root variant="elevated" overflow="hidden">
           <iframe
             title="MoveCo.net LLC Location"
@@ -219,7 +217,7 @@ const ContactUsPage = () => {
           />
         </Card.Root>
       </Stack>
- 
+
       {/* Contact Forms Section */}
       <Box mb={{ base: 8, md: 12 }}>
         <Box maxW="650px" w="100%">
@@ -230,8 +228,8 @@ const ContactUsPage = () => {
             </Text>
           </Heading>
           <Text fontSize={{ base: "md", md: "lg" }} color="fg.muted">
-            Send us an email, we would love to hear from you! <br/> Just fill out
-            the form, and a representative will get back to you as soon as
+            Send us an email, we would love to hear from you! <br /> Just fill
+            out the form, and a representative will get back to you as soon as
             possible
           </Text>
         </Box>
@@ -251,7 +249,7 @@ const ContactUsPage = () => {
                 </Flex>
                 <Heading size={{ base: "lg", md: "xl" }}>Send an Email</Heading>
               </HStack>
- 
+
               <Text
                 color="fg.muted"
                 lineHeight="1.7"
@@ -259,9 +257,7 @@ const ContactUsPage = () => {
               >
                 Send us an email and we'll get back to you as soon as possible.
               </Text>
- 
               <Separator />
- 
               <VStack gap={{ base: 4, md: 5 }} align="stretch">
                 <InputField
                   label="Name"
@@ -271,7 +267,6 @@ const ContactUsPage = () => {
                   leftIcon={<FaUserFriends />}
                   isRequired
                 />
- 
                 <InputField
                   label="Email"
                   value={contactValues.email}
@@ -280,7 +275,6 @@ const ContactUsPage = () => {
                   leftIcon={<FaEnvelope />}
                   isRequired
                 />
- 
                 <InputField
                   label="Phone"
                   value={contactValues.phone}
@@ -289,17 +283,12 @@ const ContactUsPage = () => {
                   leftIcon={<FaPhoneAlt />}
                   isRequired
                 />
- 
-                <Field.Root>
-                  <Field.Label>Message</Field.Label>
-                  <Textarea
-                    value={contactValues.message}
-                    onChange={(e) =>
-                      handleContactChange("message", e.target.value)
-                    }
-                  />
-                </Field.Root>
- 
+                <Notes
+                  label="Message"
+                  value={contactValues.message ?? ""}
+                  onChange={(value) => handleContactChange("message", value)}
+                  placeholder="Write your message here..."
+                />
                 <Button
                   fontSize="xl"
                   rounded="full"
@@ -314,7 +303,7 @@ const ContactUsPage = () => {
               </VStack>
             </Card.Body>
           </Card.Root>
- 
+
           {/* Tell a Friend Form */}
           <Card.Root variant="elevated" size="lg">
             <Card.Body gap={{ base: 4, md: 6 }}>
@@ -330,7 +319,7 @@ const ContactUsPage = () => {
                 </Flex>
                 <Heading size={{ base: "lg", md: "xl" }}>Tell a Friend</Heading>
               </HStack>
- 
+
               <Text
                 color="fg.muted"
                 lineHeight="1.7"
@@ -338,9 +327,8 @@ const ContactUsPage = () => {
               >
                 Help spread the word about MoveCo and refer your friends.
               </Text>
- 
               <Separator />
- 
+
               <VStack gap={{ base: 4, md: 5 }} align="stretch">
                 <InputField
                   label="Your Name"
@@ -351,7 +339,6 @@ const ContactUsPage = () => {
                   errorMessage={referralErrors.yourName}
                   isRequired
                 />
- 
                 <InputField
                   label="Friend Phone"
                   value={referralValues.friendPhone}
@@ -361,7 +348,6 @@ const ContactUsPage = () => {
                   errorMessage={referralErrors.friendPhone}
                   isRequired
                 />
- 
                 <InputField
                   label="Friend Email"
                   value={referralValues.friendEmail}
@@ -390,7 +376,5 @@ const ContactUsPage = () => {
     </Container>
   );
 };
- 
+
 export default ContactUsPage;
- 
- 
