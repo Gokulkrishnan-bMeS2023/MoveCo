@@ -22,7 +22,7 @@ const NAV_ITEMS = [
       { label: "About MoveCo", path: "/about-us" },
       { label: "Our Insurance", path: "/our-insurance" },
       { label: "Our Standards", path: "/our-standard" },
-      { label: "Job Application", path: "/about/jobs" },
+      { label: "Job Application", path: "/job-application" },
       { label: "Associate Code of Conduct", path: "/AssociateCodeofConduct" },
       { label: "Supported Charity", path: "/supported-charity" },
     ],

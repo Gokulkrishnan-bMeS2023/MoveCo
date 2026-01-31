@@ -27,6 +27,10 @@ export const UrlPages: AppRoute[] = [
     component: lazy(() => import("../pages/AboutUs/OurStandard")),
   },
   {
+    path: "/job-application",
+    component: lazy(() => import("../pages/AboutUs/JobApplication")),
+  },
+  {
     path: "/privacy-policy",
     component: lazy(() => import("../pages/PrivacyPolicy/PrivacyPolicy")),
   },
@@ -51,31 +55,42 @@ export const UrlPages: AppRoute[] = [
   },
   {
     path: "/client-testimonial",
-    component: lazy(() => import("../pages/ClientTestimonial/ClientTestimonial")),
+    component: lazy(
+      () => import("../pages/ClientTestimonial/ClientTestimonial"),
+    ),
   },
   {
     path: "/video-review",
     component: lazy(() => import("../pages/VideoReview/VideoReview")),
   },
-   {
+  {
     path: "/supported-charity",
     component: lazy(() => import("../pages/SupportedCharity/SupportedCharity")),
   },
   {
     path: "/TheAshleyWatrousFoundation",
-    component: lazy(() => import("../pages/TheAshleyWatrousFoundation/TheAshleyWatrousFoundation")),
+    component: lazy(
+      () =>
+        import("../pages/TheAshleyWatrousFoundation/TheAshleyWatrousFoundation"),
+    ),
   },
   {
     path: "/SensResearchFoundation",
-    component: lazy(() => import("../pages/SensResearchFoundation/SensResearchFoundation")),
+    component: lazy(
+      () => import("../pages/SensResearchFoundation/SensResearchFoundation"),
+    ),
   },
   {
     path: "/ScottishRiteHospital",
-    component: lazy(() => import("../pages/ScottishRiteHospital/ScottishRiteHospital")),
+    component: lazy(
+      () => import("../pages/ScottishRiteHospital/ScottishRiteHospital"),
+    ),
   },
-   {
+  {
     path: "/AssociateCodeofConduct",
-    component: lazy(() => import("../pages/AssociateCodeofConduct/AssociateCodeofConduct")),
+    component: lazy(
+      () => import("../pages/AssociateCodeofConduct/AssociateCodeofConduct"),
+    ),
   },
   {
     path: "/product",
