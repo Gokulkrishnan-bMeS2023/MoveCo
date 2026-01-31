@@ -57,4 +57,24 @@ export const UrlPages: AppRoute[] = [
     path: "/video-review",
     component: lazy(() => import("../pages/VideoReview/VideoReview")),
   },
+   {
+    path: "/supported-charity",
+    component: lazy(() => import("../pages/SupportedCharity/SupportedCharity")),
+  },
+  {
+    path: "/TheAshleyWatrousFoundation",
+    component: lazy(() => import("../pages/TheAshleyWatrousFoundation/TheAshleyWatrousFoundation")),
+  },
+  {
+    path: "/SensResearchFoundation",
+    component: lazy(() => import("../pages/SensResearchFoundation/SensResearchFoundation")),
+  },
+  {
+    path: "/ScottishRiteHospital",
+    component: lazy(() => import("../pages/ScottishRiteHospital/ScottishRiteHospital")),
+  },
+   {
+    path: "/AssociateCodeofConduct",
+    component: lazy(() => import("../pages/AssociateCodeofConduct/AssociateCodeofConduct")),
+  },
 ];
