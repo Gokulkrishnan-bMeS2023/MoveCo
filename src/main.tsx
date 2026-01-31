@@ -6,11 +6,13 @@ import system from "./theme";
 import App from "./app/App";
 import { Navbar } from "./components/common/Navbar";
 import { Footer } from "./components/common/Footer";
+import ScrollToTop from "./animations/ScrollToTop";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider value={system}>
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <App />
         <Footer />

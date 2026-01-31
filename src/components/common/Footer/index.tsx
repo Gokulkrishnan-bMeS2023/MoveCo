@@ -1,21 +1,20 @@
-
-import {
-  Box,
-  Flex,
-  Text,
-  Image,
-  Link,
-  Heading,
-} from "@chakra-ui/react";
+import { Box, Flex, Text, Image, Link, Heading } from "@chakra-ui/react";
 import MoveCo from "../../../assets/moveco.webp";
 import BBB from "../../../assets/card-item-3.webp";
 import SMA from "../../../assets/smalogo.png";
 import AMSA from "../../../assets/amsa-logo-blue.png";
 import MFH from "../../../assets/mfh.svg";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
-    <Box bg="brand.secondary" color="brand.white" px={{ base: 6, lg: 10 }} py={12}>
+    <Box
+      bg="brand.secondary"
+      color="brand.white"
+      px={{ base: 6, lg: 10 }}
+      py={12}
+    >
       <Flex
         direction={{ base: "column", lg: "row" }}
         justify="space-between"
@@ -107,7 +106,7 @@ const Footer = () => {
           <Text textStyle="size-sm">
             Copyright © 2025 MoveCo.Net. All rights reserved.
             <Link ml={1} textDecoration="underline" color="brand.white">
-              <Text as="span" textStyle="size-md">
+              <Text as="span" textStyle="size-md" onClick={() => navigate("/privacy-policy")}>
                 Privacy Notice
               </Text>
             </Link>

@@ -1,69 +1,65 @@
-import {
-  Box,
-  Button,
-  Container,
-  Heading,
-  Text,
-  Stack,
-  Icon,
-  HStack,
-} from "@chakra-ui/react";
+import { Box, Container, Heading, Text, Stack, HStack } from "@chakra-ui/react";
 import { FaHome, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/common/Button/Button";
 
 const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <Box
-      minH="100vh"
-      display="flex"
-      alignItems="center"
-      bgGradient="radial(circle at top, var(--chakra-colors-blue-50), transparent 60%)"
-    >
-      <Container maxW="4xl">
+    <Box minH="88vh" display="flex" alignItems="center">
+      <Container maxW="100%" px={{ base: 4, md: 8 }}>
         <Stack
+          mx="auto"
           textAlign="center"
-          gap={8}
+          gap={{ base: 6, md: 8 }}
           borderWidth="1px"
           borderRadius="2xl"
-          p={{ base: 8, md: 14 }}
-          bg="bg.surface"
+          p={{ base: 6, sm: 8, md: 14 }}
+          bg="brand.white"
           boxShadow="xl"
+          maxW={{ base: "100%", sm: "90%", md: "50%" }}
         >
           {/* 404 */}
           <Heading
-            fontSize={{ base: "7xl", md: "9xl" }}
-            fontWeight="extrabold"
-            bgGradient="linear(to-r, blue.500, purple.500)"
-            bgClip="text"
+            as="h1"
+            fontWeight="700"
+            fontSize={{ base: "6xl", sm: "7xl", md: "9xl" }}
+            color="brand.primary"
           >
             404
           </Heading>
 
           <Stack gap={2}>
-            <Heading size="lg">Page not found</Heading>
-            <Text color="fg.muted" fontSize="lg">
+            <Heading as="h3">Page not found</Heading>
+            <Text textStyle="size-xl" color="brand.secondary">
               Sorry, the page you’re looking for doesn’t exist or has been
               moved.
             </Text>
           </Stack>
 
           {/* Actions */}
-          <HStack justify="center" gap={4} flexWrap="wrap">
-            <Button size="lg" colorScheme="blue" onClick={() => navigate("/")}>
-              <HStack gap={2}>
-                <Icon as={FaHome} />
-                <Text>Go Home</Text>
-              </HStack>
-            </Button>
+          <HStack
+            justify="center"
+            gap={4}
+            flexWrap="wrap"
+            flexDirection={{ base: "column", sm: "row" }}
+          >
+            <Button
+              label="Go Home"
+              variant="primary"
+              leftIcon={<FaHome />}
+              px={8}
+              onClick={() => navigate("/")}
+            />
 
-            <Button size="lg" variant="outline" onClick={() => navigate(-1)}>
-              <HStack gap={2}>
-                <Icon as={FaArrowLeft} />
-                <Text>Go Back</Text>
-              </HStack>
-            </Button>
+            <Button
+              label="Go Back"
+              variant="outline"
+              leftIcon={<FaArrowLeft />}
+              px={8}
+              onClick={() => navigate(-1)}
+            />
           </HStack>
         </Stack>
       </Container>
