@@ -77,4 +77,12 @@ export const UrlPages: AppRoute[] = [
     path: "/AssociateCodeofConduct",
     component: lazy(() => import("../pages/AssociateCodeofConduct/AssociateCodeofConduct")),
   },
+  {
+    path: "/product",
+    component: lazy(() => import("../pages/Product/Product")),
+  },
+  {
+    path: "/cart",
+    component: lazy(() => import("../pages/Product/Cart")),
+  },
 ];
