@@ -12,7 +12,6 @@ const JobApplication = () => {
     <>
       <Container maxW="100%" px={8} py={12}>
         <Flex direction="column" align="center" textAlign="center" gap={2}>
-          {/* Heading */}
           <Heading as="h1" fontWeight="normal">
             Join the{" "}
             <Text as="span" color="brand.primary">
@@ -20,16 +19,10 @@ const JobApplication = () => {
             </Text>{" "}
             Team
           </Heading>
- 
-          {/* Subtitle */}
           <Text fontSize="md" color="gray.600">
             Apply for a position below
           </Text>
- 
-          {/* Divider */}
           <Box w="80px" h="2px" bg="brand.primary" my={4} />
- 
-          {/* Equal Opportunity Notice */}
           <Flex
             align="center"
             gap={2}
