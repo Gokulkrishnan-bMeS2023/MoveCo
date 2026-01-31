@@ -1,80 +1,80 @@
 
-// // import { 
-// //   Box, 
-// //   SimpleGrid, 
-// //   Text, 
-// //   Circle, 
-// //   Container,
-// //   Icon
-// // } from '@chakra-ui/react';
+import { 
+  Box, 
+  SimpleGrid, 
+  Text, 
+  Circle, 
+  Container,
+  Icon
+} from '@chakra-ui/react';
 
-// // import { 
-// //   FaTshirt, 
-// //   FaBan, 
-// //   FaWalking, 
-// //   FaSoap 
-// // } from 'react-icons/fa';
-// // import { GiBelt } from 'react-icons/gi';
-// // import { PiSparkleLight } from 'react-icons/pi';
+import { 
+  FaTshirt, 
+  FaBan, 
+  FaWalking, 
+  FaSoap 
+} from 'react-icons/fa';
+import { GiBelt } from 'react-icons/gi';
+import { PiSparkleLight } from 'react-icons/pi';
 
-// // interface DressCodeItem {
-// //   id: number;
-// //   text: string;
-// //   icon: any;
-// // }
+interface DressCodeItem {
+  id: number;
+  text: string;
+  icon: any;
+}
 
-// // const dressCodeData: DressCodeItem[] = [
-// //   { id: 1, text: "Wear a MoveCo t-shirt at all times while working.", icon: FaTshirt },
-// //   { id: 2, text: "Maintain a neat, clean appearance (no holes or stains).", icon: PiSparkleLight },
-// //   { id: 3, text: "No visible piercings or tattoos.", icon: FaBan },
-// //   { id: 4, text: "No sagging of pants or shorts - wear a belt!", icon: GiBelt },
-// //   { id: 5, text: "Wear shoes with non-slip soles.", icon: FaWalking },
-// //   { id: 6, text: "Maintain good personal hygiene.", icon: FaSoap },
-// // ];
+const dressCodeData: DressCodeItem[] = [
+  { id: 1, text: "Wear a MoveCo t-shirt at all times while working.", icon: FaTshirt },
+  { id: 2, text: "Maintain a neat, clean appearance (no holes or stains).", icon: PiSparkleLight },
+  { id: 3, text: "No visible piercings or tattoos.", icon: FaBan },
+  { id: 4, text: "No sagging of pants or shorts - wear a belt!", icon: GiBelt },
+  { id: 5, text: "Wear shoes with non-slip soles.", icon: FaWalking },
+  { id: 6, text: "Maintain good personal hygiene.", icon: FaSoap },
+];
 
-// // const AssociateCodeofConduct = () => {
+const AssociateCodeofConduct = () => {
 
-// //   return (
-// //     <Container maxW="100%" py={10} px={8}>
-// //       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
-// //         {dressCodeData.map((item) => (
-// //           <Box
-// //             key={item.id}
-// //             borderWidth="1px"
-// //             borderRadius="xl"
-// //             bg="brand.white"
-// //             p={8}
-// //             display="flex"
-// //             flexDirection="column"
-// //             alignItems="center"
-// //             textAlign="center"
-// //             boxShadow="sm"
-// //             transition="all 0.3s ease"
-// //           _hover={{
-// //             transform: "translateY(-6px) scale(1.04)",
-// //             boxShadow: "2xl",
-// //             borderColor: "brand.primary",
-// //           }}
-// //           >
-// //             <Circle size="100px" bg="brand.primary" color="brand.white" mb={6}>
-// //               <Icon as={item.icon} boxSize={10} />
-// //             </Circle>
+  return (
+    <Container maxW="100%" py={10} px={8}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
+        {dressCodeData.map((item) => (
+          <Box
+            key={item.id}
+            borderWidth="1px"
+            borderRadius="xl"
+            bg="brand.white"
+            p={8}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            textAlign="center"
+            boxShadow="sm"
+            transition="all 0.3s ease"
+          _hover={{
+            transform: "translateY(-6px) scale(1.04)",
+            boxShadow: "2xl",
+            borderColor: "brand.primary",
+          }}
+          >
+            <Circle size="100px" bg="brand.primary" color="brand.white" mb={6}>
+              <Icon as={item.icon} boxSize={10} />
+            </Circle>
             
-// //             <Text 
-// //               textStyle="size-xl"
-// //               lineHeight="tall"
-// //             >
-// //               {item.text}
-// //             </Text>
-// //           </Box>
-// //         ))}
-// //       </SimpleGrid>
+            <Text 
+              textStyle="size-xl"
+              lineHeight="tall"
+            >
+              {item.text}
+            </Text>
+          </Box>
+        ))}
+      </SimpleGrid>
       
-// //     </Container>
-// //   );
-// // };
+    </Container>
+  );
+};
 
-// // export default AssociateCodeofConduct;
+export default AssociateCodeofConduct;
 
 
 
