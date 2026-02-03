@@ -25,7 +25,7 @@ import { GiBelt } from "react-icons/gi";
 import { PiSparkleLight } from "react-icons/pi";
 import officeImg from "../../assets/scottish-rite.jpg";
 import customerImg from "../../assets/scottish-rite.jpg";
-import InsuranceImg from "../../assets/insurance-banner.jpg";
+import InsuranceImg from "../../assets/modifiedbanner.png";
 
 // ---------------- DRESS CODE DATA ----------------
 const dressCodeData = [
