@@ -43,9 +43,9 @@ const InputField: React.FC<InputProps> = ({
           onChange={onChange}
           outline="none"
           focusRing="inside"
-          focusRingColor="green.500"
+          focusRingColor="brand.primary"
           _focusVisible={{
-            borderColor: "green.500",
+            borderColor: "brand.primary",
           }}
         />
       </InputGroup>

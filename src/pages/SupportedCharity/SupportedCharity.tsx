@@ -28,6 +28,7 @@ const SupportedCharity = () => {
         image={SensImg}
         linkText="Read more"
         linkHref="/SensResearchFoundation"
+         reverse
       />
       </Box>
        <Box py={8}>

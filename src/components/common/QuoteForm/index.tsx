@@ -4,25 +4,30 @@ import {
   Stack,
   Heading,
   Text,
-  Input,
-  RadioGroup,
 } from "@chakra-ui/react";
 import QuoteFormImage from "../../../assets/quote-form-image.webp";
 import Button from "../Button/Button";
+import DateInput from "../DateInput/DateInput";
+import { useState } from "react";
+import RadioField from "../Radio/Radio";
+import InputField from "../Input/Input";
+import { FaEnvelope, FaPhoneAlt, FaUserFriends } from "react-icons/fa";
 
 const QuoteForm = () => {
+  const [name, setName] = useState("");
+  const [date, setDate] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [estimate, setEstimate] = useState("");
   return (
     <Box>
-      {/* Image */}
       <Image
         src={QuoteFormImage}
         alt="Quote Form"
         w="100%"
         rounded="2xl"
       />
-
-      {/* Form */}
-      <Box bg="white" p={6} mt={4} rounded="2xl">
+      <Box bg="brand.white" p={6} mt={4} rounded="2xl">
         <Heading
           fontSize="xl"
           textAlign="center"
@@ -30,69 +35,59 @@ const QuoteForm = () => {
           mb={4}
         >
           Get a Moving{" "}
-          <Text as="span" color="blue.500">
+          <Text as="span" color="brand.primary">
             Quote
           </Text>
         </Heading>
 
         <Stack gap={4}>
-          {/* Full Name */}
           <Box>
-            <Text mb={1}>Full Name</Text>
-            <Input placeholder="Enter full name" />
+            <InputField
+              label="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              leftIcon={<FaUserFriends />}
+              isRequired
+            />
+          </Box>
+          <Box>
+            <DateInput
+              label="Date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              isRequired
+            />
+          </Box>
+          <InputField
+            label="Phone Number"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            leftIcon={<FaPhoneAlt />}
+            isRequired
+          />
+          <Box>
+            <InputField
+              label="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+               leftIcon={<FaEnvelope />}
+              isRequired
+            />
           </Box>
 
-          {/* Date */}
-          <Box>
-            <Text mb={1}>Date</Text>
-            <Input type="date" />
-          </Box>
-
-          {/* Phone */}
-          <Box>
-            <Text mb={1}>Phone Number</Text>
-            <Input type="tel" placeholder="Enter phone number" />
-          </Box>
-
-          {/* Email */}
-          <Box>
-            <Text mb={1}>Email</Text>
-            <Input type="email" autoComplete="email" />
-          </Box>
-
-          {/* ✅ Radio Group – Chakra v3 correct way */}
-          <RadioGroup.Root defaultValue="1">
-            <Stack gap={2}>
-              <RadioGroup.Item value="1">
-                <RadioGroup.ItemHiddenInput />
-                <RadioGroup.ItemIndicator />
-                <RadioGroup.ItemText>
-                  Instant Online Estimate
-                </RadioGroup.ItemText>
-              </RadioGroup.Item>
-
-              <RadioGroup.Item value="2">
-                <RadioGroup.ItemHiddenInput />
-                <RadioGroup.ItemIndicator />
-                <RadioGroup.ItemText>
-                  In-Home Move Estimate
-                </RadioGroup.ItemText>
-              </RadioGroup.Item>
-
-              <RadioGroup.Item value="3">
-                <RadioGroup.ItemHiddenInput />
-                <RadioGroup.ItemIndicator />
-                <RadioGroup.ItemText>
-                  Request a call back
-                </RadioGroup.ItemText>
-              </RadioGroup.Item>
-            </Stack>
-          </RadioGroup.Root>
-
-          {/* Button */}
+          <RadioField
+            options={[
+              { label: "Instant Online Estimate", value: "Instant Online Estimate" },
+              { label: "In-Home Move Estimate", value: "In-Home Move Estimate" },
+              { label: "Request a call back", value: "Request a call back" },
+            ]}
+            value={estimate}
+            onValueChange={setEstimate}
+            isRequired
+          />
           <Button
             variant="primary"
-            label="Proceed"
+            label="Next"
           />
         </Stack>
       </Box>
