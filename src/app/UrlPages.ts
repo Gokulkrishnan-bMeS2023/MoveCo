@@ -100,4 +100,10 @@ export const UrlPages: AppRoute[] = [
     path: "/cart",
     component: lazy(() => import("../pages/Product/Cart")),
   },
+  {
+    path: "/in-home-move-estimate",
+    component: lazy(
+      () => import("../pages/services/InHomeMoveEstimate/InHomeMoveEstimate"),
+    ),
+  },
 ];
