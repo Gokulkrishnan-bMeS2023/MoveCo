@@ -11,8 +11,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 
-/* ================= NAV DATA ================= */
-
 const NAV_ITEMS = [
   { label: "Home", path: "/" },
   {

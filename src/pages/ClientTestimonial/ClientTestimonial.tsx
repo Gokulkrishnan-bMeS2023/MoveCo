@@ -1,4 +1,4 @@
-import { Box, Heading, Flex } from "@chakra-ui/react";
+import { Heading, Flex, Container } from "@chakra-ui/react";
 import { useState } from "react";
 import ClientSpeaks from "../../components/common/ReviewGrid";
 import Button from "../../components/common/Button/Button";
@@ -7,8 +7,8 @@ const ClientTestimonial = () => {
   const [visibleCount, setVisibleCount] = useState(3);
 
   return (
-    <Box px={8} py={12}>
-      <Heading mb={6} as="h2" color="brand.primary">
+   <Container maxW="100%" py={{ base: 10, md: 12 }} px={8}>
+      <Heading  mb={{base:6, lg:8}} as="h2" color="brand.primary">
         Client Speaks
       </Heading>
 
@@ -21,7 +21,7 @@ const ClientTestimonial = () => {
           onClick={() => setVisibleCount((prev) => prev + 3)}
         />
       </Flex>
-    </Box>
+    </Container>
   );
 };
 
