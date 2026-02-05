@@ -13,13 +13,13 @@ const Step3Experience = () => {
   const [agreed, setAgreed] = useState(false);
   const [showError, setShowError] = useState(false);
 
-  const handleNext = () => {
-    if (!agreed) {
-      setShowError(true);
-      return;
-    }
-    console.log("Form valid");
-  };
+  // const handleNext = () => {
+  //   if (!agreed) {
+  //     setShowError(true);
+  //     return;
+  //   }
+  //   console.log("Form valid");
+  // };
 
   return (
     <>
@@ -96,8 +96,6 @@ const Step3Experience = () => {
           You must agree before continuing.
         </Field.ErrorText>
       </Field.Root>
-
-    
     </>
   );
 };
