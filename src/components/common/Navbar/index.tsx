@@ -17,7 +17,6 @@ const NAV_ITEMS = [
   { label: "Home", path: "/" },
   {
     label: "About Us",
-    path: "/#",
     items: [
       { label: "About MoveCo", path: "/about-us" },
       { label: "Our Insurance", path: "/our-insurance" },
@@ -29,10 +28,9 @@ const NAV_ITEMS = [
   },
   {
     label: "Product & Services",
-    path: "/#",
     items: [
       { label: "Instant Online Estimate", path: "/estimate" },
-      { label: "In-Home Move Estimate", path: "/inhome-estimate" },
+      { label: "In-Home Move Estimate", path: "/InHomeMoveEstimate" },
       { label: "Moving & Packing Supplies", path: "/Product" },
       {
         label: "Professional Packing Services",
@@ -43,14 +41,12 @@ const NAV_ITEMS = [
   },
   {
     label: "Resources",
-    path: "/#",
     items: [
-      { label: "Add Testimonial", path: "/testimonial/add" },
+      { label: "Add Testimonial", path: "/AddTestimonial" },
       { label: "Client Testimonial", path: "/client-testimonial" },
       { label: "Video Review", path: "/video-review" },
     ],
   },
-  { label: "Blog", path: "/blog" },
 ];
 
 /* ================= DESKTOP NAV ITEM ================= */

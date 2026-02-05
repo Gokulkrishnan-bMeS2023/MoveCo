@@ -22,10 +22,10 @@ const Notes: React.FC<NotesProps> = ({
 
   return (
     <Field.Root invalid={isInvalid} required={isRequired}>
-      <Field.Label fontWeight="medium">
+      <Field.Label fontWeight="medium" >
         {label}
         {isRequired && (
-          <Text as="span" fontWeight="900" fontSize={16} color="red.500" ml={1}>
+          <Text as="span" fontWeight="500" fontSize={16} color="brand.red">
             *
           </Text>
         )}
@@ -38,9 +38,9 @@ const Notes: React.FC<NotesProps> = ({
         resize="vertical"
         outline="none"
         focusRing="inside"
-        focusRingColor="green.500"
+        focusRingColor="brand.primary"
         _focusVisible={{
-          borderColor: "green.500",
+          borderColor: "brand.primary",
         }}
       />
 

@@ -1,33 +1,31 @@
 
 
 
-import { 
-  Box, 
-  Flex, 
-  Heading, 
-  Image, 
-  List, 
-  HStack, 
-  Text, 
-  SimpleGrid, 
-  Circle, 
-  Icon, 
-  Container
+import {
+  Box,
+  Flex,
+  Heading,
+  Image,
+  List,
+  HStack,
+  Text,
+  SimpleGrid,
+  Circle,
+  Icon,
+  Container,
 } from "@chakra-ui/react";
 
-import { 
-  FaTshirt, 
-  FaBan, 
-  FaWalking, 
-  FaSoap 
+import {
+  FaTshirt,
+  FaBan,
+  FaWalking,
+  FaSoap
 } from "react-icons/fa";
 import { GiBelt } from "react-icons/gi";
 import { PiSparkleLight } from "react-icons/pi";
-import officeImg from "../../assets/scottish-rite.jpg";
 import customerImg from "../../assets/scottish-rite.jpg";
 import InsuranceImg from "../../assets/modifiedbanner.png";
 
-// ---------------- DRESS CODE DATA ----------------
 const dressCodeData = [
   { id: 1, text: "Wear a MoveCo t-shirt at all times while working.", icon: FaTshirt },
   { id: 2, text: "Maintain a neat, clean appearance (no holes or stains).", icon: PiSparkleLight },
@@ -37,7 +35,6 @@ const dressCodeData = [
   { id: 6, text: "Maintain good personal hygiene.", icon: FaSoap },
 ];
 
-// ---------------- CUSTOMER RELATIONS ----------------
 const customerPoints = [
   "Be polite, well-mannered, and respectful to every customer. Do not use profane, crude, or offensive language toward customers.",
   "Arrive on time and call the customer when you are on the way or if you are running late.",
@@ -48,7 +45,6 @@ const customerPoints = [
   "Give the customer magnets and plenty of business cards.",
 ];
 
-// ---------------- DEALING WITH OFFICE ----------------
 const officePoints = [
   "Report to dispatch on time at 6:45 AM.",
   "ZERO TOLERANCE OF ALCOHOL OR DRUG USE!!!",
@@ -62,164 +58,163 @@ const officePoints = [
 const AssociateCodeOfConduct = () => {
   return (
     <>
-    <Container maxW="100%" px={8} py={12}>
-            {/* <Box> */}
-            <Box
-              bgImage={`url(${InsuranceImg})`}
-              bgSize="cover"
-              borderRadius="lg"
-              minH={{ base: "230px", md: "320px" }}
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              position="relative"
-              overflow="hidden"
-            >
-              <Box position="absolute" inset={0} bg="grey" opacity={0.6} />
-              <Box position="relative" textAlign="center">
-                <Heading as={"h2"} color="brand.white" fontWeight="normal" mb={4}>
-                  Associate Code of Conduct
-                </Heading>
-              </Box>
-            </Box>
-          </Container>
-  <Container maxW="100%" py={10} px={8}>
-      {/* ---------------- DRESS CODE ---------------- */}
-      <Heading as="h2" mb={4}>Dress Code</Heading>
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6} mb={16}>
-        {dressCodeData.map((item) => (
-          <Box
-            key={item.id}
-            borderWidth="1px"
-            borderRadius="xl"
-            bg="white"
-            p={8}
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            textAlign="center"
-            boxShadow="sm"
-            transition="all 0.3s ease"
-            _hover={{
-              transform: "translateY(-6px) scale(1.04)",
-              boxShadow: "2xl",
-              borderColor: "brand.primary",
-            }}
-          >
-            <Circle size="100px" bg="brand.primary" color="brand.white" mb={6}>
-              <Icon as={item.icon} boxSize={10} />
-            </Circle>
-            <Text>{item.text}</Text>
+      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+        <Box
+          bgImage={`url(${InsuranceImg})`}
+          bgSize="cover"
+          borderRadius="lg"
+          minH={{ base: "230px", md: "320px" }}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          position="relative"
+          overflow="hidden"
+        >
+          <Box position="absolute" inset={0} bg="grey" opacity={0.6} />
+          <Box position="relative" textAlign="center">
+            <Heading as="h1" fontWeight="normal" color="brand.white" mb={4}>
+              Associate Code of Conduct
+            </Heading>
           </Box>
-        ))}
-      </SimpleGrid>
-
-      {/* ---------------- CUSTOMER RELATIONS ---------------- */}
-    
-     <Flex
-      maxW="7xl"
-      mx="auto"
-      py={10}
-      gap={10}
-      align="center"
-      direction={{ base: "column", md: "row" }}
-    >
-      {/* LEFT */}
-      <Box flex="1">
-        <Heading as="h2" mb={4}>Customer Relations</Heading>
-        <Image
-          src={customerImg}
-          alt="Customer Relations"
-          borderRadius="xl"
-          boxShadow="lg"
-          objectFit="cover"
-          w="100%"
-          maxH="420px"
-        />
-      </Box>
-
-      {/* RIGHT */}
-      <Box flex="1">
-        <List.Root gap={2} listStyle="none" ps={0}>
-          {customerPoints.map((item, index) => (
-            <List.Item key={index}>
-              <HStack align="start" gap={4}>
-                <Box
-                    minW="28px"
-                    h="28px"
-                    bg="brand.primary"
-                    color="brand.white"
-                    borderRadius="full"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    fontWeight="bold"
-                  >
-                    {index + 1}
-                  </Box>
-                <Text>{item}</Text>
-              </HStack>
-            </List.Item>
-          ))}
-        </List.Root>
-      </Box>
-    </Flex>
-
-      {/* ---------------- DEALING WITH OFFICE ---------------- */}
-       <Flex
-      maxW="7xl"
-      mx="auto"
-      py={10}
-      gap={10}
-      align="center"
-      direction={{ base: "column-reverse", md: "row" }}
-    >
-      {/* LEFT CONTENT */}
-      <Box flex="1">
-        <Heading as="h2" mb={6}>Dealing with the Office</Heading>
-
-        <Box >
-          <List.Root listStyle="none" ps={0} gap={2}>
-            {officePoints.map((item, index) => (
-              <List.Item key={index}>
-                <HStack align="start" gap={4}>
-                  <Box
-                    minW="28px"
-                    h="28px"
-                    bg="brand.primary"
-                    color="brand.white"
-                    borderRadius="full"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    fontWeight="bold"
-                  >
-                    {index + 1}
-                  </Box>
-                  <Text>{item}</Text>
-                </HStack>
-              </List.Item>
-            ))}
-          </List.Root>
         </Box>
+        <Box pt={{base:10, md:16}}>
+        <Heading mb={{base:6, lg:8}} as="h1" fontWeight="normal"> Dress <Text as="span" color="brand.primary">Code</Text></Heading>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
+          {dressCodeData.map((item) => (
+            <Box
+              key={item.id}
+              borderWidth="1px"
+              borderRadius="xl"
+              bg="brand.white"
+              p={8}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              textAlign="center"
+              boxShadow="sm"
+              transition="all 0.3s ease"
+              _hover={{
+                transform: "translateY(-6px) scale(1.04)",
+                boxShadow: "2xl",
+                borderColor: "brand.primary",
+              }}
+            >
+              <Circle size="100px" bg="brand.primary" color="brand.white" mb={6}>
+                <Icon as={item.icon} boxSize={10} />
+              </Circle>
+              <Text>{item.text}</Text>
+            </Box>
+          ))}
+        </SimpleGrid>
+      </Box>
+      <Box pt={{base:10, md:16}}>
+          <Heading mb={{base:6, lg:8}} w={{ base: "100%", lg: "50%" }} textAlign={{ base: "center", lg: "left" }} as="h1" fontWeight="normal" >Customer <Text as="span" color="brand.primary">
+            Relations
+          </Text></Heading>
+        <Flex
+          maxW="7xl"
+          mx="auto"
+          gap={10}
+          align="center"
+          direction={{ base: "column", md: "row" }}
+        >
+          <Box flex="1">
+            <Image
+              src={customerImg}
+              alt="Customer Relations"
+              borderRadius="xl"
+              boxShadow="lg"
+              objectFit="cover"
+              w="100%"
+              maxH="420px"
+            />
+          </Box>
+          <Box flex="1">
+            <List.Root gap={2} listStyle="none" ps={0}>
+              {customerPoints.map((item, index) => (
+                <List.Item key={index}>
+                  <HStack align="start" gap={4}>
+                    <Box
+                      minW="28px"
+                      h="28px"
+                      bg="brand.primary"
+                      color="brand.white"
+                      borderRadius="full"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      fontWeight="bold"
+                    >
+                      {index + 1}
+                    </Box>
+                    <Text>{item}</Text>
+                  </HStack>
+                </List.Item>
+              ))}
+            </List.Root>
+          </Box>
+        </Flex>
       </Box>
 
-      {/* RIGHT IMAGE */}
-      <Box flex="1">
-        <Image
-          src={officeImg}
-          alt="Dealing with the Office"
-          borderRadius="2xl"
-          boxShadow="xl"
-          objectFit="cover"
-          w="100%"
-          maxH="450px"
-        />
-      </Box>
-    </Flex>
-</Container>
-</>
+      <Box pt={{base:10, md:16}}>
+          <Heading mb={{base:6, lg:8}} as="h1" fontWeight="normal" w={{ base: "100%", lg: "50%" }} textAlign={{ base: "center", lg: "left" }}>Dealing with <Text as="span" color="brand.primary">
+            the Office
+          </Text></Heading>
+        <Flex
+          maxW="7xl"
+          mx="auto"
+          gap={10}
+          align="center"
+          direction={{ base: "column-reverse", md: "row" }}
+        >
+          <Box flex="1">
+            <Box >
+              <List.Root listStyle="none" ps={0} gap={2}>
+                {officePoints.map((item, index) => (
+                  <List.Item key={index}>
+                    <HStack align="start" gap={4}>
+                      <Box
+                        minW="28px"
+                        h="28px"
+                        bg="brand.primary"
+                        color="brand.white"
+                        borderRadius="full"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        fontWeight="bold"
+                      >
+                        {index + 1}
+                      </Box>
+                      <Text>{item}</Text>
+                    </HStack>
+                  </List.Item>
+                ))}
+              </List.Root>
+            </Box>
+          </Box>
+          <Box flex="1">
+            <Image
+              src={InsuranceImg}
+              alt="Dealing with the Office"
+              borderRadius="2xl"
+              boxShadow="xl"
+              objectFit="cover"
+              w="100%"
+              maxH="450px"
+            />
+          </Box>
+        </Flex>
+        </Box>
+      </Container>
+    </>
   );
 };
 
 export default AssociateCodeOfConduct;
+
+
+
+
+
+

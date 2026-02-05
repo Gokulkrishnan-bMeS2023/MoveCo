@@ -48,6 +48,8 @@ const system = createSystem(defaultConfig, {
           bgGray: { value: "#f2f2f2" },
           black: { value: "#000000" },
           white: { value: "#ffffff" },
+          red: { value: "#ff0000" },
+          gray: { value: "#718096"},
         },
       },
 

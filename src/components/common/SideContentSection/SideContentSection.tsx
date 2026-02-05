@@ -37,7 +37,7 @@
 //           rounded="2xl"
 //           w="100%"
 //           height="auto"
-          
+
 //         />
 //       </Box>
 
@@ -85,10 +85,20 @@ const SideContentSection = ({
   linkHref = "#",
   reverse = false,
 }: SideContentSectionProps) => {
+  const words = title.split(" ");
+  const normalText = words.slice(0, -1).join(" ");
+  const coloredText = words.slice(-1).join(" ");
+
   return (
     <>
       <Box w={{ base: "100%", lg: "50%" }} textAlign={{ base: "center", lg: "left" }}>
-        <Heading mb={4} as="h2">{title}</Heading>
+        <Heading mb={4} as="h2" fontWeight="normal">
+          {normalText}{" "}
+          <Text as="span" color="brand.primary">
+            {coloredText}
+          </Text>
+        </Heading>
+
       </Box>
 
       <Flex

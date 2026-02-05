@@ -1,115 +1,5 @@
-// // import { Field, RadioGroup, Stack } from "@chakra-ui/react";
 
-// // const RadioField = ({
-// //   label,
-// //   options,
-// //   value,
-// //   onValueChange,
-// //   isRequired = false,
-// //   errorMessage,
-// //   direction = "column",
-// // }: any) => {
-// //   const isInvalid = Boolean(errorMessage);
-
-// //   return (
-// //     <Field.Root invalid={isInvalid} required={isRequired}>
-// //       <Field.Label fontWeight="medium">{label}</Field.Label>
-
-// //       <RadioGroup.Root
-// //         value={value}
-// //         onValueChange={(details: any) =>
-// //           onValueChange?.(details.value)
-// //         }
-// //       >
-// //         <Stack direction={direction} gap="4">
-// //           {options.map((option: any) => (
-// //             <RadioGroup.Item
-// //               key={option.value}
-// //               value={option.value}
-// //             >
-// //               {/* 🔴 THIS IS IMPORTANT */}
-// //               <RadioGroup.ItemHiddenInput />
-
-// //               <RadioGroup.ItemControl />
-// //               <RadioGroup.ItemText>
-// //                 {option.label}
-// //               </RadioGroup.ItemText>
-// //             </RadioGroup.Item>
-// //           ))}
-// //         </Stack>
-// //       </RadioGroup.Root>
-
-// //       {isInvalid && (
-// //         <Field.ErrorText>{errorMessage}</Field.ErrorText>
-// //       )}
-// //     </Field.Root>
-// //   );
-// // };
-
-// // export default RadioField;
-
-
-
-// import { Field, RadioGroup, Stack } from "@chakra-ui/react";
-
-// const RadioField = ({
-//   label,
-//   options,
-//   value,
-//   onValueChange,
-//   isRequired = false,
-//   errorMessage,
-//   direction = "column",
-// }: any) => {
-//   const isInvalid = Boolean(errorMessage);
-
-//   return (
-//     <Field.Root invalid={isInvalid} required={isRequired}>
-//       <Field.Label fontWeight="medium">{label}</Field.Label>
-
-//       <RadioGroup.Root
-//         value={value}
-//         size="sm"
-//         variant="outline"
-//         colorPalette="brand.primary" 
-//         onValueChange={(details: any) => onValueChange?.(details.value)}
-//       >
-//         <Stack direction={direction} gap="2">
-//           {options.map((option: any) => (
-//             <RadioGroup.Item
-//               key={option.value}
-//               value={option.value}
-//               cursor="pointer"
-//             >
-//               <RadioGroup.ItemHiddenInput />
-//               <RadioGroup.ItemControl />
-//               <RadioGroup.ItemText fontSize="sm" color="brand.secondary">
-//                 {option.label}
-//               </RadioGroup.ItemText>
-//             </RadioGroup.Item>
-//           ))}
-//         </Stack>
-//       </RadioGroup.Root>
-
-//       {isInvalid && (
-//         <Field.ErrorText>{errorMessage}</Field.ErrorText>
-//       )}
-//     </Field.Root>
-//   );
-// };
-
-// export default RadioField;
-
-
-
-
-
-
-
-
-
-
-import { Field, RadioGroup, Stack, For } from "@chakra-ui/react";
+import { Field, RadioGroup, Stack, For,Text } from "@chakra-ui/react";
 
 interface RadioOption {
   label: string;
@@ -139,8 +29,15 @@ const RadioField = ({
 
   return (
     <Field.Root invalid={isInvalid} required={isRequired}>
-      {label && <Field.Label fontWeight="medium">{label}</Field.Label>}
-
+      {label && <Field.Label fontWeight="medium">
+              {label}
+              {isRequired && (
+                <Text fontWeight={"500"} fontSize={16} as="span" color="brand.red">
+                  *
+                </Text>
+              )}
+            </Field.Label>
+}
       <RadioGroup.Root
         value={value}
         size="md"

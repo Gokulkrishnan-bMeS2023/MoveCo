@@ -29,7 +29,7 @@ const InputField: React.FC<InputProps> = ({
       <Field.Label fontWeight="medium">
         {label}
         {isRequired && (
-          <Text fontWeight={"900"} fontSize={16} as="span" color="red.500" ml={1}>
+          <Text fontWeight={"500"} fontSize={16} as="span" color="brand.red">
             *
           </Text>
         )}

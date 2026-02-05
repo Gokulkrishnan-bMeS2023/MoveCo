@@ -6,8 +6,7 @@ import SideContentSection from "../../components/common/SideContentSection/SideC
 
 const SupportedCharity = () => {
   return (
-   <Container maxW="100%" px={8} py={12}>
-    <Box py={8}>
+   <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
       <SideContentSection
         title="The Ashley Watrous Foundation"
         description="Dedicated to America’s positive future. Our children are our future. The problems of tomorrow can 
@@ -17,8 +16,7 @@ const SupportedCharity = () => {
         linkText="Read more"
         linkHref="/TheAshleyWatrousFoundation"
       />
-      </Box>
-       <Box py={8}>
+       <Box pt={{base:10, md:16}}>
       <SideContentSection
         title="SENS Research Foundation"
         description="At SENS Research Foundation, we believe that a world free of age-related disease is possible. 
@@ -31,7 +29,7 @@ const SupportedCharity = () => {
         reverse
       />
       </Box>
-       <Box py={8}>
+       <Box pt={{base:10, md:16}}>
       <SideContentSection
         title="Scottish Rite Hospital"
         description="Every day world-renowned experts provide care, guidance and innovation to help kids run, jump and play.

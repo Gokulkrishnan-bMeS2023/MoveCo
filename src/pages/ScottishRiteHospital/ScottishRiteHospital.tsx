@@ -4,7 +4,7 @@ import SideContentSection from "../../components/common/SideContentSection/SideC
 
 const SupportedCharity = () => {
   return (
-   <Container maxW="100%" px={8} py={12}>
+   <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
       <SideContentSection
         title="Scottish Rite Hospital"
         description="Every day world-renowned experts provide care, guidance and innovation to help kids run, jump and play.

@@ -87,14 +87,16 @@ const AboutUs = () => {
                 borderRadius="2xl"
               />
             </Box>
-            <Box p={4}>
-              <Button
+            <Box p={{base:"0",md:"4"}}>
+              <Box mt={{base:"8",md:"0"}}>
+              <Button 
                 fontSize="xl"
                 rounded="full"
                 variant="primary"
                 label="Our Mission"
               />
-              <Text mt={6} textStyle="size-3xl">
+              </Box>
+              <Text mt={{base:"4",md:"6"}} textStyle="size-3xl">
                 We aim to impress you with our service so much that you'll share
                 our business cards with your friends and colleagues, post your
                 text and video testimonials on our website, and choose us for

@@ -1,0 +1,721 @@
+// import { useState } from "react";
+// import {
+//   Box,
+//   Image,
+//   Container,
+//   Heading,
+//   Stack,
+//   Text,
+//   SimpleGrid,
+//   Flex,
+// } from "@chakra-ui/react";
+// import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+// import InputField from "../../components/common/Input/Input";
+// import Notes from "../../components/common/Notes/Notes";
+// import DateInput from "../../components/common/DateInput/DateInput";
+// import Button from "../../components/common/Button/Button";
+// import inhomemoveestimate from "../../assets/service1.webp";
+
+// interface MoveEstimateFormValues {
+//   visitDate: string;
+//   visitTime: string;
+//   moveDate: string;
+//   moveSize: string;
+//   hearAbout: string;
+
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   homePhone: string;
+//   cellPhone: string;
+//   workPhone: string;
+//   faxPhone: string;
+
+//   fromAddress: string;
+//   apt: string;
+//   city: string;
+//   state: string;
+//   zipCode: string;
+//   notes: string;
+// }
+
+// const InHomeMoveEstimate = () => {
+//   const [values, setValues] = useState<MoveEstimateFormValues>({
+//     visitDate: "",
+//     visitTime: "",
+//     moveDate: "",
+//     moveSize: "",
+//     hearAbout: "",
+//     firstName: "",
+//     lastName: "",
+//     email: "",
+//     homePhone: "",
+//     cellPhone: "",
+//     workPhone: "",
+//     faxPhone: "",
+//     fromAddress: "",
+//     apt: "",
+//     city: "",
+//     state: "",
+//     zipCode: "",
+//     notes: "",
+//   });
+
+//   const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
+//     setValues((prev) => ({ ...prev, [field]: value }));
+//   };
+
+//   const handleSubmit = () => {
+//     console.log("Submitted Data:", values);
+//   };
+
+//   return (
+//     <>
+//       <Container maxW="100%" py={10} px={8}>
+//         <Flex
+//           mt={6}
+//           direction={{ base: "column", md: "row" }}
+//           align={{ base: "flex-start", md: "center" }}
+//           justify="space-between"
+//           gap={{ base: 6, md: 10 }}
+//         >
+//           <Box maxW="600px" w="100%">
+//             <Heading as="h1" fontWeight="normal" mb={2}>
+//               In-Home <br />
+//               <Text as="span" color="brand.primary">
+//                 Move Estimate
+//               </Text>
+//             </Heading>
+//           </Box>
+//           <Box maxW="430px" w="100%">
+//             <Text
+//               textStyle="size-xl"
+//               textAlign={{ base: "left", md: "right" }}
+//             >
+//               All information will not be released to any other person or
+//               company, please read our privacy policy Be sure to ask about our
+//               packing services!
+//             </Text>
+//           </Box>
+//         </Flex>
+//         <SimpleGrid columns={{ base: 1, md: 2 }} alignItems="center">
+//           <Box w="100%" maxW={{ base: "100%", md: "550px" }}>
+//             <Image
+//               src={inhomemoveestimate}
+//               alt="footprint"
+//               w="100%"
+//               h="auto"
+//               mt={6}
+//               borderRadius="2xl"
+//             />
+//           </Box>
+//           <Box p={4}>
+//             <Text mt={6} textStyle="size-3xl">
+//               After filling out this form, an appointment will be made to have a
+//               real, live person come out and estimate your move costs. This is a
+//               free service, and is perfect for individuals who are unsure as to
+//               how items can and will be moved. A trained, courteous MoveCo.net
+//               employee will thoroughly inspect and evalute your items, and give
+//               you a fair and accurate quote for all your moving needs.
+//             </Text>
+//           </Box>
+//         </SimpleGrid>
+//       </Container>
+//       <Container maxW="100%" py={10} px={8}>
+
+//         <Stack gap={8}>
+
+//           {/* CARD 1 – GENERAL INFORMATION (FULL WIDTH) */}
+//           <Box
+//             bg="brand.white"
+//             p={{ base: 6, md: 8 }}
+//             borderRadius="2xl"
+//             boxShadow="lg"
+//             border="1px solid"
+//             borderColor="brand.white"
+//           >
+//             <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">General Information</Heading>
+
+//             <SimpleGrid columns={{ base: 1, md: 2 }} gap={6} mb={{ base: 2, md: 4 }}>
+//               <DateInput
+//                 label="Estimator Visit Date"
+//                 value={values.visitDate}
+//                 onChange={(e) => handleChange("visitDate", e.target.value)}
+//                 isRequired
+//               />
+
+//               <InputField
+//                 label="Preferred Time (8AM - 10AM etc)"
+//                 value={values.visitTime}
+//                 onChange={(e) => handleChange("visitTime", e.target.value)}
+//                 isRequired
+//               />
+//             </SimpleGrid>
+
+//             <SimpleGrid columns={{ base: 1, md: 2 }} gap={6} mb={{ base: 2, md: 4 }}>
+//               <DateInput
+//                 label="Planned Move Date"
+//                 value={values.moveDate}
+//                 onChange={(e) => handleChange("moveDate", e.target.value)}
+//                 isRequired
+//               />
+
+//               <InputField
+//                 label="Estimated Move Size (Home / Apartment / Office)"
+//                 value={values.moveSize}
+//                 onChange={(e) => handleChange("moveSize", e.target.value)}
+//                 isRequired
+//               />
+//             </SimpleGrid>
+
+//             <InputField
+//               label="How did you hear about MoveCo.net?"
+//               value={values.hearAbout}
+//               onChange={(e) => handleChange("hearAbout", e.target.value)}
+//             />
+//           </Box>
+
+//           {/* CARD 2 + 3 – SIDE BY SIDE */}
+//           <SimpleGrid columns={{ base: 1, md: 2 }} gap={8} mb={{ base: 2, md: 4 }}>
+
+//             {/* LEFT – CONTACT INFORMATION */}
+//             <Box
+//               bg="brand.white"
+//               p={{ base: 6, md: 8 }}
+//               borderRadius="2xl"
+//               boxShadow="lg"
+//               border="1px solid"
+//               borderColor="brand.white"
+//             >
+//               <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">Contact Information</Heading>
+
+//               <SimpleGrid columns={{ base: 1, md: 2 }} gap={6} mb={{ base: 2, md: 4 }}>
+//                 <InputField
+//                   label="First Name"
+//                   value={values.firstName}
+//                   onChange={(e) => handleChange("firstName", e.target.value)}
+//                   leftIcon={<FaUser />}
+//                   isRequired
+//                 />
+//                 <InputField
+//                   label="Last Name"
+//                   value={values.lastName}
+//                   onChange={(e) => handleChange("lastName", e.target.value)}
+//                   leftIcon={<FaUser />}
+//                   isRequired
+//                 />
+//               </SimpleGrid>
+
+//               <InputField
+//                 label="Email"
+//                 value={values.email}
+//                 onChange={(e) => handleChange("email", e.target.value)}
+//                 leftIcon={<FaEnvelope />}
+//                 isRequired
+//               />
+
+//               <SimpleGrid columns={{ base: 1, md: 2 }} gap={6} mb={{ base: 2, md: 4 }}>
+//                 <InputField
+//                   label="Home Phone"
+//                   value={values.homePhone}
+//                   onChange={(e) => handleChange("homePhone", e.target.value)}
+//                   leftIcon={<FaPhone />}
+//                   isRequired
+//                 />
+//                 <InputField
+//                   label="Cell Phone"
+//                   value={values.cellPhone}
+//                   onChange={(e) => handleChange("cellPhone", e.target.value)}
+//                   leftIcon={<FaPhone />}
+//                 />
+//               </SimpleGrid>
+
+//               <SimpleGrid columns={{ base: 1, md: 2 }} gap={6} mb={{ base: 2, md: 4 }}>
+//                 <InputField
+//                   label="Work Phone"
+//                   value={values.workPhone}
+//                   onChange={(e) => handleChange("workPhone", e.target.value)}
+//                 />
+//                 <InputField
+//                   label="Fax Phone"
+//                   value={values.faxPhone}
+//                   onChange={(e) => handleChange("faxPhone", e.target.value)}
+//                 />
+//               </SimpleGrid>
+//             </Box>
+
+//             {/* RIGHT – MOVE LOCATION */}
+//             <Box
+//               bg="brand.white"
+//               p={{ base: 6, md: 8 }}
+//               borderRadius="2xl"
+//               boxShadow="lg"
+//               border="1px solid"
+//               borderColor="brand.white"
+//             >
+//               <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">Move Location</Heading>
+//               <Box gap={6}>
+//                 <InputField
+//                   label="From Address"
+//                   value={values.fromAddress}
+//                   onChange={(e) => handleChange("fromAddress", e.target.value)}
+//                   leftIcon={<FaMapMarkerAlt />}
+//                   isRequired
+//                 />
+
+//                 <InputField
+//                   label="Apt / Suite / Other"
+//                   value={values.apt}
+//                   onChange={(e) => handleChange("apt", e.target.value)}
+//                 />
+
+//                 <SimpleGrid columns={{ base: 1, md: 3 }} gap={4} mb={{ base: 2, md: 4 }}>
+//                   <InputField
+//                     label="City"
+//                     value={values.city}
+//                     onChange={(e) => handleChange("city", e.target.value)}
+//                     isRequired
+//                   />
+//                   <InputField
+//                     label="State"
+//                     value={values.state}
+//                     onChange={(e) => handleChange("state", e.target.value)}
+//                     isRequired
+//                   />
+//                   <InputField
+//                     label="Zip Code"
+//                     value={values.zipCode}
+//                     onChange={(e) => handleChange("zipCode", e.target.value)}
+//                     isRequired
+//                   />
+
+//                 </SimpleGrid>
+
+//                 <Notes
+//                   label="Additional Information"
+//                   value={values.notes}
+//                   onChange={(value) => handleChange("notes", value)}
+//                 />
+//               </Box>
+//             </Box>
+
+//           </SimpleGrid>
+
+//           {/* SUBMIT BUTTON */}
+//           <Box textAlign={{ base: "center", md: "right" }}>
+//             <Button label="Send" variant="primary" px="16" onClick={handleSubmit} />
+//           </Box>
+
+//         </Stack>
+//       </Container>
+//     </>
+//   );
+// };
+
+// export default InHomeMoveEstimate;
+
+
+
+
+
+
+
+import { useState } from "react";
+import {
+  Box,
+  Image,
+  Container,
+  Heading,
+  Stack,
+  Text,
+  SimpleGrid,
+  Flex,
+} from "@chakra-ui/react";
+import InputField from "../../components/common/Input/Input";
+import Notes from "../../components/common/Notes/Notes";
+import DateInput from "../../components/common/DateInput/DateInput";
+import Button from "../../components/common/Button/Button";
+import inhomemoveestimate from "../../assets/service1.webp";
+import SelectField from "../../components/common/Select/Select";
+import { useNavigate } from "react-router-dom";
+
+const timeOptions = [
+  { label: "8AM - 10AM", value: "8AM-10AM" },
+  { label: "10AM - 12PM", value: "10AM-12PM" },
+  { label: "12PM - 2PM", value: "12PM-2PM" },
+  { label: "2PM - 4PM", value: "2PM-4PM" },
+];
+const moveSizeOptions = [
+  { label: "Home", value: "home" },
+  { label: "Office", value: "office" },
+  { label: "Apartment", value: "apartment" },
+  { label: "Storage Room", value: "storage-room" },
+];
+const hearAboutOptions = [
+  { label: "Other", value: "Other" },
+  { label: "Yellow Pages", value: "Yellow Pages" },
+  { label: "Better Business Bureau", value: "Better Business Bureau" },
+  { label: "HMS", value: "HMS" },
+  { label: "MoveCo Truck", value: "MoveCo Truck" },
+  { label: "Referred By Someone", value: "Referred By Someone" },
+  { label: "Repeat Customer", value: "Repeat Customer" },
+  { label: "Received Mail", value: "Received Mail" },
+  { label: "Online Methods", value: "Online Methods" },
+  { label: "Online Yellow Pages", value: "Online Yellow Pages" },
+  { label: "Yahoo", value: "Yahoo" },
+  { label: "Google", value: "Google" },
+  { label: "MSN", value: "MSN" },
+  { label: "Ask.com", value: "Ask.com" },
+  { label: "Other Search Engine", value: "Other Search Engine" },
+  { label: "Other Internet", value: "Other Internet" },
+];
+const stateOptions = [
+  { label: "Texas", value: "TX" },
+  { label: "Alaska", value: "AK" },
+  { label: "Alabama", value: "AL" },
+  { label: "Arkansas", value: "AR" },
+  { label: "Arizona", value: "AZ" },
+  { label: "California", value: "CA" },
+  { label: "Colorado", value: "CO" },
+  { label: "Connecticut", value: "CT" },
+  { label: "District of Columbia", value: "DC" },
+  { label: "Delaware", value: "DE" },
+  { label: "Florida", value: "FL" },
+  { label: "Georgia", value: "GA" },
+  { label: "Hawaii", value: "HI" },
+  { label: "Iowa", value: "IA" },
+  { label: "Idaho", value: "ID" },
+  { label: "Illinois", value: "IL" },
+  { label: "Indiana", value: "IN" },
+  { label: "Kansas", value: "KS" },
+  { label: "Kentucky", value: "KY" },
+  { label: "Louisiana", value: "LA" },
+  { label: "Massachusetts", value: "MA" },
+  { label: "Maryland", value: "MD" },
+  { label: "Maine", value: "ME" },
+  { label: "Michigan", value: "MI" },
+  { label: "Minnesota", value: "MN" },
+  { label: "Missouri", value: "MO" },
+  { label: "Mississippi", value: "MS" },
+  { label: "Montana", value: "MT" },
+  { label: "North Carolina", value: "NC" },
+  { label: "North Dakota", value: "ND" },
+  { label: "Nebraska", value: "NE" },
+  { label: "New Hampshire", value: "NH" },
+  { label: "New Jersey", value: "NJ" },
+  { label: "New Mexico", value: "NM" },
+  { label: "Nevada", value: "NV" },
+  { label: "New York", value: "NY" },
+  { label: "Ohio", value: "OH" },
+  { label: "Oklahoma", value: "OK" },
+  { label: "Oregon", value: "OR" },
+  { label: "Pennsylvania", value: "PA" },
+  { label: "Puerto Rico", value: "PR" },
+  { label: "Rhode Island", value: "RI" },
+  { label: "South Carolina", value: "SC" },
+  { label: "South Dakota", value: "SD" },
+  { label: "Tennessee", value: "TN" },
+  { label: "Utah", value: "UT" },
+  { label: "Virginia", value: "VA" },
+  { label: "Virgin Islands", value: "VI" },
+  { label: "Vermont", value: "VT" },
+  { label: "Washington", value: "WA" },
+  { label: "Wisconsin", value: "WI" },
+  { label: "West Virginia", value: "WV" },
+  { label: "Wyoming", value: "WY" },
+];
+
+
+interface MoveEstimateFormValues {
+  visitDate: string;
+  visitTime: string;
+  moveDate: string;
+  moveSize: string;
+  hearAbout: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  homePhone: string;
+  cellPhone: string;
+  workPhone: string;
+  faxPhone: string;
+  fromAddress: string;
+  apt: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  notes: string;
+}
+
+const InHomeMoveEstimate = () => {
+  const navigate = useNavigate();
+  const [values, setValues] = useState<MoveEstimateFormValues>({
+    visitDate: "",
+    visitTime: "",
+    moveDate: "",
+    moveSize: "",
+    hearAbout: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    homePhone: "",
+    cellPhone: "",
+    workPhone: "",
+    faxPhone: "",
+    fromAddress: "",
+    apt: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    notes: "",
+  });
+
+  const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
+    setValues((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = () => {
+    console.log("Submitted Data:", values);
+  };
+
+  return (
+    <>
+      {/* HEADER SECTION */}
+      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          align={{ base: "flex-start", md: "center" }}
+          justify="space-between"
+          gap={{ base: 6, md: 10 }}
+          mb={{base:6, lg:8}}
+        >
+            <Heading as="h1" fontWeight="normal" w={{ base: "100%", lg: "50%" }}>
+              In-Home <br />
+              <Text as="span" color="brand.primary">
+                Move Estimate
+              </Text>
+            </Heading>
+
+          <Box maxW={{ lg: "45%" }}>
+            <Text textStyle="size-xl" textAlign={{ base: "left", md: "right" }}>
+              All information will not be released to any other person or
+              company, please read our  <Text as="span" cursor="pointer" color="brand.primary"
+               onClick={() => navigate("/privacy-policy")}>
+               privacy policy</Text>. <Text as="span" fontWeight="bold">
+               Be sure to ask about our packing services!</Text>
+            </Text>
+          </Box>
+        </Flex>
+
+        <SimpleGrid columns={{ base: 1, md: 2 }} alignItems="center">
+          <Box w="100%" maxW={{ base: "100%", md: "550px" }}>
+            <Image
+              src={inhomemoveestimate}
+              alt="footprint"
+              w="100%"
+              h="auto"
+              borderRadius="2xl"
+            />
+          </Box>
+
+          <Box p={4}>
+            <Text mt={{base:"4",md:"6"}} textStyle="size-3xl">
+              After filling out this form, an appointment will be made to have a
+              real, live person come out and estimate your move costs. This is a
+              free service, and is perfect for individuals who are unsure as to
+              how items can and will be moved.
+            </Text>
+          </Box>
+        </SimpleGrid>
+      </Container>
+
+      <Container maxW="100%" py={{base:"2",md:"10"}} px={8}>
+        <Stack gap={8}>
+
+          <Box bg="brand.white" p={{ base: 6, md: 8 }} borderRadius="2xl" boxShadow="lg">
+            <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
+              General Information
+            </Heading>
+
+            <Stack gap={4}>
+              <Text textStyle="size-md" color="brand.secondary">Which date and time is convenient for one of our trained professional 
+                  estimators to come out and visit you?</Text>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+                
+                <DateInput
+                  label="Date"
+                  value={values.visitDate}
+                  onChange={(e) => handleChange("visitDate", e.target.value)}
+                  isRequired
+                />
+
+                <SelectField
+                  label="Preferred Time"
+                  value={values.visitTime}
+                  onValueChange={(e) => handleChange("visitTime", e.value[0])}
+                  isRequired
+                  options={timeOptions}
+                />
+              </SimpleGrid>
+                <DateInput
+                  label="On which date are you planning on moving?"
+                  value={values.moveDate}
+                  onChange={(e) => handleChange("moveDate", e.target.value)}
+                  isRequired
+                />
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+
+                <SelectField
+                  label="What do you estimate your move size to be?"
+                  value={values.moveSize}
+                  onValueChange={(e) => handleChange("moveSize", e.value[0])}
+                  isRequired
+                  options={moveSizeOptions}
+                />
+                <SelectField
+                label="How did you hear about MoveCo.net?"
+                value={values.hearAbout}
+                onValueChange={(e) => handleChange("hearAbout", e.value[0])}
+                isRequired
+                options={hearAboutOptions}
+              />
+              </SimpleGrid>
+
+              
+            </Stack>
+          </Box>
+       
+          <SimpleGrid columns={{ base: 1, md: 2 }} gap={8}>
+
+            <Box bg="brand.white" p={{ base: 6, md: 8 }} borderRadius="2xl" boxShadow="lg">
+              <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
+                Contact Information
+              </Heading>
+
+              <Stack gap={4}>
+                <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+                  <InputField
+                    label="First Name"
+                    placeholder="First Name"
+                    value={values.firstName}
+                    onChange={(e) => handleChange("firstName", e.target.value)}
+                    isRequired
+                  />
+                  <InputField
+                    label="Last Name"
+                    placeholder="Last Name"
+                    value={values.lastName}
+                    onChange={(e) => handleChange("lastName", e.target.value)}
+                    isRequired
+                  />
+                </SimpleGrid>
+
+                <InputField
+                  label="Email"
+                  placeholder="Email"
+                  value={values.email}
+                  onChange={(e) => handleChange("email", e.target.value)}
+                  isRequired
+                />
+
+                <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+                  <InputField
+                    label="Home Phone"
+                    placeholder="Home Phone"
+                    value={values.homePhone}
+                    onChange={(e) => handleChange("homePhone", e.target.value)}
+                    isRequired
+                  />
+                  <InputField
+                    label="Cell Phone"
+                    placeholder="Cell Phone"
+                    value={values.cellPhone}
+                    onChange={(e) => handleChange("cellPhone", e.target.value)}
+                  />
+                </SimpleGrid>
+
+                <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+                  <InputField
+                    label="Work Phone"
+                    placeholder="Work Phone"
+                    value={values.workPhone}
+                    onChange={(e) => handleChange("workPhone", e.target.value)}
+                  />
+                  <InputField
+                    label="Fax Phone"
+                    placeholder="Fax Phone"
+                    value={values.faxPhone}
+                    onChange={(e) => handleChange("faxPhone", e.target.value)}
+                  />
+                </SimpleGrid>
+              </Stack>
+            </Box>
+
+            <Box bg="brand.white" p={{ base: 6, md: 8 }} borderRadius="2xl" boxShadow="lg">
+              <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
+                Move Location
+              </Heading>
+
+              <Stack gap={4}>
+                <InputField
+                  label="From Address"
+                  placeholder="From Address"
+                  value={values.fromAddress}
+                  onChange={(e) => handleChange("fromAddress", e.target.value)}
+                  isRequired
+                />
+
+                <InputField
+                  label="Apt / Suite / Other"
+                  placeholder="Apt / Suite / Other"
+                  value={values.apt}
+                  onChange={(e) => handleChange("apt", e.target.value)}
+                />
+
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                  <InputField
+                    label="City"
+                    placeholder="City"
+                    value={values.city}
+                    onChange={(e) => handleChange("city", e.target.value)}
+                    isRequired
+                  />
+                  <SelectField
+                    label="State"
+                    options={stateOptions}
+                    placeholder="State"
+                    value={values.state}
+                    onValueChange={(e) => handleChange("state", e.value[0])}
+                    isRequired
+                  />
+                  <InputField
+                    label="Zip Code"
+                    placeholder="Zip Code"
+                    value={values.zipCode}
+                    onChange={(e) => handleChange("zipCode", e.target.value)}
+                    isRequired
+                  />
+                </SimpleGrid>
+
+                <Notes
+                  label="Additional Information"
+                  placeholder="Specify and additional notes here"
+                  value={values.notes}
+                  onChange={(value) => handleChange("notes", value)}
+                />
+              </Stack>
+            </Box>
+
+          </SimpleGrid>
+
+          <Box textAlign={{ base: "center", md: "right" }}>
+            <Button label="Send" variant="primary" px="16" onClick={handleSubmit} />
+          </Box>
+
+        </Stack>
+      </Container>
+    </>
+  );
+};
+
+export default InHomeMoveEstimate;

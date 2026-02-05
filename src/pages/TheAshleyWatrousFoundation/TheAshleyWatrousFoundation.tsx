@@ -4,7 +4,7 @@ import SideContentSection from "../../components/common/SideContentSection/SideC
 
 const TheAshleyWatrousFoundation = () => {
   return (
-   <Container maxW="100%" px={8} py={12}>
+   <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
       <SideContentSection
         title="The Ashley Watrous Foundation"
         description="Dedicated to America’s positive future. Our children are our future. The problems of tomorrow can 
