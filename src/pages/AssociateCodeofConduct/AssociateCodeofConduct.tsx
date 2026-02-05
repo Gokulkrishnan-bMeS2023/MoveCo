@@ -102,7 +102,7 @@ const AssociateCodeOfConduct = () => {
               <Circle size="100px" bg="brand.primary" color="brand.white" mb={6}>
                 <Icon as={item.icon} boxSize={10} />
               </Circle>
-              <Text>{item.text}</Text>
+              <Text textStyle="size-xl" fontWeight="500">{item.text}</Text>
             </Box>
           ))}
         </SimpleGrid>

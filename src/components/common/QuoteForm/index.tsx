@@ -11,10 +11,10 @@ import DateInput from "../DateInput/DateInput";
 import { useState } from "react";
 import RadioField from "../Radio/Radio";
 import InputField from "../Input/Input";
-import { FaEnvelope, FaPhoneAlt, FaUserFriends } from "react-icons/fa";
 
 const QuoteForm = () => {
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [date, setDate] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -40,13 +40,22 @@ const QuoteForm = () => {
           </Text>
         </Heading>
 
-        <Stack gap={4}>
+        <Stack gap={2}>
           <Box>
             <InputField
-              label="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              leftIcon={<FaUserFriends />}
+              label=" First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="First Name"
+              isRequired
+            />
+          </Box>
+           <Box>
+            <InputField
+              label="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Last Name"
               isRequired
             />
           </Box>
@@ -62,7 +71,7 @@ const QuoteForm = () => {
             label="Phone Number"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            leftIcon={<FaPhoneAlt />}
+            placeholder="Phone"
             isRequired
           />
           <Box>
@@ -70,7 +79,7 @@ const QuoteForm = () => {
               label="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-               leftIcon={<FaEnvelope />}
+              placeholder="Email"
               isRequired
             />
           </Box>

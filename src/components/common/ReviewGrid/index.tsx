@@ -1,9 +1,6 @@
 import { Grid, Box, Text, Heading, Flex, Image } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import { useState } from "react";
 import avatarImage from "../../../assets/dp.jpg";
-
-const MotionBox = motion(Box);
 
 export interface ClientSpeak {
   id: number;
@@ -93,6 +90,75 @@ const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
   );
 };
 
+// const ReviewCard = ({ client }: { client: ClientSpeak }) => {
+//   const [isHovered, setIsHovered] = useState(false);
+
+//   return (
+//     <Box
+//       onMouseEnter={() => setIsHovered(true)}
+//       onMouseLeave={() => setIsHovered(false)}
+//       position="relative"
+//       zIndex={isHovered ? 20 : 1}
+//       pb="10px"
+//     >
+//       <MotionBox
+//         layout
+//         transition={{
+//           layout: { type: "spring", stiffness: 300, damping: 30 },
+//           height: { type: "spring", stiffness: 300, damping: 30 },
+//         }}
+//         bg="brand.white"
+//         p={6}
+//         rounded="2xl"
+//         shadow={isHovered ? "2xl" : "sm"}
+//         border="1px solid"
+//         borderColor={isHovered ? "brand.primary" : "brand.white"}
+//         overflow="hidden"
+//         initial={false}
+//       >
+//         <Flex align="center" gap={4} mb={4}>
+//           <Image
+//             src={client.image || avatarImage}
+//             boxSize="50px"
+//             borderRadius="full"
+//             objectFit="cover"
+//           />
+//           <Heading as="h4" fontSize="lg">
+//             {client.name}
+//           </Heading>
+//         </Flex>
+
+//         <MotionBox
+//           animate={{
+//             height: isHovered ? "auto" : "100px",
+//           }}
+//           transition={{ type: "spring", stiffness: 300, damping: 30 }}
+//           style={{ overflow: "hidden", position: "relative" }}
+//         >
+//           <Text
+//             color="brand.secondary"
+//             lineHeight="1.6"
+//             lineClamp={isHovered ? "none" : 4}
+//           >
+//             {client.message}
+//           </Text>
+
+//           <MotionBox
+//             initial={{ opacity: 1 }}
+//             animate={{ opacity: isHovered ? 0 : 1 }}
+//             position="absolute"
+//             bottom={0}
+//             left={0}
+//             right={0}
+//             height="50px"
+//             bgGradient="linear(to-t, white, transparent)"
+//             pointerEvents="none"
+//           />
+//         </MotionBox>
+//       </MotionBox>
+//     </Box>
+//   );
+// };
 const ReviewCard = ({ client }: { client: ClientSpeak }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -104,12 +170,7 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
       zIndex={isHovered ? 20 : 1}
       pb="10px"
     >
-      <MotionBox
-        layout
-        transition={{
-          layout: { type: "spring", stiffness: 300, damping: 30 },
-          height: { type: "spring", stiffness: 300, damping: 30 },
-        }}
+      <Box
         bg="brand.white"
         p={6}
         rounded="2xl"
@@ -117,7 +178,6 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
         border="1px solid"
         borderColor={isHovered ? "brand.primary" : "brand.white"}
         overflow="hidden"
-        initial={false}
       >
         <Flex align="center" gap={4} mb={4}>
           <Image
@@ -131,12 +191,10 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
           </Heading>
         </Flex>
 
-        <MotionBox
-          animate={{
-            height: isHovered ? "auto" : "100px",
-          }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          style={{ overflow: "hidden", position: "relative" }}
+        <Box
+          maxH={isHovered ? "none" : "100px"}
+          overflow="hidden"
+          position="relative"
         >
           <Text
             color="brand.secondary"
@@ -146,19 +204,19 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
             {client.message}
           </Text>
 
-          <MotionBox
-            initial={{ opacity: 1 }}
-            animate={{ opacity: isHovered ? 0 : 1 }}
-            position="absolute"
-            bottom={0}
-            left={0}
-            right={0}
-            height="50px"
-            bgGradient="linear(to-t, white, transparent)"
-            pointerEvents="none"
-          />
-        </MotionBox>
-      </MotionBox>
+          {!isHovered && (
+            <Box
+              position="absolute"
+              bottom={0}
+              left={0}
+              right={0}
+              h="50px"
+              bgGradient="linear(to-t, white, transparent)"
+              pointerEvents="none"
+            />
+          )}
+        </Box>
+      </Box>
     </Box>
   );
 };
