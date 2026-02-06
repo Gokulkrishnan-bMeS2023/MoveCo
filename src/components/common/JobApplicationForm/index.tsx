@@ -1,288 +1,189 @@
 import { useState } from "react";
 import {
   Stack,
-  Input,
-  Field,
-  Container,
   SimpleGrid,
   Heading,
   Box,
-  NativeSelect,
   Progress,
   Button,
-  RadioGroup,
-  HStack,
 } from "@chakra-ui/react";
 
 import Step2Address from "../JobApplicationForm/Step2address";
 import Step3Experience from "./Step3experience";
+import InputField from "../../../components/common/Input/Input";
+import DateInput from "../../../components/common/DateInput/DateInput";
+import RadioField from "../../../components/common/Radio/Radio";
 
 const JobApplicationForm = () => {
   const [page, setPage] = useState(0);
 
-  const PageDisplay = () => {
-    if (page === 0) {
-      return (
-        <>
-          <Box>
-            <Heading size="md" mb={6} textStyle="size-lg">
-              Position Details
-            </Heading>
+  const [citizen, setCitizen] = useState("no");
+  const [felony, setFelony] = useState("no");
+  const [terminated, setTerminated] = useState("no");
+  const [drugTest, setDrugTest] = useState("yes");
 
-            <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-              <Field.Root required>
-                <Field.Label>Position Applied For</Field.Label>
-                <NativeSelect.Root>
-                  <NativeSelect.Field placeholder="Select position">
-                    <option value="mover">Mover / Helper</option>
-                    <option value="driver">Driver</option>
-                    <option value="crew-lead">Crew Lead</option>
-                  </NativeSelect.Field>
-                  <NativeSelect.Indicator />
-                </NativeSelect.Root>
-              </Field.Root>
-              <Field.Root required>
-                <Field.Label>How did you learn about the position?</Field.Label>
-                <NativeSelect.Root>
-                  <NativeSelect.Field placeholder="Select source">
-                    <option value="linkedin">LinkedIn</option>
-                    <option value="indeed">Indeed</option>
-                    <option value="glassdoor">Glassdoor</option>
-                    <option value="google-jobs">Google Jobs</option>
-                    <option value="company-website">Company Website</option>
-                    <option value="referral">Employee Referral</option>
-                    <option value="social-media">Social Media</option>
-                    <option value="recruiter">Recruiter / Agency</option>
-                    <option value="other">Other</option>
-                  </NativeSelect.Field>
-                  <NativeSelect.Indicator />
-                </NativeSelect.Root>
-              </Field.Root>
-            </SimpleGrid>
-          </Box>
+  const yesNoOptions = [
+    { label: "Yes", value: "yes" },
+    { label: "No", value: "no" },
+  ];
 
-          <Stack gap={6} mt={10}>
-            <Heading >Your Information</Heading>
-            <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} >
+  const progressValue = ((page + 1) / 3) * 100;
 
-            <Field.Root>
-              <Field.Label>First Name</Field.Label>
-              <Input type="text" />
-            </Field.Root>
+  const renderPage = () => {
+    switch (page) {
+      case 0:
+        return (
+          <Stack gap={8}>
+            {/* CARD 1 */}
+            <Box
+              bg="white"
+              p={{ base: 6, md: 8 }}
+              borderRadius="2xl"
+              boxShadow="lg"
+              border="1px solid"
+              borderColor="gray.100"
+            >
+              <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
+                Position Details
+              </Heading>
 
-            <Field.Root>
-              <Field.Label>Last Name</Field.Label>
-              <Input type="text"/>
-            </Field.Root>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+                <InputField label="Position Sought" />
+                <InputField label="How did you learn about the position?" />
+              </SimpleGrid>
+            </Box>
 
-             <Field.Root>
-              <Field.Label>Email</Field.Label>
-              <Input type="email"/>
-            </Field.Root>
-          </SimpleGrid>
+            {/* CARD 2 */}
+            <Box
+              bg="white"
+              p={{ base: 6, md: 8 }}
+              borderRadius="2xl"
+              boxShadow="lg"
+              border="1px solid"
+              borderColor="gray.100"
+            >
+              <Stack gap={6}>
+                <Heading as="h3" color="brand.primary" fontWeight="normal">
+                  Your Information
+                </Heading>
 
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} >
-             <Field.Root>
-              <Field.Label>Home Phone</Field.Label>
-              <Input type="text"/>
-            </Field.Root>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                  <InputField label="First Name" isRequired />
+                  <InputField label="Last Name" isRequired />
+                  <InputField label="Email" isRequired />
+                </SimpleGrid>
 
-            <Field.Root>
-              <Field.Label>Cell Phone</Field.Label>
-              <Input type="text"/>
-            </Field.Root>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                  <InputField label="Home Phone" />
+                  <InputField label="Cell Phone" />
+                  <InputField label="Address" />
+                </SimpleGrid>
 
-            <Field.Root>
-              <Field.Label>Address</Field.Label>
-              <Input type="text"/>
-            </Field.Root>
-          </SimpleGrid>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                  <InputField label="City" />
+                  <InputField label="State" />
+                  <InputField label="Zip Code" />
+                </SimpleGrid>
 
-            <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} >
-             <Field.Root>
-              <Field.Label>City</Field.Label>
-              <Input type="text"/>
-            </Field.Root>
+                <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+                  <InputField label="Social Security Number" />
+                  <DateInput label="Available Start Date" />
+                </SimpleGrid>
 
-            <Field.Root>
-              <Field.Label>State</Field.Label>
-              <Input type="text"/>
-            </Field.Root>
+                <Stack gap={4}>
+                  <RadioField
+                    label="Are you legally authorized to work in the U.S.?"
+                    options={yesNoOptions}
+                    value={citizen}
+                    onValueChange={setCitizen}
+                    isRequired
+                    direction="row"
+                  />
 
-            <Field.Root>
-              <Field.Label>Zip Code</Field.Label>
-              <Input type="text"/>
-            </Field.Root>
-          </SimpleGrid>
+                  <RadioField
+                    label="Have you ever been convicted of a felony?"
+                    options={yesNoOptions}
+                    value={felony}
+                    onValueChange={setFelony}
+                    isRequired
+                    direction="row"
+                  />
 
-           <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} >
-             <Field.Root>
-              <Field.Label>Social Security Number</Field.Label>
-              <Input type="text"/>
-            </Field.Root>
+                  <RadioField
+                    label="Have you ever been involuntarily terminated?"
+                    options={yesNoOptions}
+                    value={terminated}
+                    onValueChange={setTerminated}
+                    isRequired
+                    direction="row"
+                  />
 
-            <Field.Root>
-              <Field.Label>On what date would you be available for work?</Field.Label>
-              <Input type="date"/>
-            </Field.Root>
-            </SimpleGrid>
-
-
-             <Field.Root required>
-                      <Field.Label>
-                        Are you a U.S. citizen, or are you otherwise authorized to work
-                        in the U.S. without any restriction?
-                      </Field.Label>
-            
-                      <RadioGroup.Root defaultValue="no">
-                        <HStack gap={6}>
-                          <RadioGroup.Item value="yes">
-                            <RadioGroup.ItemHiddenInput />
-                            <RadioGroup.ItemIndicator />
-                            <RadioGroup.ItemText>Yes</RadioGroup.ItemText>
-                          </RadioGroup.Item>
-            
-                          <RadioGroup.Item value="no">
-                            <RadioGroup.ItemHiddenInput />
-                            <RadioGroup.ItemIndicator />
-                            <RadioGroup.ItemText>No</RadioGroup.ItemText>
-                          </RadioGroup.Item>
-                        </HStack>
-                      </RadioGroup.Root>
-                    </Field.Root>
-                    
-            
-                    <Field.Root required>
-                      <Field.Label>
-                        Have you ever been convicted of a felony?
-                      </Field.Label>
-            
-                      <RadioGroup.Root defaultValue="no">
-                        <HStack gap={6}>
-                          <RadioGroup.Item value="yes">
-                            <RadioGroup.ItemHiddenInput />
-                            <RadioGroup.ItemIndicator />
-                            <RadioGroup.ItemText>Yes</RadioGroup.ItemText>
-                          </RadioGroup.Item>
-            
-                          <RadioGroup.Item value="no">
-                            <RadioGroup.ItemHiddenInput />
-                            <RadioGroup.ItemIndicator />
-                            <RadioGroup.ItemText>No</RadioGroup.ItemText>
-                          </RadioGroup.Item>
-                        </HStack>
-                      </RadioGroup.Root>
-                    </Field.Root>
-                  
-                    <Field.Root required>
-                      <Field.Label>
-                        Have you ever been involuntarily terminated or asked to resign
-                        from any position of employment?
-                      </Field.Label>
-            
-                      <RadioGroup.Root defaultValue="no">
-                        <HStack gap={6}>
-                          <RadioGroup.Item value="yes">
-                            <RadioGroup.ItemHiddenInput />
-                            <RadioGroup.ItemIndicator />
-                            <RadioGroup.ItemText>Yes</RadioGroup.ItemText>
-                          </RadioGroup.Item>
-            
-                          <RadioGroup.Item value="no">
-                            <RadioGroup.ItemHiddenInput />
-                            <RadioGroup.ItemIndicator />
-                            <RadioGroup.ItemText>No</RadioGroup.ItemText>
-                          </RadioGroup.Item>
-                        </HStack>
-                      </RadioGroup.Root>
-                    </Field.Root>
-            
-                    <Field.Root required>
-                      <Field.Label>
-                        If selected for employment, are you willing to submit to a
-                        pre-employment drug screening test?
-                      </Field.Label>
-            
-                      <RadioGroup.Root defaultValue="yes">
-                        <HStack gap={6}>
-                          <RadioGroup.Item value="yes">
-                            <RadioGroup.ItemHiddenInput />
-                            <RadioGroup.ItemIndicator />
-                            <RadioGroup.ItemText>Yes</RadioGroup.ItemText>
-                          </RadioGroup.Item>
-            
-                          <RadioGroup.Item value="no">
-                            <RadioGroup.ItemHiddenInput />
-                            <RadioGroup.ItemIndicator />
-                            <RadioGroup.ItemText>No</RadioGroup.ItemText>
-                          </RadioGroup.Item>
-                        </HStack>
-                      </RadioGroup.Root>
-                    </Field.Root>
-
-            
-          
+                  <RadioField
+                    label="Are you willing to submit to a drug test?"
+                    options={yesNoOptions}
+                    value={drugTest}
+                    onValueChange={setDrugTest}
+                    isRequired
+                    direction="row"
+                  />
+                </Stack>
+              </Stack>
+            </Box>
           </Stack>
-        </>
-      );
-    }
+        );
 
-    if (page === 1) return <Step2Address />;
-    if (page === 2) return <Step3Experience />;
+      case 1:
+        return <Step2Address />;
+
+      case 2:
+        return <Step3Experience />;
+
+      default:
+        return null;
+    }
   };
 
-  const progressValue = page === 0 ? 33.33 : page === 1 ? 66.66 : 100;
-
   return (
-    <Container
-      maxW="100%"
-      py={16}
-      bg="white"
-      border="1px solid"
-      borderColor="brand.primary"
-      borderRadius="xl"
-      boxShadow="lg"
-    >
-      <Box mb={6}>
+    <>
+      {/* PROGRESS BAR — ALWAYS VISIBLE */}
+      <Box py={12}>
         <Progress.Root value={progressValue}>
           <Progress.Track>
             <Progress.Range bg="brand.primary" />
           </Progress.Track>
         </Progress.Root>
       </Box>
-      {PageDisplay()}
 
-      {/* FOOTER BUTTONS */}
-      <Stack direction="row" justify="space-between" mt={10}>
-         <Button
-    bg="brand.primary"
-    color="white"
-    _hover={{ bg: "brand.primary" }}
-    variant="solid"
-    disabled={page === 0}
-    onClick={() => setPage((p) => p - 1)}
-  >
-    Prev
-  </Button>
+      {/* PAGE CONTENT */}
+       <Stack gap={8}>
+        {renderPage()}
+        </Stack>
 
-  <Button
-    bg="brand.primary"
-    color="white"
-    _hover={{ bg: "brand.primary" }}
-    variant="solid"
-    onClick={() => {
-      if (page === 2) {
-        alert("FORM SUBMITTED");
-      } else {
-        setPage((p) => p + 1);
-      }
-    }}
-  >
-    {page === 2 ? "Send" : "Next"}
-  </Button>
-      </Stack>
-    </Container>
+        {/* FOOTER BUTTONS */}
+        <Stack direction="row" justify="space-between" pt={10}>
+          <Button
+            variant="outline"
+            onClick={() => setPage((p) => Math.max(p - 1, 0))}
+            disabled={page === 0}
+          >
+            Prev
+          </Button>
+
+          <Button
+            bg="brand.primary"
+            color="white"
+            _hover={{ bg: "brand.primary" }}
+            onClick={() =>
+              page === 2 ? alert("FORM SUBMITTED") : setPage((p) => p + 1)
+            }
+          >
+            {page === 2 ? "Send" : "Next"}
+          </Button>
+        </Stack>
+     
+    </>
   );
 };
 
 export { JobApplicationForm };
+

@@ -27,7 +27,7 @@ const NAV_ITEMS = [
   {
     label: "Product & Services",
     items: [
-      { label: "Instant Online Estimate", path: "/estimate" },
+      { label: "Instant Online Estimate", path: "/online-estimate" },
       { label: "In-Home Move Estimate", path: "/InHomeMoveEstimate" },
       { label: "Moving & Packing Supplies", path: "/Product" },
       {

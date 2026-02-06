@@ -109,5 +109,24 @@ export const UrlPages: AppRoute[] = [
     component: lazy(
       () => import("../pages/InHomeMoveEstimate/InHomeMoveEstimate"),
     ),
-  }
+  },
+  {
+    path: "/online-estimate",
+    component: lazy(
+      () =>
+        import("../pages/services/InstantOnlineEstimate/InstantOnlineEstimate"),
+    ),
+  },
+  {
+    path: "/move-information",
+    component: lazy(
+      () => import("../pages/services/InstantOnlineEstimate/MoveInformation"),
+    ),
+  },
+  {
+    path: "/inventry",
+    component: lazy(
+      () => import("../pages/services/InstantOnlineEstimate/Inventry"),
+    ),
+  },
 ];
