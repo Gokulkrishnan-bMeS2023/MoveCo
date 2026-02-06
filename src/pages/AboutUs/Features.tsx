@@ -89,7 +89,7 @@ const FeatureGrid = ({ items }: { items: FeatureItem[] }) => (
           transition="all 0.3s ease"
           _groupHover={{ transform: "scale(1.15)" }}
         >
-          <Icon as={item.icon} boxSize={14} color="white" />
+          <Icon as={item.icon} boxSize={14} color="brand.white" />
         </Box>
 
         {/* TEXT */}

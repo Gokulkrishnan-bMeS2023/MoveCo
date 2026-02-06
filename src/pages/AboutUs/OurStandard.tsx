@@ -25,7 +25,7 @@ import {
   FaBoxes,
   FaCheckCircle,
 } from "react-icons/fa";
-
+ 
 const OurStandard = () => {
   const professionalStandards = [
     {
@@ -67,7 +67,7 @@ const OurStandard = () => {
       ],
     },
   ];
-
+ 
   const benefits = [
     {
       icon: FaComments,
@@ -102,10 +102,10 @@ const OurStandard = () => {
       text: "Furniture placed exactly where you want it in each room",
     },
   ];
-
+ 
   return (
     <div>
-      <Container maxW="100%" px={8} py={12}>
+      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
         {/* <Box> */}
         <Box
           bgImage={`url(${InsuranceImg})`}
@@ -125,9 +125,8 @@ const OurStandard = () => {
             </Heading>
           </Box>
         </Box>
-      </Container>
-      <Container maxW="100%" px={8} py={12}>
-        <Box>
+          <Box pt={{base:10, md:16}}>
+            <Box>
           <Button
             fontSize="xl"
             rounded="full"
@@ -203,8 +202,10 @@ const OurStandard = () => {
             ))}
           </SimpleGrid>
         </Box>
+      </Box>
       </Container>
-      <Container>
+      <Box bg={"white"} px="-8">
+        <Container px={8} pt={2} pb={10}>
         <Flex
           mt={6}
           direction={{ base: "column", md: "row" }}
@@ -271,9 +272,11 @@ const OurStandard = () => {
             ))}
           </AccordionRoot>
         </Box>
-      </Container>
+        </Container>
+      </Box>
+     
     </div>
   );
 };
-
+ 
 export default OurStandard;

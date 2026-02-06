@@ -67,45 +67,50 @@ const ContactCard = ({
     // }}
     >
       <Card.Body gap={4}>
-        <Heading size={{ base: "md", md: "lg" }} color="fg.emphasized">
+        <Heading as="h3" fontWeight="normal">
           {city}
         </Heading>
 
         {address && (
           <HStack align="start" gap={3}>
-            <Box color="brand.primary" mt={1} flexShrink={0}>
+            <Flex
+              align="center"
+              gap={3}
+            >
               <Icon
                 as={FaMapMarkerAlt}
                 boxSize={{ base: 3, md: 4 }}
                 color="brand.primary"
               />
-            </Box>
-            <Text
-              color="fg.muted"
-              lineHeight="1.7"
-              fontSize={{ base: "sm", md: "md" }}
-            >
-              {address}
-            </Text>
+              <Text
+                textStyle="size-lg">
+                {address}
+              </Text>
+            </Flex>
           </HStack>
         )}
 
         <Stack gap={2}>
-          <HStack gap={3}>
-            <Box color="brand.primary">
+          <HStack gap={2}>
+            <Flex
+              align="center"
+              gap={3}
+            >
               <Icon
                 as={FaPhoneAlt}
                 boxSize={{ base: 3, md: 4 }}
                 color="brand.primary"
               />
-            </Box>
-            <Text fontWeight="semibold" fontSize={{ base: "md", md: "lg" }}>
-              {office}
-            </Text>
+
+              <Text textStyle="size-lg">
+                {office}
+              </Text>
+            </Flex>
+
           </HStack>
 
           {tollFree && (
-            <Text ml={7} fontSize="sm" color="fg.muted">
+            <Text textStyle="size-lg" ml={7}>
               Toll Free: {tollFree}
             </Text>
           )}
@@ -227,11 +232,9 @@ const ContactUsPage = () => {
               </Text>
             </Heading>
           </Box>
-          <Box maxW={{ lg: "45%" }}>
+          <Box maxW={{ lg: "35%" }}>
             <Text textStyle="size-2xl" textAlign={{ base: "left", md: "right" }}>
-              Send us an email, we would love to hear from you! <br /> Just fill
-              out the form, and a representative will get back to you as soon as
-              possible
+              Fill out the form below and We will get back to you as soon as possible.
             </Text>
           </Box>
         </Flex>
@@ -250,13 +253,20 @@ const ContactUsPage = () => {
                     />
                   </Box>
                 </Flex>
-                <Heading as="h3" fontWeight="normal">Send an Email</Heading>
+                <Heading as="h3" fontWeight="normal" >Send an <Text as="span" color="brand.primary">
+                  Email
+                </Text></Heading>
               </HStack>
 
               <Text
                 textStyle="size-lg"
               >
-                Send us an email and we'll get back to you as soon as possible.
+                Send us an email, we would love to hear from you!
+              </Text>
+              <Text
+                textStyle="size-lg"
+              >
+                Just fill out the form, and a representative will get back to you as soon as possible
               </Text>
               <Separator />
               <VStack gap={4} align="stretch">
@@ -265,7 +275,6 @@ const ContactUsPage = () => {
                   value={contactValues.name}
                   onChange={(e) => handleContactChange("name", e.target.value)}
                   errorMessage={contactErrors.name}
-                  leftIcon={<FaUserFriends />}
                   isRequired
                 />
                 <InputField
@@ -273,7 +282,6 @@ const ContactUsPage = () => {
                   value={contactValues.email}
                   onChange={(e) => handleContactChange("email", e.target.value)}
                   errorMessage={contactErrors.email}
-                  leftIcon={<FaEnvelope />}
                   isRequired
                 />
                 <InputField
@@ -281,26 +289,25 @@ const ContactUsPage = () => {
                   value={contactValues.phone}
                   onChange={(e) => handleContactChange("phone", e.target.value)}
                   errorMessage={contactErrors.phone}
-                  leftIcon={<FaPhoneAlt />}
                   isRequired
                 />
                 <Notes
                   label="Message"
                   value={contactValues.message ?? ""}
                   onChange={(value) => handleContactChange("message", value)}
-                  placeholder="Write your message here..."
+                  placeholder=""
                 />
-                <Box textAlign={{ base: "center", md: "right" }}>
-                <Button
-                  px="16"
-                  variant="primary"
-                  label="Send"
-                  onClick={() => {
-                    if (submitContactForm()) {
-                      console.log("CONTACT DATA", contactValues);
-                    }
-                  }}
-                />
+                <Box textAlign={{ base: "center", md: "right" }} mt={4} >
+                  <Button
+                    px="16"
+                    variant="primary"
+                    label="Send"
+                    onClick={() => {
+                      if (submitContactForm()) {
+                        console.log("CONTACT DATA", contactValues);
+                      }
+                    }}
+                  />
                 </Box>
               </VStack>
             </Card.Body>
@@ -319,13 +326,15 @@ const ContactUsPage = () => {
                     />
                   </Box>
                 </Flex>
-                <Heading as="h3" fontWeight="normal">Tell a Friend</Heading>
+                <Heading as="h3" fontWeight="normal">Tell a friend <Text as="span" color="brand.primary">
+                  about MoveCo
+                </Text></Heading>
               </HStack>
 
               <Text
                 textStyle="size-lg"
               >
-                Help spread the word about MoveCo and refer your friends.
+                To email a friend about MoveCo, fill out the information below
               </Text>
               <Separator />
 
@@ -357,17 +366,17 @@ const ContactUsPage = () => {
                   errorMessage={referralErrors.friendEmail}
                   isRequired
                 />
-                <Box textAlign={{ base: "center", md: "right" }}>
-                <Button
-                  px="16"
-                  variant="primary"
-                  label="Send"
-                  onClick={() => {
-                    if (submitReferralForm()) {
-                      console.log("REFERRAL DATA", referralValues);
-                    }
-                  }}
-                />
+                <Box textAlign={{ base: "center", md: "right" }} mt={4} >
+                  <Button
+                    px="16"
+                    variant="primary"
+                    label="Send"
+                    onClick={() => {
+                      if (submitReferralForm()) {
+                        console.log("REFERRAL DATA", referralValues);
+                      }
+                    }}
+                  />
                 </Box>
               </VStack>
             </Card.Body>

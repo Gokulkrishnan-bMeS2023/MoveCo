@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Box, Text, VStack, SimpleGrid, Image } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
-
 import OnlineImg from "../../../assets/img1.webp";
 import EstimateImg from "../../../assets/img2.webp";
 import MovingImg from "../../../assets/img3.webp";
@@ -80,19 +79,19 @@ export default function AnimatedFeatureSwitcher() {
             bg={activeIndex === index ? "white" : "transparent"} // white when active
             borderLeft={
               activeIndex === index
-                ? "3px solid green"
+                ? "3px solid #266F5D"
                 : "3px solid transparent"
             }
             cursor="pointer"
             transition="all 0.2s"
-            _hover={{ bg: "white", color: "brand.primary" }} // hover effect
+            _hover={{ bg: "brand.white", color: "brand.primary" }} // hover effect
             onClick={() => setActiveIndex(index)}
           >
             <Text
               pl={4} // padding from left border
               textStyle="size-xl"
               fontWeight={activeIndex === index ? "bold" : "normal"}
-              color={activeIndex === index ? "green.700" : "gray.700"}
+              color={activeIndex === index ? "brand.primary" : "brand.secondary"}
               py={4}
             >
               {item.label}
@@ -122,11 +121,11 @@ export default function AnimatedFeatureSwitcher() {
               mb={6}
             />
 
-            <Text fontSize="xl" fontWeight="bold" color="green.700" mb={3}>
+            <Text textStyle="size-xl" fontWeight="bold" color="brand.primary" mb={3}>
               {features[activeIndex].title}
             </Text>
 
-            <Text color="gray.600" lineHeight="1.8">
+            <Text  lineHeight="1.8">
               {features[activeIndex].description}
             </Text>
           </MotionBox>
