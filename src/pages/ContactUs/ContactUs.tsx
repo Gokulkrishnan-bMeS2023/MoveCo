@@ -54,17 +54,17 @@ const ContactCard = ({
         right: 0,
         height: "4px",
         bgGradient: "to-r",
-        gradientFrom: "blue.500",
-        gradientTo: "purple.500",
+        gradientFrom: "brand.primary",
+        gradientTo: "brand.secondary",
         transform: "scaleX(0)",
         transformOrigin: "left",
         transition: "transform 0.3s ease",
       }}
-      // _hover={{
-      //   _before: {
-      //     transform: "scaleX(1)",
-      //   },
-      // }}
+    // _hover={{
+    //   _before: {
+    //     transform: "scaleX(1)",
+    //   },
+    // }}
     >
       <Card.Body gap={4}>
         <Heading size={{ base: "md", md: "lg" }} color="fg.emphasized">
@@ -73,7 +73,7 @@ const ContactCard = ({
 
         {address && (
           <HStack align="start" gap={3}>
-            <Box color="blue.500" mt={1} flexShrink={0}>
+            <Box color="brand.primary" mt={1} flexShrink={0}>
               <Icon
                 as={FaMapMarkerAlt}
                 boxSize={{ base: 3, md: 4 }}
@@ -92,7 +92,7 @@ const ContactCard = ({
 
         <Stack gap={2}>
           <HStack gap={3}>
-            <Box color="blue.500">
+            <Box color="brand.primary">
               <Icon
                 as={FaPhoneAlt}
                 boxSize={{ base: 3, md: 4 }}
@@ -127,8 +127,7 @@ const ContactUsPage = () => {
     submitReferralForm,
   } = useContactForms();
   return (
-    <Container maxW="100%" px={8} py={12}>
-      {/* Hero Section */}
+    <Container maxW="100%" py={{ base: 10, md: 12 }} px={8}>
       <Box
         bgImage={`url(${contactImage})`}
         bgSize="cover"
@@ -140,47 +139,42 @@ const ContactUsPage = () => {
         position="relative"
         overflow="hidden"
       >
-        <Box position="absolute" inset={0} bg="green.900" opacity={0.1} />
+        <Box position="absolute" inset={0} bg="brand.primary" opacity={0.1} />
         <Box position="relative" textAlign="center">
-          <Heading as={"h2"} color="brand.white" fontWeight="normal" mb={4}>
+          <Heading as="h1" fontWeight="normal" color="brand.white">
             Contact Us
           </Heading>
         </Box>
       </Box>
+      <Box pt={{ base: 10, md: 16 }}>
 
-      {/* Locations Section */}
-      <Stack gap={{ base: 6, md: 8 }} mb={{ base: 12, md: 16, lg: 20 }}>
-        <Box>
-          <Flex
-            mt={6}
-            direction={{ base: "column", md: "row" }}
-            align={{ base: "flex-start", md: "center" }}
-            justify="space-between"
-            gap={{ base: 6, md: 10 }}
-          >
-            <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" mb={2}>
-                Our {""}
-                <Text as="span" color="brand.primary">
-                  Offices
-                </Text>
-              </Heading>
-            </Box>
-            <Box maxW="430px" w="100%">
-              <Text
-                textStyle="size-2xl"
-                textAlign={{ base: "left", md: "right" }}
-              >
-                Visit us at any of our convenient locations across Texas
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          align={{ base: "flex-start", md: "center" }}
+          justify="space-between"
+          gap={{ base: 6, md: 10 }}
+          mb={{ base: 6, lg: 8 }}
+        >
+          <Box maxW={{ lg: "45%" }}>
+            <Heading as="h1" fontWeight="normal">
+              Our {""}
+              <Text as="span" color="brand.primary">
+                Offices
               </Text>
-            </Box>
-          </Flex>
-        </Box>
+            </Heading>
+          </Box>
+          <Box maxW={{ lg: "45%" }}>
+            <Text
+              textStyle="size-2xl"
+              textAlign={{ base: "left", md: "right" }}
+            >
+              Visit us at any of our convenient locations across Texas
+            </Text>
+          </Box>
+        </Flex>
 
         <SimpleGrid
-          columns={{ base: 1, md: 2, lg: 3 }}
-          gap={{ base: 4, md: 6, lg: 8 }}
-        >
+          columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
           <ContactCard
             city="Dallas"
             address="1439 Crescent Ave, Lewisville, TX-75057"
@@ -190,18 +184,17 @@ const ContactUsPage = () => {
           <ContactCard city="Houston" office="281-825-5544" />
           <ContactCard city="Austin" office="512-366-7901" />
         </SimpleGrid>
-      </Stack>
+      </Box>
 
-      {/* Map Section */}
-      <Stack gap={{ base: 4, md: 6 }} mb={{ base: 12, md: 16, lg: 20 }}>
-        <Box maxW="600px" w="100%">
-          <Heading as="h1" fontWeight="normal" mb={2}>
+      <Box pt={{ base: 10, md: 16 }}>
+        <Box maxW={{ lg: "45%" }} mb={{ base: 6, lg: 8 }}>
+          <Heading as="h1" fontWeight="normal">
             Visit Our {""}
             <Text as="span" color="brand.primary">
               Main Office
             </Text>
           </Heading>
-          <Text fontSize={{ base: "md", md: "lg" }} color="fg.muted">
+          <Text textStyle="size-2xl">
             Located in Lewisville, Texas
           </Text>
         </Box>
@@ -216,29 +209,39 @@ const ContactUsPage = () => {
             loading="lazy"
           />
         </Card.Root>
-      </Stack>
+      </Box>
 
-      {/* Contact Forms Section */}
-      <Box mb={{ base: 8, md: 12 }}>
-        <Box maxW="650px" w="100%">
-          <Heading as="h1" fontWeight="normal" mb={2}>
-            Send Us a {""}
-            <Text as="span" color="brand.primary">
-              Message
+      <Box pt={{ base: 10, md: 16 }}>
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          align={{ base: "flex-start", md: "center" }}
+          justify="space-between"
+          gap={{ base: 6, md: 10 }}
+          mb={{ base: 6, lg: 8 }}
+        >
+          <Box maxW={{ lg: "45%" }}>
+            <Heading as="h1" fontWeight="normal">
+              Send Us a {""}
+              <Text as="span" color="brand.primary">
+                Message
+              </Text>
+            </Heading>
+          </Box>
+          <Box maxW={{ lg: "45%" }}>
+            <Text textStyle="size-2xl" textAlign={{ base: "left", md: "right" }}>
+              Send us an email, we would love to hear from you! <br /> Just fill
+              out the form, and a representative will get back to you as soon as
+              possible
             </Text>
-          </Heading>
-          <Text fontSize={{ base: "md", md: "lg" }} color="fg.muted">
-            Send us an email, we would love to hear from you! <br /> Just fill
-            out the form, and a representative will get back to you as soon as
-            possible
-          </Text>
-        </Box>
+          </Box>
+        </Flex>
+
         <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 6, md: 8 }}>
           {/* Send Email Form */}
           <Card.Root variant="elevated" size="lg">
             <Card.Body gap={{ base: 4, md: 6 }}>
               <HStack gap={3} flexWrap="wrap">
-                <Flex bg="brand.primary" p={3} borderRadius="lg">
+                <Flex bg="brand.primary" px={3} py={2} borderRadius="md">
                   <Box color="brand.white">
                     <Icon
                       as={FaEnvelope}
@@ -247,18 +250,16 @@ const ContactUsPage = () => {
                     />
                   </Box>
                 </Flex>
-                <Heading size={{ base: "lg", md: "xl" }}>Send an Email</Heading>
+                <Heading as="h3" fontWeight="normal">Send an Email</Heading>
               </HStack>
 
               <Text
-                color="fg.muted"
-                lineHeight="1.7"
-                fontSize={{ base: "sm", md: "md" }}
+                textStyle="size-lg"
               >
                 Send us an email and we'll get back to you as soon as possible.
               </Text>
               <Separator />
-              <VStack gap={{ base: 4, md: 5 }} align="stretch">
+              <VStack gap={4} align="stretch">
                 <InputField
                   label="Name"
                   value={contactValues.name}
@@ -289,9 +290,9 @@ const ContactUsPage = () => {
                   onChange={(value) => handleContactChange("message", value)}
                   placeholder="Write your message here..."
                 />
+                <Box textAlign={{ base: "center", md: "right" }}>
                 <Button
-                  fontSize="xl"
-                  rounded="full"
+                  px="16"
                   variant="primary"
                   label="Send"
                   onClick={() => {
@@ -300,6 +301,7 @@ const ContactUsPage = () => {
                     }
                   }}
                 />
+                </Box>
               </VStack>
             </Card.Body>
           </Card.Root>
@@ -308,7 +310,7 @@ const ContactUsPage = () => {
           <Card.Root variant="elevated" size="lg">
             <Card.Body gap={{ base: 4, md: 6 }}>
               <HStack gap={3} flexWrap="wrap">
-                <Flex bg="brand.primary" p={3} borderRadius="lg">
+                <Flex bg="brand.primary" px={3} py={2} borderRadius="md">
                   <Box color="brand.white">
                     <Icon
                       as={FaUserFriends}
@@ -317,19 +319,17 @@ const ContactUsPage = () => {
                     />
                   </Box>
                 </Flex>
-                <Heading size={{ base: "lg", md: "xl" }}>Tell a Friend</Heading>
+                <Heading as="h3" fontWeight="normal">Tell a Friend</Heading>
               </HStack>
 
               <Text
-                color="fg.muted"
-                lineHeight="1.7"
-                fontSize={{ base: "sm", md: "md" }}
+                textStyle="size-lg"
               >
                 Help spread the word about MoveCo and refer your friends.
               </Text>
               <Separator />
 
-              <VStack gap={{ base: 4, md: 5 }} align="stretch">
+              <VStack gap={4} align="stretch">
                 <InputField
                   label="Your Name"
                   value={referralValues.yourName}
@@ -357,9 +357,9 @@ const ContactUsPage = () => {
                   errorMessage={referralErrors.friendEmail}
                   isRequired
                 />
+                <Box textAlign={{ base: "center", md: "right" }}>
                 <Button
-                  fontSize="xl"
-                  rounded="full"
+                  px="16"
                   variant="primary"
                   label="Send"
                   onClick={() => {
@@ -368,6 +368,7 @@ const ContactUsPage = () => {
                     }
                   }}
                 />
+                </Box>
               </VStack>
             </Card.Body>
           </Card.Root>

@@ -36,12 +36,13 @@ const MainBanner = () => {
           justifyContent="flex-end"
           alignItems="center"
           color="brand.white"
-          p={6}
+       padding={4}
         >
           <Box width="45%">
-            <Stack gap={6}>
+            <Stack gap={4}>
               <Heading
                 as="h2"
+                lineHeight="1.1"
               >
                 Your{" "}
                 <Box
@@ -54,23 +55,22 @@ const MainBanner = () => {
                   Authentic
                 </Box>
                 <br />
-                Local & Distant
+                 Professional
                 <br />
-                Logistics Partner
+                Pack/Unpack Services
               </Heading>
 
               <Text textStyle={"size-md"}>
-                Let us take care of packing & unpacking of your household goods,
-                make your shifting smooth
+                Let us take care of packing and unpacking of your household goods, while keep your entire moving plan hassle free
               </Text>
               <Box>
                 <Button
-                  variant="outline"
+                  variant="warning"
                   label="Learn More"
                 />
               </Box>
               <Flex
-                p={4}
+                padding={4}
                 bg="rgba(255,255,255,0.2)"
                 borderRadius="xl"
                 width="85%"
@@ -128,15 +128,15 @@ const MainBanner = () => {
       >
         <Stack gap={4}>
           <Heading as="h2">
-            Your Authentic Local & Distant Logistics Partner
+            Your Authentic Professional Pack/Unpack Services
           </Heading>
 
           <Text textStyle={"size-md"}>
-            Let us take care of packing & unpacking of your household goods, make your shifting smooth
+            Let us take care of packing and unpacking of your household goods, while keep your entire moving plan hassle free
           </Text>
           <Box>
             <Button
-              variant="primary"
+              variant="warning"
               label="Learn More"
             />
           </Box>

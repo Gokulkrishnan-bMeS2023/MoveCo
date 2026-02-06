@@ -28,7 +28,7 @@ const Home = () => {
         </Flex>
 
         <Box pt={{ base: 10, md: 16 }}>
-          <Flex justify="space-between" align="center">
+          <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
             <Button
               fontSize="xl"
               rounded="full"
@@ -48,7 +48,7 @@ const Home = () => {
             direction={{ base: "column", lg: "row" }}
             justify="space-between"
             align="center"
-            mt={8}
+            mb={{ base: 6, lg: 8 }}
             gap={{ base: 6, lg: 12 }}
           >
             <Heading
@@ -76,7 +76,7 @@ const Home = () => {
         </Box>
 
         <Box pt={{ base: 10, md: 16 }}>
-          <Flex justify="space-between" align="center">
+          <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
             <Button
               fontSize="xl"
               rounded="full"
@@ -96,7 +96,7 @@ const Home = () => {
             direction={{ base: "column", lg: "row" }}
             justify="space-between"
             align="center"
-            mt={8}
+           mb={{ base: 6, lg: 8 }}
             gap={{ base: 6, lg: 12 }}
           >
             <Heading

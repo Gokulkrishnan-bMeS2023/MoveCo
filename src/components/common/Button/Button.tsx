@@ -8,7 +8,7 @@ import React from "react";
 
 interface CommonButtonProps extends Omit<ButtonProps, "variant"> {
   label: string;
-  variant: "primary" | "outline"; // chakra variant conflict avoid
+  variant: "primary" | "outline" | "warning"; // chakra variant conflict avoid
   fontSize?: string;
   rounded?: string;
   px?: number | string;
@@ -32,7 +32,7 @@ const Button = ({
   as,
   ...props
 }: CommonButtonProps) => {
-  const [primary, white] = useToken("colors", ["brand.primary", "brand.white"]);
+  const [primary, white, warning,secondary] = useToken("colors", ["brand.primary", "brand.white", "brand.warning", "brand.secondary"]);
 
   let styleProps: any = {};
 
@@ -41,6 +41,12 @@ const Button = ({
       styleProps = {
         bg: primary,
         color: white,
+      };
+      break;
+    case "warning":
+      styleProps = {
+        bg: warning,
+        color: secondary,
       };
       break;
 
