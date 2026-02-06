@@ -5,14 +5,13 @@ import {
   Heading,
   Text,
   Box,
-  Checkbox, // Ensure this is imported correctly
+  Checkbox,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
 const Step3Experience = () => {
   const [agreed, setAgreed] = useState(false);
   const [showError, setShowError] = useState(false);
-
   // const handleNext = () => {
   //   if (!agreed) {
   //     setShowError(true);
@@ -23,32 +22,55 @@ const Step3Experience = () => {
 
   return (
     <>
-      <Heading size="md" mb={4}>
-        Attach a photo of yourself (JPEG format)
-      </Heading>
-
-      <Field.Root mb={8}>
-        <Field.Label>Upload Photo</Field.Label>
-        <Input type="file" accept="image/jpeg" />
-      </Field.Root>
-
-      {/* Acknowledgements */}
-      <Heading size="md" mb={4}>
-        Acknowledgments & Authorization
-      </Heading>
-
       <Box
-        borderWidth="1px"
-        borderRadius="md"
-        p={4}
-        maxH="300px"
-        overflowY="auto"
-        mb={4}
+        bg="white"
+        p={{ base: 6, md: 8 }}
+        borderRadius="2xl"
+        boxShadow="lg"
+        border="1px solid"
+        borderColor="gray.100"
       >
-        <Stack gap={3}>
+        <Heading as="h3" mb={4} color="brand.primary" fontWeight="normal">
+          Attach a photo of yourself (JPEG format)
+        </Heading>
+        <Stack gap={4}>
+          <Field.Root >
+            <Field.Label>Upload Photo</Field.Label>
+            <Input
+              type="file"
+              accept="image/jpeg"
+              border="none"
+              boxShadow="none"
+              p={0}
+              _file={{
+                border: "1px solid",
+                borderColor: "gray.300",
+                borderRadius: "md",
+                bg: "gray.50",
+                px: 4,
+                py: 2,
+                cursor: "pointer",
+                _hover: { bg: "gray.100" },
+              }}
+            />
+          </Field.Root>
+        </Stack>
+      </Box>
+      <Box
+        bg="white"
+        p={{ base: 6, md: 8 }}
+        borderRadius="2xl"
+        boxShadow="lg"
+        border="1px solid"
+        borderColor="gray.100"
+      >
+        <Heading as="h3" mb={4} color="brand.primary" fontWeight="normal">
+          Acknowledgments & Authorization
+        </Heading>
+        <Stack gap={4}>
           <Text fontSize="sm">
-            1. I certify that answers given herein are true and complete to the best
-            of my knowledge.
+            1. I certify that answers given herein are true and complete to the
+            best of my knowledge.
           </Text>
 
           <Text fontSize="sm">
@@ -63,43 +85,38 @@ const Step3Experience = () => {
           </Text>
 
           <Text fontSize="sm">
-            4. Employment is “at will” and may be terminated at any time by either
-            party.
+            4. Employment is “at will” and may be terminated at any time by
+            either party.
           </Text>
 
           <Text fontSize="sm">
             5. False or misleading information may result in discharge.
           </Text>
+          {/* Checkbox with Error */}
+          <Field.Root invalid={showError && !agreed}>
+            <Checkbox.Root
+              checked={agreed}
+              onCheckedChange={(e) => {
+                setAgreed(!!e.checked);
+                setShowError(false);
+              }}
+            >
+              <Checkbox.HiddenInput />
+              <Checkbox.Control>
+                <Checkbox.Indicator />
+              </Checkbox.Control>
+              <Checkbox.Label fontSize="sm" fontWeight="normal">
+                I have read and agree to the "Acknowledgments & Authorization"
+                outlined above.
+              </Checkbox.Label>
+            </Checkbox.Root>
+
+            <Field.ErrorText>You must agree before continuing.</Field.ErrorText>
+          </Field.Root>
         </Stack>
       </Box>
-
-
-      {/* Checkbox with Error */}
-      <Field.Root invalid={showError && !agreed}>
-        <Checkbox.Root 
-          checked={agreed} 
-          onCheckedChange={(e) => {
-            setAgreed(!!e.checked); // e.checked is a boolean or "indeterminate"
-            setShowError(false);
-          }}
-        >
-          <Checkbox.HiddenInput />
-          <Checkbox.Control>
-            <Checkbox.Indicator />
-          </Checkbox.Control>
-          <Checkbox.Label fontSize="sm">
-            I have read and agree to the "Acknowledgments & Authorization" outlined above.
-          </Checkbox.Label>
-        </Checkbox.Root>
-
-        <Field.ErrorText>
-          You must agree before continuing.
-        </Field.ErrorText>
-      </Field.Root>
     </>
   );
 };
 
 export default Step3Experience;
-
-

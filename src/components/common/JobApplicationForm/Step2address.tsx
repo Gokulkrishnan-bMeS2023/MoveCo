@@ -1,190 +1,5 @@
-// import {
-//   Stack,
-//   Input,
-//   Field,
-//   Heading,
-//   SimpleGrid,
-//   Button,
-//   Box,
-//   Flex,
-//   Text,
-// } from "@chakra-ui/react";
-// import React from "react";
-
-// const Step2Address = () => {
-//   const emptyExperience = {
-//     employer: "",
-//     jobTitle: "",
-//     from: "",
-//     to: "",
-//     priorPosition: "",
-//     startSalary: "",
-//     endSalary: "",
-//     supervisorName: "",
-//     supervisorPhone: "",
-//     reason: "",
-//     duties: "",
-//   };
-
-//   const [experiences, setExperiences] = React.useState([emptyExperience]);
-
-//   const addExperience = () => {
-//     setExperiences([...experiences, emptyExperience]);
-//   };
-
-//   const removeExperience = (index: number) => {
-//     setExperiences(experiences.filter((_, i) => i !== index));
-//   };
-
-//   return (
-//     <>
-//       <Stack gap={6}>
-//         <Heading size="md" mb={6}>
-//           Education
-//         </Heading>
-//         <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-//           <Field.Root>
-//             <Field.Label>School Name</Field.Label>
-//             <Input type="text" />
-//           </Field.Root>
-
-//           <Field.Root>
-//             <Field.Label>Location</Field.Label>
-//             <Input type="text" />
-//           </Field.Root>
-
-//           <Field.Root>
-//             <Field.Label>Years</Field.Label>
-//             <Input type="email" />
-//           </Field.Root>
-//         </SimpleGrid>
-
-//         <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-//           <Field.Root>
-//             <Field.Label>Degree received</Field.Label>
-//             <Input type="text" />
-//           </Field.Root>
-
-//           <Field.Root>
-//             <Field.Label>Major</Field.Label>
-//             <Input type="text" />
-//           </Field.Root>
-
-//           <Field.Root>
-//             <Field.Label>
-//               Other training, certifications, or licenses held:
-//             </Field.Label>
-//             <Input type="email" />
-//           </Field.Root>
-//         </SimpleGrid>
-
-//         <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-//           <Field.Root>
-//             <Field.Label>
-//               List other information pertinent to the employment you are
-//               seeking:
-//             </Field.Label>
-//             <Input type="text" />
-//           </Field.Root>
-//         </SimpleGrid>
-//         <Heading size="md" mb={6}>
-//           Previous Employment (Most Recent First)
-//         </Heading>
-
-//         {experiences.map((exp, index) => (
-//           <Box>
-//             <Flex justify="space-between" align="center" mb={4}>
-//               <Heading size="sm">Employment #{index + 1}</Heading>
-//               {experiences.length > 1 && (
-//                 <Button
-//                   size="sm"
-//                   colorScheme="red"
-//                   onClick={() => removeExperience(index)}
-//                 >
-//                   Remove
-//                 </Button>
-//               )}
-//             </Flex>
-
-//             <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-//               <Field.Root>
-//                 <Field.Label>Employer</Field.Label>
-//                 <Input />
-//               </Field.Root>
-
-//               <Field.Root>
-//                 <Field.Label>Job Title</Field.Label>
-//                 <Input />
-//               </Field.Root>
-
-//               <Field.Root>
-//                 <Field.Label>Dates Employed from &amp; to</Field.Label>
-//                 <Flex gap={2} align="center">
-//                   <Input type="date" />
-//                   <Text>to</Text>
-//                   <Input type="date" />
-//                 </Flex>
-//               </Field.Root>
-//             </SimpleGrid>
-
-//             <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={4}>
-//               <Field.Root>
-//                 <Field.Label>Prior Position</Field.Label>
-//                 <Input />
-//               </Field.Root>
-
-//               <Field.Root>
-//                 <Field.Label>Starting Salary</Field.Label>
-//                 <Input />
-//               </Field.Root>
-
-//               <Field.Root>
-//                 <Field.Label>Ending Salary</Field.Label>
-//                 <Input />
-//               </Field.Root>
-//             </SimpleGrid>
-
-//             <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={4}>
-//               <Field.Root>
-//                 <Field.Label>Supervisor Name</Field.Label>
-//                 <Input />
-//               </Field.Root>
-
-//               <Field.Root>
-//                 <Field.Label>Supervisor Phone</Field.Label>
-//                 <Input />
-//               </Field.Root>
-
-//               <Field.Root>
-//                 <Field.Label>Reason for Leaving</Field.Label>
-//                 <Input />
-//               </Field.Root>
-//             </SimpleGrid>
-
-//             <SimpleGrid columns={{ base: 1, md: 1 }} gap={6} mt={4}>
-//               <Field.Root>
-//                 <Field.Label>Duties Performed</Field.Label>
-//                 <Input />
-//               </Field.Root>
-//             </SimpleGrid>
-//           </Box>
-//         ))}
-
-//         <Button onClick={addExperience} bg={"brand.primary"}>
-//           + Add Another Experience
-//         </Button>
-//       </Stack>
-//     </>
-//   );
-// };
-
-// export default Step2Address;
-
-//2
-
 import {
   Stack,
-  Input,
   Field,
   Heading,
   SimpleGrid,
@@ -194,6 +9,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
+import InputField from "../../../components/common/Input/Input";
+import DateInput from "../../../components/common/DateInput/DateInput";
 
 const Step2Address = () => {
   const emptyExperience = {
@@ -220,209 +37,113 @@ const Step2Address = () => {
     setExperiences(experiences.filter((_, i) => i !== index));
   };
 
-  const updateExperience = (index: number, field: string, value: string) => {
-    const updated = experiences.map((exp, i) =>
-      i === index ? { ...exp, [field]: value } : exp,
-    );
-    setExperiences(updated);
-  };
-
   return (
     <>
-      <Stack gap={6}>
-        <Heading size="md" mb={6}>
-          Education
-        </Heading>
-        <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-          <Field.Root>
-            <Field.Label>School Name</Field.Label>
-            <Input type="text" />
-          </Field.Root>
+      <Box
+        bg="white"
+        p={{ base: 6, md: 8 }}
+        borderRadius="2xl"
+        boxShadow="lg"
+        border="1px solid"
+        borderColor="gray.100"
+      >
+        <Stack gap={4}>
+          <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
+            Education
+          </Heading>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+            <InputField label="School Name" />
 
-          <Field.Root>
-            <Field.Label>Location</Field.Label>
-            <Input type="text" />
-          </Field.Root>
+            <InputField label="Location" />
 
-          <Field.Root>
-            <Field.Label>Years</Field.Label>
-            <Input type="text" />
-          </Field.Root>
-        </SimpleGrid>
+            <InputField label="Years" />
+          </SimpleGrid>
 
-        <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-          <Field.Root>
-            <Field.Label>Degree received</Field.Label>
-            <Input type="text" />
-          </Field.Root>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+            <InputField label="Degree Received" />
 
-          <Field.Root>
-            <Field.Label>Major</Field.Label>
-            <Input type="text" />
-          </Field.Root>
+            <InputField label="Major" />
 
-          <Field.Root>
-            <Field.Label>
-              Other training, certifications, or licenses held:
-            </Field.Label>
-            <Input type="text" />
-          </Field.Root>
-        </SimpleGrid>
+            <InputField label="Other training, certifications, or licenses held" />
+          </SimpleGrid>
 
-        <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-          <Field.Root>
-            <Field.Label>
-              List other information pertinent to the employment you are
-              seeking:
-            </Field.Label>
-            <Input type="text" />
-          </Field.Root>
-        </SimpleGrid>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
+            <InputField label="List other information pertinent to the employment you are seeking:" />
+          </SimpleGrid>
+        </Stack>
+      </Box>
 
-        <Heading size="md" mb={6}>
-          Previous Employment (Most Recent First)
-        </Heading>
+      <Box
+        bg="white"
+        p={{ base: 6, md: 8 }}
+        borderRadius="2xl"
+        boxShadow="lg"
+        border="1px solid"
+        borderColor="gray.100"
+      >
+        <Stack gap={4}>
+          <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
+            Previous Employment (Most Recent First)
+          </Heading>
 
-        {experiences.map((exp, index) => (
-          <Box key={index}>
-            <Flex justify="space-between" align="center" mb={4}>
-              <Heading size="sm">Employment - {index + 1}</Heading>
-              {experiences.length > 1 && (
-                <Button
-                  size="sm"
-                  colorScheme="red"
-                  onClick={() => removeExperience(index)}
-                >
-                  Remove
-                </Button>
-              )}
-            </Flex>
+          {experiences.map((_, index) => (
+            <Box>
+              <Flex justify="space-between" align="center" mb={4}>
+                <Heading size="sm">Employment #{index + 1}</Heading>
+                {experiences.length > 1 && (
+                  <Button
+                    size="sm"
+                    colorScheme="red"
+                    onClick={() => removeExperience(index)}
+                  >
+                    Remove
+                  </Button>
+                )}
+              </Flex>
 
-            <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-              <Field.Root>
-                <Field.Label>Employer</Field.Label>
-                <Input
-                  value={exp.employer}
-                  onChange={(e) =>
-                    updateExperience(index, "employer", e.target.value)
-                  }
-                />
-              </Field.Root>
+              <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                <InputField label="Employer" />
 
-              <Field.Root>
-                <Field.Label>Job Title</Field.Label>
-                <Input
-                  value={exp.jobTitle}
-                  onChange={(e) =>
-                    updateExperience(index, "jobTitle", e.target.value)
-                  }
-                />
-              </Field.Root>
+                <InputField label="Job Title" />
 
-              <Field.Root>
-                <Field.Label>Dates Employed from &amp; to</Field.Label>
-                <Flex gap={2} align="center">
-                  <Input
-                    type="date"
-                    value={exp.from}
-                    onChange={(e) =>
-                      updateExperience(index, "from", e.target.value)
-                    }
-                  />
-                  <Text>to</Text>
-                  <Input
-                    type="date"
-                    value={exp.to}
-                    onChange={(e) =>
-                      updateExperience(index, "to", e.target.value)
-                    }
-                  />
-                </Flex>
-              </Field.Root>
-            </SimpleGrid>
+                <Field.Root>
+                  <Field.Label>Dates Employed from &amp; to</Field.Label>
 
-            <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={4}>
-              <Field.Root>
-                <Field.Label>Prior Position</Field.Label>
-                <Input
-                  value={exp.priorPosition}
-                  onChange={(e) =>
-                    updateExperience(index, "priorPosition", e.target.value)
-                  }
-                />
-              </Field.Root>
+                  <Flex gap={3} align="center">
+                    <DateInput label="" placeholder="From" />
 
-              <Field.Root>
-                <Field.Label>Starting Salary</Field.Label>
-                <Input
-                  value={exp.startSalary}
-                  onChange={(e) =>
-                    updateExperience(index, "startSalary", e.target.value)
-                  }
-                />
-              </Field.Root>
+                    <Text color="gray.500" fontSize="sm">
+                      to
+                    </Text>
 
-              <Field.Root>
-                <Field.Label>Ending Salary</Field.Label>
-                <Input
-                  value={exp.endSalary}
-                  onChange={(e) =>
-                    updateExperience(index, "endSalary", e.target.value)
-                  }
-                />
-              </Field.Root>
-            </SimpleGrid>
+                    <DateInput label="" placeholder="To" />
+                  </Flex>
+                </Field.Root>
+              </SimpleGrid>
 
-            <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={4}>
-              <Field.Root>
-                <Field.Label>Supervisor Name</Field.Label>
-                <Input
-                  value={exp.supervisorName}
-                  onChange={(e) =>
-                    updateExperience(index, "supervisorName", e.target.value)
-                  }
-                />
-              </Field.Root>
+              <SimpleGrid columns={{ base: 1, md: 3 }} gap={4} mt={4}>
+                <InputField label="Prior Positions" />
+                <InputField label="Starting Salary" />
+                <InputField label="Ending Salary" />
+              </SimpleGrid>
 
-              <Field.Root>
-                <Field.Label>Supervisor Phone</Field.Label>
-                <Input
-                  value={exp.supervisorPhone}
-                  onChange={(e) =>
-                    updateExperience(index, "supervisorPhone", e.target.value)
-                  }
-                />
-              </Field.Root>
+              <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={4}>
+                 <InputField label="Supervisor Name" />
+                <InputField label="Supervisor Phone" />
+                <InputField label="Reason for Leaving" />
+              </SimpleGrid>
 
-              <Field.Root>
-                <Field.Label>Reason for Leaving</Field.Label>
-                <Input
-                  value={exp.reason}
-                  onChange={(e) =>
-                    updateExperience(index, "reason", e.target.value)
-                  }
-                />
-              </Field.Root>
-            </SimpleGrid>
+              <SimpleGrid columns={{ base: 1, md: 1 }} gap={6} mt={4}>
+               <InputField label="Duties Performed" />
+              </SimpleGrid>
+            </Box>
+          ))}
 
-            <SimpleGrid columns={{ base: 1, md: 1 }} gap={6} mt={4}>
-              <Field.Root>
-                <Field.Label>Duties Performed</Field.Label>
-                <Input
-                  value={exp.duties}
-                  onChange={(e) =>
-                    updateExperience(index, "duties", e.target.value)
-                  }
-                />
-              </Field.Root>
-            </SimpleGrid>
-          </Box>
-        ))}
-
-        <Button onClick={addExperience} bg={"brand.primary"}>
-          + Add Another Experience
-        </Button>
-      </Stack>
+          <Button onClick={addExperience} bg={"brand.primary"}>
+            + Add Another Experience
+          </Button>
+        </Stack>
+      </Box>
     </>
   );
 };
