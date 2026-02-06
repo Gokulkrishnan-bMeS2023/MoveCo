@@ -23,7 +23,7 @@ import {
 } from "react-icons/fa";
 import { GiBelt } from "react-icons/gi";
 import { PiSparkleLight } from "react-icons/pi";
-import customerImg from "../../assets/scottish-rite.jpg";
+import customerImg from "../../assets/cust-relations.jpeg";
 import InsuranceImg from "../../assets/modifiedbanner.png";
 
 const dressCodeData = [
