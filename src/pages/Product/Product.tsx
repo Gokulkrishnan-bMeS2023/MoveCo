@@ -213,7 +213,7 @@ const ProductPage = () => {
                   position="absolute"
                   top={{ base: 2, md: 4 }}
                   right={{ base: 2, md: 4 }}
-                  colorPalette="green"
+                  colorPalette="brand.primary"
                   fontSize={{ base: "xs", md: "sm" }}
                   px={{ base: 2, md: 3 }}
                   py={1}
@@ -247,7 +247,7 @@ const ProductPage = () => {
                   <Text
                     fontSize={{ base: "2xl", md: "3xl" }}
                     fontWeight="bold"
-                    color="green.600"
+                    color="brand.primary"
                   >
                     ${product.price.toFixed(2)}
                   </Text>

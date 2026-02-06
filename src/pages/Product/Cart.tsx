@@ -544,7 +544,11 @@ const CartPage = () => {
                       >
                         {item.name}
                       </Text>
-                      <Text fontWeight="bold" color="green.600" fontSize="lg">
+                      <Text
+                        fontWeight="bold"
+                        color="brand.primary"
+                        fontSize="lg"
+                      >
                         ${item.price.toFixed(2)}
                       </Text>
                     </VStack>
@@ -564,6 +568,7 @@ const CartPage = () => {
                       <IconButton
                         aria-label="Decrease quantity"
                         size="sm"
+                        bg={"brand.primary"}
                         onClick={() =>
                           updateQuantity(item.id, item.quantity - 1)
                         }
@@ -585,6 +590,7 @@ const CartPage = () => {
                       <IconButton
                         aria-label="Increase quantity"
                         size="sm"
+                        bg={"brand.primary"}
                         onClick={() =>
                           updateQuantity(item.id, item.quantity + 1)
                         }
@@ -686,6 +692,7 @@ const CartPage = () => {
                           onClick={() =>
                             updateQuantity(item.id, item.quantity - 1)
                           }
+                          bg={"brand.primary"}
                           disabled={item.quantity <= 1}
                         >
                           <FiMinus />
@@ -703,6 +710,7 @@ const CartPage = () => {
                         <IconButton
                           aria-label="Increase quantity"
                           size="sm"
+                          bg={"brand.primary"}
                           onClick={() =>
                             updateQuantity(item.id, item.quantity + 1)
                           }
@@ -775,7 +783,7 @@ const CartPage = () => {
                   Shipping
                 </Text>
                 <Badge
-                  colorPalette="green"
+                  colorPalette="brand.primary"
                   fontSize={{ base: "sm", md: "md" }}
                   px={3}
                   py={1}
@@ -819,7 +827,7 @@ const CartPage = () => {
                 <Text
                   fontSize={{ base: "xl", md: "2xl" }}
                   fontWeight="bold"
-                  color="green.600"
+                  color="brand.primary"
                 >
                   ${total.toFixed(2)}
                 </Text>
