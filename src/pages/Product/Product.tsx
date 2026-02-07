@@ -141,30 +141,13 @@ const ProductPage = () => {
   };
 
   return (
-    <Container
-      maxW="100%"
-      px={{ base: 4, md: 6, lg: 8 }}
-      py={{ base: 6, md: 10, lg: 12 }}
-    >
+    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
       {/* Header */}
-      <VStack
-        gap={{ base: 4, md: 6 }}
-        mb={{ base: 8, md: 10, lg: 12 }}
-        align="start"
-      >
-        <Heading
-          as="h1"
-          fontWeight="normal"
-          fontSize={{ base: "2xl", sm: "3xl", md: "4xl", lg: "5xl" }}
-        >
+      <VStack mb={12} gap={{ base: 4, md: 6 }} align="start">
+        <Heading as="h1" fontWeight="normal">
           Moving & <Span color="brand.primary">Packing Supplies</Span>
         </Heading>
-        <Text
-          fontSize={{ base: "md", md: "lg" }}
-          color="gray.600"
-          maxW="3xl"
-          lineHeight="1.7"
-        >
+        <Text textStyle="size-lg" color="gray.600">
           When you plan a move, you certainly want to keep your possessions safe
           and organized. Boxes, packing material, moving safety material, and
           all the other rest of moving supplies are also sold here in our online
@@ -257,7 +240,7 @@ const ProductPage = () => {
                 <HStack
                   gap={2}
                   justify="flex-end"
-                //   display={{ base: "none", sm: "flex" }} // Horizontal on tablet+
+                  //   display={{ base: "none", sm: "flex" }} // Horizontal on tablet+
                   flexWrap="wrap"
                 >
                   {isInCart(product.id) && (

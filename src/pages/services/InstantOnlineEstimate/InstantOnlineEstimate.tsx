@@ -20,37 +20,31 @@ const InstantOnlineEstimate = () => {
   return (
     <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
       {/* Heading Section */}
-      <Box>
-        <Flex
-          mt={6}
-          direction={{ base: "column", md: "row" }}
-          align={{ base: "flex-start", md: "center" }}
-          justify="space-between"
-          gap={{ base: 6, md: 10 }}
-          mb={12}
-        >
-          {/* Left */}
-          <Box maxW="600px" w="100%">
-            <Heading as="h1" fontWeight="normal" mb={2}>
-              Instant{" "}
-              <Text as="span" color="brand.primary">
-                Online Estimate
-              </Text>
-            </Heading>
-          </Box>
-
-          {/* Right */}
-          <Box maxW="500px" w="100%">
-            <Text
-              textStyle="size-2xl"
-              textAlign={{ base: "left", md: "right" }}
-            >
-              Already have an inventory list? Avoid surprises and get an
-              immediate, guaranteed fixed-price moving quote right now.
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        align={{ base: "flex-start", md: "center" }}
+        justify="space-between"
+        gap={{ base: 6, md: 10 }}
+        mb={12}
+      >
+        {/* Left */}
+        <Box maxW="600px" w="100%">
+          <Heading as="h1" fontWeight="normal" mb={2}>
+            Instant{" "}
+            <Text as="span" color="brand.primary">
+              Online Estimate
             </Text>
-          </Box>
-        </Flex>
-      </Box>
+          </Heading>
+        </Box>
+
+        {/* Right */}
+        <Box maxW="500px" w="100%">
+          <Text textStyle="size-2xl" textAlign={{ base: "left", md: "right" }}>
+            Already have an inventory list? Avoid surprises and get an
+            immediate, guaranteed fixed-price moving quote right now.
+          </Text>
+        </Box>
+      </Flex>
 
       <Flex gap={10} align="center" direction={{ base: "column", md: "row" }}>
         {/* Form Card */}
