@@ -44,27 +44,8 @@ const ContactCard = ({
         shadow: "xl",
       }}
       transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
-      position="relative"
-      overflow="hidden"
-      _before={{
-        content: '""',
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        height: "4px",
-        bgGradient: "to-r",
-        gradientFrom: "brand.primary",
-        gradientTo: "brand.secondary",
-        transform: "scaleX(0)",
-        transformOrigin: "left",
-        transition: "transform 0.3s ease",
-      }}
-    // _hover={{
-    //   _before: {
-    //     transform: "scaleX(1)",
-    //   },
-    // }}
+      borderLeftWidth={4}
+      borderColor="brand.primary"
     >
       <Card.Body gap={4}>
         <Heading as="h3" fontWeight="normal">
@@ -73,40 +54,27 @@ const ContactCard = ({
 
         {address && (
           <HStack align="start" gap={3}>
-            <Flex
-              align="center"
-              gap={3}
-            >
+            <Flex align="center" gap={3}>
               <Icon
                 as={FaMapMarkerAlt}
                 boxSize={{ base: 3, md: 4 }}
                 color="brand.primary"
               />
-              <Text
-                textStyle="size-lg">
-                {address}
-              </Text>
+              <Text textStyle="size-lg">{address}</Text>
             </Flex>
           </HStack>
         )}
 
         <Stack gap={2}>
           <HStack gap={2}>
-            <Flex
-              align="center"
-              gap={3}
-            >
+            <Flex align="center" gap={3}>
               <Icon
                 as={FaPhoneAlt}
                 boxSize={{ base: 3, md: 4 }}
                 color="brand.primary"
               />
-
-              <Text textStyle="size-lg">
-                {office}
-              </Text>
+              <Text textStyle="size-lg">{office}</Text>
             </Flex>
-
           </HStack>
 
           {tollFree && (
@@ -152,7 +120,6 @@ const ContactUsPage = () => {
         </Box>
       </Box>
       <Box pt={{ base: 10, md: 16 }}>
-
         <Flex
           direction={{ base: "column", md: "row" }}
           align={{ base: "flex-start", md: "center" }}
@@ -178,8 +145,7 @@ const ContactUsPage = () => {
           </Box>
         </Flex>
 
-        <SimpleGrid
-          columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
           <ContactCard
             city="Dallas"
             address="1439 Crescent Ave, Lewisville, TX-75057"
@@ -199,9 +165,7 @@ const ContactUsPage = () => {
               Main Office
             </Text>
           </Heading>
-          <Text textStyle="size-2xl">
-            Located in Lewisville, Texas
-          </Text>
+          <Text textStyle="size-2xl">Located in Lewisville, Texas</Text>
         </Box>
 
         <Card.Root variant="elevated" overflow="hidden">
@@ -233,8 +197,12 @@ const ContactUsPage = () => {
             </Heading>
           </Box>
           <Box maxW={{ lg: "35%" }}>
-            <Text textStyle="size-2xl" textAlign={{ base: "left", md: "right" }}>
-              Fill out the form below and We will get back to you as soon as possible.
+            <Text
+              textStyle="size-2xl"
+              textAlign={{ base: "left", md: "right" }}
+            >
+              Fill out the form below and We will get back to you as soon as
+              possible.
             </Text>
           </Box>
         </Flex>
@@ -253,51 +221,54 @@ const ContactUsPage = () => {
                     />
                   </Box>
                 </Flex>
-                <Heading as="h3" fontWeight="normal" >Send an <Text as="span" color="brand.primary">
-                  Email
-                </Text></Heading>
+                <Heading as="h3" fontWeight="normal">
+                  Send an{" "}
+                  <Text as="span" color="brand.primary">
+                    Email
+                  </Text>
+                </Heading>
               </HStack>
 
-              <Text
-                textStyle="size-lg"
-              >
+              <Text textStyle="size-lg">
                 Send us an email, we would love to hear from you!
               </Text>
-              <Text
-                textStyle="size-lg"
-              >
-                Just fill out the form, and a representative will get back to you as soon as possible
+              <Text textStyle="size-lg">
+                Just fill out the form, and a representative will get back to
+                you as soon as possible
               </Text>
               <Separator />
               <VStack gap={4} align="stretch">
                 <InputField
-                  label="Name"
+                  label="Your Name"
                   value={contactValues.name}
                   onChange={(e) => handleContactChange("name", e.target.value)}
                   errorMessage={contactErrors.name}
                   isRequired
+                  placeholder="Your Name"
                 />
                 <InputField
-                  label="Email"
+                  label="Your Email"
                   value={contactValues.email}
                   onChange={(e) => handleContactChange("email", e.target.value)}
                   errorMessage={contactErrors.email}
                   isRequired
+                  placeholder="Your Email"
                 />
                 <InputField
-                  label="Phone"
+                  label="Your Phone Number"
                   value={contactValues.phone}
                   onChange={(e) => handleContactChange("phone", e.target.value)}
                   errorMessage={contactErrors.phone}
                   isRequired
+                  placeholder="Your Phone Number"
                 />
                 <Notes
-                  label="Message"
+                  label="Your Message"
                   value={contactValues.message ?? ""}
                   onChange={(value) => handleContactChange("message", value)}
-                  placeholder=""
+                  placeholder="Your Message"
                 />
-                <Box textAlign={{ base: "center", md: "right" }} mt={4} >
+                <Box textAlign={{ base: "center", md: "right" }} mt={4}>
                   <Button
                     px="16"
                     variant="primary"
@@ -326,14 +297,15 @@ const ContactUsPage = () => {
                     />
                   </Box>
                 </Flex>
-                <Heading as="h3" fontWeight="normal">Tell a friend <Text as="span" color="brand.primary">
-                  about MoveCo
-                </Text></Heading>
+                <Heading as="h3" fontWeight="normal">
+                  Tell a friend{" "}
+                  <Text as="span" color="brand.primary">
+                    about MoveCo
+                  </Text>
+                </Heading>
               </HStack>
 
-              <Text
-                textStyle="size-lg"
-              >
+              <Text textStyle="size-lg">
                 To email a friend about MoveCo, fill out the information below
               </Text>
               <Separator />
@@ -341,6 +313,7 @@ const ContactUsPage = () => {
               <VStack gap={4} align="stretch">
                 <InputField
                   label="Your Name"
+                  placeholder="Your Name"
                   value={referralValues.yourName}
                   onChange={(e) =>
                     handleReferralChange("yourName", e.target.value)
@@ -349,7 +322,8 @@ const ContactUsPage = () => {
                   isRequired
                 />
                 <InputField
-                  label="Friend Phone"
+                  label="Friend's Phone Number"
+                  placeholder="Friend's Phone Number"
                   value={referralValues.friendPhone}
                   onChange={(e) =>
                     handleReferralChange("friendPhone", e.target.value)
@@ -358,7 +332,8 @@ const ContactUsPage = () => {
                   isRequired
                 />
                 <InputField
-                  label="Friend Email"
+                  label="Friend's Email Address"
+                  placeholder="Friend's Email Address"
                   value={referralValues.friendEmail}
                   onChange={(e) =>
                     handleReferralChange("friendEmail", e.target.value)
@@ -366,7 +341,7 @@ const ContactUsPage = () => {
                   errorMessage={referralErrors.friendEmail}
                   isRequired
                 />
-                <Box textAlign={{ base: "center", md: "right" }} mt={4} >
+                <Box textAlign={{ base: "center", md: "right" }} mt={4}>
                   <Button
                     px="16"
                     variant="primary"
