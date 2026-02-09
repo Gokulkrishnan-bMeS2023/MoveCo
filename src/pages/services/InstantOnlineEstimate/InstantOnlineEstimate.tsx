@@ -20,23 +20,23 @@ const InstantOnlineEstimate = () => {
   return (
     <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
       {/* Heading Section */}
-   
-        <Flex
-          direction={{ base: "column", md: "row" }}
-          align={{ base: "flex-start", md: "center" }}
-          justify="space-between"
-          gap={{ base: 6, md: 10 }}
-          mb={12}
-        >
-          {/* Left */}
-          <Box maxW="600px" w="100%">
-            <Heading as="h1" fontWeight="normal" mb={2}>
-              Instant{" "}
-              <Text as="span" color="brand.primary">
-                Online Estimate
-              </Text>
-            </Heading>
-          </Box>
+
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        align={{ base: "flex-start", md: "center" }}
+        justify="space-between"
+        gap={{ base: 6, md: 10 }}
+        mb={12}
+      >
+        {/* Left */}
+        <Box maxW="600px" w="100%">
+          <Heading as="h1" fontWeight="normal" mb={2}>
+            Instant{" "}
+            <Text as="span" color="brand.primary">
+              Online Estimate
+            </Text>
+          </Heading>
+        </Box>
 
         {/* Right */}
         <Box maxW="500px" w="100%">
