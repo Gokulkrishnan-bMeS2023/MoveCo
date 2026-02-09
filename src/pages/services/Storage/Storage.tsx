@@ -91,17 +91,15 @@ import {
   HStack,
   Span,
 } from "@chakra-ui/react";
-
 import storageImage from "../../../assets/Storage.jpg";
 
 export default function StoragePage() {
   return (
-    <Container maxW="100%" px={8} py={10}>
-      {/* Top heading row */}
+    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
       <HStack
         justify="space-between"
         align="flex-start"
-        mb={{ base: 10, md: 16 }}
+       mb={{base:6, lg:8}}
         gap={10}
       >
         <Stack gap={4} maxW="60%">
@@ -115,13 +113,11 @@ export default function StoragePage() {
         </Text>
       </HStack>
 
-      {/* Image + content section */}
       <SimpleGrid
         columns={{ base: 1, md: 2 }}
         gap={{ base: 10, md: 16 }}
         alignItems="flex-start"
       >
-        {/* Left image */}
         <Box rounded="2xl" overflow="hidden">
           <Image
             src={storageImage}
@@ -158,25 +154,25 @@ export default function StoragePage() {
         </Stack>
       </SimpleGrid>
 
-      {/* Storage Pricing */}
-      <Stack mt={{ base: 16, md: 24 }} gap={6} maxW="4xl">
+       <Box pt={{ base: 10, md: 16 }} maxW="4xl">
+      <Stack gap={6}>
         <Heading as="h1" fontWeight={"normal"} >
           Storage <Span color="brand.primary">Pricing</Span>
         </Heading>
-        <Stack borderWidth="1px" borderRadius="xl" p={6} gap={4}>
+        <Stack borderWidth="1px" borderRadius="xl" p={6} gap={4} bg="brand.white">
           <HStack justify="space-between" fontWeight="semibold">
-            <Text>Size (Feet)</Text>
-            <Text>Price / Month</Text>
+            <Text textStyle="size-xl">Size (Feet)</Text>
+            <Text textStyle="size-xl">Price / Month</Text>
           </HStack>
 
           <HStack justify="space-between">
-            <Text>10 x 20</Text>
-            <Text>$260</Text>
+            <Text textStyle="size-md">10 x 20</Text>
+            <Text textStyle="size-md">$260</Text>
           </HStack>
 
           <HStack justify="space-between">
-            <Text>10 x 30</Text>
-            <Text>$395</Text>
+            <Text textStyle="size-md">10 x 30</Text>
+            <Text textStyle="size-md">$395</Text>
           </HStack>
         </Stack>
 
@@ -184,6 +180,7 @@ export default function StoragePage() {
           We also offer <strong>RV and boat storage</strong>. call for pricing.
         </Text>
       </Stack>
+      </Box>
     </Container>
   );
 }

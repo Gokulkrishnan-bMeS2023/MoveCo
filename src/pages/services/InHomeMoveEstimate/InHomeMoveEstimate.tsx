@@ -12,7 +12,7 @@ import inhomemoveestimate from "../../../assets/inhomemoveestimate.webp";
 
 const InHomeMoveEstimate = () => {
   return (
-    <Container maxW="100%" px={8} py={12}>
+    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
       <Box>
         <Button
           fontSize="xl"
@@ -21,14 +21,14 @@ const InHomeMoveEstimate = () => {
           label="About Us"
         />
         <Flex
-          mt={6}
+          mb={{ base: 6, lg: 8 }}
           direction={{ base: "column", md: "row" }}
           align={{ base: "flex-start", md: "center" }}
           justify="space-between"
           gap={{ base: 6, md: 10 }}
         >
           <Box maxW="600px" w="100%">
-            <Heading as="h1" fontWeight="normal" mb={2}>
+            <Heading as="h1" fontWeight="normal">
               In-Home <br />
               <Text as="span" color="brand.primary">
                 Move Estimate
@@ -53,7 +53,6 @@ const InHomeMoveEstimate = () => {
               alt="footprint"
               w="100%"
               h="auto"
-              mt={6}
               borderRadius="2xl"
             />
           </Box>
@@ -64,7 +63,7 @@ const InHomeMoveEstimate = () => {
               variant="primary"
               label="Our Mission"
             />
-            <Text mt={6} textStyle="size-3xl">
+            <Text textStyle="size-3xl">
               After filling out this form, an appointment will be made to have a
               real, live person come out and estimate your move costs. This is a
               free service, and is perfect for individuals who are unsure as to

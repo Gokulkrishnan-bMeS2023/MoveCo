@@ -33,9 +33,6 @@ const primaryFeatures: FeatureItem[] = [
     icon: FaBoxOpen,
     text: "$40,000 Standard cargo insurance",
   },
-];
-
-const secondaryFeatures: FeatureItem[] = [
   {
     icon: FaCogs,
     text: "Your consumer rights with the BBB & SMA",
@@ -55,7 +52,7 @@ const secondaryFeatures: FeatureItem[] = [
 ];
 
 const FeatureGrid = ({ items }: { items: FeatureItem[] }) => (
-  <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} gap={6} mt={12}>
+  <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} gap={6}>
     {items.map((item, index) => (
       <Box
         key={index}
@@ -105,9 +102,7 @@ export default function InsuranceFeatures() {
   return (
     <>
       <FeatureGrid items={primaryFeatures} />
-      <Box mt={10}>
-        <FeatureGrid items={secondaryFeatures} />
-      </Box>
+
     </>
   );
 }

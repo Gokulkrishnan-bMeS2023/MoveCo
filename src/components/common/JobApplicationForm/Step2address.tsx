@@ -51,7 +51,7 @@ const Step2Address = () => {
           <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
             Education
           </Heading>
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
             <InputField label="School Name" />
 
             <InputField label="Location" />
@@ -59,7 +59,7 @@ const Step2Address = () => {
             <InputField label="Years" />
           </SimpleGrid>
 
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
             <InputField label="Degree Received" />
 
             <InputField label="Major" />

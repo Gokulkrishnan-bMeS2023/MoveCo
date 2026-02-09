@@ -62,30 +62,30 @@ const JobApplicationForm = () => {
               border="1px solid"
               borderColor="gray.100"
             >
-              <Stack gap={6}>
+              <Stack gap={4}>
                 <Heading as="h3" color="brand.primary" fontWeight="normal">
                   Your Information
                 </Heading>
 
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
                   <InputField label="First Name" isRequired />
                   <InputField label="Last Name" isRequired />
                   <InputField label="Email" isRequired />
                 </SimpleGrid>
 
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
                   <InputField label="Home Phone" />
                   <InputField label="Cell Phone" />
                   <InputField label="Address" />
                 </SimpleGrid>
 
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
                   <InputField label="City" />
                   <InputField label="State" />
                   <InputField label="Zip Code" />
                 </SimpleGrid>
 
-                <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+                <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                   <InputField label="Social Security Number" />
                   <DateInput label="Available Start Date" />
                 </SimpleGrid>

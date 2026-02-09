@@ -19,7 +19,7 @@ import Features from "./Features";
 const AboutUs = () => {
   return (
     <Box as={section}>
-      <Container maxW="100%" px={8} py={12}>
+      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
         <Box
           bgImage={`url(${BannerImg})`}
           bgSize="cover"
@@ -31,7 +31,7 @@ const AboutUs = () => {
           position="relative"
           overflow="hidden"
         >
-          <Box position="absolute" inset={0} bg="green.900" opacity={0.1} />
+          <Box position="absolute" inset={0} bg="brand.primary" opacity={0.1} />
           <Box position="relative" textAlign="center">
             <Heading as={"h2"} color="brand.white" fontWeight="normal" mb={4}>
               Wanna Know More {""}
@@ -41,24 +41,24 @@ const AboutUs = () => {
             </Heading>
           </Box>
         </Box>
-      </Container>
-      <Container maxW="100%" px={8} py={12}>
-        <Box>
+        <Box pt={{ base: 10, md: 16 }}>
+
           <Button
             fontSize="xl"
             rounded="full"
             variant="primary"
             label="About Us"
+            mb={{ base: 4, lg: 6 }}
           />
           <Flex
-            mt={6}
+            mb={{ base: 6, lg: 8 }}
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"
             gap={{ base: 6, md: 10 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" mb={2}>
+              <Heading as="h1" fontWeight="normal">
                 What Do We Do <br />
                 In{" "}
                 <Text as="span" color="brand.primary">
@@ -76,27 +76,27 @@ const AboutUs = () => {
               </Text>
             </Box>
           </Flex>
-          <SimpleGrid columns={{ base: 1, md: 2 }} alignItems="center">
+          <SimpleGrid columns={{ base: 1, md: 2 }} alignItems="center" gap={{ base: 8, md: 12 }}>
             <Box w="100%" maxW={{ base: "100%", md: "550px" }}>
               <Image
                 src={ServiceImg}
                 alt="footprint"
                 w="100%"
                 h="auto"
-                mt={6}
                 borderRadius="2xl"
               />
             </Box>
-            <Box p={{base:"0",md:"4"}}>
-              <Box mt={{base:"8",md:"0"}}>
-              <Button 
-                fontSize="xl"
-                rounded="full"
-                variant="primary"
-                label="Our Mission"
-              />
+            <Box>
+              <Box >
+                <Button
+                  fontSize="xl"
+                  rounded="full"
+                  variant="primary"
+                  label="Our Mission"
+                  mb={{ base: 4, lg: 6 }}
+                />
               </Box>
-              <Text mt={{base:"4",md:"6"}} textStyle="size-3xl">
+              <Text textStyle="size-3xl">
                 We aim to impress you with our service so much that you'll share
                 our business cards with your friends and colleagues, post your
                 text and video testimonials on our website, and choose us for
@@ -104,10 +104,10 @@ const AboutUs = () => {
               </Text>
             </Box>
           </SimpleGrid>
+
         </Box>
-      </Container>
-      <Container maxW="100%" px={8} py={12}>
-        <Box>
+        <Box pt={{ base: 10, md: 16 }}>
+
           <SimpleGrid
             columns={{ base: 1, md: 2 }}
             alignItems="center"
@@ -119,8 +119,9 @@ const AboutUs = () => {
                 rounded="full"
                 variant="primary"
                 label="Testimonials"
+                mb={{ base: 4, lg: 6 }}
               />
-              <Text textStyle="size-3xl" mt={6}>
+              <Text textStyle="size-3xl">
                 Our online testimonial board goes a step further. You can post
                 your moving experience for our future customers to see. You can
                 also go to our website & see over 10 years of customer reviews.
@@ -138,25 +139,26 @@ const AboutUs = () => {
               />
             </Box>
           </SimpleGrid>
+
         </Box>
-      </Container>
-      <Container maxW="100%" px={8} py={12}>
-        <Box>
+        <Box pt={{ base: 10, md: 16 }}>
+
           <Button
             fontSize="xl"
             rounded="full"
             variant="primary"
             label="Features"
+            mb={{ base: 4, lg: 6 }}
           />
           <Flex
-            mt={6}
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"
             gap={{ base: 6, md: 10 }}
+            mb={{ base: 6, lg: 8 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" mb={2}>
+              <Heading as="h1" fontWeight="normal" >
                 What Do You Get <br />
                 When you In{" "}
                 <Text as="span" color="brand.primary">
@@ -176,29 +178,27 @@ const AboutUs = () => {
           </Flex>
           <Features />
         </Box>
-      </Container>
-      <Container maxW="100%" px={8} py={12}>
-        <Box py={10}>
+        <Box pt={{ base: 10, md: 16 }}>
           <AboutFeatureSwitcher />
         </Box>
-      </Container>
-      <Container maxW="100%" px={8} py={12}>
-        <Box>
+        <Box pt={{ base: 10, md: 16 }}>
+
           <Button
             fontSize="xl"
             rounded="full"
             variant="primary"
-            label="Benifits"
+            label="Benefits"
+            mb={{ base: 4, lg: 6 }}
           />
           <Flex
-            mt={6}
+            mb={{ base: 6, lg: 8 }}
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"
             gap={{ base: 6, md: 10 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" mb={2}>
+              <Heading as="h1" fontWeight="normal">
                 Our <br />{" "}
                 <Text as="span" color="brand.primary">
                   Standards
@@ -217,6 +217,7 @@ const AboutUs = () => {
           </Flex>
           <BenefitsGrid />
         </Box>
+
       </Container>
     </Box>
   );

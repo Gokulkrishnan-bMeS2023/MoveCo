@@ -118,7 +118,6 @@ export default function BenefitsGrid() {
     <SimpleGrid
       columns={{ base: 1, sm: 2, md: 4 }}
       gap={8}
-      mt={12}
     >
       {benefits.map((item, index) => (
         <Box
