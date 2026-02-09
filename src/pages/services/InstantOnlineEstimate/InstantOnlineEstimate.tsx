@@ -7,7 +7,7 @@ import {
   Stack,
   Image,
 } from "@chakra-ui/react";
-import { FaPhoneAlt, FaUser, FaEnvelope } from "react-icons/fa";
+import { FaPhoneAlt, FaUser, FaEnvelope, FaCalendarAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import InputField from "../../../components/common/Input/Input";
@@ -22,7 +22,6 @@ const InstantOnlineEstimate = () => {
       {/* Heading Section */}
       <Box>
         <Flex
-          mt={6}
           direction={{ base: "column", md: "row" }}
           align={{ base: "flex-start", md: "center" }}
           justify="space-between"
@@ -66,18 +65,39 @@ const InstantOnlineEstimate = () => {
           </Heading>
 
           <Stack gap={4}>
-            <InputField label="Name" leftIcon={<FaUser />} isRequired />
-
-            <InputField label="LastName" leftIcon={<FaUser />} isRequired />
-
-            <DateInput label="Date" isRequired />
-
             <InputField
-              label="PhoneNumber"
-              leftIcon={<FaPhoneAlt />}
+              label="Name"
+              leftIcon={<FaUser color="var(--chakra-colors-brand-primary)" />}
+              placeholder="Name"
               isRequired
             />
-            <InputField label="Email" leftIcon={<FaEnvelope />} isRequired />
+
+            <InputField
+              label="Last Name"
+              leftIcon={<FaUser color="var(--chakra-colors-brand-primary)" />}
+              placeholder="Last Name"
+              isRequired
+            />
+
+            <DateInput
+              label="Date"
+              leftIcon={<FaCalendarAlt color="var(--chakra-colors-brand-primary)" />}
+              placeholder="Date"
+              isRequired
+            />
+
+            <InputField
+              label="Phone Number"
+              placeholder="Phone Number"
+              leftIcon={<FaPhoneAlt color="var(--chakra-colors-brand-primary)" />}
+              isRequired
+            />
+            <InputField
+              label="Email"
+              leftIcon={<FaEnvelope color="var(--chakra-colors-brand-primary)" />}
+              placeholder="Email"
+              isRequired
+            />
             <Button
               onClick={() => navigate("/move-information")}
               label="Get Your Quote"

@@ -174,31 +174,35 @@ const InHomeMoveEstimate = () => {
           <VStack align="stretch" gap={4}>
             <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-                <InputField label="First Name" isRequired />
-                <InputField label="Last Name" isRequired />
+                <InputField label="First Name" placeholder="First Name" isRequired />
+                <InputField label="Last Name" placeholder="Last Name" isRequired />
               </SimpleGrid>
-              <InputField label="Email" isRequired />
+              <InputField label="Email" placeholder="Eamil" isRequired />
             </SimpleGrid>
 
             <SimpleGrid columns={{ base: 1, md: 4 }} gap={4}>
               <InputField
                 label="Phone"
                 value={values.moveSize}
+                placeholder="Phone"
                 onChange={(e) => handleChange("moveSize", e.target.value)}
                 isRequired
               />
               <InputField
                 label="Work Phone"
+                placeholder="Work Phone"
                 value={values.hearAbout}
                 onChange={(e) => handleChange("hearAbout", e.target.value)}
               />
               <InputField
                 label="Cell Phone"
+                placeholder="Cell Phone"
                 value={values.moveSize}
                 onChange={(e) => handleChange("moveSize", e.target.value)}
               />
               <InputField
                 label="Home Phone"
+                placeholder="Home Phone"
                 value={values.moveSize}
                 onChange={(e) => handleChange("moveSize", e.target.value)}
               />
@@ -225,6 +229,7 @@ const InHomeMoveEstimate = () => {
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
                 <DateInput
                   label="Move Date"
+                  placeholder="Move Date"
                   value={values.moveDate}
                   onChange={(e) => handleChange("moveDate", e.target.value)}
                   isRequired
@@ -241,6 +246,7 @@ const InHomeMoveEstimate = () => {
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
                 <DateInput
                   label="Drop Date"
+                  placeholder="Drop Date"
                   value={values.moveDate}
                   onChange={(e) => handleChange("moveDate", e.target.value)}
                 />
@@ -308,21 +314,23 @@ const InHomeMoveEstimate = () => {
 
           <VStack align="stretch" gap={6}>
             <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-              <InputField label="From Address" />
+              <InputField label="From Address" placeholder="From Address" />
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-                <InputField label="Apt / Suite / Other" />
-                <InputField label="City" />
+                <InputField label="Apt / Suite / Other" placeholder="Apt / Suite / Other" />
+                <InputField label="City" placeholder="City" />
               </SimpleGrid>
             </SimpleGrid>
 
             <SimpleGrid columns={{ base: 1, md: 4 }} gap={4}>
               <InputField
                 label="State"
+                placeholder="State"
                 value={values.moveSize}
                 onChange={(e) => handleChange("moveSize", e.target.value)}
               />
               <InputField
                 label="Zip Code"
+                placeholder="Zip Code"
                 value={values.hearAbout}
                 onChange={(e) => handleChange("hearAbout", e.target.value)}
                 isRequired
@@ -358,21 +366,23 @@ const InHomeMoveEstimate = () => {
 
           <VStack align="stretch" gap={4}>
             <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-              <InputField label="To Address" />
+              <InputField label="To Address" placeholder="To Address" />
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-                <InputField label="Apt / Suite / Other" />
-                <InputField label="City" />
+                <InputField label="Apt / Suite / Other" placeholder="Apt / Suite / Other"/>
+                <InputField label="City" placeholder="City" />
               </SimpleGrid>
             </SimpleGrid>
 
             <SimpleGrid columns={{ base: 1, md: 4 }} gap={4}>
               <InputField
                 label="State"
+                placeholder="State"
                 value={values.moveSize}
                 onChange={(e) => handleChange("moveSize", e.target.value)}
               />
               <InputField
                 label="Zip Code"
+                placeholder="Zip Code"
                 value={values.hearAbout}
                 onChange={(e) => handleChange("hearAbout", e.target.value)}
                 isRequired
