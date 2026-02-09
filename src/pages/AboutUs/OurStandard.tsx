@@ -126,22 +126,22 @@ const OurStandard = () => {
           </Box>
         </Box>
           <Box pt={{base:10, md:16}}>
-            <Box>
           <Button
             fontSize="xl"
             rounded="full"
             variant="primary"
-            label="Benifits"
+            label="Benefits"
+            mb={{ base: 4, lg: 6 }}
           />
           <Flex
-            mt={6}
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"
             gap={{ base: 6, md: 10 }}
+            mb={{ base: 6, lg: 8 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" mb={2}>
+              <Heading as="h1" fontWeight="normal">
                 Our <br />{" "}
                 <Text as="span" color="brand.primary">
                   Standards
@@ -158,7 +158,7 @@ const OurStandard = () => {
               </Text>
             </Box>
           </Flex>
-          <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} gap={8} mt={12}>
+          <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} gap={8} >
             {benefits.map((item, index) => (
               <Box
                 key={index}
@@ -201,20 +201,19 @@ const OurStandard = () => {
               </Box>
             ))}
           </SimpleGrid>
-        </Box>
       </Box>
       </Container>
       <Box bg={"white"} px="-8">
-        <Container px={8} pt={2} pb={10}>
+        <Container px={8} pt={4} pb={10}>
         <Flex
-          mt={6}
+          mb={{ base: 6, lg: 8 }}
           direction={{ base: "column", md: "row" }}
           align={{ base: "flex-start", md: "center" }}
           justify="space-between"
           gap={{ base: 6, md: 10 }}
         >
           <Box maxW="600px" w="100%">
-            <Heading as="h1" fontWeight="normal" mb={2}>
+            <Heading as="h1" fontWeight="normal">
               <Text as="span" color="brand.primary">
                 MoveCo <br />
               </Text>
@@ -231,7 +230,7 @@ const OurStandard = () => {
             </Text>
           </Box>
         </Flex>
-        <Box mt={16}>
+        <Box>
           <AccordionRoot multiple style={{ padding: "0px" }}>
             {professionalStandards.map((section, index) => (
               <AccordionItem

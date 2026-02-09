@@ -391,16 +391,17 @@ const OurInsurance = () => {
             rounded="full"
             variant="primary"
             label="Our Insurance"
+            mb={{ base: 4, lg: 6 }}
           />
           <Flex
-            mt={6}
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"
             gap={{ base: 6, md: 10 }}
+            mb={{ base: 6, lg: 8 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" mb={2}>
+              <Heading as="h1" fontWeight="normal">
                 Why Insurance Matters <br />
                 In{" "}
                 <Text as="span" color="brand.primary">
@@ -418,25 +419,25 @@ const OurInsurance = () => {
               </Text>
             </Box>
           </Flex>
-          <SimpleGrid columns={{ base: 1, md: 2 }} alignItems="center">
+          <SimpleGrid columns={{ base: 1, md: 2 }} alignItems="center" gap={{ base: 8, md: 12 }}>
             <Box w="100%" maxW={{ base: "100%", md: "550px" }}>
               <Image
                 src={pakerImg}
                 alt="footprint"
                 w="100%"
                 h="auto"
-                mt={6}
                 borderRadius="2xl"
               />
             </Box>
-            <Box py={4}>
+            <Box >
               <Button
                 fontSize="xl"
                 rounded="full"
                 variant="primary"
                 label="Our Mission"
+                mb={{ base: 4, lg: 6 }}
               />
-              <Text mt={6} textStyle="size-3xl">
+              <Text textStyle="size-3xl">
                 No one expects anything to get damaged during a move. But life
                 does happen, no matter how careful you are. That’s why we’ve
                 built one of the most efficient and streamlined damage claim
@@ -455,16 +456,17 @@ const OurInsurance = () => {
             rounded="full"
             variant="primary"
             label="Our Coverage"
+            mb={{ base: 4, lg: 6 }}
           />
           <Flex
-            mt={6}
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"
             gap={{ base: 6, md: 10 }}
+            mb={{ base: 6, lg: 8 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" mb={2}>
+              <Heading as="h1" fontWeight="normal">
                 <Text as="span" color="brand.primary">
                   With MoveCo, <br />
                 </Text>
@@ -483,7 +485,6 @@ const OurInsurance = () => {
           </Flex>
           {/* <Features /> */}
           <SimpleGrid
-            mt={12}
             columns={{ base: 1, sm: 2, md: 4 }}
             gap={8}
            
@@ -536,16 +537,16 @@ const OurInsurance = () => {
         </Box>
       </Container>
         <Box bg={"white"} px="-8">
-          <Container px={8} pt={2} pb={10}>
+          <Container px={8} pt={4} pb={10}>
         <Flex
-          mt={6}
           direction={{ base: "column", md: "row" }}
           align={{ base: "flex-start", md: "center" }}
           justify="space-between"
           gap={{ base: 6, md: 10 }}
+          mb={{ base: 4, lg: 6 }}
         >
           <Box maxW="600px" w="100%">
-            <Heading as="h1" fontWeight="normal" mb={2}>
+            <Heading as="h1" fontWeight="normal">
               <Text as="span" color="brand.primary">
                 MoveCo <br />
               </Text>
@@ -562,8 +563,7 @@ const OurInsurance = () => {
             </Text>
           </Box>
         </Flex>
-        <Box mt={16}>
-          <Box p={0}>
+          <Box>
             <AccordionRoot multiple style={{ padding: "0px" }}>
               {policyExamples.map((example, index) => (
                 <AccordionItem
@@ -603,11 +603,8 @@ const OurInsurance = () => {
               ))}
             </AccordionRoot>
           </Box>
-        </Box>
           </Container>
-        </Box>
-        
-      
+        </Box> 
     </div>
   );
 };

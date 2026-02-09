@@ -71,7 +71,7 @@ export default function AnimatedFeatureSwitcher() {
   return (
     <SimpleGrid columns={{ base: 1, md: 2 }} gap={12} alignItems="start">
       {/* LEFT SIDE – 50% */}
-      <VStack align="start" gap={4}>
+      <VStack align="start" gap={{base: 1,md:2}}>
         {features.map((item, index) => (
           <Box
             key={index}
@@ -88,7 +88,7 @@ export default function AnimatedFeatureSwitcher() {
             onClick={() => setActiveIndex(index)}
           >
             <Text
-              pl={4} // padding from left border
+              pl={4} 
               textStyle="size-xl"
               fontWeight={activeIndex === index ? "bold" : "normal"}
               color={activeIndex === index ? "brand.primary" : "brand.secondary"}

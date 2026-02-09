@@ -62,7 +62,7 @@ const JobApplicationForm = () => {
               border="1px solid"
               borderColor="gray.100"
             >
-              <Stack gap={6}>
+              <Stack gap={4}>
                 <Heading as="h3" color="brand.primary" fontWeight="normal">
                   Your Information
                 </Heading>
