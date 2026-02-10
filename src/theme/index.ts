@@ -1,4 +1,9 @@
-import { createSystem, defaultConfig, defineRecipe } from "@chakra-ui/react";
+import {
+  createSystem,
+  defaultConfig,
+  defineRecipe,
+  defineSlotRecipe,
+} from "@chakra-ui/react";
 
 const headingRecipe = defineRecipe({
   variants: {
@@ -27,6 +32,68 @@ const textRecipe = defineRecipe({
   },
 });
 
+const tableRecipe = defineSlotRecipe({
+  slots: ["root", "row", "columnHeader", "cell"],
+
+  base: {
+    root: {
+      width: "full",
+      borderCollapse: "collapse",
+    },
+    columnHeader: {
+      textAlign: "start",
+    },
+  },
+
+  variants: {
+    textStyle: {
+      "size-3xl": {
+        columnHeader: { fontSize: { base: "xl", md: "3xl" } },
+        cell: { fontSize: { base: "xl", md: "3xl" } },
+      },
+
+      "size-2xl": {
+        columnHeader: { fontSize: { base: "lg", md: "2xl" } },
+        cell: { fontSize: { base: "lg", md: "2xl" } },
+      },
+
+      "size-xl": {
+        columnHeader: { fontSize: { base: "md", md: "xl" } },
+        cell: { fontSize: { base: "md", md: "xl" } },
+      },
+
+      "size-lg": {
+        columnHeader: {
+          fontSize: { base: "sm", md: "lg" },
+          fontWeight: "semibold",
+        },
+        cell: {
+          fontSize: { base: "sm", md: "lg" },
+        },
+      },
+
+      "size-md": {
+        columnHeader: { fontSize: "md" },
+        cell: { fontSize: "md" },
+      },
+
+      "size-sm": {
+        columnHeader: { fontSize: "sm" },
+        cell: { fontSize: "sm" },
+      },
+
+      "size-xs": {
+        columnHeader: { fontSize: "xs" },
+        cell: { fontSize: "xs" },
+      },
+    },
+  },
+
+  defaultVariants: {
+    textStyle: "size-md",
+  },
+});
+
 const system = createSystem(defaultConfig, {
   globalCss: {
     body: {
@@ -49,7 +116,7 @@ const system = createSystem(defaultConfig, {
           black: { value: "#000000" },
           white: { value: "#ffffff" },
           red: { value: "#ff0000" },
-          gray: { value: "#718096"},
+          gray: { value: "#718096" },
         },
       },
 
@@ -78,6 +145,9 @@ const system = createSystem(defaultConfig, {
     recipes: {
       heading: headingRecipe,
       text: textRecipe,
+    },
+    slotRecipes: {
+      table: tableRecipe, // ✅ IMPORTANT
     },
   },
 });

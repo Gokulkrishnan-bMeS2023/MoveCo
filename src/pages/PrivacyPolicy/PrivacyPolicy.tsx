@@ -12,7 +12,6 @@ import {
   GridItem,
 } from "@chakra-ui/react";
 import {
-  FaShieldAlt,
   FaEnvelope,
   FaCookie,
   FaLink,
@@ -85,21 +84,18 @@ const PolicySection = ({
 
 const PrivacyPolicyPage = () => {
   return (
-    <Container maxW="100%" px={8} py={10}>
+    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
       {/* Header */}
-      <HStack>
-        <Icon fontSize="5xl">
-          <FaShieldAlt />
-        </Icon>
-        <HStack>
-          <Heading as="h1" fontWeight={"normal"}>
-            Privacy &{" "}
-          </Heading>
-          <Heading as="h1" color={"brand.primary"} fontWeight={"normal"}>
+
+      {/* Left */}
+      <Box w="100%">
+        <Heading as="h1" fontWeight="normal" mb={2}>
+          Privacy &{" "}
+          <Text as="span" color="brand.primary">
             Security Policy
-          </Heading>
-        </HStack>
-      </HStack>
+          </Text>
+        </Heading>
+      </Box>
 
       {/* Main Content */}
 
@@ -112,7 +108,7 @@ const PrivacyPolicyPage = () => {
           reverse={false}
         >
           <VStack align="stretch" gap={4}>
-            <Text color="brand.secondary" textStyle="size-lg" lineHeight="tall">
+            <Text color="brand.secondary" textStyle="size-lg">
               Welcome to MoveCo.net's websites. We appreciate your interest in
               us. When you visit and navigate our sites and when you communicate
               with us via our sites, we will not collect personal information
@@ -134,7 +130,7 @@ const PrivacyPolicyPage = () => {
               to protect the information and use it only for the purpose it was
               provided.
             </Text>
-            <Text color="brand.secondary" textStyle="size-lg" lineHeight="tall">
+            <Text color="brand.secondary" textStyle="size-lg">
               By "personal information", we mean data that is unique to an
               individual, such as a name, address, Social Security number,
               e-mail address, or telephone number. From time to time, we may
@@ -153,14 +149,14 @@ const PrivacyPolicyPage = () => {
           reverse={true}
         >
           <VStack align="stretch" gap={4}>
-            <Text color="brand.secondary" textStyle="size-lg" lineHeight="tall">
+            <Text color="brand.secondary" textStyle="size-lg">
               We welcome your comments or questions about our websites and have
               provided e-mail boxes for that purpose. We will share your
               comments and questions with our customer service representatives
               and those employees most capable of addressing your questions and
               concerns.
             </Text>
-            <Text color="brand.secondary" textStyle="size-lg" lineHeight="tall">
+            <Text color="brand.secondary" textStyle="size-lg">
               Please note that your e-mail, like most, if not all, non-encrypted
               Internet e-mail communications, may be accessed and viewed by
               other Internet users, without your knowledge and permission, while
@@ -172,7 +168,7 @@ const PrivacyPolicyPage = () => {
               at the Member Services toll-free number that appears on your ID
               card.
             </Text>
-            <Text color="brand.secondary" textStyle="size-lg" lineHeight="tall">
+            <Text color="brand.secondary" textStyle="size-lg">
               There are some locations on MoveCo.net’s websites where we have
               made special provisions for a more secure environment in which we
               can exchange information with you. At each of these locations, we
@@ -189,7 +185,7 @@ const PrivacyPolicyPage = () => {
           reverse={false}
         >
           <VStack align="stretch" gap={4}>
-            <Text color="brand.secondary" textStyle="size-lg" lineHeight="tall">
+            <Text color="brand.secondary" textStyle="size-lg">
               You should also be aware that when you visit our websites, we
               collect certain information that does not identify you personally,
               but provides us with "usage data," such as the number of visitors
@@ -197,7 +193,7 @@ const PrivacyPolicyPage = () => {
               us to analyze and improve the usefulness of the information we
               provide at these websites.
             </Text>
-            <Text color="brand.secondary" textStyle="size-lg" lineHeight="tall">
+            <Text color="brand.secondary" textStyle="size-lg">
               Like most commercial website owners, we may use what is known as
               "cookie" technology. A "cookie" is an element of data that a
               website can send to your browser when you link to that website. It
@@ -209,7 +205,7 @@ const PrivacyPolicyPage = () => {
               extract other personal information about you, such as your name or
               address.
             </Text>
-            <Text color="brand.secondary" textStyle="size-lg" lineHeight="tall">
+            <Text color="brand.secondary" textStyle="size-lg">
               We may also use what is known as "client-side page tagging", which
               uses code on each page to write certain information about the page
               and the visitor to a log when a page is rendered by your web
@@ -233,7 +229,7 @@ const PrivacyPolicyPage = () => {
           image={images.Linking}
           reverse={true}
         >
-          <Text color="brand.secondary" textStyle="size-lg" lineHeight="tall">
+          <Text color="brand.secondary" textStyle="size-lg">
             From time to time, MoveCo.net websites may provide links to other
             websites, not owned or controlled by MoveCo.net, that we think might
             be useful or of interest to you. We cannot, however, be responsible
@@ -252,7 +248,7 @@ const PrivacyPolicyPage = () => {
           image={images.Security}
           reverse={false}
         >
-          <Text color="brand.secondary" textStyle="size-lg" lineHeight="tall">
+          <Text color="brand.secondary" textStyle="size-lg">
             MoveCo.net has adopted and adheres to stringent security standards
             designed to protect non-public personal information at
             MoveCo.net.com against accidental or unauthorized access or
@@ -271,7 +267,7 @@ const PrivacyPolicyPage = () => {
           image={images.Statement}
           reverse={true}
         >
-          <Text color="brand.secondary" textStyle="size-lg" lineHeight="tall">
+          <Text color="brand.secondary" textStyle="size-lg">
             MoveCo.net may change this Statement from time to time; when updates
             are made, the Privacy Policy version date (located at the bottom of
             this Policy) will also be updated to reflect that a revision
