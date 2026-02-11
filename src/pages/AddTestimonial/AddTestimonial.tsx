@@ -41,8 +41,23 @@ const AddTestimonial = () => {
   };
 
   const handleSubmit = () => {
-    console.log("Submitted Data:", values);
-  };
+  const newErrors: Partial<TestimonialFormValues> = {};
+
+  if (!values.firstName) newErrors.firstName = "First name is required";
+  if (!values.lastName) newErrors.lastName = "Last name is required";
+  if (!values.moveDate) newErrors.moveDate = "Move date is required";
+  if (!values.email) newErrors.email = "Email is required";
+  if (!values.comments) newErrors.comments = "Comments are required";
+
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    return;
+  }
+
+  setErrors({});
+  console.log("Submitted Data:", values);
+};
+
 
   return (
     <Container maxW="100%" py={{ base: 10, md: 12 }} px={8}>
@@ -138,6 +153,7 @@ const AddTestimonial = () => {
             value={values.comments}
             onChange={(value) => handleChange("comments", value)}
             isRequired
+            errorMessage={errors.comments}
           />
           <Box textAlign={{ base: "center", md: "right" }} mt={4}>
             <Button

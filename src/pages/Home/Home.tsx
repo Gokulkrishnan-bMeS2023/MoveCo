@@ -122,7 +122,6 @@ const Home = () => {
           <ClientSpeaks limit={3} />
         </Box>
       </Container>
-
     </>
   );
 };

@@ -14,7 +14,6 @@ import Notes from "../../../components/common/Notes/Notes";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import Button from "../../../components/common/Button/Button";
 import SelectField from "../../../components/common/Select/Select";
-
 import { useNavigate } from "react-router-dom";
 
 interface MoveEstimateFormValues {
@@ -23,7 +22,6 @@ interface MoveEstimateFormValues {
   moveDate: string;
   moveSize: string;
   hearAbout: string;
-
   firstName: string;
   lastName: string;
   email: string;
@@ -31,13 +29,11 @@ interface MoveEstimateFormValues {
   cellPhone: string;
   workPhone: string;
   faxPhone: string;
-
   fromAddress: string;
   apt: string;
   city: string;
   state: string;
   zipCode: string;
-
   notes: string;
 }
 
@@ -48,7 +44,6 @@ const InHomeMoveEstimate = () => {
     moveDate: "",
     moveSize: "",
     hearAbout: "",
-
     firstName: "",
     lastName: "",
     email: "",
@@ -56,23 +51,24 @@ const InHomeMoveEstimate = () => {
     cellPhone: "",
     workPhone: "",
     faxPhone: "",
-
     fromAddress: "",
     apt: "",
     city: "",
     state: "",
     zipCode: "",
-
     notes: "",
   });
 
+  const [errors, setErrors] = useState<Partial<MoveEstimateFormValues>>({});
   const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
     setValues((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => ({
+        ...prev,
+        [field]: "",
+      }));
+    }
   };
-
-  // const handleSubmit = () => {
-  //   console.log("Submitted Data:", values);
-  // };
 
   const moveTimeOptions = [
     { label: "8AM - 10AM", value: "8-10" },
@@ -124,9 +120,24 @@ const InHomeMoveEstimate = () => {
   const [distance, setDistance] = useState("");
   const navigate = useNavigate();
 
+  const handleSubmit = () => {
+    const newErrors: any = {};
+    if (!values.firstName) newErrors.firstName = "First name is required";
+    if (!values.lastName) newErrors.lastName = "Last name is required";
+    if (!values.email) newErrors.email = "Email is required";
+    if (!values.cellPhone) newErrors.cellPhone = "Phone number is required";
+    if (!values.moveDate) newErrors.moveDate = "Move date is required";
+    if (!values.zipCode) newErrors.zipCode = "Zip code is required";
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    setErrors({});
+    navigate("/inventry");
+  };
+
   return (
     <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
-      
       {/* HEADER */}
       <Box>
         <Flex
@@ -174,19 +185,41 @@ const InHomeMoveEstimate = () => {
           <VStack align="stretch" gap={4}>
             <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-                <InputField label="First Name" placeholder="First Name" isRequired />
-                <InputField label="Last Name" placeholder="Last Name" isRequired />
+                <InputField
+                  label="First Name"
+                  placeholder="First Name"
+                  value={values.firstName}
+                  onChange={(e) => handleChange("firstName", e.target.value)}
+                  isRequired
+                  errorMessage={errors.firstName}
+                />
+                <InputField
+                  label="Last Name"
+                  placeholder="Last Name"
+                  value={values.lastName}
+                  onChange={(e) => handleChange("lastName", e.target.value)}
+                  isRequired
+                  errorMessage={errors.lastName}
+                />
               </SimpleGrid>
-              <InputField label="Email" placeholder="Eamil" isRequired />
+              <InputField
+                label="Email"
+                placeholder="Email"
+                value={values.email}
+                onChange={(e) => handleChange("email", e.target.value)}
+                isRequired
+                errorMessage={errors.email}
+              />
             </SimpleGrid>
 
             <SimpleGrid columns={{ base: 1, md: 4 }} gap={4}>
               <InputField
                 label="Phone"
-                value={values.moveSize}
                 placeholder="Phone"
-                onChange={(e) => handleChange("moveSize", e.target.value)}
+                value={values.cellPhone}
+                onChange={(e) => handleChange("cellPhone", e.target.value)}
                 isRequired
+                errorMessage={errors.cellPhone}
               />
               <InputField
                 label="Work Phone"
@@ -211,7 +244,7 @@ const InHomeMoveEstimate = () => {
         </Box>
 
         {/* ================= CARD 2 + 3 ================= */}
-        <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} gap={8}>
           {/* LEFT */}
           <Box
             bg="white"
@@ -233,6 +266,7 @@ const InHomeMoveEstimate = () => {
                   value={values.moveDate}
                   onChange={(e) => handleChange("moveDate", e.target.value)}
                   isRequired
+                  errorMessage={errors.moveDate}
                 />
                 <SelectField
                   label="Move Time"
@@ -260,7 +294,6 @@ const InHomeMoveEstimate = () => {
               </SimpleGrid>
             </VStack>
           </Box>
-
           {/* RIGHT */}
           <Box
             bg="gray.50"
@@ -289,7 +322,6 @@ const InHomeMoveEstimate = () => {
                   onValueChange={(d) => setHearAbout(d.value[0])}
                 />
               </SimpleGrid>
-
               <Notes
                 label="Additional Information"
                 value={values.notes}
@@ -311,16 +343,17 @@ const InHomeMoveEstimate = () => {
           <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
             Move Location
           </Heading>
-
           <VStack align="stretch" gap={6}>
             <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
               <InputField label="From Address" placeholder="From Address" />
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-                <InputField label="Apt / Suite / Other" placeholder="Apt / Suite / Other" />
+                <InputField
+                  label="Apt / Suite / Other"
+                  placeholder="Apt / Suite / Other"
+                />
                 <InputField label="City" placeholder="City" />
               </SimpleGrid>
             </SimpleGrid>
-
             <SimpleGrid columns={{ base: 1, md: 4 }} gap={4}>
               <InputField
                 label="State"
@@ -331,9 +364,10 @@ const InHomeMoveEstimate = () => {
               <InputField
                 label="Zip Code"
                 placeholder="Zip Code"
-                value={values.hearAbout}
-                onChange={(e) => handleChange("hearAbout", e.target.value)}
+                value={values.zipCode}
+                onChange={(e) => handleChange("zipCode", e.target.value)}
                 isRequired
+                errorMessage={errors.zipCode}
               />
               <SelectField
                 label="Flights of stairs at this address?"
@@ -363,12 +397,14 @@ const InHomeMoveEstimate = () => {
           <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
             Drop Location
           </Heading>
-
           <VStack align="stretch" gap={4}>
             <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
               <InputField label="To Address" placeholder="To Address" />
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-                <InputField label="Apt / Suite / Other" placeholder="Apt / Suite / Other"/>
+                <InputField
+                  label="Apt / Suite / Other"
+                  placeholder="Apt / Suite / Other"
+                />
                 <InputField label="City" placeholder="City" />
               </SimpleGrid>
             </SimpleGrid>
@@ -383,9 +419,10 @@ const InHomeMoveEstimate = () => {
               <InputField
                 label="Zip Code"
                 placeholder="Zip Code"
-                value={values.hearAbout}
-                onChange={(e) => handleChange("hearAbout", e.target.value)}
+                value={values.zipCode}
+                onChange={(e) => handleChange("zipCode", e.target.value)}
                 isRequired
+                errorMessage={errors.zipCode}
               />
               <SelectField
                 label="Flights of stairs at this address?"
@@ -405,11 +442,7 @@ const InHomeMoveEstimate = () => {
 
         {/* SUBMIT */}
         <Box textAlign={{ base: "center", md: "right" }}>
-          <Button
-            label="Next"
-            variant="primary"
-            onClick={() => navigate("/inventry")}
-          />
+          <Button label="Next" variant="primary" onClick={handleSubmit} />
         </Box>
       </Stack>
     </Container>
