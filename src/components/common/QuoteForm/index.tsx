@@ -79,14 +79,13 @@ const QuoteForm = () => {
   const [estimate, setEstimate] = useState("");
 
   const [errors, setErrors] = useState<QuoteFormErrors>({});
-  const [submitted, setSubmitted] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
 
   return (
     <Box>
       <Image src={QuoteFormImage} alt="Quote Form" w="100%" rounded="2xl" />
-      <Image src={QuoteFormImage} alt="Quote Form" w="100%" rounded="2xl" />
       <Box bg="brand.white" p={6} mt={4} rounded="2xl">
-        <Heading fontSize="xl" textAlign="center" fontWeight="medium" mb={4}>
+       
         <Heading fontSize="xl" textAlign="center" fontWeight="medium" mb={4}>
           Get a Moving{" "}
           <Text as="span" color="brand.primary">
@@ -98,26 +97,20 @@ const QuoteForm = () => {
           <Box>
             <InputField
               label="First Name"
-              label="First Name"
               value={firstName}
-              onChange={(e) => handleChange("firstName", e.target.value)}
               onChange={(e) => handleChange("firstName", e.target.value)}
               placeholder="First Name"
               isRequired
               errorMessage={errors.firstName}
-              errorMessage={errors.firstName}
             />
           </Box>
-          <Box>
           <Box>
             <InputField
               label="Last Name"
               value={lastName}
               onChange={(e) => handleChange("lastName", e.target.value)}
-              onChange={(e) => handleChange("lastName", e.target.value)}
               placeholder="Last Name"
               isRequired
-              errorMessage={errors.lastName}
               errorMessage={errors.lastName}
             />
           </Box>
@@ -126,9 +119,7 @@ const QuoteForm = () => {
               label="Date"
               value={date}
               onChange={(e) => handleChange("date", e.target.value)}
-              onChange={(e) => handleChange("date", e.target.value)}
               isRequired
-              errorMessage={errors.date}
               errorMessage={errors.date}
             />
           </Box>
@@ -136,21 +127,20 @@ const QuoteForm = () => {
             label="Phone Number"
             value={phoneNumber}
             onChange={(e) => handleChange("phoneNumber", e.target.value)}
-            onChange={(e) => handleChange("phoneNumber", e.target.value)}
+          
             placeholder="Phone"
             isRequired
             errorMessage={errors.phoneNumber}
-            errorMessage={errors.phoneNumber}
+          
           />
           <Box>
             <InputField
               label="Email"
               value={email}
               onChange={(e) => handleChange("email", e.target.value)}
-              onChange={(e) => handleChange("email", e.target.value)}
+             
               placeholder="Email"
               isRequired
-              errorMessage={errors.email}
               errorMessage={errors.email}
             />
           </Box>
@@ -177,12 +167,9 @@ const QuoteForm = () => {
             ]}
             value={estimate}
             onValueChange={(val) => handleChange("estimate", val)}
-            onValueChange={(val) => handleChange("estimate", val)}
             isRequired
             errorMessage={errors.estimate}
-            errorMessage={errors.estimate}
           />
-          <Button variant="primary" label="Next" onClick={handleSubmit} />
           <Button variant="primary" label="Next" onClick={handleSubmit} />
         </Stack>
       </Box>

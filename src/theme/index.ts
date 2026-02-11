@@ -96,68 +96,6 @@ const tableRecipe = defineSlotRecipe({
 });
  
  
-const tableRecipe = defineSlotRecipe({
-  slots: ["root", "row", "columnHeader", "cell"],
- 
-  base: {
-    root: {
-      width: "full",
-      borderCollapse: "collapse",
-    },
-    columnHeader: {
-      textAlign: "start",
-    },
-  },
- 
-  variants: {
-    textStyle: {
-      "size-3xl": {
-        columnHeader: { fontSize: { base: "xl", md: "3xl" } },
-        cell: { fontSize: { base: "xl", md: "3xl" } },
-      },
- 
-      "size-2xl": {
-        columnHeader: { fontSize: { base: "lg", md: "2xl" } },
-        cell: { fontSize: { base: "lg", md: "2xl" } },
-      },
- 
-      "size-xl": {
-        columnHeader: { fontSize: { base: "md", md: "xl" } },
-        cell: { fontSize: { base: "md", md: "xl" } },
-      },
- 
-      "size-lg": {
-        columnHeader: {
-          fontSize: { base: "sm", md: "lg" },
-          fontWeight: "semibold",
-        },
-        cell: {
-          fontSize: { base: "sm", md: "lg" },
-        },
-      },
- 
-      "size-md": {
-        columnHeader: { fontSize: "md" },
-        cell: { fontSize: "md" },
-      },
- 
-      "size-sm": {
-        columnHeader: { fontSize: "sm" },
-        cell: { fontSize: "sm" },
-      },
- 
-      "size-xs": {
-        columnHeader: { fontSize: "xs" },
-        cell: { fontSize: "xs" },
-      },
-    },
-  },
- 
-  defaultVariants: {
-    textStyle: "size-md",
-  },
-});
- 
 const system = createSystem(defaultConfig, {
   globalCss: {
     body: {
