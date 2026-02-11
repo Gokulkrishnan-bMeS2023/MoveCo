@@ -114,7 +114,7 @@ const PackingServicesPage = () => {
                 Packing Rates
               </Heading>
 
-              <Table.Root size="lg" variant="outline" striped>
+              <Table.Root textStyle="size-lg" variant="outline" striped>
                 <Table.Header bg={"brand.primary"}>
                   <Table.Row>
                     <Table.ColumnHeader color={"brand.white"}>

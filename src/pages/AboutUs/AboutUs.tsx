@@ -13,8 +13,9 @@ import ServiceImg from "../../assets/service1.webp";
 import ServiceImg2 from "../../assets/service2.webp";
 import AboutFeatureSwitcher from "../../components/common/AboutFeatureSwitcher/AboutFeatureSwitcher";
 import Button from "../../components/common/Button/Button";
-import BenefitsGrid from "./BenefitsGrid";
-import Features from "./Features";
+import CardTemplate from "../../components/common/CardTemplate/CardTemplate";
+import { benefits } from "../../data/benefitsData";
+import { features } from "../../data/features";
 
 const AboutUs = () => {
   return (
@@ -42,7 +43,6 @@ const AboutUs = () => {
           </Box>
         </Box>
         <Box pt={{ base: 10, md: 16 }}>
-
           <Button
             fontSize="xl"
             rounded="full"
@@ -76,7 +76,11 @@ const AboutUs = () => {
               </Text>
             </Box>
           </Flex>
-          <SimpleGrid columns={{ base: 1, md: 2 }} alignItems="center" gap={{ base: 8, md: 12 }}>
+          <SimpleGrid
+            columns={{ base: 1, md: 2 }}
+            alignItems="center"
+            gap={{ base: 8, md: 12 }}
+          >
             <Box w="100%" maxW={{ base: "100%", md: "550px" }}>
               <Image
                 src={ServiceImg}
@@ -87,7 +91,7 @@ const AboutUs = () => {
               />
             </Box>
             <Box>
-              <Box >
+              <Box>
                 <Button
                   fontSize="xl"
                   rounded="full"
@@ -104,10 +108,8 @@ const AboutUs = () => {
               </Text>
             </Box>
           </SimpleGrid>
-
         </Box>
         <Box pt={{ base: 10, md: 16 }}>
-
           <SimpleGrid
             columns={{ base: 1, md: 2 }}
             alignItems="center"
@@ -139,10 +141,8 @@ const AboutUs = () => {
               />
             </Box>
           </SimpleGrid>
-
         </Box>
         <Box pt={{ base: 10, md: 16 }}>
-
           <Button
             fontSize="xl"
             rounded="full"
@@ -158,7 +158,7 @@ const AboutUs = () => {
             mb={{ base: 6, lg: 8 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" >
+              <Heading as="h1" fontWeight="normal">
                 What Do You Get <br />
                 When you In{" "}
                 <Text as="span" color="brand.primary">
@@ -176,13 +176,12 @@ const AboutUs = () => {
               </Text>
             </Box>
           </Flex>
-          <Features />
+         <CardTemplate data={features} />
         </Box>
         <Box pt={{ base: 10, md: 16 }}>
           <AboutFeatureSwitcher />
         </Box>
         <Box pt={{ base: 10, md: 16 }}>
-
           <Button
             fontSize="xl"
             rounded="full"
@@ -215,9 +214,8 @@ const AboutUs = () => {
               </Text>
             </Box>
           </Flex>
-          <BenefitsGrid />
+          <CardTemplate data={benefits} />
         </Box>
-
       </Container>
     </Box>
   );

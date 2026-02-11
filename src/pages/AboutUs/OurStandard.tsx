@@ -1,112 +1,21 @@
 import {
   Box,
   Text,
-  Icon,
   Container,
   Heading,
   Flex,
-  SimpleGrid,
-  AccordionRoot,
-  AccordionItem,
-  AccordionItemTrigger,
-  AccordionItemContent,
-  AccordionItemIndicator,
 } from "@chakra-ui/react";
-import { FaPlus } from "react-icons/fa";
 import InsuranceImg from "../../assets/modifiedbanner.png";
 import Button from "../../components/common/Button/Button";
-import {
-  FaComments,
-  FaDollarSign,
-  FaClock,
-  FaMapMarkerAlt,
-  FaShieldAlt,
-  FaTruckMoving,
-  FaBoxes,
-  FaCheckCircle,
-} from "react-icons/fa";
+import CardTemplate from "../../components/common/CardTemplate/CardTemplate";
+import { standardFeature } from "../../data/stanadardFeature";
+import CommonAccordion from "../../components/common/CommonAccordion/CommonAccordion";
+import { professionalStandards } from "../../data/professionalStandardsData";
  
 const OurStandard = () => {
-  const professionalStandards = [
-    {
-      title: "Licensing & Compliance",
-      items: [
-        "Registered with Texas Department of Motor Vehicles (TX DMV)",
-        "Registered with US Department of Transportation (US DOT)",
-        "$50,000 bonded company",
-        "Member in good standing with the Chamber of Commerce",
-        "Compliant with all state and federal regulations",
-      ],
-    },
-    {
-      title: "Safety & Staff Policies",
-      items: [
-        "Background-checked movers",
-        "Random drug testing for associates",
-        "Formal associate conduct policy",
-        "Enforced professional dress code",
-        "All drivers have a minimum of 2 years experience",
-      ],
-    },
-    {
-      title: "Equipment & Operations",
-      items: [
-        "Late-model trucks and professional moving equipment",
-        "GPS-tracked fleet for real-time location updates",
-        "Exclusive use of our trucks — one move at a time",
-        "Professional packing tools and materials",
-      ],
-    },
-    {
-      title: "Pricing & Customer Protection",
-      items: [
-        "Guaranteed move prices with no hidden costs",
-        "No hourly rates or clock watching",
-        "Upfront itemized online quotes",
-        "In-house policy to repair or replace damaged items",
-      ],
-    },
-  ];
- 
-  const benefits = [
-    {
-      icon: FaComments,
-      text: "Online feedback board for customers to post reviews",
-    },
-    {
-      icon: FaDollarSign,
-      text: "Guaranteed move prices with no hidden costs",
-    },
-    {
-      icon: FaClock,
-      text: "Guaranteed pick up and delivery dates",
-    },
-    {
-      icon: FaMapMarkerAlt,
-      text: "GPS tracked trucks for real-time location updates",
-    },
-    {
-      icon: FaCheckCircle,
-      text: "Membership in good standing with BBB & SMA",
-    },
-    {
-      icon: FaShieldAlt,
-      text: "2 Million dollars General Liability Insurance",
-    },
-    {
-      icon: FaBoxes,
-      text: "$50,000 Standard Cargo Insurance coverage",
-    },
-    {
-      icon: FaTruckMoving,
-      text: "Furniture placed exactly where you want it in each room",
-    },
-  ];
- 
   return (
     <div>
       <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
-        {/* <Box> */}
         <Box
           bgImage={`url(${InsuranceImg})`}
           bgSize="cover"
@@ -158,49 +67,7 @@ const OurStandard = () => {
               </Text>
             </Box>
           </Flex>
-          <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} gap={8} >
-            {benefits.map((item, index) => (
-              <Box
-                key={index}
-                role="group"
-                bg="white"
-                border="1px solid"
-                borderColor="gray.300"
-                borderRadius="2xl"
-                p={8}
-                textAlign="center"
-                minH="320px"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                transition="all 0.3s ease"
-                _hover={{
-                  transform: "translateY(-6px) scale(1.04)",
-                  boxShadow: "2xl",
-                  borderColor: "brand.primary",
-                }}
-              >
-                <Box
-                  w="125px"
-                  h="125px"
-                  bg="brand.primary"
-                  borderRadius="full"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  mx="auto"
-                  mb={6}
-                  transition="all 0.3s ease"
-                  _groupHover={{
-                    transform: "scale(1.15)",
-                  }}
-                >
-                  <Icon as={item.icon} boxSize={14} color="white" />
-                </Box>
-                <Text textStyle="size-2xl">{item.text}</Text>
-              </Box>
-            ))}
-          </SimpleGrid>
+           <CardTemplate data={standardFeature} />
       </Box>
       </Container>
       <Box bg={"white"} px="-8">
@@ -230,47 +97,7 @@ const OurStandard = () => {
             </Text>
           </Box>
         </Flex>
-        <Box>
-          <AccordionRoot multiple style={{ padding: "0px" }}>
-            {professionalStandards.map((section, index) => (
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                borderBottom="1px solid"
-                borderColor="gray.200"
-                py={4}
-              >
-                <AccordionItemTrigger
-                  px={0}
-                  py={2}
-                  _hover={{
-                    textDecoration: "underline",
-                    textUnderlineOffset: "6px",
-                  }}
-                >
-                  <Flex flex="1" align="center" justify="space-between">
-                    <Text textStyle="size-2xl">{section.title}</Text>
-                    <AccordionItemIndicator>
-                      <Icon as={FaPlus} boxSize={4} fontWeight="normal" />
-                    </AccordionItemIndicator>
-                  </Flex>
-                </AccordionItemTrigger>
-                <AccordionItemContent pt={4} color="gray.600">
-                  <Box as="ul" pl={6} listStyleType="none">
-                    {section.items.map((item, i) => (
-                      <Text as="li" key={i} textStyle="size-lg" mb={2}>
-                        <Text as="span" color="brand.primary" mr={2}>
-                          ➣
-                        </Text>
-                        {item}
-                      </Text>
-                    ))}
-                  </Box>
-                </AccordionItemContent>
-              </AccordionItem>
-            ))}
-          </AccordionRoot>
-        </Box>
+        <CommonAccordion sections={professionalStandards} />
         </Container>
       </Box>
      
