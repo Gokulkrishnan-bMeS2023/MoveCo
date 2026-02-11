@@ -28,7 +28,7 @@ const RadioField = ({
   const isInvalid = Boolean(errorMessage);
 
   return (
-    <Field.Root invalid={isInvalid} required={isRequired}>
+    <Field.Root invalid={isInvalid}>
       {label && <Field.Label fontWeight="medium">
               {label}
               {isRequired && (

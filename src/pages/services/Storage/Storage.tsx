@@ -13,7 +13,6 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { Table } from "@chakra-ui/react";
-
 import Button from "../../../components/common/Button/Button";
 import storageImage from "../../../assets/Storage.jpg";
 

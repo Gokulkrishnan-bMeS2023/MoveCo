@@ -13,8 +13,9 @@ import ServiceImg from "../../assets/service1.webp";
 import ServiceImg2 from "../../assets/service2.webp";
 import AboutFeatureSwitcher from "../../components/common/AboutFeatureSwitcher/AboutFeatureSwitcher";
 import Button from "../../components/common/Button/Button";
-import BenefitsGrid from "./BenefitsGrid";
-import Features from "./Features";
+import CardTemplate from "../../components/common/CardTemplate/CardTemplate";
+import { benefits } from "../../data/benefitsData";
+import { features } from "../../data/features";
 
 const AboutUs = () => {
   return (
@@ -176,7 +177,7 @@ const AboutUs = () => {
               </Text>
             </Box>
           </Flex>
-          <Features />
+         <CardTemplate data={features} />
         </Box>
         <Box pt={{ base: 10, md: 16 }}>
           <AboutFeatureSwitcher />
@@ -215,7 +216,7 @@ const AboutUs = () => {
               </Text>
             </Box>
           </Flex>
-          <BenefitsGrid />
+          <CardTemplate data={benefits} />
         </Box>
 
       </Container>
