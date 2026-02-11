@@ -26,16 +26,15 @@ export default function StoragePage() {
 
   return (
     <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
-      {/* Top heading row */}
-
       <Flex
+        mb={{ base: 6, lg: 8 }}
         direction={{ base: "column", md: "row" }}
         align={{ base: "flex-start", md: "center" }}
         justify="space-between"
         gap={{ base: 6, md: 10 }}
       >
         <Box maxW="600px" w="100%">
-          <Heading as="h1" fontWeight="normal" mb={2} color="brand.primary">
+          <Heading as="h1" fontWeight="normal" color={"brand.primary"}>
             Storages
           </Heading>
         </Box>
@@ -45,26 +44,22 @@ export default function StoragePage() {
           </Text>
         </Box>
       </Flex>
-
       <SimpleGrid
         columns={{ base: 1, md: 2 }}
-        gap={{ base: 10, md: 16 }}
         alignItems="flex-start"
-        pt={{ base: 10, md: 16 }}
+        gap={{ base: 8, md: 12 }}
       >
-        <Box rounded="2xl" overflow="hidden">
+        <Box w="100%" maxW={{ base: "100%", md: "550px" }}>
           <Image
             src={storageImage}
-            alt="Storage Services"
+            alt="storageimg"
             w="100%"
-            h="100%"
-            objectFit="cover"
+            h="auto"
+            borderRadius="2xl"
           />
         </Box>
-
-        {/* Right content */}
         <Stack gap={6}>
-          <Text textStyle="size-2xl">
+          <Text textStyle="size-xl">
             MoveCo.net offers climate controlled storage service with 24-hour
             security cameras at our Lewisville facility. One of the major
             advantage of using our storage service is the convenience that it
@@ -75,11 +70,9 @@ export default function StoragePage() {
             one house to another, you will not only use this service again but
             recommend it to friends and family.
           </Text>
-
-          {/* View all / View less */}
           <Box>
             <Text
-              textStyle="size-2xl"
+              textStyle="size-xl"
               lineClamp={showAll ? undefined : 2}
               transition="all 0.3s ease"
             >
@@ -95,6 +88,8 @@ export default function StoragePage() {
 
             <Button
               mt={3}
+              fontSize="xl"
+              rounded="full"
               variant="outline"
               label={showAll ? "View less" : "View all"}
               onClick={() => setShowAll(!showAll)}
@@ -103,7 +98,6 @@ export default function StoragePage() {
         </Stack>
       </SimpleGrid>
 
-      {/* Storage Pricing */}
       <Box pt={{ base: 10, md: 16 }}>
         <Grid
           templateColumns={{ base: "1fr", lg: "1fr 2fr" }}
@@ -131,7 +125,7 @@ export default function StoragePage() {
               <Text textStyle="size-lg">
                 We also offer <strong>RV and boat storage</strong>.
               </Text>
-              <Text textStyle="size-md" color="gray.600">
+              <Text textStyle="size-lg" color="gray.600">
                 Call for pricing
               </Text>
             </Stack>
@@ -139,13 +133,13 @@ export default function StoragePage() {
 
           {/* Right - Pricing Table */}
           <Box>
-            <Table.Root size="lg" variant="outline" striped>
+            <Table.Root textStyle="size-lg" variant="outline" striped>
               <Table.Header>
                 <Table.Row bg="brand.primary">
-                  <Table.ColumnHeader color="brand.white" fontSize="md">
+                  <Table.ColumnHeader color="brand.white">
                     Size (Feet)
                   </Table.ColumnHeader>
-                  <Table.ColumnHeader color="brand.white" fontSize="md">
+                  <Table.ColumnHeader color="brand.white">
                     Price / Month (Climate Controlled)
                   </Table.ColumnHeader>
                 </Table.Row>
@@ -155,12 +149,8 @@ export default function StoragePage() {
                 <For each={STORAGE_PRICING}>
                   {(item) => (
                     <Table.Row key={item.size}>
-                      <Table.Cell fontSize="lg">{item.size}</Table.Cell>
-                      <Table.Cell
-                        fontWeight="semibold"
-                        fontSize="lg"
-                        color="brand.primary"
-                      >
+                      <Table.Cell>{item.size}</Table.Cell>
+                      <Table.Cell fontWeight="semibold">
                         {item.price}
                       </Table.Cell>
                     </Table.Row>

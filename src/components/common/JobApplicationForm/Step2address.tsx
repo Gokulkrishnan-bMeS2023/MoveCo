@@ -51,24 +51,19 @@ const Step2Address = () => {
           <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
             Education
           </Heading>
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-            <InputField label="School Name" />
-
-            <InputField label="Location" />
-
-            <InputField label="Years" />
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+            <InputField label="School Name" placeholder="School Name" />
+            <InputField label="Location" placeholder="Location" />
+            <InputField label="Years" placeholder="Years" />
+          </SimpleGrid>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+            <InputField label="Degree Received" placeholder="Degree Received" />
+            <InputField label="Major" placeholder="Major" />
+            <InputField label="Other training, certifications, or licenses held" placeholder="Other training, certifications, or licenses held"/>
           </SimpleGrid>
 
           <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-            <InputField label="Degree Received" />
-
-            <InputField label="Major" />
-
-            <InputField label="Other training, certifications, or licenses held" />
-          </SimpleGrid>
-
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-            <InputField label="List other information pertinent to the employment you are seeking:" />
+            <InputField label="List other information pertinent to the employment you are seeking:" placeholder="Additional Information" />
           </SimpleGrid>
         </Stack>
       </Box>
@@ -102,9 +97,9 @@ const Step2Address = () => {
               </Flex>
 
               <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
-                <InputField label="Employer" />
+                <InputField label="Employer" placeholder="Employer"/>
 
-                <InputField label="Job Title" />
+                <InputField label="Job Title" placeholder="Job Title" />
 
                 <Field.Root>
                   <Field.Label>Dates Employed from &amp; to</Field.Label>
@@ -122,19 +117,19 @@ const Step2Address = () => {
               </SimpleGrid>
 
               <SimpleGrid columns={{ base: 1, md: 3 }} gap={4} mt={4}>
-                <InputField label="Prior Positions" />
-                <InputField label="Starting Salary" />
-                <InputField label="Ending Salary" />
+                <InputField label="Prior Positions" placeholder="Prior Positions"/>
+                <InputField label="Starting Salary" placeholder="Starting salary" />
+                <InputField label="Ending Salary" placeholder="Ending Salary" />
               </SimpleGrid>
 
               <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={4}>
-                 <InputField label="Supervisor Name" />
-                <InputField label="Supervisor Phone" />
-                <InputField label="Reason for Leaving" />
+                 <InputField label="Supervisor Name" placeholder="Supervisor Name" />
+                <InputField label="Supervisor Phone" placeholder="Supervisor Phone"/>
+                <InputField label="Reason for Leaving" placeholder="Reason for Leaving" />
               </SimpleGrid>
 
               <SimpleGrid columns={{ base: 1, md: 1 }} gap={6} mt={4}>
-               <InputField label="Duties Performed" />
+               <InputField label="Duties Performed" placeholder="Duties Performed" />
               </SimpleGrid>
             </Box>
           ))}

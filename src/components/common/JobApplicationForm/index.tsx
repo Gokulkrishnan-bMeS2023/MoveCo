@@ -67,27 +67,27 @@ const JobApplicationForm = () => {
                   Your Information
                 </Heading>
 
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-                  <InputField label="First Name" isRequired />
-                  <InputField label="Last Name" isRequired />
-                  <InputField label="Email" isRequired />
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                  <InputField label="First Name" isRequired placeholder="First Name"/>
+                  <InputField label="Last Name" isRequired  placeholder="Last Name"/>
+                  <InputField label="Email" placeholder="Email" isRequired />
                 </SimpleGrid>
 
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-                  <InputField label="Home Phone" />
-                  <InputField label="Cell Phone" />
-                  <InputField label="Address" />
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                  <InputField label="Home Phone" placeholder="Home Phone" />
+                  <InputField label="Cell Phone" placeholder="Cell phone" />
+                  <InputField label="Address" placeholder="Address" />
                 </SimpleGrid>
 
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-                  <InputField label="City" />
-                  <InputField label="State" />
-                  <InputField label="Zip Code" />
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                  <InputField label="City" placeholder="City" />
+                  <InputField label="State" placeholder="State" />
+                  <InputField label="Zip Code" placeholder="Zip Code" />
                 </SimpleGrid>
 
-                <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-                  <InputField label="Social Security Number" />
-                  <DateInput label="Available Start Date" />
+                <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+                  <InputField label="Social Security Number" placeholder="Social Security Number"/>
+                  <DateInput label="Available Start Date" placeholder="Available start Date" />
                 </SimpleGrid>
 
                 <Stack gap={4}>

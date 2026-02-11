@@ -205,6 +205,7 @@ const system = createSystem(defaultConfig, {
           white: { value: "#ffffff" },
           red: { value: "#ff0000" },
           gray: { value: "#718096" },
+          gray: { value: "#718096" },
         },
       },
  
@@ -233,6 +234,9 @@ const system = createSystem(defaultConfig, {
     recipes: {
       heading: headingRecipe,
       text: textRecipe,
+    },
+    slotRecipes: {
+      table: tableRecipe, // ✅ IMPORTANT
     },
     slotRecipes: {
       table: tableRecipe, // ✅ IMPORTANT
