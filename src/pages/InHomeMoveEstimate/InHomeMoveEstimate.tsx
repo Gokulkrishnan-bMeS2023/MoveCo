@@ -350,7 +350,7 @@ const InHomeMoveEstimate = () => {
                   onChange={(e) => handleChange("apt", e.target.value)}
                 />
 
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
                   <InputField
                     label="City"
                     placeholder="City"

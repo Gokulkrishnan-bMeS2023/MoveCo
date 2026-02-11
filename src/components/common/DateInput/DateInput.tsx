@@ -92,6 +92,20 @@ const DateInput: React.FC<DateInputProps> = ({
           onKeyDown={(e) => e.preventDefault()}
           _hover={{ borderColor: "brand.primary" }}
           _focusVisible={{ borderColor: "brand.primary" }}
+          css={{
+            // Right side native calendar icon-ai remove panna intha selector venum
+            "&::-webkit-calendar-picker-indicator": {
+              display: "none",
+              WebkitAppearance: "none",
+            },
+            "&::-webkit-datetime-edit": {
+              color: value ? "inherit" : "gray.500", // gray.400
+            },
+            // // Native "dd-mm-yyyy" placeholder-ai invisible aaka
+            // "&::-webkit-datetime-edit": {
+            //   color: value ? "inherit" : "transparent",
+            // },
+          }}
         />
       </InputGroup>
 

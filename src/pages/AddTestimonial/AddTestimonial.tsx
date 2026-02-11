@@ -8,7 +8,6 @@ import {
   SimpleGrid,
   Flex,
 } from "@chakra-ui/react";
-import { FaUser, FaEnvelope } from "react-icons/fa";
 import InputField from "../../components/common/Input/Input";
 import Notes from "../../components/common/Notes/Notes";
 import DateInput from "../../components/common/DateInput/DateInput";
@@ -96,7 +95,6 @@ const AddTestimonial = () => {
               value={values.firstName}
               onChange={(e) => handleChange("firstName", e.target.value)}
               errorMessage={errors.firstName}
-              leftIcon={<FaUser />}
               isRequired
             />
             <InputField
@@ -105,7 +103,6 @@ const AddTestimonial = () => {
               value={values.lastName}
               onChange={(e) => handleChange("lastName", e.target.value)}
               errorMessage={errors.lastName}
-              leftIcon={<FaUser />}
               isRequired
             />
           </SimpleGrid>
@@ -125,7 +122,6 @@ const AddTestimonial = () => {
                 value={values.email}
                 onChange={(e) => handleChange("email", e.target.value)}
                 errorMessage={errors.email}
-                leftIcon={<FaEnvelope />}
                 isRequired
               />
               <Text textStyle="size-xs" color="gray.400" mt={1} ml={1}>
