@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+
 import {
   Stack,
   SimpleGrid,
@@ -14,6 +15,29 @@ import InputField from "../../../components/common/Input/Input";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import RadioField from "../../../components/common/Radio/Radio";
 
+type YesNo = "yes" | "no";
+interface StepOneValues {
+  PositionSought: string;
+  Howdidyoulearnabouttheposition?: string;
+  HomePhone: string;
+  CellPhone: string;
+  EmailAddress: string;
+  Address: string;
+  City: string;
+  State: string;
+  ZipCode: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  SocialSecurityNumber: string;
+  Onwhatdatewouldyoubeavailableforwork?: string;
+   citizen: YesNo;
+  felony: YesNo;
+  terminated: YesNo;
+  drugTest: YesNo;
+}
+
+
 const JobApplicationForm = () => {
   const [page, setPage] = useState(0);
 
@@ -28,6 +52,71 @@ const JobApplicationForm = () => {
   ];
 
   const progressValue = ((page + 1) / 3) * 100;
+
+const [values, setValues] = useState<StepOneValues>({
+  PositionSought: "",
+  Howdidyoulearnabouttheposition: "",
+
+  HomePhone: "",
+  CellPhone: "",
+  EmailAddress: "",
+
+  Address: "",
+  City: "",
+  State: "",
+  ZipCode: "",
+
+  firstName: "",
+  lastName: "",
+  email: "",
+
+  SocialSecurityNumber: "",
+  Onwhatdatewouldyoubeavailableforwork: "",
+
+  citizen: "no",
+  felony: "no",
+  terminated: "no",
+  drugTest: "yes",
+});
+
+  const [errors, setErrors] = useState<any>({});
+const handleChange = <K extends keyof StepOneValues>(
+  field: K,
+  value: string
+) => {
+  setValues((prev) => ({
+    ...prev,
+    [field]: value as StepOneValues[K],
+  }));
+
+  if (errors[field]) {
+    setErrors((prevErrors: any) => ({
+      ...prevErrors,
+      [field]: "",
+    }));
+  }
+};
+
+  const validateStepOne = () => {
+    const newErrors: any = {};
+
+    if (!values.firstName) newErrors.firstName = "First name is required";
+    if (!values.lastName) newErrors.lastName = "Last name is required";
+    if (!values.email) newErrors.email = "Email is required";
+    if (!citizen) newErrors.citizen = "Required";
+    if (!felony) newErrors.felony = "Required";
+    if (!terminated) newErrors.terminated = "Required";
+    if (!drugTest) newErrors.drugTest = "Required";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return false;
+    }
+
+    setErrors({});
+    return true;
+  };
+  const step3Ref = useRef<any>(null);
 
   const renderPage = () => {
     switch (page) {
@@ -68,9 +157,32 @@ const JobApplicationForm = () => {
                 </Heading>
 
                 <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
-                  <InputField label="First Name" isRequired placeholder="First Name"/>
-                  <InputField label="Last Name" isRequired  placeholder="Last Name"/>
-                  <InputField label="Email" placeholder="Email" isRequired />
+                  <InputField
+                    label="First Name"
+                    placeholder="First Name"
+                    isRequired
+                    value={values.firstName}
+                    onChange={(e) => handleChange("firstName", e.target.value)}
+                    errorMessage={errors.firstName}
+                  />
+
+                  <InputField
+                    label="Last Name"
+                    placeholder="Last Name"
+                    isRequired
+                    value={values.lastName}
+                    onChange={(e) => handleChange("lastName", e.target.value)}
+                    errorMessage={errors.lastName}
+                  />
+
+                  <InputField
+                    label="Email"
+                    placeholder="Email"
+                    isRequired
+                    value={values.email}
+                    onChange={(e) => handleChange("email", e.target.value)}
+                    errorMessage={errors.email}
+                  />
                 </SimpleGrid>
 
                 <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
@@ -86,8 +198,14 @@ const JobApplicationForm = () => {
                 </SimpleGrid>
 
                 <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-                  <InputField label="Social Security Number" placeholder="Social Security Number"/>
-                  <DateInput label="Available Start Date" placeholder="Available start Date" />
+                  <InputField
+                    label="Social Security Number"
+                    placeholder="Social Security Number"
+                  />
+                  <DateInput
+                    label="Available Start Date"
+                    placeholder="Available start Date"
+                  />
                 </SimpleGrid>
 
                 <Stack gap={4}>
@@ -97,6 +215,7 @@ const JobApplicationForm = () => {
                     value={citizen}
                     onValueChange={setCitizen}
                     isRequired
+                    errorMessage={errors.citizen}
                     direction="row"
                   />
 
@@ -106,6 +225,7 @@ const JobApplicationForm = () => {
                     value={felony}
                     onValueChange={setFelony}
                     isRequired
+                    errorMessage={errors.felony}
                     direction="row"
                   />
 
@@ -115,6 +235,7 @@ const JobApplicationForm = () => {
                     value={terminated}
                     onValueChange={setTerminated}
                     isRequired
+                    errorMessage={errors.terminated}
                     direction="row"
                   />
 
@@ -124,6 +245,7 @@ const JobApplicationForm = () => {
                     value={drugTest}
                     onValueChange={setDrugTest}
                     isRequired
+                    errorMessage={errors.drugTest}
                     direction="row"
                   />
                 </Stack>
@@ -136,7 +258,7 @@ const JobApplicationForm = () => {
         return <Step2Address />;
 
       case 2:
-        return <Step3Experience />;
+        return <Step3Experience ref={step3Ref} />;
 
       default:
         return null;
@@ -153,37 +275,48 @@ const JobApplicationForm = () => {
           </Progress.Track>
         </Progress.Root>
       </Box>
-
       {/* PAGE CONTENT */}
-       <Stack gap={8}>
-        {renderPage()}
-        </Stack>
-
-        {/* FOOTER BUTTONS */}
-        <Stack direction="row" justify="space-between" pt={10}>
-          <Button
-            variant="outline"
-            onClick={() => setPage((p) => Math.max(p - 1, 0))}
-            disabled={page === 0}
-          >
-            Prev
-          </Button>
-
-          <Button
-            bg="brand.primary"
-            color="white"
-            _hover={{ bg: "brand.primary" }}
-            onClick={() =>
-              page === 2 ? alert("FORM SUBMITTED") : setPage((p) => p + 1)
+      <Stack gap={8}>{renderPage()}</Stack>
+      {/* FOOTER BUTTONS */}
+      <Stack direction="row" justify="space-between" pt={10}>
+        <Button
+          variant="outline"
+          fontSize="sm"
+          color="brand.primary"
+          borderWidth="1px"
+          borderColor="brand.primary"
+          _hover={{
+            bg: "brand.primary",
+            color: "white",
+          }}
+          onClick={() => setPage((p) => Math.max(p - 1, 0))}
+          disabled={page === 0}
+        >
+          Prev
+        </Button>
+        <Button
+          bg="brand.primary"
+          color="white"
+          _hover={{ bg: "brand.primary" }}
+          onClick={() => {
+            // STEP 1 validation
+            if (page === 0) {
+              if (!validateStepOne()) return;
             }
-          >
-            {page === 2 ? "Send" : "Next"}
-          </Button>
-        </Stack>
-     
+
+            if (page === 2) {
+              if (!step3Ref.current?.validate()) return;
+              alert("FORM SUBMITTED");
+              return;
+            }
+            setPage((p) => p + 1);
+          }}
+        >
+          {page === 2 ? "Send" : "Next"}
+        </Button>
+      </Stack>
     </>
   );
 };
 
 export { JobApplicationForm };
-

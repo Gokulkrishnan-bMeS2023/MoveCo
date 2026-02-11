@@ -12,8 +12,32 @@ import React from "react";
 import InputField from "../../../components/common/Input/Input";
 import DateInput from "../../../components/common/DateInput/DateInput";
 
+export interface EducationValues {
+  schoolName: string;
+  location: string;
+  years: string;
+  degree: string;
+  major: string;
+  otherTraining: string;
+  additionalInfo: string;
+}
+
+export interface EmploymentExperience {
+  employer: string;
+  jobTitle: string;
+  from: string;
+  to: string;
+  priorPosition: string;
+  startSalary: string;
+  endSalary: string;
+  supervisorName: string;
+  supervisorPhone: string;
+  reason: string;
+  duties: string;
+}
+
 const Step2Address = () => {
-  const emptyExperience = {
+  const emptyExperience: EmploymentExperience = {
     employer: "",
     jobTitle: "",
     from: "",
@@ -27,14 +51,15 @@ const Step2Address = () => {
     duties: "",
   };
 
-  const [experiences, setExperiences] = React.useState([emptyExperience]);
+  const [experiences, setExperiences] =
+    React.useState<EmploymentExperience[]>([emptyExperience]);
 
   const addExperience = () => {
-    setExperiences([...experiences, emptyExperience]);
+    setExperiences((prev) => [...prev, emptyExperience]);
   };
 
   const removeExperience = (index: number) => {
-    setExperiences(experiences.filter((_, i) => i !== index));
+    setExperiences((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -98,19 +123,15 @@ const Step2Address = () => {
 
               <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
                 <InputField label="Employer" placeholder="Employer"/>
-
                 <InputField label="Job Title" placeholder="Job Title" />
-
                 <Field.Root>
                   <Field.Label>Dates Employed from &amp; to</Field.Label>
 
                   <Flex gap={3} align="center">
                     <DateInput label="" placeholder="From" />
-
                     <Text color="gray.500" fontSize="sm">
                       to
                     </Text>
-
                     <DateInput label="" placeholder="To" />
                   </Flex>
                 </Field.Root>
@@ -122,13 +143,13 @@ const Step2Address = () => {
                 <InputField label="Ending Salary" placeholder="Ending Salary" />
               </SimpleGrid>
 
-              <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={4}>
+              <SimpleGrid columns={{ base: 1, md: 3 }} gap={4} mt={4}>
                  <InputField label="Supervisor Name" placeholder="Supervisor Name" />
                 <InputField label="Supervisor Phone" placeholder="Supervisor Phone"/>
                 <InputField label="Reason for Leaving" placeholder="Reason for Leaving" />
               </SimpleGrid>
 
-              <SimpleGrid columns={{ base: 1, md: 1 }} gap={6} mt={4}>
+              <SimpleGrid columns={{ base: 1, md: 1 }} gap={4} mt={4}>
                <InputField label="Duties Performed" placeholder="Duties Performed" />
               </SimpleGrid>
             </Box>

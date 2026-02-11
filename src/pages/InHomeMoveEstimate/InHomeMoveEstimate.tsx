@@ -103,7 +103,6 @@ const stateOptions = [
   { label: "Wyoming", value: "WY" },
 ];
 
-
 interface MoveEstimateFormValues {
   visitDate: string;
   visitTime: string;
@@ -148,12 +147,51 @@ const InHomeMoveEstimate = () => {
     notes: "",
   });
 
-  const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
-    setValues((prev) => ({ ...prev, [field]: value }));
-  };
+ const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
+  setValues((prev) => ({ ...prev, [field]: value }));
+
+  if (errors[field]) {
+    setErrors((prev) => ({
+      ...prev,
+      [field]: "",
+    }));
+  }
+};
+
+
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof MoveEstimateFormValues, string>>>({});
 
   const handleSubmit = () => {
+    const newErrors: Partial<Record<keyof MoveEstimateFormValues, string>> = {};
+
+    // General Information
+    if (!values.visitDate) newErrors.visitDate = "Visit date is required";
+    if (!values.visitTime) newErrors.visitTime = "Preferred time is required";
+    if (!values.moveDate) newErrors.moveDate = "Move date is required";
+    if (!values.moveSize) newErrors.moveSize = "Move size is required";
+    if (!values.hearAbout) newErrors.hearAbout = "This field is required";
+
+    // Contact Information
+    if (!values.firstName) newErrors.firstName = "First name is required";
+    if (!values.lastName) newErrors.lastName = "Last name is required";
+    if (!values.email) newErrors.email = "Email is required";
+    if (!values.homePhone) newErrors.homePhone = "Home phone is required";
+
+    // Move Location
+    if (!values.fromAddress) newErrors.fromAddress = "From address is required";
+    if (!values.city) newErrors.city = "City is required";
+    if (!values.state) newErrors.state = "State is required";
+    if (!values.zipCode) newErrors.zipCode = "Zip code is required";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({});
     console.log("Submitted Data:", values);
+    // navigate("/next-page"); // when needed
   };
 
   return (
@@ -165,22 +203,31 @@ const InHomeMoveEstimate = () => {
           align={{ base: "flex-start", md: "center" }}
           justify="space-between"
           gap={{ base: 6, md: 10 }}
-          mb={{base:6, lg:8}}
+          mb={{ base: 6, lg: 8 }}
         >
-            <Heading as="h1" fontWeight="normal" w={{ base: "100%", lg: "50%" }}>
-              In-Home <br />
-              <Text as="span" color="brand.primary">
-                Move Estimate
-              </Text>
-            </Heading>
+          <Heading as="h1" fontWeight="normal" w={{ base: "100%", lg: "50%" }}>
+            In-Home <br />
+            <Text as="span" color="brand.primary">
+              Move Estimate
+            </Text>
+          </Heading>
 
           <Box maxW={{ lg: "45%" }}>
             <Text textStyle="size-xl" textAlign={{ base: "left", md: "right" }}>
               All information will not be released to any other person or
-              company, please read our  <Text as="span" cursor="pointer" color="brand.primary"
-               onClick={() => navigate("/privacy-policy")}>
-               privacy policy</Text>. <Text as="span" fontWeight="500">
-               Be sure to ask about our packing services!</Text>
+              company, please read our{" "}
+              <Text
+                as="span"
+                cursor="pointer"
+                color="brand.primary"
+                onClick={() => navigate("/privacy-policy")}
+              >
+                privacy policy
+              </Text>
+              .{" "}
+              <Text as="span" fontWeight="500">
+                Be sure to ask about our packing services!
+              </Text>
             </Text>
           </Box>
         </Flex>
@@ -197,7 +244,7 @@ const InHomeMoveEstimate = () => {
           </Box>
 
           <Box p={4}>
-            <Text mt={{base:"4",md:"6"}} textStyle="size-3xl">
+            <Text mt={{ base: "4", md: "6" }} textStyle="size-3xl">
               After filling out this form, an appointment will be made to have a
               real, live person come out and estimate your move costs. This is a
               free service, and is perfect for individuals who are unsure as to
@@ -207,24 +254,30 @@ const InHomeMoveEstimate = () => {
         </SimpleGrid>
       </Container>
 
-      <Container maxW="100%" py={{base:"2",md:"10"}} px={8}>
+      <Container maxW="100%" py={{ base: "2", md: "10" }} px={8}>
         <Stack gap={8}>
-
-          <Box bg="brand.white" p={{ base: 6, md: 8 }} borderRadius="2xl" boxShadow="lg">
+          <Box
+            bg="brand.white"
+            p={{ base: 6, md: 8 }}
+            borderRadius="2xl"
+            boxShadow="lg"
+          >
             <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
               General Information
             </Heading>
 
             <Stack gap={4}>
-              <Text textStyle="size-md" color="brand.secondary">Which date and time is convenient for one of our trained professional 
-                  estimators to come out and visit you?</Text>
+              <Text textStyle="size-md" color="brand.secondary">
+                Which date and time is convenient for one of our trained
+                professional estimators to come out and visit you?
+              </Text>
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-                
                 <DateInput
                   label="Date"
                   value={values.visitDate}
                   onChange={(e) => handleChange("visitDate", e.target.value)}
                   isRequired
+                  errorMessage={errors.visitDate}
                 />
 
                 <SelectField
@@ -233,39 +286,44 @@ const InHomeMoveEstimate = () => {
                   onValueChange={(e) => handleChange("visitTime", e.value[0])}
                   isRequired
                   options={timeOptions}
+                  errorMessage={errors.visitTime}
                 />
               </SimpleGrid>
-                <DateInput
-                  label="On which date are you planning on moving?"
-                  value={values.moveDate}
-                  onChange={(e) => handleChange("moveDate", e.target.value)}
-                  isRequired
-                />
+              <DateInput
+                label="On which date are you planning on moving?"
+                value={values.moveDate}
+                onChange={(e) => handleChange("moveDate", e.target.value)}
+                isRequired
+                errorMessage={errors.moveDate}
+              />
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-
                 <SelectField
                   label="What do you estimate your move size to be?"
                   value={values.moveSize}
                   onValueChange={(e) => handleChange("moveSize", e.value[0])}
                   isRequired
                   options={moveSizeOptions}
+                  errorMessage={errors.moveSize}
                 />
                 <SelectField
-                label="How did you hear about MoveCo.net?"
-                value={values.hearAbout}
-                onValueChange={(e) => handleChange("hearAbout", e.value[0])}
-                isRequired
-                options={hearAboutOptions}
-              />
+                  label="How did you hear about MoveCo.net?"
+                  value={values.hearAbout}
+                  onValueChange={(e) => handleChange("hearAbout", e.value[0])}
+                  isRequired
+                  options={hearAboutOptions}
+                  errorMessage={errors.hearAbout}
+                />
               </SimpleGrid>
-
-              
             </Stack>
           </Box>
-       
-          <SimpleGrid columns={{ base: 1, md: 2 }} gap={8}>
 
-            <Box bg="brand.white" p={{ base: 6, md: 8 }} borderRadius="2xl" boxShadow="lg">
+          <SimpleGrid columns={{ base: 1, md: 2 }} gap={8}>
+            <Box
+              bg="brand.white"
+              p={{ base: 6, md: 8 }}
+              borderRadius="2xl"
+              boxShadow="lg"
+            >
               <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
                 Contact Information
               </Heading>
@@ -278,13 +336,16 @@ const InHomeMoveEstimate = () => {
                     value={values.firstName}
                     onChange={(e) => handleChange("firstName", e.target.value)}
                     isRequired
+                    errorMessage={errors.firstName}
                   />
+
                   <InputField
                     label="Last Name"
                     placeholder="Last Name"
                     value={values.lastName}
                     onChange={(e) => handleChange("lastName", e.target.value)}
                     isRequired
+                    errorMessage={errors.lastName}
                   />
                 </SimpleGrid>
 
@@ -294,6 +355,7 @@ const InHomeMoveEstimate = () => {
                   value={values.email}
                   onChange={(e) => handleChange("email", e.target.value)}
                   isRequired
+                  errorMessage={errors.email}
                 />
 
                 <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
@@ -303,6 +365,7 @@ const InHomeMoveEstimate = () => {
                     value={values.homePhone}
                     onChange={(e) => handleChange("homePhone", e.target.value)}
                     isRequired
+                    errorMessage={errors.homePhone}
                   />
                   <InputField
                     label="Cell Phone"
@@ -329,7 +392,12 @@ const InHomeMoveEstimate = () => {
               </Stack>
             </Box>
 
-            <Box bg="brand.white" p={{ base: 6, md: 8 }} borderRadius="2xl" boxShadow="lg">
+            <Box
+              bg="brand.white"
+              p={{ base: 6, md: 8 }}
+              borderRadius="2xl"
+              boxShadow="lg"
+            >
               <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
                 Move Location
               </Heading>
@@ -341,6 +409,7 @@ const InHomeMoveEstimate = () => {
                   value={values.fromAddress}
                   onChange={(e) => handleChange("fromAddress", e.target.value)}
                   isRequired
+                  errorMessage={errors.fromAddress}
                 />
 
                 <InputField
@@ -357,6 +426,7 @@ const InHomeMoveEstimate = () => {
                     value={values.city}
                     onChange={(e) => handleChange("city", e.target.value)}
                     isRequired
+                    errorMessage={errors.city}
                   />
                   <SelectField
                     label="State"
@@ -365,6 +435,7 @@ const InHomeMoveEstimate = () => {
                     value={values.state}
                     onValueChange={(e) => handleChange("state", e.value[0])}
                     isRequired
+                    errorMessage={errors.state}
                   />
                   <InputField
                     label="Zip Code"
@@ -372,6 +443,7 @@ const InHomeMoveEstimate = () => {
                     value={values.zipCode}
                     onChange={(e) => handleChange("zipCode", e.target.value)}
                     isRequired
+                    errorMessage={errors.zipCode}
                   />
                 </SimpleGrid>
 
@@ -383,13 +455,16 @@ const InHomeMoveEstimate = () => {
                 />
               </Stack>
             </Box>
-
           </SimpleGrid>
 
           <Box textAlign={{ base: "center", md: "right" }}>
-            <Button label="Send" variant="primary" px="16" onClick={handleSubmit} />
+            <Button
+              label="Send"
+              variant="primary"
+              px="16"
+              onClick={handleSubmit}
+            />
           </Box>
-
         </Stack>
       </Container>
     </>
