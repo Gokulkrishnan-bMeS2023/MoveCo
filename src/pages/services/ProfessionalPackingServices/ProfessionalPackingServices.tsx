@@ -98,7 +98,7 @@ const PackingServicesPage = () => {
         {/* Packing Rates Section */}
         <Box
           bg="brand.white"
-          p={{ base: 6, md: 10 }}
+          p={{ base: 6, md: 8 }}
           borderRadius="xl"
           boxShadow="sm"
           border="1px solid"
