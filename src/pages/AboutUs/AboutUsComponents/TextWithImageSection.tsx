@@ -10,7 +10,7 @@ interface ImageTextSectionProps {
   reverse?: boolean; 
 }
 
-const ImageTextSection = ({
+const TextWithImageSection = ({
   image,
   alt = "section image",
   buttonLabel,
@@ -53,4 +53,4 @@ const ImageTextSection = ({
   );
 };
 
-export default ImageTextSection;
+export default TextWithImageSection;

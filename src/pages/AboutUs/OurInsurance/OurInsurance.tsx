@@ -12,7 +12,7 @@ import Button from "../../../components/common/Button/Button";
 import CardTemplate from "../AboutUsComponents/CardTemplate";
 import CommonAccordion from "../AboutUsComponents/CommonAccordion";
 import HeroBanner from "../AboutUsComponents/HeroBanner";
-import ImageTextSection from "../AboutUsComponents/TextImageSection";
+import ImageTextSection from "../AboutUsComponents/TextWithImageSection";
 
 const OurInsurance = () => {
   return (

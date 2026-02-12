@@ -12,7 +12,7 @@ import ServiceImg2 from "../../../assets/service2.webp";
 import Button from "../../../components/common/Button/Button";
 import { benefits, features } from "./data";
 import HeroBanner from "../AboutUsComponents/HeroBanner";
-import ImageTextSection from "../AboutUsComponents/TextImageSection";
+import ImageTextSection from "../AboutUsComponents/TextWithImageSection";
 import CardTemplate from "../AboutUsComponents/CardTemplate";
 import AboutFeatureSwitcher from "../AboutUsComponents/AboutFeatureSwitcher";
 

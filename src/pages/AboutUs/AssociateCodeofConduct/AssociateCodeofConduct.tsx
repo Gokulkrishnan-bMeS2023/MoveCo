@@ -11,7 +11,7 @@ import { dressCode } from "./data";
 import { customerPoints, officePoints } from "./data";
 import CardTemplate from "../AboutUsComponents/CardTemplate";
 import HeroBanner from "../AboutUsComponents/HeroBanner";
-import ImageListSection from "../AboutUsComponents/ImageListSection";
+import ImageListSection from "../AboutUsComponents/ImageWithListContent";
 
 const AssociateCodeOfConduct = () => {
   return (

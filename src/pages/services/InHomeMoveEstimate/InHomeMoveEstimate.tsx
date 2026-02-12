@@ -164,21 +164,15 @@ const InHomeMoveEstimate = () => {
 
   const handleSubmit = () => {
     const newErrors: Partial<Record<keyof MoveEstimateFormValues, string>> = {};
-
-    // General Information
     if (!values.visitDate) newErrors.visitDate = "Visit date is required";
     if (!values.visitTime) newErrors.visitTime = "Preferred time is required";
     if (!values.moveDate) newErrors.moveDate = "Move date is required";
     if (!values.moveSize) newErrors.moveSize = "Move size is required";
     if (!values.hearAbout) newErrors.hearAbout = "This field is required";
-
-    // Contact Information
     if (!values.firstName) newErrors.firstName = "First name is required";
     if (!values.lastName) newErrors.lastName = "Last name is required";
     if (!values.email) newErrors.email = "Email is required";
     if (!values.homePhone) newErrors.homePhone = "Home phone is required";
-
-    // Move Location
     if (!values.fromAddress) newErrors.fromAddress = "From address is required";
     if (!values.city) newErrors.city = "City is required";
     if (!values.state) newErrors.state = "State is required";
@@ -196,7 +190,6 @@ const InHomeMoveEstimate = () => {
 
   return (
     <>
-      {/* HEADER SECTION */}
       <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
         <Flex
           direction={{ base: "column", md: "row" }}

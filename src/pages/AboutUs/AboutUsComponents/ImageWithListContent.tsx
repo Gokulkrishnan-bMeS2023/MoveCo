@@ -6,7 +6,7 @@ interface ImageListSectionProps {
   imagePosition?: "left" | "right";
 }
 
-const ImageListSection = ({
+const ImageWithListContent = ({
   image,
   points,
   imagePosition = "left",
@@ -35,7 +35,7 @@ const ImageListSection = ({
       </Box>
 
       <Box flex="1">
-        <List.Root gap={2} listStyle="none" ps={0}>
+        <List.Root gap={4} listStyle="none" ps={0}>
           {points.map((item, index) => (
             <List.Item key={index}>
               <HStack align="start" gap={4}>
@@ -52,7 +52,7 @@ const ImageListSection = ({
                 >
                   {index + 1}
                 </Box>
-                <Text>{item}</Text>
+                <Text textStyle="size-lg">{item}</Text>
               </HStack>
             </List.Item>
           ))}
@@ -62,4 +62,4 @@ const ImageListSection = ({
   );
 };
 
-export default ImageListSection;
+export default ImageWithListContent;

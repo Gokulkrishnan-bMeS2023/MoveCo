@@ -37,13 +37,13 @@ const SideContentSection = ({
       <Flex
         direction={{
           base: "column",
-          lg: reverse ? "row-reverse" : "row", // 👈 MAGIC
+          lg: reverse ? "row-reverse" : "row", 
         }}
         gap={{ base: "8", lg: "16" }}
         align="center"
         justify="center"
       >
-        {/* IMAGE */}
+
         <Box w={{ base: "100%", lg: "50%" }}>
           <Image
             src={image}
@@ -54,8 +54,6 @@ const SideContentSection = ({
             height="auto"
           />
         </Box>
-
-        {/* CONTENT */}
         <Box w={{ base: "100%", lg: "50%" }}>
           <Text textStyle="size-xl" mb={4}>
             {description}
