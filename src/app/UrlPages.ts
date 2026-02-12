@@ -90,11 +90,15 @@ export const UrlPages: AppRoute[] = [
   },
   {
     path: "/product",
-    component: lazy(() => import("../pages/Product/Product")),
+    component: lazy(
+      () => import("../pages/services/MoveingPackingSupplies/Product"),
+    ),
   },
   {
     path: "/cart",
-    component: lazy(() => import("../pages/Product/Cart")),
+    component: lazy(
+      () => import("../pages/services/MoveingPackingSupplies/Cart"),
+    ),
   },
   {
     path: "/InHomeMoveEstimate",

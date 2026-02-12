@@ -188,16 +188,16 @@ const TollFreeBox = memo(() => (
         objectFit="contain"
       />
     </Flex>
-    <Box px="5" py="4">
+    <Box px="2" py="2">
       <Flex
         alignItems="center"
         gap="2"
         mb="2"
-        direction={{ base: "column", md: "row" }}
+        direction={"column"}
         justifyContent={RESPONSIVE_ALIGN}
       >
         <Text
-          textStyle="size-md"
+          textStyle="size-lg"
           color="brand.warning"
           fontWeight="700"
           textTransform="uppercase"
