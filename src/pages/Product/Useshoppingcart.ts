@@ -1,23 +1,32 @@
 // ============================================================================
 // hooks/useShoppingCart.ts
-// Reusable shopping cart hook
+// Centralized shopping cart hook - single source of truth
 // ============================================================================
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { createToaster } from "@chakra-ui/react";
 
-interface Product {
+// ============================================================================
+// TYPES
+// ============================================================================
+
+export interface Product {
   id: number;
   name: string;
   price: number;
   image: string;
 }
 
-interface CartItem extends Product {
+export interface CartItem extends Product {
   quantity: number;
 }
 
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
 const STORAGE_KEY = "shopping_cart";
+export const TAX_RATE = 0.0823; // 8.23% tax
 
 const toaster = createToaster({
   placement: "top-end",
@@ -57,7 +66,7 @@ export const cartStorage = {
 };
 
 // ============================================================================
-// CART OPERATIONS
+// CART OPERATIONS (Pure functions)
 // ============================================================================
 
 export const cartOperations = {
@@ -93,12 +102,31 @@ export const cartOperations = {
     );
   },
 
-  calculateTotal: (cart: CartItem[]): number => {
+  calculateSubtotal: (cart: CartItem[]): number => {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  },
+
+  calculateTax: (subtotal: number, taxRate: number = TAX_RATE): number => {
+    return subtotal * taxRate;
+  },
+
+  calculateTotal: (cart: CartItem[], taxRate: number = TAX_RATE): number => {
+    const subtotal = cartOperations.calculateSubtotal(cart);
+    const tax = cartOperations.calculateTax(subtotal, taxRate);
+    return subtotal + tax;
   },
 
   getTotalItems: (cart: CartItem[]): number => {
     return cart.reduce((sum, item) => sum + item.quantity, 0);
+  },
+
+  isProductInCart: (cart: CartItem[], productId: number): boolean => {
+    return cart.some((item) => item.id === productId);
+  },
+
+  getItemQuantity: (cart: CartItem[], productId: number): number => {
+    const item = cart.find((item) => item.id === productId);
+    return item?.quantity || 0;
   },
 };
 
@@ -114,48 +142,59 @@ export const useShoppingCart = () => {
     setCartItems(cartStorage.get());
   }, []);
 
-  // Add item to cart
-  const addToCart = useCallback((product: Product) => {
-    const currentCart = cartStorage.get();
-    const updatedCart = cartOperations.addItem(currentCart, product);
-
+  // Sync state with storage
+  const syncCart = useCallback((updatedCart: CartItem[]) => {
     cartStorage.save(updatedCart);
     setCartItems(updatedCart);
-
-    toaster.create({
-      title: "Added to cart",
-      description: `${product.name} has been added to your cart`,
-      type: "success",
-    });
   }, []);
+
+  // Add item to cart
+  const addToCart = useCallback(
+    (product: Product) => {
+      const currentCart = cartStorage.get();
+      const updatedCart = cartOperations.addItem(currentCart, product);
+      syncCart(updatedCart);
+
+      toaster.create({
+        title: "Added to cart",
+        description: `${product.name} has been added to your cart`,
+        type: "success",
+      });
+    },
+    [syncCart],
+  );
 
   // Remove item from cart
-  const removeFromCart = useCallback((productId: number) => {
-    const currentCart = cartStorage.get();
-    const updatedCart = cartOperations.removeItem(currentCart, productId);
+  const removeFromCart = useCallback(
+    (productId: number) => {
+      const currentCart = cartStorage.get();
+      const updatedCart = cartOperations.removeItem(currentCart, productId);
+      syncCart(updatedCart);
 
-    cartStorage.save(updatedCart);
-    setCartItems(updatedCart);
-
-    toaster.create({
-      title: "Removed from cart",
-      description: "Item has been removed from your cart",
-      type: "info",
-    });
-  }, []);
+      toaster.create({
+        title: "Item removed",
+        description: "Product has been removed from your cart",
+        type: "info",
+      });
+    },
+    [syncCart],
+  );
 
   // Update quantity
-  const updateQuantity = useCallback((productId: number, quantity: number) => {
-    const currentCart = cartStorage.get();
-    const updatedCart = cartOperations.updateQuantity(
-      currentCart,
-      productId,
-      quantity,
-    );
+  const updateQuantity = useCallback(
+    (productId: number, quantity: number) => {
+      if (quantity < 1) return;
 
-    cartStorage.save(updatedCart);
-    setCartItems(updatedCart);
-  }, []);
+      const currentCart = cartStorage.get();
+      const updatedCart = cartOperations.updateQuantity(
+        currentCart,
+        productId,
+        quantity,
+      );
+      syncCart(updatedCart);
+    },
+    [syncCart],
+  );
 
   // Clear cart
   const clearCart = useCallback(() => {
@@ -172,7 +211,7 @@ export const useShoppingCart = () => {
   // Check if product is in cart
   const isInCart = useCallback(
     (productId: number): boolean => {
-      return cartItems.some((item) => item.id === productId);
+      return cartOperations.isProductInCart(cartItems, productId);
     },
     [cartItems],
   );
@@ -180,8 +219,7 @@ export const useShoppingCart = () => {
   // Get item quantity
   const getItemQuantity = useCallback(
     (productId: number): number => {
-      const item = cartItems.find((item) => item.id === productId);
-      return item?.quantity || 0;
+      return cartOperations.getItemQuantity(cartItems, productId);
     },
     [cartItems],
   );
@@ -192,22 +230,33 @@ export const useShoppingCart = () => {
     [cartItems],
   );
 
-  const totalPrice = useMemo(
-    () => cartOperations.calculateTotal(cartItems),
+  const subtotal = useMemo(
+    () => cartOperations.calculateSubtotal(cartItems),
     [cartItems],
   );
 
+  const tax = useMemo(() => cartOperations.calculateTax(subtotal), [subtotal]);
+
+  const total = useMemo(() => subtotal + tax, [subtotal, tax]);
+
   return {
+    // State
     cartItems,
+
+    // Actions
     addToCart,
     removeFromCart,
     updateQuantity,
     clearCart,
+
+    // Queries
     isInCart,
     getItemQuantity,
+
+    // Computed values
     totalItems,
-    totalPrice,
+    subtotal,
+    tax,
+    total,
   };
 };
-
-export type { Product, CartItem };

@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback, memo } from "react";
+import { useCallback, memo } from "react";
 import {
   Box,
   Container,
@@ -18,7 +18,12 @@ import {
 import { FiX, FiPlus, FiMinus } from "react-icons/fi";
 import Button from "../../components/common/Button/Button";
 import { useNavigate } from "react-router-dom";
-import { cartStorage } from "./product";
+import { useShoppingCart } from "./Useshoppingcart";
+
+const toaster = createToaster({
+  placement: "top-end",
+  duration: 2000,
+});
 
 interface Product {
   id: number;
@@ -30,89 +35,6 @@ interface Product {
 interface CartItem extends Product {
   quantity: number;
 }
-
-// ============================================================================
-// CONSTANTS
-// ============================================================================
-
-// const STORAGE_KEY = "shopping_cart";
-const TAX_RATE = 0.0823; // 8.23% tax
-
-const toaster = createToaster({
-  placement: "top-end",
-  duration: 2000,
-});
-
-
-// ============================================================================
-// CUSTOM HOOK - Reusable cart logic
-// ============================================================================
-
-const useShoppingCart = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-
-  const getCartFromStorage = cartStorage.get;
-  const saveCartToStorage = cartStorage.save;
-
-  useEffect(() => {
-    setCartItems(getCartFromStorage());
-  }, []);
-
-  const updateQuantity = useCallback((productId: number, quantity: number) => {
-    const currentCart = getCartFromStorage();
-
-    if (quantity <= 0) {
-      // Remove item if quantity is 0 or less
-      const updatedCart = currentCart.filter((item) => item.id !== productId);
-      saveCartToStorage(updatedCart);
-      setCartItems(updatedCart);
-      return;
-    }
-
-    const updatedCart = currentCart.map((item) =>
-      item.id === productId ? { ...item, quantity } : item,
-    );
-
-    saveCartToStorage(updatedCart);
-    setCartItems(updatedCart);
-  }, []);
-
-  const removeFromCart = useCallback((productId: number) => {
-    const currentCart = getCartFromStorage();
-    const updatedCart = currentCart.filter((item) => item.id !== productId);
-
-    saveCartToStorage(updatedCart);
-    setCartItems(updatedCart);
-
-    toaster.create({
-      title: "Item removed",
-      description: "Product has been removed from your cart",
-      type: "info",
-    });
-  }, []);
-
-  const totalPrice = useMemo(
-    () => cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
-    [cartItems],
-  );
-
-  const totalItems = useMemo(
-    () => cartItems.reduce((sum, item) => sum + item.quantity, 0),
-    [cartItems],
-  );
-
-  return {
-    cartItems,
-    updateQuantity,
-    removeFromCart,
-    totalPrice,
-    totalItems,
-  };
-};
-
-// ============================================================================
-// SUB-COMPONENTS - Memoized for performance
-// ============================================================================
 
 const EmptyCart = memo(
   ({ onStartShopping }: { onStartShopping: () => void }) => (
@@ -450,13 +372,9 @@ CartTotals.displayName = "CartTotals";
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const { cartItems, updateQuantity, removeFromCart, totalPrice } =
-    useShoppingCart();
 
-  // Memoized calculations
-  const subtotal = totalPrice;
-  const tax = useMemo(() => subtotal * TAX_RATE, [subtotal]);
-  const total = useMemo(() => subtotal + tax, [subtotal, tax]);
+  const { cartItems, updateQuantity, removeFromCart, subtotal, tax, total } =
+    useShoppingCart();
 
   const handleContinueShopping = useCallback(() => {
     navigate("/product");

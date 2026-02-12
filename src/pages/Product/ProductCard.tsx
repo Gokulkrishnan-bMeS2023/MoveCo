@@ -10,13 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { FiShoppingCart, FiCheck } from "react-icons/fi";
 import Button from "../../components/common/Button/Button";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-}
+import type { Product } from "./DTOs";
 
 interface ProductCardProps {
   product: Product;
@@ -133,4 +127,3 @@ const ProductCard = memo(
 ProductCard.displayName = "ProductCard";
 
 export default ProductCard;
-export type { Product, ProductCardProps };

@@ -12,8 +12,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/common/Button/Button";
 import ProductCard from "./ProductCard";
-import { useShoppingCart } from "./product";
 import { PRODUCTS, GRID_BREAKPOINTS } from "./data";
+import { useShoppingCart } from "./Useshoppingcart";
 
 const PageHeader = () => (
   <VStack mb={12} gap={{ base: 4, md: 6 }} align="start">
@@ -41,7 +41,6 @@ const ProductPage = () => {
   return (
     <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
       <PageHeader />
-
       <Grid templateColumns={GRID_BREAKPOINTS} gap={{ base: 4, sm: 6, md: 8 }}>
         {PRODUCTS.map((product) => (
           <GridItem key={product.id}>
