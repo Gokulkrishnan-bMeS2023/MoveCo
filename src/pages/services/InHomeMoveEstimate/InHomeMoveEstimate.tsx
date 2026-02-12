@@ -9,12 +9,12 @@ import {
   SimpleGrid,
   Flex,
 } from "@chakra-ui/react";
-import InputField from "../../components/common/Input/Input";
-import Notes from "../../components/common/Notes/Notes";
-import DateInput from "../../components/common/DateInput/DateInput";
-import Button from "../../components/common/Button/Button";
-import inhomemoveestimate from "../../assets/in-home.jpg";
-import SelectField from "../../components/common/Select/Select";
+import InputField from "../../../components/common/Input/Input";
+import Notes from "../../../components/common/Notes/Notes";
+import DateInput from "../../../components/common/DateInput/DateInput";
+import Button from "../../../components/common/Button/Button";
+import inhomemoveestimate from "../../../assets/in-home.jpg";
+import SelectField from "../../../components/common/Select/Select";
 import { useNavigate } from "react-router-dom";
 
 const timeOptions = [

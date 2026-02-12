@@ -23,7 +23,7 @@ import InputField from "../../components/common/Input/Input";
 import { useContactForms } from "./useContactForms";
 import Button from "../../components/common/Button/Button";
 import Notes from "../../components/common/Notes/Notes";
-import HeroBanner from "../../components/common/HeroBanner/HeroBanner";
+import HeroBanner from "../AboutUs/AboutUsComponents/HeroBanner";
 
 const ContactCard = ({
   city,

@@ -103,7 +103,7 @@ export const UrlPages: AppRoute[] = [
   {
     path: "/InHomeMoveEstimate",
     component: lazy(
-      () => import("../pages/InHomeMoveEstimate/InHomeMoveEstimate"),
+      () => import("../pages/services/InHomeMoveEstimate/InHomeMoveEstimate"),
     ),
   },
   {
