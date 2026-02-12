@@ -5,12 +5,12 @@ import {
   Text,
   Container,
 } from "@chakra-ui/react";
-import { MainBanner } from "../../components/common/MainBanner";
-import VideoGrid from "../../components/common/VideoGrid";
+import VideoGrid from "./VideoGrid";
 import { useNavigate } from "react-router-dom";
-import ClientSpeaks from "../../components/common/ReviewGrid";
+import ClientSpeaks from "./ReviewGrid";
 import Button from "../../components/common/Button/Button";
-import { QuoteForm } from "../../components/common/QuoteForm";
+import { MainBanner } from "./HomeBanner";
+import { QuoteForm } from "./QuoteForm";
 
 const Home = () => {
   const navigate = useNavigate();

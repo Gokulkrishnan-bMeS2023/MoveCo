@@ -6,29 +6,54 @@ export const UrlPages: AppRoute[] = [
     path: "/",
     component: lazy(() => import("../pages/Home/Home")),
   },
-  {
-    path: "/about-us",
-    component: lazy(() => import("../pages/AboutUs/AboutUs")),
-  },
-  {
+   {
     path: "/privacy-policy",
     component: lazy(() => import("../pages/PrivacyPolicy/PrivacyPolicy")),
   },
   {
-    path: "/contact-us",
-    component: lazy(() => import("../pages/ContactUs/ContactUs")),
+    path: "/about-us",
+    component: lazy(() => import("../pages/AboutUs/AboutMoveCo/AboutUs")),
   },
   {
     path: "/our-insurance",
-    component: lazy(() => import("../pages/AboutUs/OurInsurance")),
+    component: lazy(() => import("../pages/AboutUs/OurInsurance/OurInsurance")),
   },
   {
     path: "/our-standard",
-    component: lazy(() => import("../pages/AboutUs/OurStandard")),
+    component: lazy(() => import("../pages/AboutUs/OurStandards/OurStandard")),
+  },
+   {
+    path: "/AssociateCodeofConduct",
+    component: lazy(
+      () => import("../pages/AboutUs/AssociateCodeofConduct/AssociateCodeofConduct"),
+    ),
+  },
+  {
+    path: "/supported-charity",
+    component: lazy(() => import("../pages/AboutUs/SupportedCharity/SupportedCharity")),
+  },
+  {
+    path: "/TheAshleyWatrousFoundation",
+    component: lazy(
+      () =>
+        import("../pages/AboutUs/SupportedCharity/TheAshleyWatrousFoundation/TheAshleyWatrousFoundation"),
+    ),
+  },
+  {
+    path: "/SensResearchFoundation",
+    component: lazy(
+      () => import("../pages/AboutUs/SupportedCharity/SensResearchFoundation/SensResearchFoundation"),
+    ),
+  },
+  {
+    path: "/ScottishRiteHospital",
+    component: lazy(
+      () => import("../pages/AboutUs/SupportedCharity/ScottishRiteHospital/ScottishRiteHospital"),
+    ),
   },
   {
     path: "/job-application",
-    component: lazy(() => import("../pages/AboutUs/JobApplication")),
+    component: lazy(() => import("../pages/AboutUs/JobApplication/JobApplication")),
   },
   {
     path: "/privacy-policy",
@@ -37,10 +62,6 @@ export const UrlPages: AppRoute[] = [
   {
     path: "/contact-us",
     component: lazy(() => import("../pages/ContactUs/ContactUs")),
-  },
-  {
-    path: "/blog",
-    component: lazy(() => import("../pages/Blog/Blog")),
   },
   {
     path: "professionalpackingservices",
@@ -53,44 +74,19 @@ export const UrlPages: AppRoute[] = [
     path: "storages",
     component: lazy(() => import("../pages/services/Storage/Storage")),
   },
+   {
+    path: "/AddTestimonial",
+    component: lazy(() => import("../pages/Resources/AddTestimonial/AddTestimonial")),
+  },
   {
     path: "/client-testimonial",
     component: lazy(
-      () => import("../pages/ClientTestimonial/ClientTestimonial"),
+      () => import("../pages/Resources/ClientTestimonial/ClientTestimonial"),
     ),
   },
   {
     path: "/video-review",
-    component: lazy(() => import("../pages/VideoReview/VideoReview")),
-  },
-  {
-    path: "/supported-charity",
-    component: lazy(() => import("../pages/SupportedCharity/SupportedCharity")),
-  },
-  {
-    path: "/TheAshleyWatrousFoundation",
-    component: lazy(
-      () =>
-        import("../pages/TheAshleyWatrousFoundation/TheAshleyWatrousFoundation"),
-    ),
-  },
-  {
-    path: "/SensResearchFoundation",
-    component: lazy(
-      () => import("../pages/SensResearchFoundation/SensResearchFoundation"),
-    ),
-  },
-  {
-    path: "/ScottishRiteHospital",
-    component: lazy(
-      () => import("../pages/ScottishRiteHospital/ScottishRiteHospital"),
-    ),
-  },
-  {
-    path: "/AssociateCodeofConduct",
-    component: lazy(
-      () => import("../pages/AssociateCodeofConduct/AssociateCodeofConduct"),
-    ),
+    component: lazy(() => import("../pages/Resources/VideoReview/VideoReview")),
   },
   {
     path: "/product",
@@ -99,10 +95,6 @@ export const UrlPages: AppRoute[] = [
   {
     path: "/cart",
     component: lazy(() => import("../pages/Product/Cart")),
-  },
-  {
-    path: "/AddTestimonial",
-    component: lazy(() => import("../pages/AddTestimonial/AddTestimonial")),
   },
   {
     path: "/InHomeMoveEstimate",
@@ -128,5 +120,9 @@ export const UrlPages: AppRoute[] = [
     component: lazy(
       () => import("../pages/services/InstantOnlineEstimate/Inventry"),
     ),
+  },
+  {
+    path: "/contact-us",
+    component: lazy(() => import("../pages/ContactUs/ContactUs")),
   },
 ];

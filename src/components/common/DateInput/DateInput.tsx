@@ -73,8 +73,8 @@ const DateInput: React.FC<DateInputProps> = ({
       <Field.Label fontWeight="medium">
         {label}
         {isRequired && (
-          <Text as="span" color="brand.red" ml={1}>
-            *
+          <Text as="span" color="brand.red">
+          *
           </Text>
         )}
       </Field.Label>

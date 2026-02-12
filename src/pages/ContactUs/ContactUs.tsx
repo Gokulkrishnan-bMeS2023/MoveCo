@@ -23,6 +23,7 @@ import InputField from "../../components/common/Input/Input";
 import { useContactForms } from "./useContactForms";
 import Button from "../../components/common/Button/Button";
 import Notes from "../../components/common/Notes/Notes";
+import HeroBanner from "../../components/common/HeroBanner/HeroBanner";
 
 const ContactCard = ({
   city,
@@ -101,24 +102,10 @@ const ContactUsPage = () => {
   } = useContactForms();
   return (
     <Container maxW="100%" py={{ base: 10, md: 12 }} px={8}>
-      <Box
-        bgImage={`url(${contactImage})`}
-        bgSize="cover"
-        borderRadius="lg"
-        minH={{ base: "230px", md: "320px" }}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        position="relative"
-        overflow="hidden"
-      >
-        <Box position="absolute" inset={0} bg="brand.primary" opacity={0.1} />
-        <Box position="relative" textAlign="center">
-          <Heading as="h1" fontWeight="normal" color="brand.white">
-            Contact Us
-          </Heading>
-        </Box>
-      </Box>
+       <HeroBanner
+          bgImage={contactImage}
+          title="Contact Us"
+        />
       <Box pt={{ base: 10, md: 16 }}>
         <Flex
           direction={{ base: "column", md: "row" }}

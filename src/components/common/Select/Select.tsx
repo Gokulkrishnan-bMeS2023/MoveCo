@@ -66,7 +66,6 @@ const SelectField: React.FC<SelectProps> = ({
           }}
         >
           <SelectValueText placeholder={placeholder} />
-
           <SelectIndicator>
             <Box mb={1}>
               <FaSortDown size={16} />
