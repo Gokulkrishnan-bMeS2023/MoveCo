@@ -16,25 +16,15 @@ import {
   Span,
 } from "@chakra-ui/react";
 import { FiX, FiPlus, FiMinus } from "react-icons/fi";
-import Button from "../../components/common/Button/Button";
+import Button from "../../../components/common/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { useShoppingCart } from "./Useshoppingcart";
+import type { CartItem } from "./DTOs";
 
 const toaster = createToaster({
   placement: "top-end",
   duration: 2000,
 });
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-}
-
-interface CartItem extends Product {
-  quantity: number;
-}
 
 const EmptyCart = memo(
   ({ onStartShopping }: { onStartShopping: () => void }) => (

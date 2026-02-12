@@ -10,9 +10,9 @@ import {
   Span,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/common/Button/Button";
+import Button from "../../../components/common/Button/Button";
 import ProductCard from "./ProductCard";
-import { PRODUCTS, GRID_BREAKPOINTS } from "./data";
+import { PRODUCTS } from "./data";
 import { useShoppingCart } from "./Useshoppingcart";
 
 const PageHeader = () => (
@@ -41,7 +41,15 @@ const ProductPage = () => {
   return (
     <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
       <PageHeader />
-      <Grid templateColumns={GRID_BREAKPOINTS} gap={{ base: 4, sm: 6, md: 8 }}>
+      <Grid
+        templateColumns={{
+          base: "1fr",
+          sm: "repeat(2, 1fr)",
+          lg: "repeat(3, 1fr)",
+          xl: "repeat(4, 1fr)",
+        }}
+        gap={{ base: 4, sm: 6, md: 8 }}
+      >
         {PRODUCTS.map((product) => (
           <GridItem key={product.id}>
             <ProductCard

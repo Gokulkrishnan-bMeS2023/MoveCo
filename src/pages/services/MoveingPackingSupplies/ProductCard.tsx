@@ -9,7 +9,7 @@ import {
   Badge,
 } from "@chakra-ui/react";
 import { FiShoppingCart, FiCheck } from "react-icons/fi";
-import Button from "../../components/common/Button/Button";
+import Button from "../../../components/common/Button/Button";
 import type { Product } from "./DTOs";
 
 interface ProductCardProps {
@@ -95,7 +95,7 @@ const ProductCard = memo(
           </Text>
 
           {/* Action Buttons */}
-          <HStack gap={2} justify="flex-end" flexWrap="wrap">
+          <HStack gap={2} justify="flex-end">
             {isInCart && (
               <Button
                 label="View Cart"
@@ -111,11 +111,6 @@ const ProductCard = memo(
               leftIcon={isInCart ? <FiCheck /> : <FiShoppingCart />}
               onClick={() => onAddToCart(product)}
               disabled={isInCart}
-              aria-label={
-                isInCart
-                  ? "Product already in cart"
-                  : `Add ${product.name} to cart`
-              }
             />
           </HStack>
         </VStack>

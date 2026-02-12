@@ -5,21 +5,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { createToaster } from "@chakra-ui/react";
-
-// ============================================================================
-// TYPES
-// ============================================================================
-
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-}
-
-export interface CartItem extends Product {
-  quantity: number;
-}
+import type { CartItem, Product } from "./DTOs";
 
 // ============================================================================
 // CONSTANTS
