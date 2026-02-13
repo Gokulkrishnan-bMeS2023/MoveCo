@@ -1,23 +1,14 @@
-export interface ContactFormValues {
-  name: string;
-  email: string;
-  phone: string;
-  message?: string;
-}
-
-export interface ReferralFormValues {
-  yourName: string;
-  friendEmail: string;
-  friendPhone: string;
-}
-
-export type FormErrors<T> = Partial<Record<keyof T, string>>;
+import type {
+  ContactFormValues,
+  ReferralFormValues,
+  FormErrors,
+} from "./DTOs";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phoneRegex = /^[0-9+\-\s()]{7,}$/;
 
 export const validateContactForm = (
-  values: ContactFormValues,
+  values: ContactFormValues
 ): FormErrors<ContactFormValues> => {
   const errors: FormErrors<ContactFormValues> = {};
 
@@ -36,12 +27,12 @@ export const validateContactForm = (
   } else if (!phoneRegex.test(values.phone)) {
     errors.phone = "Enter a valid phone number";
   }
-  
+
   return errors;
 };
 
 export const validateReferralForm = (
-  values: ReferralFormValues,
+  values: ReferralFormValues
 ): FormErrors<ReferralFormValues> => {
   const errors: FormErrors<ReferralFormValues> = {};
 

@@ -7,25 +7,18 @@ import {
   Stack,
   Image,
 } from "@chakra-ui/react";
-import { FaPhoneAlt, FaUser, FaEnvelope, FaCalendarAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import InputField from "../../../components/common/Input/Input";
 import Button from "../../../components/common/Button/Button";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import Logistics from "../../../assets/Logistics.svg";
-
-interface InstantEstimateValues {
-  firstName: string;
-  lastName: string;
-  date: string;
-  phone: string;
-  email: string;
-}
+import type { InstantEstimateDTO, InstantEstimateErrors } from "./DTOs";
+import { validateInstantEstimate } from "./validation";
 
 const InstantOnlineEstimate = () => {
   const navigate = useNavigate();
-  const [values, setValues] = useState<InstantEstimateValues>({
+  const [values, setValues] = useState<InstantEstimateDTO>({
     firstName: "",
     lastName: "",
     date: "",
@@ -33,9 +26,10 @@ const InstantOnlineEstimate = () => {
     email: "",
   });
 
-  const [errors, setErrors] = useState<Partial<InstantEstimateValues>>({});
+  const [errors, setErrors] = useState<InstantEstimateErrors>({});
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (field: keyof InstantEstimateValues, value: string) => {
+  const handleChange = (field: keyof InstantEstimateDTO, value: string) => {
     setValues((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prev) => ({
@@ -44,62 +38,31 @@ const InstantOnlineEstimate = () => {
       }));
     }
   };
-const handleSubmit = async () => {
-  const newErrors: any = {};
 
-  if (!values.firstName) newErrors.firstName = "Name is required";
-  if (!values.lastName) newErrors.lastName = "Last name is required";
-  if (!values.date) newErrors.date = "Date is required";
-  if (!values.phone) newErrors.phone = "Phone number is required";
+  const handleSubmit = () => {
+  const newErrors = validateInstantEstimate(values);
 
-  if (!values.email) {
-    newErrors.email = "Email is required";
-  } else if (!/^\S+@\S+\.\S+$/.test(values.email)) {
-    newErrors.email = "Invalid email address";
-  }
-
-  // ❌ Stop here if validation fails
   if (Object.keys(newErrors).length > 0) {
     setErrors(newErrors);
     return;
   }
-
-  // ✅ Validation passed
-  setErrors({});
-
-  try {
-    const response = await fetch(
-      "https://workinsite-test-api.onrender.com/Register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName: values.firstName,
-          lastName: values.lastName,
-          email: values.email,
-          phone: values.phone,
-          movingDate: values.date,
-          estimateType: "Instant Online Estimate", // or dynamic
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Something went wrong");
-    }
-
-    const data = await response.json();
-    console.log("Success:", data);
-
-    // 🔀 Navigate only AFTER successful API call
-    navigate("/move-information");
-
-  } catch (error: any) {
-    console.error("API Error:", error.message);
-  }
+  navigate(
+  `/move-information?firstName=${values.firstName}&lastName=${values.lastName}&email=${values.email}&phone=${values.phone}&moveDate=${values.date}`
+);
+  fetch("https://workinsite-test-api.onrender.com/Register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      phone: values.phone,
+      movingDate: values.date,
+      estimateType: "Instant Online Estimate",
+    }),
+  }).catch((err) => console.error("Background API error:", err));
 };
 
 
@@ -112,7 +75,6 @@ const handleSubmit = async () => {
         gap={{ base: 6, md: 10 }}
         mb={12}
       >
-        {/* Left */}
         <Box maxW="600px" w="100%">
           <Heading as="h1" fontWeight="normal" mb={2}>
             Instant{" "}
@@ -121,8 +83,6 @@ const handleSubmit = async () => {
             </Text>
           </Heading>
         </Box>
-
-        {/* Right */}
         <Box maxW="500px" w="100%">
           <Text textStyle="size-2xl" textAlign={{ base: "left", md: "right" }}>
             Already have an inventory list? Avoid surprises and get an
@@ -131,21 +91,19 @@ const handleSubmit = async () => {
         </Box>
       </Flex>
       <Flex gap={10} align="center" direction={{ base: "column", md: "row" }}>
-        {/* Form Card */}
         <Box
-          bg="white"
+          bg="brand.white"
           p={8}
           borderRadius="xl"
           boxShadow="lg"
           w={{ base: "100%", md: "420px" }}
         >
           <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
-            📋 Get a Moving Quote
+            Get a Moving Quote
           </Heading>
           <Stack gap={4}>
             <InputField
               label="Name"
-              leftIcon={<FaUser color="var(--chakra-colors-brand-primary)" />}
               placeholder="Name"
               value={values.firstName}
               onChange={(e) => handleChange("firstName", e.target.value)}
@@ -154,7 +112,6 @@ const handleSubmit = async () => {
             />
             <InputField
               label="Last Name"
-              leftIcon={<FaUser color="var(--chakra-colors-brand-primary)" />}
               placeholder="Last Name"
               value={values.lastName}
               onChange={(e) => handleChange("lastName", e.target.value)}
@@ -163,9 +120,6 @@ const handleSubmit = async () => {
             />
             <DateInput
               label="Date"
-              leftIcon={
-                <FaCalendarAlt color="var(--chakra-colors-brand-primary)" />
-              }
               value={values.date}
               onChange={(e) => handleChange("date", e.target.value)}
               isRequired
@@ -174,9 +128,6 @@ const handleSubmit = async () => {
             <InputField
               label="Phone Number"
               placeholder="Phone Number"
-              leftIcon={
-                <FaPhoneAlt color="var(--chakra-colors-brand-primary)" />
-              }
               value={values.phone}
               onChange={(e) => handleChange("phone", e.target.value)}
               isRequired
@@ -184,9 +135,6 @@ const handleSubmit = async () => {
             />
             <InputField
               label="Email"
-              leftIcon={
-              <FaEnvelope color="var(--chakra-colors-brand-primary)" />
-              }
               placeholder="Email"
               value={values.email}
               onChange={(e) => handleChange("email", e.target.value)}
@@ -195,8 +143,9 @@ const handleSubmit = async () => {
             />
             <Button
               onClick={handleSubmit}
-              label="Get Your Quote"
+              label={isLoading ? "Submitting..." : "Get Your Quote"}
               variant="primary"
+              disabled={isLoading}
             />
             <Text textStyle="size-sm">
               Prefer to speak with us directly?{" "}

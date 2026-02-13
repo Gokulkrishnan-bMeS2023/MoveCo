@@ -16,6 +16,11 @@ import Button from "../../../components/common/Button/Button";
 import inhomemoveestimate from "../../../assets/in-home.jpg";
 import SelectField from "../../../components/common/Select/Select";
 import { useNavigate } from "react-router-dom";
+import type { MoveEstimateFormValues, MoveEstimateErrors } from "./DTOs";
+import { validateMoveEstimate } from "./validation";
+
+
+
 
 const timeOptions = [
   { label: "8AM - 10AM", value: "8AM-10AM" },
@@ -103,49 +108,33 @@ const stateOptions = [
   { label: "Wyoming", value: "WY" },
 ];
 
-interface MoveEstimateFormValues {
-  visitDate: string;
-  visitTime: string;
-  moveDate: string;
-  moveSize: string;
-  hearAbout: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  homePhone: string;
-  cellPhone: string;
-  workPhone: string;
-  faxPhone: string;
-  fromAddress: string;
-  apt: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  notes: string;
-}
+
 
 const InHomeMoveEstimate = () => {
   const navigate = useNavigate();
-  const [values, setValues] = useState<MoveEstimateFormValues>({
-    visitDate: "",
-    visitTime: "",
-    moveDate: "",
-    moveSize: "",
-    hearAbout: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    homePhone: "",
-    cellPhone: "",
-    workPhone: "",
-    faxPhone: "",
-    fromAddress: "",
-    apt: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    notes: "",
-  });
+const [values, setValues] = useState<MoveEstimateFormValues>({
+  visitDate: "",
+  visitTime: "",
+  moveDate: "",
+  moveSize: "",
+  hearAbout: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  homePhone: "",
+  cellPhone: "",
+  workPhone: "",
+  faxPhone: "",
+  fromAddress: "",
+  apt: "",
+  city: "",
+  state: "",
+  zipCode: "",
+  notes: "",
+});
+
+const [errors, setErrors] = useState<MoveEstimateErrors>({});
+
 
  const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
   setValues((prev) => ({ ...prev, [field]: value }));
@@ -159,37 +148,23 @@ const InHomeMoveEstimate = () => {
 };
 
 
-  const [errors, setErrors] = useState<
-    Partial<Record<keyof MoveEstimateFormValues, string>>>({});
+const handleSubmit = () => {
+  const newErrors = validateMoveEstimate(values);
 
-  const handleSubmit = () => {
-    const newErrors: Partial<Record<keyof MoveEstimateFormValues, string>> = {};
-    if (!values.visitDate) newErrors.visitDate = "Visit date is required";
-    if (!values.visitTime) newErrors.visitTime = "Preferred time is required";
-    if (!values.moveDate) newErrors.moveDate = "Move date is required";
-    if (!values.moveSize) newErrors.moveSize = "Move size is required";
-    if (!values.hearAbout) newErrors.hearAbout = "This field is required";
-    if (!values.firstName) newErrors.firstName = "First name is required";
-    if (!values.lastName) newErrors.lastName = "Last name is required";
-    if (!values.email) newErrors.email = "Email is required";
-    if (!values.homePhone) newErrors.homePhone = "Home phone is required";
-    if (!values.fromAddress) newErrors.fromAddress = "From address is required";
-    if (!values.city) newErrors.city = "City is required";
-    if (!values.state) newErrors.state = "State is required";
-    if (!values.zipCode) newErrors.zipCode = "Zip code is required";
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    return;
+  }
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
+  setErrors({});
+  alert("Form Submitted Successfully!");
 
-    setErrors({});
-    console.log("Submitted Data:", values);
-    // navigate("/next-page"); // when needed
-  };
+};
+
 
   return (
     <>
+      {/* HEADER SECTION */}
       <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
         <Flex
           direction={{ base: "column", md: "row" }}

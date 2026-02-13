@@ -3,7 +3,6 @@ import {
   Field,
   Heading,
   SimpleGrid,
-  Button,
   Box,
   Flex,
   Text,
@@ -12,60 +11,40 @@ import React from "react";
 import InputField from "../../../components/common/Input/Input";
 import DateInput from "../../../components/common/DateInput/DateInput";
 
-export interface EducationValues {
-  schoolName: string;
-  location: string;
-  years: string;
-  degree: string;
-  major: string;
-  otherTraining: string;
-  additionalInfo: string;
+import type { 
+  EducationDTO, 
+  EmploymentExperienceDTO
+} from "./DTOs";
+import Button from "../../../components/common/Button/Button";
+
+interface Step2AddressProps {
+  education: EducationDTO;
+  experiences: EmploymentExperienceDTO[];
+  onEducationChange: <K extends keyof EducationDTO>(
+    field: K,
+    value: EducationDTO[K]
+  ) => void;
+  onExperienceChange: <K extends keyof EmploymentExperienceDTO>(
+    index: number,
+    field: K,
+    value: EmploymentExperienceDTO[K]
+  ) => void;
+  onAddExperience: () => void;
+  onRemoveExperience: (index: number) => void;
 }
 
-export interface EmploymentExperience {
-  employer: string;
-  jobTitle: string;
-  from: string;
-  to: string;
-  priorPosition: string;
-  startSalary: string;
-  endSalary: string;
-  supervisorName: string;
-  supervisorPhone: string;
-  reason: string;
-  duties: string;
-}
-
-const Step2Address = () => {
-  const emptyExperience: EmploymentExperience = {
-    employer: "",
-    jobTitle: "",
-    from: "",
-    to: "",
-    priorPosition: "",
-    startSalary: "",
-    endSalary: "",
-    supervisorName: "",
-    supervisorPhone: "",
-    reason: "",
-    duties: "",
-  };
-
-  const [experiences, setExperiences] =
-    React.useState<EmploymentExperience[]>([emptyExperience]);
-
-  const addExperience = () => {
-    setExperiences((prev) => [...prev, emptyExperience]);
-  };
-
-  const removeExperience = (index: number) => {
-    setExperiences((prev) => prev.filter((_, i) => i !== index));
-  };
-
+const Step2Address: React.FC<Step2AddressProps> = ({
+  education,
+  experiences,
+  onEducationChange,
+  onExperienceChange,
+  onAddExperience,
+  onRemoveExperience,
+}) => {
   return (
     <>
       <Box
-        bg="white"
+        bg="brand.white"
         p={{ base: 6, md: 8 }}
         borderRadius="2xl"
         boxShadow="lg"
@@ -77,24 +56,63 @@ const Step2Address = () => {
             Education
           </Heading>
           <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
-            <InputField label="School Name" placeholder="School Name" />
-            <InputField label="Location" placeholder="Location" />
-            <InputField label="Years" placeholder="Years" />
+            <InputField
+              label="School Name"
+              placeholder="School Name"
+              value={education.schoolName}
+              onChange={(e) => onEducationChange("schoolName", e.target.value)}
+            />
+            <InputField
+              label="Location"
+              placeholder="Location"
+              value={education.location}
+              onChange={(e) => onEducationChange("location", e.target.value)}
+            />
+            <InputField
+              label="Years"
+              placeholder="Years"
+              value={education.years}
+              onChange={(e) => onEducationChange("years", e.target.value)}
+            />
           </SimpleGrid>
           <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
-            <InputField label="Degree Received" placeholder="Degree Received" />
-            <InputField label="Major" placeholder="Major" />
-            <InputField label="Other training, certifications, or licenses held" placeholder="Other training, certifications, or licenses held"/>
+            <InputField
+              label="Degree Received"
+              placeholder="Degree Received"
+              value={education.degree}
+              onChange={(e) => onEducationChange("degree", e.target.value)}
+            />
+            <InputField
+              label="Major"
+              placeholder="Major"
+              value={education.major}
+              onChange={(e) => onEducationChange("major", e.target.value)}
+            />
+            <InputField
+              label="Other training, certifications, or licenses held"
+              placeholder="Other training, certifications, or licenses held"
+              value={education.otherTraining}
+              onChange={(e) =>
+                onEducationChange("otherTraining", e.target.value)
+              }
+            />
           </SimpleGrid>
 
           <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-            <InputField label="List other information pertinent to the employment you are seeking:" placeholder="Additional Information" />
+            <InputField
+              label="List other information pertinent to the employment you are seeking:"
+              placeholder="Additional Information"
+              value={education.additionalInfo}
+              onChange={(e) =>
+                onEducationChange("additionalInfo", e.target.value)
+              }
+            />
           </SimpleGrid>
         </Stack>
       </Box>
 
       <Box
-        bg="white"
+        bg="brand.white"
         p={{ base: 6, md: 8 }}
         borderRadius="2xl"
         boxShadow="lg"
@@ -106,57 +124,130 @@ const Step2Address = () => {
             Previous Employment (Most Recent First)
           </Heading>
 
-          {experiences.map((_, index) => (
-            <Box>
+          {experiences.map((experience, index) => (
+            <Box key={index}>
               <Flex justify="space-between" align="center" mb={4}>
-                <Heading size="sm">Employment #{index + 1}</Heading>
+                <Heading as="h4">Employment #{index + 1}</Heading>
                 {experiences.length > 1 && (
                   <Button
-                    size="sm"
-                    colorScheme="red"
-                    onClick={() => removeExperience(index)}
-                  >
-                    Remove
+                   variant="outline"
+                    onClick={() => onRemoveExperience(index)} label={"Remove"}                   >
                   </Button>
                 )}
               </Flex>
 
               <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
-                <InputField label="Employer" placeholder="Employer"/>
-                <InputField label="Job Title" placeholder="Job Title" />
+                <InputField
+                  label="Employer"
+                  placeholder="Employer"
+                  value={experience.employer}
+                  onChange={(e) =>
+                    onExperienceChange(index, "employer", e.target.value)
+                  }
+                />
+                <InputField
+                  label="Job Title"
+                  placeholder="Job Title"
+                  value={experience.jobTitle}
+                  onChange={(e) =>
+                    onExperienceChange(index, "jobTitle", e.target.value)
+                  }
+                />
                 <Field.Root>
                   <Field.Label>Dates Employed from &amp; to</Field.Label>
 
                   <Flex gap={3} align="center">
-                    <DateInput label="" placeholder="From" />
+                    <DateInput
+                      label=""
+                      placeholder="From"
+                      value={experience.from}
+                      onChange={(e) =>
+                        onExperienceChange(index, "from", e.target.value)
+                      }
+                    />
                     <Text color="gray.500" fontSize="sm">
                       to
                     </Text>
-                    <DateInput label="" placeholder="To" />
+                    <DateInput
+                      label=""
+                      placeholder="To"
+                      value={experience.to}
+                      onChange={(e) =>
+                        onExperienceChange(index, "to", e.target.value)
+                      }
+                    />
                   </Flex>
                 </Field.Root>
               </SimpleGrid>
 
               <SimpleGrid columns={{ base: 1, md: 3 }} gap={4} mt={4}>
-                <InputField label="Prior Positions" placeholder="Prior Positions"/>
-                <InputField label="Starting Salary" placeholder="Starting salary" />
-                <InputField label="Ending Salary" placeholder="Ending Salary" />
+                <InputField
+                  label="Prior Positions"
+                  placeholder="Prior Positions"
+                  value={experience.priorPosition}
+                  onChange={(e) =>
+                    onExperienceChange(index, "priorPosition", e.target.value)
+                  }
+                />
+                <InputField
+                  label="Starting Salary"
+                  placeholder="Starting salary"
+                  value={experience.startSalary}
+                  onChange={(e) =>
+                    onExperienceChange(index, "startSalary", e.target.value)
+                  }
+                />
+                <InputField
+                  label="Ending Salary"
+                  placeholder="Ending Salary"
+                  value={experience.endSalary}
+                  onChange={(e) =>
+                    onExperienceChange(index, "endSalary", e.target.value)
+                  }
+                />
               </SimpleGrid>
 
               <SimpleGrid columns={{ base: 1, md: 3 }} gap={4} mt={4}>
-                 <InputField label="Supervisor Name" placeholder="Supervisor Name" />
-                <InputField label="Supervisor Phone" placeholder="Supervisor Phone"/>
-                <InputField label="Reason for Leaving" placeholder="Reason for Leaving" />
+                <InputField
+                  label="Supervisor Name"
+                  placeholder="Supervisor Name"
+                  value={experience.supervisorName}
+                  onChange={(e) =>
+                    onExperienceChange(index, "supervisorName", e.target.value)
+                  }
+                />
+                <InputField
+                  label="Supervisor Phone"
+                  placeholder="Supervisor Phone"
+                  value={experience.supervisorPhone}
+                  onChange={(e) =>
+                    onExperienceChange(index, "supervisorPhone", e.target.value)
+                  }
+                />
+                <InputField
+                  label="Reason for Leaving"
+                  placeholder="Reason for Leaving"
+                  value={experience.reason}
+                  onChange={(e) =>
+                    onExperienceChange(index, "reason", e.target.value)
+                  }
+                />
               </SimpleGrid>
 
               <SimpleGrid columns={{ base: 1, md: 1 }} gap={4} mt={4}>
-               <InputField label="Duties Performed" placeholder="Duties Performed" />
+                <InputField
+                  label="Duties Performed"
+                  placeholder="Duties Performed"
+                  value={experience.duties}
+                  onChange={(e) =>
+                    onExperienceChange(index, "duties", e.target.value)
+                  }
+                />
               </SimpleGrid>
             </Box>
           ))}
 
-          <Button onClick={addExperience} bg={"brand.primary"}>
-            + Add Another Experience
+          <Button onClick={onAddExperience} label={"+ Add Another Experience"} variant={"primary"}>
           </Button>
         </Stack>
       </Box>

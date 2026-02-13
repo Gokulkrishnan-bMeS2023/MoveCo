@@ -102,7 +102,7 @@ const ContactUsPage = () => {
   } = useContactForms();
   return (
     <Container maxW="100%" py={{ base: 10, md: 12 }} px={8}>
-       <HeroBanner
+      <HeroBanner
           bgImage={contactImage}
           title="Contact Us"
         />
@@ -263,6 +263,7 @@ const ContactUsPage = () => {
                     onClick={() => {
                       if (submitContactForm()) {
                         console.log("CONTACT DATA", contactValues);
+                        alert("Your message has been submitted successfully!");
                       }
                     }}
                   />
@@ -336,6 +337,7 @@ const ContactUsPage = () => {
                     onClick={() => {
                       if (submitReferralForm()) {
                         console.log("REFERRAL DATA", referralValues);
+                        alert("Referral form submitted successfully!");
                       }
                     }}
                   />

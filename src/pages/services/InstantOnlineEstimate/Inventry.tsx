@@ -10,13 +10,17 @@ import {
   Container,
   Icon,
   Heading,
+  Box,
 } from "@chakra-ui/react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useState } from "react";
 import { Button as ChakraButton } from "@chakra-ui/react";
-import Button from "../../../components/common/Button/Button"; 
+import Button from "../../../components/common/Button/Button";
+import type { InventoryDTO, InventorySection } from "./DTOs";
+import { validateInventory } from "./validation";
 
-const inventorySections = [
+
+const inventorySections: InventorySection[] = [
   {
     title: "Appliances",
     items: [
@@ -259,8 +263,11 @@ const inventorySections = [
 ];
 
 const Inventory = () => {
-  const [quantities, setQuantities] = useState<Record<string, number>>({});
+  const [quantities, setQuantities] =
+    useState<InventoryDTO["quantities"]>({});
   const [openItems, setOpenItems] = useState<string[]>([]);
+  const [errors, setErrors] = useState<{ quantities?: string }>({});
+  const [successMessage, setSuccessMessage] = useState("");
 
   const increase = (item: string) => {
     setQuantities((prev) => ({
@@ -281,13 +288,30 @@ const Inventory = () => {
   };
 
   const handleExpandAll = () => {
-    const allSections = inventorySections.map((_, index) => `section-${index}`);
+    const allSections = inventorySections.map(
+      (_, index) => `section-${index}`
+    );
     setOpenItems(allSections);
+  };
+
+  const handleSubmit = () => {
+    const inventoryData = { quantities };
+    const validationErrors = validateInventory(inventoryData);
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setSuccessMessage("");
+      return;
+    }
+
+    setErrors({});
+    setSuccessMessage("Inventory successfully submitted!");
+
+    console.log("Submitted Inventory:", quantities);
   };
 
   return (
     <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
-      {/* Header with Title and Buttons */}
       <Flex
         justify="space-between"
         align={{ base: "flex-start", md: "center" }}
@@ -299,7 +323,6 @@ const Inventory = () => {
           Inventory
         </Heading>
 
-        {/* Collapse/Expand Buttons */}
         <Flex gap={3}>
           <Button
             label="Collapse All"
@@ -320,7 +343,6 @@ const Inventory = () => {
         </Flex>
       </Flex>
 
-      {/* Accordion - Single Expand Mode */}
       <AccordionRoot
         value={openItems}
         onValueChange={(e) => setOpenItems(e.value)}
@@ -337,7 +359,6 @@ const Inventory = () => {
             px={4}
             py={4}
           >
-            {/* Accordion Header */}
             <AccordionItemTrigger px={0}>
               <Flex flex="1" justify="space-between" align="center">
                 <Text textStyle="size-xl" fontWeight="600">
@@ -352,7 +373,7 @@ const Inventory = () => {
                 </AccordionItemIndicator>
               </Flex>
             </AccordionItemTrigger>
-            {/* Accordion Content */}
+
             <AccordionItemContent py={2}>
               <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
                 {section.items.map((item) => {
@@ -371,27 +392,19 @@ const Inventory = () => {
                       <Text fontSize="sm" fontWeight="500">
                         {item}
                       </Text>
-                      {/* Quantity Controls */}
+
                       <Flex align="center" gap={2}>
-                        {/* Minus */}
                         <ChakraButton
                           size="sm"
                           variant="outline"
                           minW="32px"
                           h="32px"
-                          p={0}
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="center"
                           onClick={() => decrease(item)}
                           disabled={count === 0}
-                          color="brand.primary"
-                          borderColor="brand.primary"
                         >
                           <FaMinus />
                         </ChakraButton>
 
-                        {/* Count */}
                         <Text w="20px" textAlign="center" fontSize="sm">
                           {count}
                         </Text>
@@ -400,13 +413,8 @@ const Inventory = () => {
                           size="sm"
                           minW="32px"
                           h="32px"
-                          p={0}
                           bg="brand.primary"
                           color="white"
-                          _hover={{ bg: "brand.primary" }}
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="center"
                           onClick={() => increase(item)}
                         >
                           <FaPlus />
@@ -420,6 +428,30 @@ const Inventory = () => {
           </AccordionItem>
         ))}
       </AccordionRoot>
+
+      {/* Submit Section */}
+      <Box mt={8} textAlign={{ base: "center", md: "right" }}>
+        
+
+        <Button
+          label="Submit Inventory"
+          variant="primary"
+          onClick={handleSubmit}
+          px={8}
+          py={6}
+        />
+        {errors.quantities && (
+          <Text color="red.500" mt={4}>
+            {errors.quantities}
+          </Text>
+        )}
+
+        {successMessage && (
+          <Text color="green.600" mt={4}>
+            {successMessage}
+          </Text>
+        )}
+      </Box>
     </Container>
   );
 };

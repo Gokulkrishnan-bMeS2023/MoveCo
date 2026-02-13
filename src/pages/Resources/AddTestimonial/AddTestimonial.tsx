@@ -13,14 +13,8 @@ import Notes from "../../../components/common/Notes/Notes";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import Button from "../../../components/common/Button/Button";
 import { useNavigate } from "react-router-dom";
-
-interface TestimonialFormValues {
-  firstName: string;
-  lastName: string;
-  moveDate: string;
-  email: string;
-  comments: string;
-}
+import type { TestimonialFormValues, TestimonialErrors } from "./DTOs";
+import { validateTestimonial } from "./validation";
 
 const AddTestimonial = () => {
   const navigate = useNavigate();
@@ -32,21 +26,16 @@ const AddTestimonial = () => {
     comments: "",
   });
 
-  const [errors, setErrors] = useState<Partial<TestimonialFormValues>>({});
+  const [errors, setErrors] = useState<TestimonialErrors>({});
+
 
   const handleChange = (field: keyof TestimonialFormValues, value: string) => {
     setValues((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-  const handleSubmit = () => {
-  const newErrors: Partial<TestimonialFormValues> = {};
-
-  if (!values.firstName) newErrors.firstName = "First name is required";
-  if (!values.lastName) newErrors.lastName = "Last name is required";
-  if (!values.moveDate) newErrors.moveDate = "Move date is required";
-  if (!values.email) newErrors.email = "Email is required";
-  if (!values.comments) newErrors.comments = "Comments are required";
+const handleSubmit = () => {
+  const newErrors = validateTestimonial(values);
 
   if (Object.keys(newErrors).length > 0) {
     setErrors(newErrors);
@@ -55,8 +44,9 @@ const AddTestimonial = () => {
 
   setErrors({});
   console.log("Submitted Data:", values);
-};
 
+  alert("Testimonial Submitted Successfully!");
+};
 
   return (
     <Container maxW="100%" py={{ base: 10, md: 12 }} px={8}>

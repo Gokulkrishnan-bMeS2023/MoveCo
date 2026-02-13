@@ -1,11 +1,9 @@
 import { useState } from "react";
 import {
-  type ContactFormValues,
-  type ReferralFormValues,
-  type FormErrors,
   validateContactForm,
   validateReferralForm,
-} from "./validation/contactValidation";
+} from "./contactValidation";
+import type { ContactFormValues, FormErrors, ReferralFormValues } from "./DTOs";
 
 const initialContactState: ContactFormValues = {
   name: "",
