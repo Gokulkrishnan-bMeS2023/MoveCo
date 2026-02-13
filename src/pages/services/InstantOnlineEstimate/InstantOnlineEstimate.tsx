@@ -40,31 +40,32 @@ const InstantOnlineEstimate = () => {
   };
 
   const handleSubmit = () => {
-  const newErrors = validateInstantEstimate(values);
+    const newErrors = validateInstantEstimate(values);
+    setIsLoading(true);
 
-  if (Object.keys(newErrors).length > 0) {
-    setErrors(newErrors);
-    return;
-  }
-  navigate(
-  `/move-information?firstName=${values.firstName}&lastName=${values.lastName}&email=${values.email}&phone=${values.phone}&moveDate=${values.date}`
-);
-  fetch("https://workinsite-test-api.onrender.com/Register", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      firstName: values.firstName,
-      lastName: values.lastName,
-      email: values.email,
-      phone: values.phone,
-      movingDate: values.date,
-      estimateType: "Instant Online Estimate",
-    }),
-  }).catch((err) => console.error("Background API error:", err));
-};
-
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setIsLoading(false);
+      return;
+    }
+    navigate(
+      `/move-information?firstName=${values.firstName}&lastName=${values.lastName}&email=${values.email}&phone=${values.phone}&moveDate=${values.date}`,
+    );
+    fetch("https://workinsite-test-api.onrender.com/Register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        phone: values.phone,
+        movingDate: values.date,
+        estimateType: "Instant Online Estimate",
+      }),
+    }).catch((err) => console.error("Background API error:", err));
+  };
 
   return (
     <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
