@@ -1,4 +1,4 @@
-import { useCallback, memo } from "react";
+import { useCallback, memo, useState, useMemo } from "react";
 import {
   Box,
   Container,
@@ -7,16 +7,19 @@ import {
   Image,
   HStack,
   VStack,
-  Table,
   IconButton,
-  Input,
   Separator,
   Badge,
   createToaster,
   Span,
+  Grid,
+  Dialog,
+  Input as ChakraInput,
+  Stack,
 } from "@chakra-ui/react";
-import { FiX, FiPlus, FiMinus } from "react-icons/fi";
+import { FiX, FiShoppingCart } from "react-icons/fi";
 import Button from "../../../components/common/Button/Button";
+import SelectField from "../../../components/common/Select/Select";
 import { useNavigate } from "react-router-dom";
 import { useShoppingCart } from "./Useshoppingcart";
 import type { CartItem } from "./DTOs";
@@ -26,6 +29,95 @@ const toaster = createToaster({
   duration: 2000,
 });
 
+// QUANTITY SELECT MODAL
+
+interface QuantityModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  currentQuantity: number;
+  itemName: string;
+  onConfirm: (quantity: number) => void;
+}
+
+const QuantityModal = memo(
+  ({
+    isOpen,
+    onClose,
+    currentQuantity,
+    itemName,
+    onConfirm,
+  }: QuantityModalProps) => {
+    const [quantity, setQuantity] = useState(currentQuantity.toString());
+
+    const handleConfirm = () => {
+      const qty = parseInt(quantity) || 1;
+      if (qty > 0) {
+        onConfirm(qty);
+        onClose();
+      }
+    };
+
+    const handleCancel = () => {
+      setQuantity(currentQuantity.toString());
+      onClose();
+    };
+
+    return (
+      <Dialog.Root open={isOpen} onOpenChange={handleCancel}>
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content maxW="400px">
+            <Dialog.Header>
+              <Dialog.Title fontSize="xl" fontWeight="bold">
+                Enter Quantity
+              </Dialog.Title>
+            </Dialog.Header>
+            <Dialog.Body>
+              <VStack gap={4} align="stretch">
+                <Text color="gray.600">
+                  Update quantity for <strong>{itemName}</strong>
+                </Text>
+                <Box>
+                  <Text fontSize="sm" color="gray.600" mb={2}>
+                    Quantity
+                  </Text>
+                  <ChakraInput
+                    type="number"
+                    min="1"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    size="lg"
+                    autoFocus
+                  />
+                </Box>
+              </VStack>
+            </Dialog.Body>
+            <Dialog.Footer>
+              <HStack gap={3} justify="flex-end" w="100%">
+                <Button
+                  label="Cancel"
+                  variant="outline"
+                  onClick={handleCancel}
+                />
+                <Button
+                  label="Confirm"
+                  variant="primary"
+                  onClick={handleConfirm}
+                />
+              </HStack>
+            </Dialog.Footer>
+            <Dialog.CloseTrigger />
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Dialog.Root>
+    );
+  },
+);
+
+QuantityModal.displayName = "QuantityModal";
+
+// EMPTY CART
+
 const EmptyCart = memo(
   ({ onStartShopping }: { onStartShopping: () => void }) => (
     <Box
@@ -34,17 +126,34 @@ const EmptyCart = memo(
       borderRadius="xl"
       textAlign="center"
       boxShadow="md"
+      maxW="600px"
+      mx="auto"
     >
-      <Text fontSize={{ base: "xl", md: "2xl" }} color="gray.400" mb={4}>
-        🛒
-      </Text>
-      <Text fontSize={{ base: "lg", md: "xl" }} color="gray.500" mb={6}>
+      <Box
+        fontSize={{ base: "4xl", md: "5xl" }}
+        color="gray.300"
+        mb={4}
+        display="flex"
+        justifyContent="center"
+      >
+        <FiShoppingCart />
+      </Box>
+      <Heading
+        fontSize={{ base: "xl", md: "2xl" }}
+        color="gray.700"
+        mb={2}
+        fontWeight="semibold"
+      >
         Your cart is empty
+      </Heading>
+      <Text fontSize={{ base: "md", md: "lg" }} color="gray.500" mb={6}>
+        Add some products to get started
       </Text>
       <Button
         label="Start Shopping"
         variant="primary"
         py={3}
+        px={6}
         onClick={onStartShopping}
       />
     </Box>
@@ -53,7 +162,7 @@ const EmptyCart = memo(
 
 EmptyCart.displayName = "EmptyCart";
 
-// ============================================================================
+// CART ITEM CARD
 
 interface CartItemCardProps {
   item: CartItem;
@@ -63,290 +172,258 @@ interface CartItemCardProps {
 
 const CartItemCard = memo(
   ({ item, onUpdateQuantity, onRemove }: CartItemCardProps) => {
-    const handleQuantityChange = useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        const val = parseInt(e.target.value) || 1;
-        onUpdateQuantity(item.id, val);
-      },
-      [item.id, onUpdateQuantity],
-    );
+    const [showModal, setShowModal] = useState(false);
+
+    // Generate quantity options dynamically based on current quantity
+    const quantityOptions = useMemo(() => {
+      const baseOptions = [
+        { label: "1", value: "1" },
+        { label: "2", value: "2" },
+      ];
+
+      // If current quantity is greater than 10, add it to the list
+      const currentQty = item.quantity;
+      if (currentQty > 2) {
+        // Insert the current quantity before "More..."
+        baseOptions.push({
+          label: currentQty.toString(),
+          value: currentQty.toString(),
+        });
+      }
+
+      // Always add "More..." option at the end
+      baseOptions.push({ label: "More...", value: "more" });
+
+      return baseOptions;
+    }, [item.quantity]);
+
+    const handleQuantityChange = (details: { value: string[] }) => {
+      const value = details.value[0];
+
+      if (value === "more") {
+        setShowModal(true);
+      } else if (value) {
+        onUpdateQuantity(item.id, parseInt(value));
+      }
+    };
+
+    const handleModalConfirm = (quantity: number) => {
+      onUpdateQuantity(item.id, quantity);
+    };
 
     return (
-      <Box bg="white" borderRadius="lg" p={4} boxShadow="md">
-        <HStack gap={3} align="start" mb={3}>
-          <Image
-            src={item.image}
-            alt={item.name}
-            boxSize="80px"
-            objectFit="cover"
-            borderRadius="md"
-            flexShrink={0}
-            loading="lazy"
-          />
-          <VStack align="start" gap={1} flex="1">
-            <Text fontWeight="semibold" color="gray.800" fontSize="sm">
-              {item.name}
-            </Text>
-            <Text fontWeight="bold" color="brand.primary" fontSize="lg">
-              ${item.price.toFixed(2)}
-            </Text>
-          </VStack>
-          <IconButton
-            aria-label={`Remove ${item.name}`}
-            size="sm"
-            colorPalette="red"
-            variant="ghost"
-            onClick={() => onRemove(item.id)}
-          >
-            <FiX />
-          </IconButton>
-        </HStack>
+      <>
+        <Box
+          bg="white"
+          borderRadius="lg"
+          p={{ base: 4, md: 5 }}
+          boxShadow="sm"
+          border="1px solid"
+          borderColor="gray.200"
+          transition="all 0.2s"
+          _hover={{ boxShadow: "md" }}
+        >
+          <HStack gap={4} align="start">
+            {/* Product Image */}
+            <Box position="relative" flexShrink={0}>
+              <Image
+                src={item.image}
+                alt={item.name}
+                boxSize={{ base: "80px", md: "100px" }}
+                objectFit="cover"
+                borderRadius="md"
+                loading="lazy"
+              />
+            </Box>
 
-        <HStack justify="space-between" align="center">
-          <HStack gap={2}>
-            <IconButton
-              aria-label="Decrease quantity"
-              size="sm"
-              bg="brand.primary"
-              onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-              disabled={item.quantity <= 1}
-            >
-              <FiMinus />
-            </IconButton>
-            <Input
-              value={item.quantity}
-              onChange={handleQuantityChange}
-              w="50px"
-              size="sm"
-              textAlign="center"
-              fontWeight="semibold"
-              min={1}
-            />
-            <IconButton
-              aria-label="Increase quantity"
-              size="sm"
-              bg="brand.primary"
-              onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-            >
-              <FiPlus />
-            </IconButton>
+            {/* Product Details */}
+            <VStack align="start" gap={2} flex="1" minW="0">
+              <HStack justify="space-between" w="100%" align="start">
+                <Text
+                  fontWeight="semibold"
+                  color="gray.800"
+                  fontSize={{ base: "md", md: "lg" }}
+                  lineClamp={2}
+                  flex="1"
+                >
+                  {item.name}
+                </Text>
+                <IconButton
+                  aria-label={`Remove ${item.name}`}
+                  size="sm"
+                  colorPalette="red"
+                  variant="ghost"
+                  onClick={() => onRemove(item.id)}
+                  flexShrink={0}
+                >
+                  <FiX />
+                </IconButton>
+              </HStack>
+
+              <Text
+                fontWeight="bold"
+                color="brand.primary"
+                fontSize={{ base: "lg", md: "xl" }}
+              >
+                ${item.price.toFixed(2)}
+              </Text>
+
+              <HStack
+                justify="space-between"
+                w="100%"
+                mt={2}
+                flexWrap={{ base: "wrap", sm: "nowrap" }}
+                gap={3}
+              >
+                {/* Quantity Selector */}
+                <HStack gap={2} onClick={(e) => e.stopPropagation()}>
+                  <Text
+                    fontSize="sm"
+                    color="gray.600"
+                    fontWeight="medium"
+                    flexShrink={0}
+                  >
+                    Qty:
+                  </Text>
+                  <Box width="110px">
+                    <SelectField
+                      options={quantityOptions}
+                      value={item.quantity.toString()}
+                      onValueChange={handleQuantityChange}
+                      placeholder="Select"
+                    />
+                  </Box>
+                </HStack>
+
+                {/* Subtotal */}
+                <VStack align="end" gap={0} flexShrink={0}>
+                  <Text fontSize="xs" color="gray.500">
+                    Subtotal
+                  </Text>
+                  <Text
+                    fontWeight="bold"
+                    color="gray.800"
+                    fontSize={{ base: "lg", md: "xl" }}
+                  >
+                    ${(item.price * item.quantity).toFixed(2)}
+                  </Text>
+                </VStack>
+              </HStack>
+            </VStack>
           </HStack>
-          <Text fontWeight="bold" color="gray.800" fontSize="lg">
-            ${(item.price * item.quantity).toFixed(2)}
-          </Text>
-        </HStack>
-      </Box>
+        </Box>
+
+        <QuantityModal
+          isOpen={showModal}
+          onClose={() => setShowModal(false)}
+          currentQuantity={item.quantity}
+          itemName={item.name}
+          onConfirm={handleModalConfirm}
+        />
+      </>
     );
   },
 );
 
 CartItemCard.displayName = "CartItemCard";
 
-// ============================================================================
-
-interface CartItemRowProps {
-  item: CartItem;
-  onUpdateQuantity: (id: number, quantity: number) => void;
-  onRemove: (id: number) => void;
-}
-
-const CartItemRow = memo(
-  ({ item, onUpdateQuantity, onRemove }: CartItemRowProps) => {
-    const handleQuantityChange = useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        const val = parseInt(e.target.value) || 1;
-        onUpdateQuantity(item.id, val);
-      },
-      [item.id, onUpdateQuantity],
-    );
-
-    return (
-      <Table.Row>
-        <Table.Cell>
-          <IconButton
-            aria-label={`Remove ${item.name}`}
-            size="sm"
-            colorPalette="red"
-            variant="ghost"
-            onClick={() => onRemove(item.id)}
-          >
-            <FiX />
-          </IconButton>
-        </Table.Cell>
-        <Table.Cell textStyle="size-md">
-          <HStack gap={4}>
-            <Image
-              src={item.image}
-              alt={item.name}
-              boxSize="60px"
-              objectFit="cover"
-              borderRadius="md"
-              loading="lazy"
-            />
-            <Text fontWeight="semibold" color="gray.800">
-              {item.name}
-            </Text>
-          </HStack>
-        </Table.Cell>
-        <Table.Cell textStyle="size-md">
-          <Text fontWeight="semibold" color="gray.700">
-            ${item.price.toFixed(2)}
-          </Text>
-        </Table.Cell>
-        <Table.Cell textStyle="size-md">
-          <HStack justify="center" gap={2}>
-            <IconButton
-              aria-label="Decrease quantity"
-              size="sm"
-              onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-              bg="brand.primary"
-              disabled={item.quantity <= 1}
-            >
-              <FiMinus />
-            </IconButton>
-            <Input
-              value={item.quantity}
-              onChange={handleQuantityChange}
-              w="60px"
-              textAlign="center"
-              fontWeight="semibold"
-              min={1}
-            />
-            <IconButton
-              aria-label="Increase quantity"
-              size="sm"
-              bg="brand.primary"
-              onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-            >
-              <FiPlus />
-            </IconButton>
-          </HStack>
-        </Table.Cell>
-        <Table.Cell textStyle="size-lg">
-          <Text fontWeight="bold" color="gray.800">
-            ${(item.price * item.quantity).toFixed(2)}
-          </Text>
-        </Table.Cell>
-      </Table.Row>
-    );
-  },
-);
-
-CartItemRow.displayName = "CartItemRow";
-
-// ============================================================================
+// CART TOTALS
 
 interface CartTotalsProps {
   subtotal: number;
   tax: number;
   total: number;
   onCheckout: () => void;
+  isFixed?: boolean;
 }
 
 const CartTotals = memo(
-  ({ subtotal, tax, total, onCheckout }: CartTotalsProps) => {
+  ({ subtotal, tax, total, onCheckout, isFixed = false }: CartTotalsProps) => {
     return (
       <Box
         bg="white"
-        p={{ base: 6, md: 8 }}
+        p={{ base: 5, md: 6 }}
         borderRadius="xl"
         boxShadow="md"
-        maxW={{ base: "100%", md: "500px" }}
-        ml={{ base: 0, md: "auto" }}
-        w="100%"
+        border="1px solid"
+        borderColor="gray.200"
+        h="fit-content"
+        position={isFixed ? { base: "relative", lg: "sticky" } : "relative"}
+        top={isFixed ? { lg: "20px" } : undefined}
       >
         <Heading
-          fontSize={{ base: "xl", md: "2xl" }}
+          fontSize={{ base: "lg", md: "xl" }}
           fontWeight="bold"
           color="gray.800"
-          mb={{ base: 4, md: 6 }}
+          mb={5}
         >
-          Cart totals
+          Order Summary
         </Heading>
 
         <VStack gap={4} align="stretch">
           <HStack justify="space-between">
-            <Text fontSize={{ base: "md", md: "lg" }} color="gray.600">
+            <Text fontSize="md" color="gray.600">
               Subtotal
             </Text>
-            <Text
-              fontSize={{ base: "md", md: "lg" }}
-              fontWeight="semibold"
-              color="gray.800"
-            >
+            <Text fontSize="md" fontWeight="semibold" color="gray.800">
               ${subtotal.toFixed(2)}
             </Text>
           </HStack>
 
           <HStack justify="space-between" flexWrap="wrap">
-            <Text fontSize={{ base: "md", md: "lg" }} color="gray.600">
+            <Text fontSize="md" color="gray.600">
               Shipping
             </Text>
             <Badge
-              colorPalette="brand.primary"
-              fontSize={{ base: "sm", md: "md" }}
+              colorPalette="green"
+              fontSize="sm"
               px={3}
               py={1}
+              variant="solid"
             >
-              Free Shipping
+              FREE
             </Badge>
           </HStack>
 
           <HStack justify="space-between" align="start">
             <VStack align="start" gap={0}>
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.600">
+              <Text fontSize="md" color="gray.600">
                 Tax
               </Text>
-              <Text
-                fontSize="xs"
-                color="gray.400"
-                display={{ base: "none", sm: "block" }}
-              >
-                (estimated for the United States (US))
+              <Text fontSize="xs" color="gray.400">
+                (US estimated)
               </Text>
             </VStack>
-            <Text
-              fontSize={{ base: "md", md: "lg" }}
-              fontWeight="semibold"
-              color="gray.800"
-            >
+            <Text fontSize="md" fontWeight="semibold" color="gray.800">
               ${tax.toFixed(2)}
             </Text>
           </HStack>
 
-          <Separator />
+          <Separator borderColor="gray.300" />
 
-          <HStack justify="space-between">
-            <Text
-              fontSize={{ base: "lg", md: "xl" }}
-              fontWeight="bold"
-              color="gray.800"
-            >
+          <HStack justify="space-between" py={2}>
+            <Text fontSize="lg" fontWeight="bold" color="gray.800">
               Total
             </Text>
-            <Text
-              fontSize={{ base: "xl", md: "2xl" }}
-              fontWeight="bold"
-              color="brand.primary"
-            >
+            <Text fontSize="2xl" fontWeight="bold" color="brand.primary">
               ${total.toFixed(2)}
             </Text>
           </HStack>
 
           <Button
-            label="Proceed to checkout"
+            label="Proceed to Checkout"
             variant="primary"
             onClick={onCheckout}
+            py={3}
+            w="100%"
           />
 
-          <Text
-            fontSize="sm"
-            color="gray.500"
-            textAlign="center"
-            mt={2}
-            display={{ base: "none", sm: "block" }}
-          >
-            Please Log-in to Proceed Further
+          <Text fontSize="sm" color="gray.500" textAlign="center" mt={2}>
+            🔒 Secure Checkout
+          </Text>
+
+          <Text fontSize="xs" color="gray.400" textAlign="center">
+            Please log in to proceed further
           </Text>
         </VStack>
       </Box>
@@ -356,9 +433,7 @@ const CartTotals = memo(
 
 CartTotals.displayName = "CartTotals";
 
-// ============================================================================
 // MAIN COMPONENT
-// ============================================================================
 
 const CartPage = () => {
   const navigate = useNavigate();
@@ -388,92 +463,66 @@ const CartPage = () => {
   }, []);
 
   return (
-    <Container maxW="100%" px={8} py={12}>
+    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
       {/* Header */}
-      <VStack gap={{ base: 4, md: 6 }} mb={{ base: 6, md: 8 }} align="stretch">
-        <HStack justify="space-between" flexWrap="wrap" gap={4}>
-          <Heading as="h1" fontWeight="normal">
-            Shopping <Span color="brand.primary">Cart</Span>
-          </Heading>
-          <Button
-            label="Continue Shopping"
-            variant="outline"
-            py={2}
-            onClick={handleContinueShopping}
-          />
-        </HStack>
-      </VStack>
+      <Stack
+        direction={{ base: "column", sm: "row" }}
+        justify="space-between"
+        align={{ base: "start", sm: "center" }}
+        mb={8}
+        gap={4}
+      >
+        <Heading
+          as="h1"
+          fontWeight="normal"
+        >
+          Shopping <Span color="brand.primary">Cart</Span>
+          {cartItems.length > 0 && (
+            <Span color="gray.600" fontSize="xl" fontWeight="normal" ml={2}>
+              ({cartItems.length} {cartItems.length === 1 ? "item" : "items"})
+            </Span>
+          )}
+        </Heading>
+        <Button
+          label="Continue Shopping"
+          variant="outline"
+          onClick={handleContinueShopping}
+        />
+      </Stack>
 
       {/* Empty Cart State */}
       {cartItems.length === 0 ? (
         <EmptyCart onStartShopping={handleContinueShopping} />
       ) : (
-        <VStack gap={{ base: 6, md: 8 }} align="stretch">
-          {/* Mobile Card View */}
-          <Box display={{ base: "block", md: "none" }}>
-            <VStack gap={4} align="stretch">
-              {cartItems.map((item) => (
-                <CartItemCard
-                  key={item.id}
-                  item={item}
-                  onUpdateQuantity={handleUpdateQuantity}
-                  onRemove={removeFromCart}
-                />
-              ))}
-            </VStack>
-          </Box>
+        <Grid
+          templateColumns={{
+            base: "1fr",
+            lg: "1fr 380px",
+          }}
+          gap={{ base: 6, lg: 8 }}
+          alignItems="start"
+        >
+          {/* Cart Items - Left Side */}
+          <VStack gap={4} align="stretch">
+            {cartItems.map((item) => (
+              <CartItemCard
+                key={item.id}
+                item={item}
+                onUpdateQuantity={handleUpdateQuantity}
+                onRemove={removeFromCart}
+              />
+            ))}
+          </VStack>
 
-          {/* Desktop Table View */}
-          <Box
-            bg="white"
-            borderRadius="xl"
-            overflow="hidden"
-            boxShadow="md"
-            display={{ base: "none", md: "block" }}
-          >
-            <Table.Root variant="outline" striped>
-              <Table.Header bg="brand.primary">
-                <Table.Row>
-                  <Table.ColumnHeader color="brand.white" w="50px" />
-                  <Table.ColumnHeader color="brand.white" textStyle="size-md">
-                    Product
-                  </Table.ColumnHeader>
-                  <Table.ColumnHeader color="brand.white" textStyle="size-md">
-                    Price
-                  </Table.ColumnHeader>
-                  <Table.ColumnHeader
-                    color="brand.white"
-                    textAlign="center"
-                    textStyle="size-md"
-                  >
-                    Quantity
-                  </Table.ColumnHeader>
-                  <Table.ColumnHeader color="brand.white" textStyle="size-md">
-                    Total
-                  </Table.ColumnHeader>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {cartItems.map((item) => (
-                  <CartItemRow
-                    key={item.id}
-                    item={item}
-                    onUpdateQuantity={handleUpdateQuantity}
-                    onRemove={removeFromCart}
-                  />
-                ))}
-              </Table.Body>
-            </Table.Root>
-          </Box>
-
-          {/* Cart Totals */}
+          {/* Cart Totals - Right Side (Fixed on Desktop) */}
           <CartTotals
             subtotal={subtotal}
             tax={tax}
             total={total}
             onCheckout={handleCheckout}
+            isFixed={true}
           />
-        </VStack>
+        </Grid>
       )}
     </Container>
   );

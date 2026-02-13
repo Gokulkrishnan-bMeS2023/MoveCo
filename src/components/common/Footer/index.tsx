@@ -40,6 +40,7 @@ const CERTIFICATIONS = [
 const CONTACT_INFO = [
   { label: "Local", number: "(972) 250-1100", href: "tel:9722501100" },
   { label: "Metro", number: "(817) 380-5398", href: "tel:8173805398" },
+  { label: "Toll Free", number: "(800) 590-0928", href: "tel:8005900928" },
 ];
 
 const SOCIAL_LINKS = [
@@ -156,71 +157,49 @@ const ContactNumber = memo(
 ContactNumber.displayName = "ContactNumber";
 
 const TollFreeBox = memo(() => (
-  <Box
-    bg="brand.primary"
-    borderRadius="lg"
-    w="100%"
-    mt="2"
-    border="2px solid"
-    borderColor="brand.warning"
-    boxShadow="0 4px 16px rgba(255, 215, 10, 0.15)"
-    _hover={{
-      transform: "translateY(-2px)",
-      boxShadow: "0 6px 20px rgba(255, 215, 10, 0.25)",
-    }}
-    transition="all 0.3s"
-    overflow="hidden"
+  <Flex
+    bg="brand.white"
+    direction={{ base: "column", md: "row" }}
+    alignItems="center"
+    justifyContent="center"
+    gap={4}
+    py={2}
   >
+    <Image
+      src="https://d3eaozktcyljdh.cloudfront.net/themes/custom/txdmv/logo.svg"
+      alt="TX DMV Certified"
+      height="45px"
+      width="auto"
+      objectFit="contain"
+    />
     <Flex
-      bg="brand.white"
-      px="5"
-      py="3"
       alignItems="center"
-      justifyContent="center"
-      borderBottom="2px solid"
-      borderColor="brand.warning"
+      gap="2"
+      direction={{ base: "column", md: "row" }}
+      justify={"center"}
     >
-      <Image
-        src="https://d3eaozktcyljdh.cloudfront.net/themes/custom/txdmv/logo.svg"
-        alt="TX DMV Certified"
-        height="35px"
-        width="auto"
-        objectFit="contain"
-      />
-    </Flex>
-    <Box px="2" py="2">
-      <Flex
-        alignItems="center"
-        gap="2"
-        mb="2"
-        direction={"column"}
-        justifyContent={RESPONSIVE_ALIGN}
+      <Text
+        textStyle="size-md"
+        color="brand.black"
+        textTransform="uppercase"
+        letterSpacing="wider"
+        textAlign={RESPONSIVE_TEXT_ALIGN}
       >
-        <Text
-          textStyle="size-lg"
-          color="brand.warning"
-          fontWeight="700"
-          textTransform="uppercase"
-          letterSpacing="wider"
-          textAlign={RESPONSIVE_TEXT_ALIGN}
-        >
-          24/7 Toll Free
-        </Text>
-        <Link
-          href="tel:8005900928"
-          textStyle="size-3xl"
-          fontWeight="700"
-          color="brand.white"
-          _hover={{ color: "brand.warning" }}
-          display="block"
-          textAlign="center"
-          letterSpacing="tight"
-        >
-          (800) 590-0928
-        </Link>
-      </Flex>
-    </Box>
-  </Box>
+        24/7 Toll Free
+      </Text>
+      <Link
+        href="tel:8005900928"
+        textStyle="size-3xl"
+        color="brand.black"
+        _hover={{ color: "brand.warning" }}
+        display="block"
+        textAlign="center"
+        letterSpacing="tight"
+      >
+        1 (888) 368-4689
+      </Link>
+    </Flex>
+  </Flex>
 ));
 TollFreeBox.displayName = "TollFreeBox";
 
@@ -378,10 +357,8 @@ const Footer = () => {
                 {CONTACT_INFO.map((contact) => (
                   <ContactNumber key={contact.label} {...contact} />
                 ))}
-                <TollFreeBox />
               </Stack>
             </Stack>
-
             {/* Licensing & Compliance */}
             <Stack gap="5" alignItems={RESPONSIVE_ALIGN}>
               <Heading as="h5" color="brand.warning">
@@ -391,33 +368,6 @@ const Footer = () => {
                 {LICENSING_INFO.map((item) => (
                   <LicensingItem key={item.label} {...item} />
                 ))}
-                <Box
-                  mt="3"
-                  pt="4"
-                  borderTopWidth="1px"
-                  borderColor="whiteAlpha.200"
-                  w="100%"
-                  textAlign={RESPONSIVE_TEXT_ALIGN}
-                >
-                  <Text
-                    textStyle="size-lg"
-                    color="brand.warning"
-                    mb="1"
-                    fontWeight="600"
-                  >
-                    Consumer Assistance
-                  </Text>
-                  <Link
-                    href="tel:8883684689"
-                    textStyle="size-xl"
-                    fontWeight="600"
-                    color="brand.white"
-                    _hover={{ color: "brand.warning" }}
-                    transition="all 0.2s"
-                  >
-                    1 (888) 368-4689
-                  </Link>
-                </Box>
               </Stack>
             </Stack>
 
@@ -439,6 +389,7 @@ const Footer = () => {
           </Grid>
         </Box>
       </Container>
+      <TollFreeBox />
 
       {/* Bottom Bar */}
       <Box
