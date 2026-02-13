@@ -1,4 +1,4 @@
-import SensImg from "../../../assets/SENS.jpg";
+import SensImg from "../../../../assets/SENS.jpg";
 
 export const SENS_DATA = [
   {

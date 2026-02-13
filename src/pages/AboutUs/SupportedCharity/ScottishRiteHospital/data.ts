@@ -1,4 +1,4 @@
-import ScottishImg from "../../../assets/scottish-rite.jpg";
+import ScottishImg from "../../../../assets/scottish-rite.jpg";
 
 export const SCOTTISH_RITE_DATA = [
   {

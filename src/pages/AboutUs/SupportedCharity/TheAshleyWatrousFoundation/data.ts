@@ -1,4 +1,4 @@
-import AshleyImg from "../../../assets/ashley-watrous.jpg";
+import AshleyImg from "../../../../assets/ashley-watrous.jpg";
 
 export const ASHLEY_WATROUS_DATA = [
   {
