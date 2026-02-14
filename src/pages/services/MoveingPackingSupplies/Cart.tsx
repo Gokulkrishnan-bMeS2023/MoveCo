@@ -138,15 +138,10 @@ const EmptyCart = memo(
       >
         <FiShoppingCart />
       </Box>
-      <Heading
-        fontSize={{ base: "xl", md: "2xl" }}
-        color="gray.700"
-        mb={2}
-        fontWeight="semibold"
-      >
+      <Heading as={"h3"} mb={2}>
         Your cart is empty
       </Heading>
-      <Text fontSize={{ base: "md", md: "lg" }} color="gray.500" mb={6}>
+      <Text fontSize="lg" color="gray.500" mb={6}>
         Add some products to get started
       </Text>
       <Button
@@ -242,7 +237,7 @@ const CartItemCard = memo(
                 <Text
                   fontWeight="semibold"
                   color="gray.800"
-                  fontSize={{ base: "md", md: "lg" }}
+                  textStyle={"size-xl"}
                   lineClamp={2}
                   flex="1"
                 >
@@ -263,7 +258,7 @@ const CartItemCard = memo(
               <Text
                 fontWeight="bold"
                 color="brand.primary"
-                fontSize={{ base: "lg", md: "xl" }}
+                textStyle={"size-xl"}
               >
                 ${item.price.toFixed(2)}
               </Text>
@@ -278,7 +273,7 @@ const CartItemCard = memo(
                 {/* Quantity Selector */}
                 <HStack gap={2} onClick={(e) => e.stopPropagation()}>
                   <Text
-                    fontSize="sm"
+                    textStyle={"size-lg"}
                     color="gray.600"
                     fontWeight="medium"
                     flexShrink={0}
@@ -297,13 +292,13 @@ const CartItemCard = memo(
 
                 {/* Subtotal */}
                 <VStack align="end" gap={0} flexShrink={0}>
-                  <Text fontSize="xs" color="gray.500">
-                    Subtotal
+                  <Text textStyle={"size-lg"} color="gray.500">
+                    Total
                   </Text>
                   <Text
+                    textStyle={"size-xl"}
                     fontWeight="bold"
                     color="gray.800"
-                    fontSize={{ base: "lg", md: "xl" }}
                   >
                     ${(item.price * item.quantity).toFixed(2)}
                   </Text>
@@ -351,27 +346,22 @@ const CartTotals = memo(
         position={isFixed ? { base: "relative", lg: "sticky" } : "relative"}
         top={isFixed ? { lg: "20px" } : undefined}
       >
-        <Heading
-          fontSize={{ base: "lg", md: "xl" }}
-          fontWeight="bold"
-          color="gray.800"
-          mb={5}
-        >
+        <Heading as={"h3"} mb={5}>
           Order Summary
         </Heading>
 
         <VStack gap={4} align="stretch">
           <HStack justify="space-between">
-            <Text fontSize="md" color="gray.600">
+            <Text textStyle="size-lg" color="gray.600">
               Subtotal
             </Text>
-            <Text fontSize="md" fontWeight="semibold" color="gray.800">
+            <Text textStyle="size-lg" fontWeight="semibold" color="gray.800">
               ${subtotal.toFixed(2)}
             </Text>
           </HStack>
 
           <HStack justify="space-between" flexWrap="wrap">
-            <Text fontSize="md" color="gray.600">
+            <Text textStyle="size-lg" color="gray.600">
               Shipping
             </Text>
             <Badge
@@ -381,20 +371,20 @@ const CartTotals = memo(
               py={1}
               variant="solid"
             >
-              FREE
+              FREE Shipping
             </Badge>
           </HStack>
 
           <HStack justify="space-between" align="start">
             <VStack align="start" gap={0}>
-              <Text fontSize="md" color="gray.600">
+              <Text textStyle="size-lg" color="gray.600">
                 Tax
               </Text>
-              <Text fontSize="xs" color="gray.400">
+              <Text textStyle="size-md" color="gray.400">
                 (US estimated)
               </Text>
             </VStack>
-            <Text fontSize="md" fontWeight="semibold" color="gray.800">
+            <Text textStyle="size-lg" fontWeight="semibold" color="gray.800">
               ${tax.toFixed(2)}
             </Text>
           </HStack>
@@ -402,10 +392,10 @@ const CartTotals = memo(
           <Separator borderColor="gray.300" />
 
           <HStack justify="space-between" py={2}>
-            <Text fontSize="lg" fontWeight="bold" color="gray.800">
+            <Text textStyle="size-lg" fontWeight="bold" color="gray.800">
               Total
             </Text>
-            <Text fontSize="2xl" fontWeight="bold" color="brand.primary">
+            <Text textStyle="size-xl" fontWeight="bold" color="brand.primary">
               ${total.toFixed(2)}
             </Text>
           </HStack>
@@ -418,11 +408,11 @@ const CartTotals = memo(
             w="100%"
           />
 
-          <Text fontSize="sm" color="gray.500" textAlign="center" mt={2}>
+          <Text textStyle="size-md" color="gray.500" textAlign="center" mt={2}>
             🔒 Secure Checkout
           </Text>
 
-          <Text fontSize="xs" color="gray.400" textAlign="center">
+          <Text textStyle="size-md" textAlign="center">
             Please log in to proceed further
           </Text>
         </VStack>

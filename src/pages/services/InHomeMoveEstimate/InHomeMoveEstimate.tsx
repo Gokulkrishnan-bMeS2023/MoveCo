@@ -19,9 +19,6 @@ import { useNavigate } from "react-router-dom";
 import type { MoveEstimateFormValues, MoveEstimateErrors } from "./DTOs";
 import { validateMoveEstimate } from "./validation";
 
-
-
-
 const timeOptions = [
   { label: "8AM - 10AM", value: "8AM-10AM" },
   { label: "10AM - 12PM", value: "10AM-12PM" },
