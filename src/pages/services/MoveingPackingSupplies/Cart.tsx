@@ -74,7 +74,7 @@ const QuantityModal = memo(
             </Dialog.Header>
             <Dialog.Body>
               <VStack gap={4} align="stretch">
-                <Text color="gray.600">
+                <Text textStyle={"size-md"}>
                   Update quantity for <strong>{itemName}</strong>
                 </Text>
                 <Box>
@@ -472,10 +472,7 @@ const CartPage = () => {
         mb={8}
         gap={4}
       >
-        <Heading
-          as="h1"
-          fontWeight="normal"
-        >
+        <Heading as="h1" fontWeight="normal">
           Shopping <Span color="brand.primary">Cart</Span>
           {cartItems.length > 0 && (
             <Span color="gray.600" fontSize="xl" fontWeight="normal" ml={2}>

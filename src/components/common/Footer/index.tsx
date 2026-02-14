@@ -172,12 +172,7 @@ const TollFreeBox = memo(() => (
       width="auto"
       objectFit="contain"
     />
-    <Flex
-      alignItems="center"
-      gap="2"
-      direction={{ base: "column", md: "row" }}
-      justify={"center"}
-    >
+    <Flex alignItems="center" gap="2" direction={"row"} justify={"center"}>
       <Text
         textStyle="size-md"
         color="brand.black"
