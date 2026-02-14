@@ -1,7 +1,6 @@
 import { memo } from "react";
 import {
   Box,
-  Heading,
   Text,
   Image,
   HStack,
@@ -77,17 +76,17 @@ const ProductCard = memo(
           align="stretch"
           flex="1"
         >
-          <Heading
-            fontSize={{ base: "lg", md: "xl" }}
+          <Text
+            textStyle={"size-xl"}
             fontWeight="semibold"
             color="gray.800"
             minH={{ base: "auto", md: "3rem" }}
           >
             {product.name}
-          </Heading>
+          </Text>
 
           <Text
-            fontSize={{ base: "2xl", md: "3xl" }}
+            textStyle={"size-2xl"}
             fontWeight="bold"
             color="brand.primary"
           >
