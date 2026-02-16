@@ -29,26 +29,26 @@ const InHomeMoveEstimate = () => {
   const moveDate = searchParams.get("moveDate") || "";
 
   // 2️⃣ THEN use them in useState
-  const [values, setValues] = useState<MoveInformationDTO>({
-    // Contact Information
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
+ const [values, setValues] = useState<MoveInformationDTO>(() => {
+  const saved = localStorage.getItem("moveInformation");
+
+  if (saved) return JSON.parse(saved);
+
+  return {
+    firstName,
+    lastName,
+    email,
     cellPhone: phone,
     homePhone: "",
     workPhone: "",
     faxPhone: "",
-
-    // Move Dates
-    moveDate: moveDate,
+    moveDate,
     moveTime: "",
     dropDate: "",
     dropTime: "",
-
     moveType: "",
     hearAbout: "",
     notes: "",
-
     fromAddress: "",
     fromApt: "",
     fromCity: "",
@@ -63,19 +63,24 @@ const InHomeMoveEstimate = () => {
     toZipCode: "",
     toStairs: "",
     toDistance: "",
-  });
+  };
+});
+
 
   const [errors, setErrors] = useState<MoveInformationErrors>({});
 
   const handleChange = (field: keyof MoveInformationDTO, value: string) => {
-    setValues((prev) => ({ ...prev, [field]: value }));
-    if (errors[field]) {
-      setErrors((prev) => ({
-        ...prev,
-        [field]: "",
-      }));
-    }
-  };
+  const updatedValues = { ...values, [field]: value };
+  setValues(updatedValues);
+
+  // ⭐ save to localStorage
+  localStorage.setItem("moveInformation", JSON.stringify(updatedValues));
+
+  if (errors[field]) {
+    setErrors((prev) => ({ ...prev, [field]: "" }));
+  }
+};
+
 
   const moveTimeOptions = [
     { label: "8AM - 10AM", value: "8-10" },
@@ -126,14 +131,11 @@ const InHomeMoveEstimate = () => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    // Use the separated validation function
     const newErrors = validateMoveInformation(values);
-
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
     setErrors({});
     navigate("/inventry");
   };
@@ -185,8 +187,8 @@ const InHomeMoveEstimate = () => {
           </Heading>
 
           <VStack align="stretch" gap={4}>
-            <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+            <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <InputField
                   label="First Name"
                   placeholder="First Name"
@@ -214,7 +216,7 @@ const InHomeMoveEstimate = () => {
               />
             </SimpleGrid>
 
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={4}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} gap={6}>
               <InputField
                 label="Phone"
                 placeholder="Phone"
@@ -246,7 +248,7 @@ const InHomeMoveEstimate = () => {
         </Box>
 
         {/* ================= CARD 2 + 3 ================= */}
-        <SimpleGrid columns={{ base: 1, md: 2 }} gap={8}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
           {/* LEFT */}
           <Box
             bg="white"
@@ -261,7 +263,7 @@ const InHomeMoveEstimate = () => {
             </Heading>
 
             <VStack align="stretch" gap={4}>
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <DateInput
                   label="Move Date"
                   placeholder="Move Date"
@@ -279,7 +281,7 @@ const InHomeMoveEstimate = () => {
                 />
               </SimpleGrid>
 
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <DateInput
                   label="Drop Date"
                   placeholder="Drop Date"
@@ -310,7 +312,7 @@ const InHomeMoveEstimate = () => {
             </Heading>
 
             <VStack align="stretch" gap={6}>
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <SelectField
                   label="Move Type"
                   options={moveTypeOptions}
@@ -346,14 +348,14 @@ const InHomeMoveEstimate = () => {
             Move Location
           </Heading>
           <VStack align="stretch" gap={6}>
-            <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+            <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
               <InputField
                 label="From Address"
                 placeholder="From Address"
                 value={values.fromAddress}
                 onChange={(e) => handleChange("fromAddress", e.target.value)}
               />
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <InputField
                   label="Apt / Suite / Other"
                   placeholder="Apt / Suite / Other"
@@ -368,7 +370,7 @@ const InHomeMoveEstimate = () => {
                 />
               </SimpleGrid>
             </SimpleGrid>
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={4}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} gap={6}>
               <InputField
                 label="State"
                 placeholder="State"
@@ -412,14 +414,14 @@ const InHomeMoveEstimate = () => {
             Drop Location
           </Heading>
           <VStack align="stretch" gap={4}>
-            <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+            <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
               <InputField
                 label="To Address"
                 placeholder="To Address"
                 value={values.toAddress}
                 onChange={(e) => handleChange("toAddress", e.target.value)}
               />
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <InputField
                   label="Apt / Suite / Other"
                   placeholder="Apt / Suite / Other"
@@ -435,7 +437,7 @@ const InHomeMoveEstimate = () => {
               </SimpleGrid>
             </SimpleGrid>
 
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={4}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} gap={6}>
               <InputField
                 label="State"
                 placeholder="State"

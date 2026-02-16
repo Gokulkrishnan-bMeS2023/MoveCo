@@ -6,8 +6,8 @@ const JobApplication = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
-        <Flex direction="column" align="flex-start" gap={4} mb={{ base: 6, lg: 8 }}>
+      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }} >
+        <Flex direction="column" align="flex-start" gap={4} >
           <Box maxW="600px" w="100%">
             <Heading as="h1" fontWeight="normal">
               Join the <br />
@@ -17,8 +17,7 @@ const JobApplication = () => {
               Team
             </Heading>
           </Box>
-          {/* Paragraph */}
-          <Box maxW="800px" w="100%">
+          <Box  w="100%">
             <Text textStyle="size-lg">
               All potential employees are evaluated without regard to race,
               color, religion, gender, national origin, age, marital or veteran

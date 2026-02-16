@@ -7,15 +7,17 @@ import {
 import React from "react";
 
 interface CommonButtonProps extends Omit<ButtonProps, "variant"> {
-  label: string;
-  variant: "primary" | "outline" | "warning"; // chakra variant conflict avoid
+  label?: string;
+  variant: "primary" | "outline" | "warning";
   fontSize?: string;
   rounded?: string;
   px?: number | string;
   py?: number | string;
   onClick?: () => void;
-  leftIcon?: React.ReactNode; // icon on the right
-  href?: string; // ✅ add this
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode; 
+  children?: React.ReactNode; 
+  href?: string;
   as?: any;
 }
 
@@ -28,11 +30,18 @@ const Button = ({
   py = 5,
   onClick,
   leftIcon,
+  rightIcon, 
+  children,
   href,
   as,
   ...props
 }: CommonButtonProps) => {
-  const [primary, white, warning,secondary] = useToken("colors", ["brand.primary", "brand.white", "brand.warning", "brand.secondary"]);
+  const [primary, white, warning, secondary] = useToken("colors", [
+    "brand.primary",
+    "brand.white",
+    "brand.warning",
+    "brand.secondary",
+  ]);
 
   let styleProps: any = {};
 
@@ -49,7 +58,6 @@ const Button = ({
         color: secondary,
       };
       break;
-
     case "outline":
       styleProps = {
         bg: white,
@@ -58,7 +66,6 @@ const Button = ({
         _hover: { bg: primary, color: white },
       };
       break;
-
     default:
       styleProps = {
         bg: primary,
@@ -82,10 +89,15 @@ const Button = ({
       {...styleProps}
       {...props}
     >
-      <HStack gap={2} justify="center">
-        {leftIcon && <span>{leftIcon}</span>}
-        <span>{label}</span>
-      </HStack>
+      {children ? (
+        children
+      ) : (
+        <HStack gap={2} justify="center">
+          {leftIcon && <span>{leftIcon}</span>}
+          {label && <span>{label}</span>}
+          {rightIcon && <span>{rightIcon}</span>}
+        </HStack>
+      )}
     </ChakraButton>
   );
 };

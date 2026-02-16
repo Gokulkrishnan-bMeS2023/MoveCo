@@ -18,26 +18,32 @@ import { validateInstantEstimate } from "./validation";
 
 const InstantOnlineEstimate = () => {
   const navigate = useNavigate();
-  const [values, setValues] = useState<InstantEstimateDTO>({
-    firstName: "",
-    lastName: "",
-    date: "",
-    phone: "",
-    email: "",
-  });
+  const [values, setValues] = useState<InstantEstimateDTO>(() => {
+  const saved = localStorage.getItem("instantEstimate");
+  return saved
+    ? JSON.parse(saved)
+    : {
+        firstName: "",
+        lastName: "",
+        date: "",
+        phone: "",
+        email: "",
+      };
+});
 
   const [errors, setErrors] = useState<InstantEstimateErrors>({});
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (field: keyof InstantEstimateDTO, value: string) => {
-    setValues((prev) => ({ ...prev, [field]: value }));
-    if (errors[field]) {
-      setErrors((prev) => ({
-        ...prev,
-        [field]: "",
-      }));
-    }
-  };
+  const updatedValues = { ...values, [field]: value };
+  setValues(updatedValues);
+  localStorage.setItem("instantEstimate", JSON.stringify(updatedValues));
+
+  if (errors[field]) {
+    setErrors((prev) => ({ ...prev, [field]: "" }));
+  }
+};
+
 
   const handleSubmit = () => {
     const newErrors = validateInstantEstimate(values);

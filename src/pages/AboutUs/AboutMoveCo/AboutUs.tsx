@@ -15,8 +15,10 @@ import HeroBanner from "../AboutUsComponents/HeroBanner";
 import ImageTextSection from "../AboutUsComponents/TextWithImageSection";
 import CardTemplate from "../AboutUsComponents/CardTemplate";
 import AboutFeatureSwitcher from "../AboutUsComponents/AboutFeatureSwitcher";
+import { useNavigate } from "react-router-dom";
 
 const AboutUs = () => {
+  const navigate = useNavigate();
   return (
     <Box as={section}>
       <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
@@ -128,13 +130,21 @@ const AboutUs = () => {
           <AboutFeatureSwitcher />
         </Box>
         <Box pt={{ base: 10, md: 16 }}>
-          <Button
-            fontSize="xl"
-            rounded="full"
-            variant="primary"
-            label="Benefits"
-            mb={{ base: 4, lg: 6 }}
-          />
+          <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
+            <Button
+              fontSize="xl"
+              rounded="full"
+              variant="primary"
+              label="Benefits"
+            />
+            <Button
+              fontSize="xl"
+              rounded="full"
+              variant="outline"
+              onClick={() => navigate("/our-standard")}
+              label="View all"
+            />
+          </Flex>
           <Flex
             mb={{ base: 6, lg: 8 }}
             direction={{ base: "column", md: "row" }}

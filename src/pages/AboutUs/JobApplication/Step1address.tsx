@@ -278,7 +278,7 @@ const JobApplicationForm = () => {
                 Position Details
               </Heading>
 
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <InputField
                   label="Position Sought"
                   value={formData.PositionSought}
@@ -311,7 +311,7 @@ const JobApplicationForm = () => {
                   Your Information
                 </Heading>
 
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
                   <InputField
                     label="First Name"
                     placeholder="First Name"
@@ -340,7 +340,7 @@ const JobApplicationForm = () => {
                   />
                 </SimpleGrid>
 
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
                   <InputField
                     label="Home Phone"
                     placeholder="Home Phone"
@@ -361,7 +361,7 @@ const JobApplicationForm = () => {
                   />
                 </SimpleGrid>
 
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
                   <InputField
                     label="City"
                     placeholder="City"
@@ -386,7 +386,7 @@ const JobApplicationForm = () => {
                   />
                 </SimpleGrid>
 
-                <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+                <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                   <InputField
                     label="Social Security Number"
                     placeholder="Social Security Number"

@@ -14,11 +14,9 @@ import {
 } from "@chakra-ui/react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useState } from "react";
-import { Button as ChakraButton } from "@chakra-ui/react";
 import Button from "../../../components/common/Button/Button";
 import type { InventoryDTO, InventorySection } from "./DTOs";
 import { validateInventory } from "./validation";
-
 
 const inventorySections: InventorySection[] = [
   {
@@ -263,34 +261,43 @@ const inventorySections: InventorySection[] = [
 ];
 
 const Inventory = () => {
-  const [quantities, setQuantities] =
-    useState<InventoryDTO["quantities"]>({});
+ const [quantities, setQuantities] = useState<InventoryDTO["quantities"]>(() => {
+  const saved = localStorage.getItem("inventoryData");
+  return saved ? JSON.parse(saved) : {};
+});
+
   const [openItems, setOpenItems] = useState<string[]>([]);
   const [errors, setErrors] = useState<{ quantities?: string }>({});
   const [successMessage, setSuccessMessage] = useState("");
 
-  const increase = (item: string) => {
-    setQuantities((prev) => ({
+ const increase = (item: string) => {
+  setQuantities((prev) => {
+    const updated = {
       ...prev,
       [item]: (prev[item] || 0) + 1,
-    }));
-  };
+    };
+    localStorage.setItem("inventoryData", JSON.stringify(updated));
+    return updated;
+  });
+};
 
-  const decrease = (item: string) => {
-    setQuantities((prev) => ({
+const decrease = (item: string) => {
+  setQuantities((prev) => {
+    const updated = {
       ...prev,
       [item]: Math.max((prev[item] || 0) - 1, 0),
-    }));
-  };
+    };
+    localStorage.setItem("inventoryData", JSON.stringify(updated));
+    return updated;
+  });
+};
 
   const handleCollapseAll = () => {
     setOpenItems([]);
   };
 
   const handleExpandAll = () => {
-    const allSections = inventorySections.map(
-      (_, index) => `section-${index}`
-    );
+    const allSections = inventorySections.map((_, index) => `section-${index}`);
     setOpenItems(allSections);
   };
 
@@ -394,31 +401,32 @@ const Inventory = () => {
                       </Text>
 
                       <Flex align="center" gap={2}>
-                        <ChakraButton
-                          size="sm"
+                        <Button
                           variant="outline"
                           minW="32px"
                           h="32px"
+                          p="0"
+                          rounded="md"
                           onClick={() => decrease(item)}
                           disabled={count === 0}
                         >
-                          <FaMinus />
-                        </ChakraButton>
+                          <FaMinus size={4} fontWeight="normal" />
+                        </Button>
 
                         <Text w="20px" textAlign="center" fontSize="sm">
                           {count}
                         </Text>
 
-                        <ChakraButton
-                          size="sm"
+                        <Button
+                          variant="primary"
                           minW="32px"
                           h="32px"
-                          bg="brand.primary"
-                          color="white"
+                          p="0"
+                          rounded="md"
                           onClick={() => increase(item)}
                         >
-                          <FaPlus />
-                        </ChakraButton>
+                          <FaPlus size={4} fontWeight="normal" />
+                        </Button>
                       </Flex>
                     </Flex>
                   );
@@ -431,8 +439,6 @@ const Inventory = () => {
 
       {/* Submit Section */}
       <Box mt={8} textAlign={{ base: "center", md: "right" }}>
-        
-
         <Button
           label="Submit Inventory"
           variant="primary"
