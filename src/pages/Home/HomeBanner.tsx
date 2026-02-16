@@ -1,23 +1,13 @@
-
-import {
-  Box,
-  Flex,
-  Heading,
-  Text,
-  Stack,
-  Image,
-  Icon,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Stack, Image, Icon } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
 import Customer1 from "../../assets/client1.webp";
 import Customer2 from "../../assets/customer2.webp";
 import Customer3 from "../../assets/Customer3.jpg";
 import Customer4 from "../../assets/Customer4.webp";
 import Customer5 from "../../assets/Customer5.webp";
-import MainBannerBG from "../../assets/main-banner-bg.png";
+import MainBannerBG from "../../assets/main-banner-bg.webp";
 import MainBannerMobileBG from "../../assets/main-banner-mobile.jpg";
 import Button from "../../components/common/Button/Button";
-
 
 const MainBanner = () => {
   return (
@@ -36,14 +26,11 @@ const MainBanner = () => {
           justifyContent="flex-end"
           alignItems="center"
           color="brand.white"
-       padding={4}
+          padding={4}
         >
           <Box width="45%">
             <Stack gap={4}>
-              <Heading
-                as="h2"
-                lineHeight="1.1"
-              >
+              <Heading as="h2" lineHeight="1.1">
                 Your{" "}
                 <Box
                   as="span"
@@ -55,19 +42,17 @@ const MainBanner = () => {
                   Authentic
                 </Box>
                 <br />
-                 Professional
+                Professional
                 <br />
                 Pack/Unpack Services
               </Heading>
 
               <Text textStyle={"size-md"}>
-                Let us take care of packing and unpacking of your household goods, while keep your entire moving plan hassle free
+                Let us take care of packing and unpacking of your household
+                goods, while keep your entire moving plan hassle free
               </Text>
               <Box>
-                <Button
-                  variant="warning"
-                  label="Learn More"
-                />
+                <Button variant="warning" label="Learn More" />
               </Box>
               <Flex
                 padding={4}
@@ -81,22 +66,24 @@ const MainBanner = () => {
               >
                 {/* Customers */}
                 <Stack alignItems="center" gap={2}>
-                  <Heading as="h3">
-                    5000+
-                  </Heading>
+                  <Heading as="h3">5000+</Heading>
                   <Flex>
-                    {[Customer1, Customer2, Customer3, Customer4, Customer5].map(
-                      (img, i) => (
-                        <Image
-                          key={i}
-                          src={img}
-                          alt="customer"
-                          boxSize="30px"
-                          borderRadius="full"
-                          ml={i === 0 ? 0 : "-8px"}
-                        />
-                      )
-                    )}
+                    {[
+                      Customer1,
+                      Customer2,
+                      Customer3,
+                      Customer4,
+                      Customer5,
+                    ].map((img, i) => (
+                      <Image
+                        key={i}
+                        src={img}
+                        alt="customer"
+                        boxSize="30px"
+                        borderRadius="full"
+                        ml={i === 0 ? 0 : "-8px"}
+                      />
+                    ))}
                   </Flex>
                 </Stack>
 
@@ -104,7 +91,12 @@ const MainBanner = () => {
                 <Stack alignItems="center" gap={2}>
                   <Flex>
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <Icon as={FaStar} key={i} boxSize="22px" color="brand.warning" />
+                      <Icon
+                        as={FaStar}
+                        key={i}
+                        boxSize="22px"
+                        color="brand.warning"
+                      />
                     ))}
                   </Flex>
                   <Text textStyle="size-md">Valuable Customers</Text>
@@ -132,13 +124,11 @@ const MainBanner = () => {
           </Heading>
 
           <Text textStyle={"size-md"}>
-            Let us take care of packing and unpacking of your household goods, while keep your entire moving plan hassle free
+            Let us take care of packing and unpacking of your household goods,
+            while keep your entire moving plan hassle free
           </Text>
           <Box>
-            <Button
-              variant="warning"
-              label="Learn More"
-            />
+            <Button variant="warning" label="Learn More" />
           </Box>
         </Stack>
       </Box>
