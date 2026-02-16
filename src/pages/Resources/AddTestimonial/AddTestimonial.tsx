@@ -25,9 +25,7 @@ const AddTestimonial = () => {
     email: "",
     comments: "",
   });
-
   const [errors, setErrors] = useState<TestimonialErrors>({});
-
 
   const handleChange = (field: keyof TestimonialFormValues, value: string) => {
     setValues((prev) => ({ ...prev, [field]: value }));
@@ -36,15 +34,11 @@ const AddTestimonial = () => {
 
 const handleSubmit = () => {
   const newErrors = validateTestimonial(values);
-
   if (Object.keys(newErrors).length > 0) {
     setErrors(newErrors);
     return;
   }
-
   setErrors({});
-  console.log("Submitted Data:", values);
-
   alert("Testimonial Submitted Successfully!");
 };
 
@@ -79,7 +73,7 @@ const handleSubmit = () => {
             >
               email us
             </Text>
-            . This board is for actual customers only.
+             This board is for actual customers only.
           </Text>
         </Box>
       </Flex>
@@ -91,7 +85,6 @@ const handleSubmit = () => {
         border="1px solid"
         borderColor="gray.100"
       >
-        {/* FORM FIELDS */}
         <Stack gap={4}>
           <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
             <InputField
@@ -115,6 +108,7 @@ const handleSubmit = () => {
           <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
             <DateInput
               label="Move Date"
+              variant="future-only"
               value={values.moveDate}
               onChange={(e) => handleChange("moveDate", e.target.value)}
               errorMessage={errors.moveDate}
@@ -122,16 +116,13 @@ const handleSubmit = () => {
             />
             <Box>
               <InputField
-                label="Email"
+                label="Email(Email address WILL NOT be displayed on the Testimonial board)"
                 placeholder="Email"
                 value={values.email}
                 onChange={(e) => handleChange("email", e.target.value)}
                 errorMessage={errors.email}
                 isRequired
               />
-              <Text textStyle="size-xs" color="gray.400" mt={1} ml={1}>
-                Email address WILL NOT be displayed on the Testimonial board
-              </Text>
             </Box>
           </SimpleGrid>
           <Notes

@@ -20,8 +20,7 @@ import { validateMoveInformation } from "./validation";
 import { useSearchParams } from "react-router-dom";
 
 const InHomeMoveEstimate = () => {
-   const [searchParams] = useSearchParams();
-
+  const [searchParams] = useSearchParams();
   const firstName = searchParams.get("firstName") || "";
   const lastName = searchParams.get("lastName") || "";
   const email = searchParams.get("email") || "";
@@ -142,7 +141,6 @@ const InHomeMoveEstimate = () => {
 
   return (
     <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
-      {/* HEADER */}
       <Box>
         <Flex
           direction={{ base: "column", md: "row" }}
@@ -151,7 +149,6 @@ const InHomeMoveEstimate = () => {
           gap={{ base: 6, md: 10 }}
           mb={8}
         >
-          {/* Left */}
           <Box maxW="400px" w="100%">
             <Heading as="h1" fontWeight="normal" mb={2}>
               Information{" "}
@@ -160,7 +157,6 @@ const InHomeMoveEstimate = () => {
               </Text>
             </Heading>
           </Box>
-          {/* Right */}
           <Box maxW="500px" w="100%">
             <Text
               textStyle="size-2xl"
@@ -173,7 +169,6 @@ const InHomeMoveEstimate = () => {
         </Flex>
       </Box>
       <Stack gap={8}>
-        {/* ================= CARD 1 – CONTACT INFO ================= */}
         <Box
           bg="white"
           p={{ base: 6, md: 8 }}
@@ -251,7 +246,7 @@ const InHomeMoveEstimate = () => {
         <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
           {/* LEFT */}
           <Box
-            bg="white"
+            bg="brand.white"
             p={{ base: 6, md: 8 }}
             borderRadius="2xl"
             boxShadow="lg"
@@ -266,6 +261,7 @@ const InHomeMoveEstimate = () => {
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <DateInput
                   label="Move Date"
+                  variant="future-only"
                   placeholder="Move Date"
                   value={values.moveDate}
                   onChange={(e) => handleChange("moveDate", e.target.value)}
@@ -284,6 +280,7 @@ const InHomeMoveEstimate = () => {
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <DateInput
                   label="Drop Date"
+                  variant="future-only"
                   placeholder="Drop Date"
                   value={values.dropDate}
                   onChange={(e) => handleChange("dropDate", e.target.value)}

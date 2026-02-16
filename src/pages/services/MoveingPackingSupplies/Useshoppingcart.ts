@@ -1,15 +1,10 @@
-// ============================================================================
 // hooks/useShoppingCart.ts
-// Centralized shopping cart hook - single source of truth
-// ============================================================================
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { createToaster } from "@chakra-ui/react";
 import type { CartItem, Product } from "./DTOs";
 
-// ============================================================================
 // CONSTANTS
-// ============================================================================
 
 const STORAGE_KEY = "shopping_cart";
 export const TAX_RATE = 0.0823; // 8.23% tax
@@ -19,9 +14,7 @@ const toaster = createToaster({
   duration: 2000,
 });
 
-// ============================================================================
 // STORAGE UTILITIES
-// ============================================================================
 
 export const cartStorage = {
   get: (): CartItem[] => {
@@ -51,9 +44,7 @@ export const cartStorage = {
   },
 };
 
-// ============================================================================
 // CART OPERATIONS (Pure functions)
-// ============================================================================
 
 export const cartOperations = {
   addItem: (cart: CartItem[], product: Product): CartItem[] => {
@@ -116,9 +107,7 @@ export const cartOperations = {
   },
 };
 
-// ============================================================================
 // CUSTOM HOOK
-// ============================================================================
 
 export const useShoppingCart = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -228,17 +217,14 @@ export const useShoppingCart = () => {
   return {
     // State
     cartItems,
-
     // Actions
     addToCart,
     removeFromCart,
     updateQuantity,
     clearCart,
-
     // Queries
     isInCart,
     getItemQuantity,
-
     // Computed values
     totalItems,
     subtotal,

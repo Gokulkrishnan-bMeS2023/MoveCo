@@ -5,9 +5,9 @@ import {
   Heading,
   Text,
   Box,
-  Checkbox,
 } from "@chakra-ui/react";
 import { forwardRef, useImperativeHandle, useState, useRef } from "react";
+import CheckboxField from "../../../components/common/CheckBox/Checkbox";
 
 interface Step3ExperienceProps {
   photoFile: File | null;
@@ -132,29 +132,16 @@ const Step3Experience = forwardRef<any, Step3ExperienceProps>(
               result in discharge. I understand, also, that I am required to
               abide by all rules and regulations of the employer.
             </Text>
+            <CheckboxField
+              label='I have read and agree to the "Acknowledgments & Authorization" outlined above.'
+              isChecked={agreed}
+              onChange={(e) => {
+                onAgreedChange(e.target.checked);
+                setShowError(false);
+              }}
+              errorMessage={showError && !agreed ? "You need to accept the policy" : ""}
+            />
 
-            <Field.Root invalid={showError && !agreed}>
-              <Checkbox.Root
-                checked={agreed}
-                onCheckedChange={(e) => {
-                  onAgreedChange(!!e.checked);
-                  setShowError(false);
-                }}
-              >
-                <Checkbox.HiddenInput />
-                <Checkbox.Control>
-                  <Checkbox.Indicator />
-                </Checkbox.Control>
-                <Checkbox.Label textStyle="size-md">
-                  I have read and agree to the "Acknowledgments & Authorization"
-                  outlined above.
-                </Checkbox.Label>
-              </Checkbox.Root>
-
-              {showError && (
-                <Field.ErrorText>You need to accept the policy</Field.ErrorText>
-              )}
-            </Field.Root>
           </Stack>
         </Box>
       </>

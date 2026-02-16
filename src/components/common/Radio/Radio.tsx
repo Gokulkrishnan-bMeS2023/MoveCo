@@ -1,5 +1,4 @@
-
-import { Field, RadioGroup, Stack, For,Text } from "@chakra-ui/react";
+import { Field, RadioGroup, Stack, For, Text } from "@chakra-ui/react";
 
 interface RadioOption {
   label: string;
@@ -29,32 +28,34 @@ const RadioField = ({
 
   return (
     <Field.Root invalid={isInvalid}>
-      {label && <Field.Label fontWeight="medium">
-              {label}
-              {isRequired && (
-                <Text fontWeight={"500"} fontSize={16} as="span" color="brand.red">
-                  *
-                </Text>
-              )}
-            </Field.Label>
-}
+      {label && <Field.Label fontWeight="medium" display="block">
+        <Text as="span">
+          {label}
+          {isRequired && (
+            <Text fontWeight={"500"} fontSize={16} as="span" color="brand.red" ml={1}>
+              *
+            </Text>
+          )}
+        </Text>
+      </Field.Label>
+      }
       <RadioGroup.Root
         value={value}
         size="md"
         variant="outline"
-        colorPalette="teal" 
-        onValueChange={(details:any) => onValueChange?.(details.value)}
+        colorPalette="teal"
+        onValueChange={(details: any) => onValueChange?.(details.value)}
       >
-        <Stack direction={direction} gap="2">
+        <Stack direction={direction} gap="4">
           <For each={options}>
             {(option) => (
-              <RadioGroup.Item 
-                key={option.value} 
-                value={option.value} 
-                cursor="pointer"
+              <RadioGroup.Item
+                key={option.value}
+                value={option.value}
+                cursor="pointer"     
               >
                 <RadioGroup.ItemHiddenInput />
-                <RadioGroup.ItemIndicator />
+                <RadioGroup.ItemIndicator color="brand.primary"/>
                 <RadioGroup.ItemText fontSize="sm" color="brand.secondary">
                   {option.label}
                 </RadioGroup.ItemText>
@@ -64,7 +65,7 @@ const RadioField = ({
         </Stack>
       </RadioGroup.Root>
 
-      {isInvalid && <Field.ErrorText>{errorMessage}</Field.ErrorText>}
+      {isInvalid && <Field.ErrorText color="brand.red" fontWeight="400">{errorMessage}</Field.ErrorText>}
     </Field.Root>
   );
 };
