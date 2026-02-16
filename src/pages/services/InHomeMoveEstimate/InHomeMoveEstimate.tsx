@@ -19,9 +19,6 @@ import { useNavigate } from "react-router-dom";
 import type { MoveEstimateFormValues, MoveEstimateErrors } from "./DTOs";
 import { validateMoveEstimate } from "./validation";
 
-
-
-
 const timeOptions = [
   { label: "8AM - 10AM", value: "8AM-10AM" },
   { label: "10AM - 12PM", value: "10AM-12PM" },
@@ -108,8 +105,6 @@ const stateOptions = [
   { label: "Wyoming", value: "WY" },
 ];
 
-
-
 const InHomeMoveEstimate = () => {
   const navigate = useNavigate();
 const [values, setValues] = useState<MoveEstimateFormValues>({
@@ -135,7 +130,6 @@ const [values, setValues] = useState<MoveEstimateFormValues>({
 
 const [errors, setErrors] = useState<MoveEstimateErrors>({});
 
-
  const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
   setValues((prev) => ({ ...prev, [field]: value }));
 
@@ -147,24 +141,18 @@ const [errors, setErrors] = useState<MoveEstimateErrors>({});
   }
 };
 
-
 const handleSubmit = () => {
   const newErrors = validateMoveEstimate(values);
-
   if (Object.keys(newErrors).length > 0) {
     setErrors(newErrors);
     return;
   }
-
   setErrors({});
   alert("Form Submitted Successfully!");
-
 };
-
 
   return (
     <>
-      {/* HEADER SECTION */}
       <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
         <Flex
           direction={{ base: "column", md: "row" }}
@@ -220,9 +208,7 @@ const handleSubmit = () => {
             </Text>
           </Box>
         </SimpleGrid>
-      </Container>
-
-      <Container maxW="100%" py={{ base: "2", md: "10" }} px={8}>
+        <Box pt={{base: 10, md: 16}}>
         <Stack gap={8}>
           <Box
             bg="brand.white"
@@ -242,6 +228,7 @@ const handleSubmit = () => {
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <DateInput
                   label="Date"
+                  variant="future-only"
                   value={values.visitDate}
                   onChange={(e) => handleChange("visitDate", e.target.value)}
                   isRequired
@@ -434,6 +421,7 @@ const handleSubmit = () => {
             />
           </Box>
         </Stack>
+        </Box>
       </Container>
     </>
   );

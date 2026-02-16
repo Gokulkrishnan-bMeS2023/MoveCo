@@ -43,15 +43,17 @@ const SelectField: React.FC<SelectProps> = ({
 
   return (
     <Field.Root invalid={isInvalid} required={isRequired}>
-      <Field.Label fontWeight="medium" fontSize="16">
-        {label}
-        {isRequired && (
-          <Text fontWeight={"500"} fontSize={16} as="span" color="brand.red">
-            *
-          </Text>
-        )}
+      {label && <Field.Label fontWeight="medium" display="block">
+        <Text as="span">
+          {label}
+          {isRequired && (
+            <Text fontWeight={"500"} fontSize={16} as="span" color="brand.red" ml={1}>
+              *
+            </Text>
+          )}
+        </Text>
       </Field.Label>
-
+      }
       <SelectRoot
         collection={collection}
         value={value ? [value] : []}
@@ -109,7 +111,7 @@ const SelectField: React.FC<SelectProps> = ({
         </SelectPositioner>
       </SelectRoot>
 
-      {isInvalid && <Field.ErrorText>{errorMessage}</Field.ErrorText>}
+      {isInvalid && <Field.ErrorText color="brand.red" fontWeight="400">{errorMessage}</Field.ErrorText>}
     </Field.Root>
   );
 };

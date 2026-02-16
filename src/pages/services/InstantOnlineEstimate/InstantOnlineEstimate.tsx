@@ -121,6 +121,7 @@ const InstantOnlineEstimate = () => {
             />
             <DateInput
               label="Date"
+              variant="future-only"
               value={values.date}
               onChange={(e) => handleChange("date", e.target.value)}
               isRequired

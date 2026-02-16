@@ -11,8 +11,8 @@ import React from "react";
 import InputField from "../../../components/common/Input/Input";
 import DateInput from "../../../components/common/DateInput/DateInput";
 
-import type { 
-  EducationDTO, 
+import type {
+  EducationDTO,
   EmploymentExperienceDTO
 } from "./DTOs";
 import Button from "../../../components/common/Button/Button";
@@ -130,7 +130,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 <Heading as="h4">Employment #{index + 1}</Heading>
                 {experiences.length > 1 && (
                   <Button
-                   variant="outline"
+                    variant="outline"
                     onClick={() => onRemoveExperience(index)} label={"Remove"}                   >
                   </Button>
                 )}
@@ -155,28 +155,29 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 />
                 <Field.Root>
                   <Field.Label>Dates Employed from &amp; to</Field.Label>
-
-                  <Flex gap={3} align="center">
+                  <Flex gap={2} align="center">
                     <DateInput
-                      label=""
                       placeholder="From"
                       value={experience.from}
+                      variant="today-and-past"
                       onChange={(e) =>
                         onExperienceChange(index, "from", e.target.value)
                       }
                     />
-                    <Text color="gray.500" fontSize="sm">
-                      to
-                    </Text>
+
+                    <Text color="gray.500" fontSize="sm">to</Text>
+
                     <DateInput
-                      label=""
                       placeholder="To"
                       value={experience.to}
+                      variant="today-and-past"
+                      min={experience.from} // 👈 From date-ku munnadi disable
                       onChange={(e) =>
                         onExperienceChange(index, "to", e.target.value)
                       }
                     />
                   </Flex>
+
                 </Field.Root>
               </SimpleGrid>
 

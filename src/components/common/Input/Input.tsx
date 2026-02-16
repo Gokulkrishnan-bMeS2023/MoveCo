@@ -26,15 +26,17 @@ const InputField: React.FC<InputProps> = ({
 
   return (
     <Field.Root invalid={isInvalid} required={isRequired}>
-      <Field.Label fontWeight="medium">
-        {label}
-        {isRequired && (
-          <Text fontWeight={"500"} fontSize={16} as="span" color="brand.red">
-            *
-          </Text>
-        )}
+      {label && <Field.Label fontWeight="medium" display="block">
+        <Text as="span">
+          {label}
+          {isRequired && (
+            <Text fontWeight={"500"} fontSize={16} as="span" color="brand.red" ml={1}>
+              *
+            </Text>
+          )}
+        </Text>
       </Field.Label>
-
+      }
       <InputGroup startElement={leftIcon}>
         <Input
           type={type}
@@ -49,7 +51,7 @@ const InputField: React.FC<InputProps> = ({
           }}
         />
       </InputGroup>
-      {isInvalid && <Field.ErrorText>{errorMessage}</Field.ErrorText>}
+      {isInvalid && <Field.ErrorText color="brand.red" fontWeight="400">{errorMessage}</Field.ErrorText>}
     </Field.Root>
   );
 };
