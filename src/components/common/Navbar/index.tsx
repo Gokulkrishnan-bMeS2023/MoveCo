@@ -11,8 +11,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 
-const NAV_ITEMS = [
+export const NAV_ITEMS = [
   { label: "Home", path: "/" },
+
   {
     label: "About Us",
     items: [
@@ -20,27 +21,32 @@ const NAV_ITEMS = [
       { label: "Our Insurance", path: "/our-insurance" },
       { label: "Our Standards", path: "/our-standard" },
       { label: "Job Application", path: "/job-application" },
-      { label: "Associate Code of Conduct", path: "/AssociateCodeofConduct" },
+      {
+        label: "Associate Code of Conduct",
+        path: "/associate-code-of-conduct",
+      },
       { label: "Supported Charity", path: "/supported-charity" },
     ],
   },
+
   {
     label: "Product & Services",
     items: [
       { label: "Instant Online Estimate", path: "/online-estimate" },
-      { label: "In-Home Move Estimate", path: "/InHomeMoveEstimate" },
-      { label: "Moving & Packing Supplies", path: "/Product" },
+      { label: "In-Home Move Estimate", path: "/in-home-move-estimate" },
+      { label: "Moving & Packing Supplies", path: "/product" },
       {
         label: "Professional Packing Services",
-        path: "/professionalpackingservices",
+        path: "/professional-packing-services",
       },
-      { label: "Storage", path: "/storages" },
+      { label: "Storage", path: "/storage" },
     ],
   },
+
   {
     label: "Resources",
     items: [
-      { label: "Add Testimonial", path: "/AddTestimonial" },
+      { label: "Add Testimonial", path: "/add-testimonial" },
       { label: "Client Testimonial", path: "/client-testimonial" },
       { label: "Video Review", path: "/video-review" },
     ],

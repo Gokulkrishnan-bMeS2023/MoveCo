@@ -10,7 +10,7 @@ export const SUPPORTED_CHARITY_DATA = [
      not want what others have, but wants to create for themselves.`,
     image: AshleyImg,
     linkText: "Read more",
-    linkHref: "/TheAshleyWatrousFoundation",
+    linkHref: "/the-ashley-watrous-foundation",
     reverse: false,
   },
   {
@@ -21,7 +21,7 @@ export const SUPPORTED_CHARITY_DATA = [
       underlying damage to the body’s tissues, cells, and molecules. Our goal is to help build the industry that will cure the diseases of aging.`,
     image: SensImg,
     linkText: "Read more",
-    linkHref: "/SensResearchFoundation",
+    linkHref: "/sens-research-foundation",
     reverse: true,
   },
   {
@@ -32,7 +32,7 @@ export const SUPPORTED_CHARITY_DATA = [
       Pioneering research and innovation of leading-edge technologies. Discovering genetic breakthroughs. Educating future leaders in pediatric orthopedics.`,
     image: ScottishImg,
     linkText: "Read more",
-    linkHref: "/ScottishRiteHospital",
+    linkHref: "/scottish-rite-hospital",
     reverse: false,
   },
 ];

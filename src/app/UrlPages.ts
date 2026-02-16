@@ -2,110 +2,127 @@ import { lazy } from "react";
 import type { AppRoute } from "../app/routes";
 
 export const UrlPages: AppRoute[] = [
+  { path: "/", component: lazy(() => import("../pages/Home/Home")) },
+
   {
-    path: "/",
-    component: lazy(() => import("../pages/Home/Home")),
-  },
-   {
     path: "/privacy-policy",
     component: lazy(() => import("../pages/PrivacyPolicy/PrivacyPolicy")),
   },
+
   {
     path: "/about-us",
     component: lazy(() => import("../pages/AboutUs/AboutMoveCo/AboutUs")),
   },
+
   {
     path: "/our-insurance",
     component: lazy(() => import("../pages/AboutUs/OurInsurance/OurInsurance")),
   },
+
   {
     path: "/our-standard",
     component: lazy(() => import("../pages/AboutUs/OurStandards/OurStandard")),
   },
-   {
-    path: "/AssociateCodeofConduct",
+
+  {
+    path: "/associate-code-of-conduct",
     component: lazy(
-      () => import("../pages/AboutUs/AssociateCodeofConduct/AssociateCodeofConduct"),
+      () =>
+        import("../pages/AboutUs/AssociateCodeofConduct/AssociateCodeofConduct"),
     ),
   },
+
   {
     path: "/supported-charity",
-    component: lazy(() => import("../pages/AboutUs/SupportedCharity/SupportedCharity")),
+    component: lazy(
+      () => import("../pages/AboutUs/SupportedCharity/SupportedCharity"),
+    ),
   },
+
   {
-    path: "/TheAshleyWatrousFoundation",
+    path: "/the-ashley-watrous-foundation",
     component: lazy(
       () =>
         import("../pages/AboutUs/SupportedCharity/TheAshleyWatrousFoundation/TheAshleyWatrousFoundation"),
     ),
   },
+
   {
-    path: "/SensResearchFoundation",
+    path: "/sens-research-foundation",
     component: lazy(
-      () => import("../pages/AboutUs/SupportedCharity/SensResearchFoundation/SensResearchFoundation"),
+      () =>
+        import("../pages/AboutUs/SupportedCharity/SensResearchFoundation/SensResearchFoundation"),
     ),
   },
+
   {
-    path: "/ScottishRiteHospital",
+    path: "/scottish-rite-hospital",
     component: lazy(
-      () => import("../pages/AboutUs/SupportedCharity/ScottishRiteHospital/ScottishRiteHospital"),
+      () =>
+        import("../pages/AboutUs/SupportedCharity/ScottishRiteHospital/ScottishRiteHospital"),
     ),
   },
+
   {
     path: "/job-application",
-    component: lazy(() => import("../pages/AboutUs/JobApplication/JobApplication")),
+    component: lazy(
+      () => import("../pages/AboutUs/JobApplication/JobApplication"),
+    ),
   },
+
   {
-    path: "/privacy-policy",
-    component: lazy(() => import("../pages/PrivacyPolicy/PrivacyPolicy")),
-  },
-  {
-    path: "/contact-us",
-    component: lazy(() => import("../pages/ContactUs/ContactUs")),
-  },
-  {
-    path: "professionalpackingservices",
+    path: "/professional-packing-services",
     component: lazy(
       () =>
         import("../pages/services/ProfessionalPackingServices/ProfessionalPackingServices"),
     ),
   },
+
   {
-    path: "storages",
+    path: "/storage",
     component: lazy(() => import("../pages/services/Storage/Storage")),
   },
-   {
-    path: "/AddTestimonial",
-    component: lazy(() => import("../pages/Resources/AddTestimonial/AddTestimonial")),
+
+  {
+    path: "/add-testimonial",
+    component: lazy(
+      () => import("../pages/Resources/AddTestimonial/AddTestimonial"),
+    ),
   },
+
   {
     path: "/client-testimonial",
     component: lazy(
       () => import("../pages/Resources/ClientTestimonial/ClientTestimonial"),
     ),
   },
+
   {
     path: "/video-review",
     component: lazy(() => import("../pages/Resources/VideoReview/VideoReview")),
   },
+
   {
     path: "/product",
     component: lazy(
       () => import("../pages/services/MoveingPackingSupplies/Product"),
     ),
   },
+
   {
     path: "/cart",
     component: lazy(
       () => import("../pages/services/MoveingPackingSupplies/Cart"),
     ),
   },
+
   {
-    path: "/InHomeMoveEstimate",
+    path: "/in-home-move-estimate",
     component: lazy(
       () => import("../pages/services/InHomeMoveEstimate/InHomeMoveEstimate"),
     ),
   },
+
   {
     path: "/online-estimate",
     component: lazy(
@@ -113,18 +130,21 @@ export const UrlPages: AppRoute[] = [
         import("../pages/services/InstantOnlineEstimate/InstantOnlineEstimate"),
     ),
   },
+
   {
     path: "/move-information",
     component: lazy(
       () => import("../pages/services/InstantOnlineEstimate/MoveInformation"),
     ),
   },
+
   {
-    path: "/inventry",
+    path: "/inventory",
     component: lazy(
-      () => import("../pages/services/InstantOnlineEstimate/Inventry"),
+      () => import("../pages/services/InstantOnlineEstimate/Inventory"),
     ),
   },
+
   {
     path: "/contact-us",
     component: lazy(() => import("../pages/ContactUs/ContactUs")),

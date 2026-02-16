@@ -136,7 +136,7 @@ const InHomeMoveEstimate = () => {
       return;
     }
     setErrors({});
-    navigate("/inventry");
+    navigate("/inventory");
   };
 
   return (
