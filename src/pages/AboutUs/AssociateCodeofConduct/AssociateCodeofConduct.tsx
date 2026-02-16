@@ -5,7 +5,7 @@ import {
   Container,
 } from "@chakra-ui/react";
 import customerImg from "../../../assets/customer-relationships.jpg";
-import InsuranceImg from "../../../assets/modifiedbanner.png";
+import InsuranceImg from "../../../assets/insurance-banner.png";
 import DealOfficeImg from "../../../assets/deal.jpg";
 import { dressCode } from "./data";
 import { customerPoints, officePoints } from "./data";

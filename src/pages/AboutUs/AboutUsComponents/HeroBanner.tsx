@@ -4,14 +4,14 @@ import type { ReactNode } from "react";
 interface HeroBannerProps {
   title: ReactNode;
   bgImage: string;
-  overlayColor?: string; 
-  overlayOpacity?: number; 
+  overlayColor?: string;
+  overlayOpacity?: number;
 }
 
 const HeroBanner = ({
   title,
   bgImage,
-  overlayColor = "grey",
+  overlayColor = "gray",
   overlayOpacity = 0.6,
 }: HeroBannerProps) => {
   return (

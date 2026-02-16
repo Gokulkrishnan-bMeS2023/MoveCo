@@ -12,7 +12,7 @@ import email from "../../assets/Email.webp";
 import cookies from "../../assets/Cookies and tag.webp";
 import linking from "../../assets/Linking.webp";
 import security from "../../assets/Security.webp";
-import statement from "../../assets/Statement.webp";
+import statement from "../../assets/Statement.jpg";
 
 const images = {
   personalInfo: personalInfo,

@@ -5,7 +5,7 @@ import {
   Heading,
   Flex,
 } from "@chakra-ui/react";
-import InsuranceImg from "../../../assets/modifiedbanner.png";
+import InsuranceImg from "../../../assets/insurance-banner.png";
 import Button from "../../../components/common/Button/Button";
 import { standardFeature } from "./data";
 import { professionalStandards } from "./data";

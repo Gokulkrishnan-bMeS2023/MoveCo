@@ -5,8 +5,8 @@ import {
   Heading,
   Flex,
 } from "@chakra-ui/react";
-import InsuranceImg from "../../../assets/modifiedbanner.png";
-import pakerImg from "../../../assets/packer.jpg";
+import InsuranceImg from "../../../assets/insurance-banner.png";
+import packerImg from "../../../assets/packer.jpg";
 import { coveredWays, inHomePolicy } from "./data";
 import Button from "../../../components/common/Button/Button";
 import CardTemplate from "../AboutUsComponents/CardTemplate";
@@ -59,7 +59,7 @@ const OurInsurance = () => {
               </Box>
             </Flex>
             <ImageTextSection
-              image={pakerImg}
+              image={packerImg}
               buttonLabel="Our Mission"
               content={
                 <>
