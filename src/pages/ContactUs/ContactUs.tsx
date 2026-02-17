@@ -10,8 +10,9 @@ import {
 import contactImage from "../../assets/contact.webp";
 import HeroBanner from "../AboutUs/AboutUsComponents/HeroBanner";
 import ContactCard from "./ContactCard";
-import SendEmailForm from "./SendEmailForm";
-import FriendForm from "./FriendForm";
+import React from "react";
+const SendEmailForm = React.lazy(() => import("./SendEmailForm"));
+const FriendForm = React.lazy(() => import("./FriendForm"));
 
 const ContactUsPage = () => {
   return (

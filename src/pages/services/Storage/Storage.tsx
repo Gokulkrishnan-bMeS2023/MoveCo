@@ -50,12 +50,24 @@ export default function StoragePage() {
         gap={{ base: 8, md: 12 }}
       >
         <Box w="100%" maxW={{ base: "100%", md: "550px" }}>
-          <Image
+          {/* <Image
             src={storageImage}
             alt="storageimg"
             w="100%"
             h="auto"
             borderRadius="2xl"
+          /> */}
+
+          <Image
+            src={storageImage}
+            alt="Storage service facility"
+            w="100%"
+            h="auto"
+            borderRadius="2xl"
+            loading="eager"
+            fetchPriority="high"
+            width={500}
+            height={350}
           />
         </Box>
         <Stack gap={6}>

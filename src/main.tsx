@@ -12,11 +12,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider value={system}>
       <BrowserRouter>
-        <ScrollToTop />
-        <Navbar />
-        <App />
-        <Footer />
+        <main>
+          <ScrollToTop />
+          <Navbar />
+          <App />
+          <Footer />
+        </main>
       </BrowserRouter>
     </ChakraProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
