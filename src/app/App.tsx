@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import { Suspense } from "react";
 import { UrlPages } from "./UrlPages";
 import NotFound from "../pages/NotFound";
-import ScrollToTopButton from "../animations/ScrollToTopButton";
 import AppLoader from "../animations/AppLoader";
 
 const App = () => {
@@ -16,7 +15,6 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
-      <ScrollToTopButton />
     </>
   );
 };
