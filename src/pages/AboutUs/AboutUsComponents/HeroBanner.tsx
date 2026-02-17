@@ -11,7 +11,7 @@ interface HeroBannerProps {
 const HeroBanner = ({
   title,
   bgImage,
-  overlayColor = "gray",
+  overlayColor = "gray.900",
   overlayOpacity = 0.6,
 }: HeroBannerProps) => {
   return (
@@ -19,7 +19,7 @@ const HeroBanner = ({
       bgImage={`url(${bgImage})`}
       bgSize="cover"
       borderRadius="lg"
-      minH={{ base: "230px", md: "320px" }}
+      minH={{ base: "230px", md: "360px" }}
       display="flex"
       alignItems="center"
       justifyContent="center"
