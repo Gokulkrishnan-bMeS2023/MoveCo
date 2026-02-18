@@ -13,25 +13,40 @@ import DateInput from "../../../components/common/DateInput/DateInput";
 
 import type {
   EducationDTO,
-  EmploymentExperienceDTO
+  EmploymentExperienceDTO,
+  EmploymentExperienceErrors, // 👈 ADD THIS
 } from "./DTOs";
+
 import Button from "../../../components/common/Button/Button";
 
 interface Step2AddressProps {
   education: EducationDTO;
   experiences: EmploymentExperienceDTO[];
-  onEducationChange: <K extends keyof EducationDTO>(
-    field: K,
-    value: EducationDTO[K]
-  ) => void;
+  onEducationChange: <K extends keyof EducationDTO>(field: K, value: EducationDTO[K]) => void;
   onExperienceChange: <K extends keyof EmploymentExperienceDTO>(
-    index: number,
-    field: K,
-    value: EmploymentExperienceDTO[K]
+    index: number, field: K, value: EmploymentExperienceDTO[K]
   ) => void;
   onAddExperience: () => void;
   onRemoveExperience: (index: number) => void;
+  experienceErrors?: EmploymentExperienceErrors[]; // 👈 ADD THIS
+  onClearExperienceError: (index: number, field: keyof EmploymentExperienceDTO) => void;
 }
+
+const formatUSPhone = (value: string) => {
+  const digits = value.replace(/\D/g, "").slice(0, 10);
+
+  if (digits.length < 4) return digits;
+  if (digits.length < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+};
+
+const validateUSPhone = (value: string) => {
+  const phoneRegex = /^\(\d{3}\) \d{3}-\d{4}$/;
+  return phoneRegex.test(value);
+};
+
+
 
 const Step2Address: React.FC<Step2AddressProps> = ({
   education,
@@ -40,7 +55,11 @@ const Step2Address: React.FC<Step2AddressProps> = ({
   onExperienceChange,
   onAddExperience,
   onRemoveExperience,
+  experienceErrors,
+  onClearExperienceError,
 }) => {
+
+  
   return (
     <>
       <Box
@@ -216,14 +235,23 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                     onExperienceChange(index, "supervisorName", e.target.value)
                   }
                 />
-                <InputField
-                  label="Supervisor Phone"
-                  placeholder="Supervisor Phone"
-                  value={experience.supervisorPhone}
-                  onChange={(e) =>
-                    onExperienceChange(index, "supervisorPhone", e.target.value)
-                  }
-                />
+<InputField
+  label="Supervisor Phone"
+  placeholder="(XXX) XXX-XXXX"
+  value={experience.supervisorPhone}
+  errorMessage={experienceErrors?.[index]?.supervisorPhone}
+  onChange={(e) => {
+    const formatted = formatUSPhone(e.target.value);
+    onExperienceChange(index, "supervisorPhone", formatted);
+
+    // ✅ Auto-clear error once user reaches 10 digits
+    const digits = e.target.value.replace(/\D/g, "");
+    if (digits.length === 10) {
+      onClearExperienceError(index, "supervisorPhone");
+    }
+  }}
+/>
+
                 <InputField
                   label="Reason for Leaving"
                   placeholder="Reason for Leaving"

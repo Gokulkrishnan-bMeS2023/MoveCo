@@ -10,6 +10,9 @@ import type {
 } from "./DTOs";
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
+const PHONE_REGEX = /^\d{10}$/;
+const SSN_REGEX = /^\d{3}-\d{2}-\d{4}$/;
+
 
 // Step 1 Validation
 export const validateStepOne = (data: StepOneDTO): StepOneErrors => {
@@ -28,6 +31,26 @@ export const validateStepOne = (data: StepOneDTO): StepOneErrors => {
   } else if (!EMAIL_REGEX.test(data.email)) {
     errors.email = "Invalid email address";
   }
+   
+  if (data.HomePhone) {
+  const cleaned = data.HomePhone.replace(/\D/g, "");
+  if (!PHONE_REGEX.test(cleaned)) {
+    errors.HomePhone = "Enter valid 10 digit phone number";
+  }
+}
+
+if (data.CellPhone) {
+  const cleaned = data.CellPhone.replace(/\D/g, "");
+  if (!PHONE_REGEX.test(cleaned)) {
+    errors.CellPhone = "Enter valid 10 digit phone number";
+  }
+}
+
+if (data.SocialSecurityNumber && !SSN_REGEX.test(data.SocialSecurityNumber)) {
+  errors.SocialSecurityNumber = "Enter valid SSN";
+}
+
+ 
 
   if (!data.citizen) {
     errors.citizen = "This field is required";
@@ -51,14 +74,6 @@ export const validateStepOne = (data: StepOneDTO): StepOneErrors => {
 export const validateEducation = (data: EducationDTO): EducationErrors => {
   const errors: EducationErrors = {};
 
-  if (!data.schoolName.trim()) {
-    errors.schoolName = "School name is required";
-  }
-
-  if (!data.location.trim()) {
-    errors.location = "Location is required";
-  }
-
   return errors;
 };
 
@@ -68,20 +83,15 @@ export const validateEmploymentExperience = (
 ): EmploymentExperienceErrors => {
   const errors: EmploymentExperienceErrors = {};
 
-  if (!data.employer.trim()) {
-    errors.employer = "Employer is required";
-  }
+ 
 
-  if (!data.jobTitle.trim()) {
-    errors.jobTitle = "Job title is required";
-  }
+    if (data.supervisorPhone) {
+    const cleaned = data.supervisorPhone.replace(/\D/g, "");
 
-  if (!data.from) {
-    errors.from = "Start date is required";
-  }
-
-  if (!data.to) {
-    errors.to = "End date is required";
+    if (cleaned.length !== 10) {
+      errors.supervisorPhone =
+        "Please enter a valid 10 digit phone number";
+    }
   }
 
   return errors;

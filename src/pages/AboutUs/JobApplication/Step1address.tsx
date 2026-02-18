@@ -16,12 +16,13 @@ import SelectField from "../../../components/common/Select/Select";
 import type { 
   StepOneDTO, 
   StepOneErrors, 
-  StepTwoDTO, 
+  StepTwoDTO,
+  StepTwoErrors,        // 👈 ADD THIS
   StepThreeDTO,
   EmploymentExperienceDTO,
   EducationDTO 
 } from "./DTOs";
-import { validateStepOne } from "./validation";
+import { validateStepOne, validateStepTwo } from "./validation";  // 👈 ADD validateStepTwo
 import Step2Address from "./Step2address";
 
 const stateOptions = [
@@ -135,6 +136,7 @@ const JobApplicationForm = () => {
   });
 
   const [errors, setErrors] = useState<StepOneErrors>({});
+  const [stepTwoErrors, setStepTwoErrors] = useState<StepTwoErrors>({});
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -232,10 +234,18 @@ const JobApplicationForm = () => {
 
       setErrors({});
     }
-    if (page === 1) {
-      setPage((p) => p + 1);
-      return;
-    }
+   if (page === 1) {
+  const stepTwoValidationErrors = validateStepTwo(stepTwoData);
+  
+  if (Object.keys(stepTwoValidationErrors).length > 0) {
+    setStepTwoErrors(stepTwoValidationErrors);
+    return; 
+  }
+
+  setStepTwoErrors({}); 
+  setPage((p) => p + 1); 
+  return;
+}
     if (page === 2) {
       if (!step3Ref.current?.validate()) return;
 
@@ -260,6 +270,41 @@ const JobApplicationForm = () => {
   ];
 
   const step3Ref = useRef<any>(null);
+
+  const formatUSPhone = (value: string) => {
+  const digits = value.replace(/\D/g, "").slice(0, 10);
+
+  if (digits.length < 4) return digits;
+  if (digits.length < 7) return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+
+  return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+};
+
+const formatSSN = (value: string) => {
+  const digits = value.replace(/\D/g, "").slice(0, 9); 
+
+  if (digits.length <= 3) return digits;
+  if (digits.length <= 5) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+
+  return `${digits.slice(0, 3)}-${digits.slice(3, 5)}-${digits.slice(5)}`;
+};
+// Add this function near your other handlers
+const handleClearExperienceError = (
+  index: number,
+  field: keyof EmploymentExperienceDTO
+) => {
+  setStepTwoErrors((prev) => {
+    const updatedExperiences = [...(prev.experiences || [])];
+    if (updatedExperiences[index]) {
+      updatedExperiences[index] = {
+        ...updatedExperiences[index],
+        [field]: "",  // ✅ Clear that specific field error
+      };
+    }
+    return { ...prev, experiences: updatedExperiences };
+  });
+};
+
 
   const renderPage = () => {
     switch (page) {
@@ -341,18 +386,32 @@ const JobApplicationForm = () => {
                 </SimpleGrid>
 
                 <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-                  <InputField
-                    label="Home Phone"
-                    placeholder="Home Phone"
-                    value={formData.HomePhone}
-                    onChange={(e) => handleChange("HomePhone", e.target.value)}
-                  />
-                  <InputField
-                    label="Cell Phone"
-                    placeholder="Cell phone"
-                    value={formData.CellPhone}
-                    onChange={(e) => handleChange("CellPhone", e.target.value)}
-                  />
+<InputField
+  label="Home Phone"
+  placeholder="(555) 555-5555"
+  type="text"
+  value={formatUSPhone(formData.HomePhone)}
+  errorMessage={errors.HomePhone}
+  onChange={(e) =>
+    handleChange("HomePhone", e.target.value.replace(/\D/g, "").slice(0,10))
+  }
+/>
+
+
+
+<InputField
+  label="Cell Phone"
+  placeholder="(555) 555-5555"
+  type="text"
+  value={formatUSPhone(formData.CellPhone)}
+  errorMessage={errors.CellPhone}
+  onChange={(e) =>
+    handleChange("CellPhone", e.target.value.replace(/\D/g, "").slice(0,10))
+  }
+/>
+
+
+
                   <InputField
                     label="Address"
                     placeholder="Address"
@@ -387,14 +446,16 @@ const JobApplicationForm = () => {
                 </SimpleGrid>
 
                 <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-                  <InputField
-                    label="Social Security Number"
-                    placeholder="Social Security Number"
-                    value={formData.SocialSecurityNumber}
-                    onChange={(e) =>
-                      handleChange("SocialSecurityNumber", e.target.value)
-                    }
-                  />
+                 <InputField
+  label="Social Security Number"
+  placeholder="XXX-XX-XXXX"
+  value={formData.SocialSecurityNumber}
+  errorMessage={errors.SocialSecurityNumber}
+  onChange={(e) =>
+    handleChange("SocialSecurityNumber", formatSSN(e.target.value))
+  }
+/>
+
                   <DateInput
                     label="Available Start Date"
                     placeholder="Available start Date"
@@ -469,6 +530,8 @@ const JobApplicationForm = () => {
             onExperienceChange={handleExperienceChange}
             onAddExperience={addExperience}
             onRemoveExperience={removeExperience}
+            experienceErrors={stepTwoErrors.experiences}
+            onClearExperienceError={handleClearExperienceError}
           />
         );
 

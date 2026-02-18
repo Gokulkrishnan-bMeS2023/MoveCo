@@ -15,33 +15,51 @@ import DateInput from "../../../components/common/DateInput/DateInput";
 import Logistics from "../../../assets/Logistics.svg";
 import type { InstantEstimateDTO, InstantEstimateErrors } from "./DTOs";
 import { validateInstantEstimate } from "./validation";
+import { useEffect } from "react";
+
+
 
 const InstantOnlineEstimate = () => {
   const navigate = useNavigate();
-  const [values, setValues] = useState<InstantEstimateDTO>(() => {
-  const saved = localStorage.getItem("instantEstimate");
-  return saved
-    ? JSON.parse(saved)
-    : {
-        firstName: "",
-        lastName: "",
-        date: "",
-        phone: "",
-        email: "",
-      };
-});
+
+  const [values, setValues] = useState<InstantEstimateDTO>({
+    firstName: "",
+    lastName: "",
+    date: "",
+    phone: "",
+    email: "",
+  });
 
   const [errors, setErrors] = useState<InstantEstimateErrors>({});
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (field: keyof InstantEstimateDTO, value: string) => {
-  const updatedValues = { ...values, [field]: value };
-  setValues(updatedValues);
-  localStorage.setItem("instantEstimate", JSON.stringify(updatedValues));
+  useEffect(() => {
+  const saved = sessionStorage.getItem("instantEstimate");
+  if (saved) {
+    setValues(JSON.parse(saved));
+  }
+}, []);
+
+
+const handleChange = (field: keyof InstantEstimateDTO, value: string) => {
+  const updated = { ...values, [field]: value };
+  setValues(updated);
+
+  // ✅ save updated values
+  sessionStorage.setItem("instantEstimate", JSON.stringify(updated));
 
   if (errors[field]) {
     setErrors((prev) => ({ ...prev, [field]: "" }));
   }
+};
+
+const formatUSPhone = (value: string) => {
+  const digits = value.replace(/\D/g, "").slice(0, 10);
+
+  if (digits.length < 4) return digits;
+  if (digits.length < 7) return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+
+  return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
 };
 
 
@@ -54,9 +72,11 @@ const InstantOnlineEstimate = () => {
       setIsLoading(false);
       return;
     }
+
     navigate(
-      `/move-information?firstName=${values.firstName}&lastName=${values.lastName}&email=${values.email}&phone=${values.phone}&moveDate=${values.date}`,
+      `/move-information?firstName=${encodeURIComponent(values.firstName)}&lastName=${encodeURIComponent(values.lastName)}&email=${encodeURIComponent(values.email)}&phone=${encodeURIComponent(values.phone)}&moveDate=${encodeURIComponent(values.date)}`,
     );
+
     fetch("https://workinsite-test-api.onrender.com/Register", {
       method: "POST",
       headers: {
@@ -120,6 +140,7 @@ const InstantOnlineEstimate = () => {
             <InputField
               label="Last Name"
               placeholder="Last Name"
+              type="tel"
               value={values.lastName}
               onChange={(e) => handleChange("lastName", e.target.value)}
               isRequired
@@ -133,14 +154,20 @@ const InstantOnlineEstimate = () => {
               isRequired
               errorMessage={errors.date}
             />
-            <InputField
-              label="Phone Number"
-              placeholder="Phone Number"
-              value={values.phone}
-              onChange={(e) => handleChange("phone", e.target.value)}
-              isRequired
-              errorMessage={errors.phone}
-            />
+           <InputField
+  label="Phone Number"
+  placeholder="(555) 555-5555"
+  value={formatUSPhone(values.phone)}
+  onChange={(e) =>
+    handleChange(
+      "phone",
+      e.target.value.replace(/\D/g, "").slice(0, 10)
+    )
+  }
+  isRequired
+  errorMessage={errors.phone}
+/>
+
             <InputField
               label="Email"
               placeholder="Email"
