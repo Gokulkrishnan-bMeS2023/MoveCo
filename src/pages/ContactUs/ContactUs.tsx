@@ -10,10 +10,26 @@ import {
 import contactImage from "../../assets/contact.webp";
 import HeroBanner from "../AboutUs/AboutUsComponents/HeroBanner";
 import ContactCard from "./ContactCard";
-import SendEmailForm from "./SendEmailForm";
-import FriendForm from "./FriendForm";
+import React from "react";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+const SendEmailForm = React.lazy(() => import("./SendEmailForm"));
+const FriendForm = React.lazy(() => import("./FriendForm"));
 
 const ContactUsPage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.focus === "friend-form") {
+      const element = document.getElementById("friend-form");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+        const input = element.querySelector("input");
+        input?.focus();
+      }
+    }
+  }, [location]);
+
   return (
     <Container maxW="100%" py={{ base: 10, md: 12 }} px={8}>
       <HeroBanner bgImage={contactImage} title="Contact Us" />
@@ -107,7 +123,9 @@ const ContactUsPage = () => {
 
         <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 6, md: 8 }}>
           <SendEmailForm />
-          <FriendForm />
+          <Box id="friend-form">
+            <FriendForm />
+          </Box>
         </SimpleGrid>
       </Box>
     </Container>

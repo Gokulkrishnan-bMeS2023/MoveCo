@@ -1,13 +1,6 @@
 import { Box, Flex, Text, Stack, Span } from "@chakra-ui/react";
-import { useState } from "react";
-import {
-  FiPhone,
-  FiUser,
-  FiMenu,
-  FiX,
-  FiUsers,
-  FiChevronDown,
-} from "react-icons/fi";
+import { useState, useRef, useEffect } from "react";
+import { FiPhone, FiMenu, FiX, FiUsers, FiChevronDown } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 
@@ -99,7 +92,6 @@ const NavItem = ({ label, items, path }: any) => {
           position="absolute"
           top="100%"
           left="0"
-          // mt={2}
           bg="brand.white"
           py={2}
           minW="240px"
@@ -178,13 +170,13 @@ const MobileNavItem = ({
       onToggle();
     } else {
       navigate(path);
-      onNavigate(); // Close mobile menu
+      onNavigate();
     }
   };
 
   const handleItemClick = (itemPath: string) => {
     navigate(itemPath);
-    onNavigate(); // Close mobile menu
+    onNavigate();
   };
 
   return (
@@ -301,6 +293,30 @@ export const Navbar = () => {
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  // Ref to the entire navbar wrapper for outside-click detection
+  const navbarRef = useRef<HTMLDivElement>(null);
+
+  // Close mobile menu when clicking outside the navbar
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        navbarRef.current &&
+        !navbarRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpen(false);
+        setOpenSubmenu(null);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
+
   const handleSubmenuToggle = (label: string) => {
     setOpenSubmenu(openSubmenu === label ? null : label);
   };
@@ -318,7 +334,7 @@ export const Navbar = () => {
   };
 
   return (
-    <Box pt={6}>
+    <Box pt={6} ref={navbarRef}>
       <Box
         bg="white"
         mx={{ base: 6, lg: 8 }}
@@ -386,6 +402,9 @@ export const Navbar = () => {
               _active={{
                 transform: "rotate(0deg) scale(0.95)",
               }}
+              onClick={() =>
+                navigate("/contact-us", { state: { focus: "friend-form" } })
+              }
             >
               <FiUsers size={20} />
             </Box>
@@ -411,8 +430,11 @@ export const Navbar = () => {
               _active={{
                 transform: "scale(0.9)",
               }}
+              onClick={() =>
+                navigate("/contact-us", { state: { focus: "friend-form" } })
+              }
             >
-              <FiUser />
+              <FiUsers />
             </Box>
             <Box
               onClick={toggleMenu}

@@ -1,0 +1,123 @@
+import { memo } from "react";
+import {
+  Box,
+  Text,
+  Image,
+  HStack,
+  VStack,
+  Badge,
+} from "@chakra-ui/react";
+import { FiShoppingCart, FiCheck } from "react-icons/fi";
+import Button from "../../../components/common/Button/Button";
+import type { Product } from "./DTOs";
+
+interface ProductCardProps {
+  product: Product;
+  isInCart: boolean;
+  onAddToCart: (product: Product) => void;
+  onViewCart: () => void;
+  showFreeShipping?: boolean;
+}
+
+const ProductCard = memo(
+  ({
+    product,
+    isInCart,
+    onAddToCart,
+    onViewCart,
+    showFreeShipping = true,
+  }: ProductCardProps) => {
+    return (
+      <Box
+        bg="white"
+        borderRadius={{ base: "lg", md: "xl" }}
+        overflow="hidden"
+        boxShadow="lg"
+        transition="all 0.3s"
+        _hover={{ transform: "translateY(-4px)", boxShadow: "2xl" }}
+        height="100%"
+        display="flex"
+        flexDirection="column"
+      >
+        {/* Product Image */}
+        <Box
+          position="relative"
+          overflow="hidden"
+          h={{ base: "200px", sm: "250px", md: "300px" }}
+        >
+          <Image
+            src={product.image}
+            alt={product.name}
+            w="100%"
+            h="100%"
+            objectFit="cover"
+            loading="lazy"
+          />
+          {showFreeShipping && (
+            <Badge
+              position="absolute"
+              top={{ base: 2, md: 4 }}
+              right={{ base: 2, md: 4 }}
+              colorPalette="brand.primary"
+              fontSize={{ base: "xs", md: "sm" }}
+              px={{ base: 2, md: 3 }}
+              py={1}
+              borderRadius="full"
+            >
+              FREE SHIPPING
+            </Badge>
+          )}
+        </Box>
+
+        {/* Product Details */}
+        <VStack
+          gap={{ base: 3, md: 4 }}
+          p={{ base: 4, md: 6 }}
+          align="stretch"
+          flex="1"
+        >
+          <Text
+            textStyle={"size-xl"}
+            fontWeight="semibold"
+            color="gray.800"
+            minH={{ base: "auto", md: "3rem" }}
+          >
+            {product.name}
+          </Text>
+
+          <Text
+            textStyle={"size-2xl"}
+            fontWeight="bold"
+            color="brand.primary"
+          >
+            ${product.price.toFixed(2)}
+          </Text>
+
+          {/* Action Buttons */}
+          <HStack gap={2} justify="flex-end">
+            {isInCart && (
+              <Button
+                label="View Cart"
+                variant="outline"
+                onClick={onViewCart}
+                aria-label="View shopping cart"
+              />
+            )}
+
+            <Button
+              label={isInCart ? "Added" : "Add To Cart"}
+              variant={isInCart ? "outline" : "primary"}
+              leftIcon={isInCart ? <FiCheck /> : <FiShoppingCart />}
+              onClick={() => onAddToCart(product)}
+              disabled={isInCart}
+            />
+          </HStack>
+        </VStack>
+      </Box>
+    );
+  },
+);
+
+ProductCard.displayName = "ProductCard";
+
+export default ProductCard;
