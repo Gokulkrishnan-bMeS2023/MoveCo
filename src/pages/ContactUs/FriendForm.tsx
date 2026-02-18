@@ -23,7 +23,7 @@ const FriendForm = () => {
   } = useContactForms();
   return (
     <>
-      <Card.Root variant="elevated" size="lg">
+      <Card.Root variant="elevated" size="lg" h={"100%"}>
         <Card.Body gap={{ base: 4, md: 6 }}>
           <HStack gap={3} flexWrap="wrap">
             <Flex bg="brand.primary" px={3} py={2} borderRadius="md">
