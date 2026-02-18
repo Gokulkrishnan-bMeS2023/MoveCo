@@ -12,12 +12,10 @@ import { useState } from "react";
 import InputField from "../../../components/common/Input/Input";
 import Button from "../../../components/common/Button/Button";
 import DateInput from "../../../components/common/DateInput/DateInput";
-import Logistics from "../../../assets/Logistics.svg";
 import type { InstantEstimateDTO, InstantEstimateErrors } from "./DTOs";
 import { validateInstantEstimate } from "./validation";
 import { useEffect } from "react";
-
-
+import { images } from "../../../assets";
 
 const InstantOnlineEstimate = () => {
   const navigate = useNavigate();
@@ -94,16 +92,16 @@ const formatUSPhone = (value: string) => {
   };
 
   return (
-    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+    <Container>
       <Flex
         direction={{ base: "column", md: "row" }}
         align={{ base: "flex-start", md: "center" }}
         justify="space-between"
         gap={{ base: 6, md: 10 }}
-        mb={12}
+        mb={{ base: 6, lg: 8 }}
       >
         <Box maxW="600px" w="100%">
-          <Heading as="h1" fontWeight="normal" mb={2}>
+          <Heading as="h1" fontWeight="normal">
             Instant{" "}
             <Text as="span" color="brand.primary">
               Online Estimate
@@ -192,7 +190,7 @@ const formatUSPhone = (value: string) => {
         </Box>
         <Box w={{ base: "100%", md: "50%" }} textAlign="start">
           <Image
-            src={Logistics}
+            src={images.logistics}
             alt="Logistics Illustration"
             maxW="480px"
             mx="auto"

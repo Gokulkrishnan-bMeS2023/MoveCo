@@ -1,13 +1,7 @@
 import { Box, Flex, Heading, Text, Stack, Image, Icon } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
-import Customer1 from "../../assets/client1.webp";
-import Customer2 from "../../assets/customer2.webp";
-import Customer3 from "../../assets/Customer3.jpg";
-import Customer4 from "../../assets/Customer4.webp";
-import Customer5 from "../../assets/Customer5.webp";
-import MainBannerBG from "../../assets/main-banner-bg.webp";
-import MainBannerMobileBG from "../../assets/main-banner-mobile.jpg";
 import Button from "../../components/common/Button/Button";
+import { images } from "../../assets";
 
 const MainBanner = () => {
   return (
@@ -15,7 +9,7 @@ const MainBanner = () => {
       <Box
         display={{ base: "none", lg: "block" }}
         minHeight="82vh"
-        backgroundImage={`url(${MainBannerBG})`}
+        backgroundImage={`url(${images.mainBannerBg})`}
         backgroundSize="cover"
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
@@ -69,11 +63,11 @@ const MainBanner = () => {
                   <Heading as="h3">5000+</Heading>
                   <Flex>
                     {[
-                      Customer1,
-                      Customer2,
-                      Customer3,
-                      Customer4,
-                      Customer5,
+                      images.customer1,
+                      images.customer2,
+                      images.customer3,
+                      images.customer4,
+                      images.customer5,
                     ].map((img, i) => (
                       <Image
                         key={i}
@@ -87,7 +81,6 @@ const MainBanner = () => {
                   </Flex>
                 </Stack>
 
-                {/* Rating */}
                 <Stack alignItems="center" gap={2}>
                   <Flex>
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -107,10 +100,9 @@ const MainBanner = () => {
         </Flex>
       </Box>
 
-      {/* ================== MOBILE BANNER ================== */}
       <Box
         display={{ base: "block", lg: "none" }}
-        backgroundImage={`url(${MainBannerMobileBG})`}
+        backgroundImage={`url(${images.mainBannerMobile})`}
         backgroundSize="cover"
         backgroundPosition="center"
         borderRadius="xl"

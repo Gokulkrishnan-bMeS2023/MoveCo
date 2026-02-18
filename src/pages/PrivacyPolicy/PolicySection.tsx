@@ -13,9 +13,9 @@ import {
 import type { PolicySectionProps } from "./DTOs";
 
 const PolicySection = memo<PolicySectionProps>(
-  ({ icon, title, image, reverse = false, children }: PolicySectionProps) => {
+  ({ icon, title, image, reverse = false, children,pt="sectionTop" }: PolicySectionProps) => {
     return (
-      <Box pb={8}>
+      <Box pt={pt}>
         <Grid
           templateColumns={{ base: "1fr", lg: "1fr 1fr" }}
           gap={16}
@@ -49,7 +49,6 @@ const PolicySection = memo<PolicySectionProps>(
             </VStack>
           </GridItem>
 
-          {/* Content Side */}
           <GridItem order={{ base: 2, lg: reverse ? 1 : 2 }}>
             <VStack align="stretch" gap={4}>
               {children}

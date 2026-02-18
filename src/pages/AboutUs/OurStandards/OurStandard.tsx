@@ -1,18 +1,18 @@
 import { Box, Text, Container, Heading, Flex } from "@chakra-ui/react";
-import InsuranceImg from "../../../assets/insurance-banner.webp";
 import Button from "../../../components/common/Button/Button";
 import { standardFeature } from "./data";
 import { professionalStandards } from "./data";
 import CardTemplate from "../AboutUsComponents/CardTemplate";
 import CommonAccordion from "../AboutUsComponents/CommonAccordion";
 import HeroBanner from "../AboutUsComponents/HeroBanner";
+import { images } from "../../../assets";
 
 const OurStandard = () => {
   return (
     <div>
-      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
-        <HeroBanner title="Our Standard" bgImage={InsuranceImg} />
-        <Box pt={{ base: 10, md: 16 }}>
+      <Container>
+        <HeroBanner title="Our Standard" bgImage={images.insuranceBanner} />
+        <Box pt="sectionTop">
           <Button
             fontSize="xl"
             rounded="full"

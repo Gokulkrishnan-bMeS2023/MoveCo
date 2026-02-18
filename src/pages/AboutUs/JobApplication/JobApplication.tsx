@@ -5,8 +5,7 @@ import { JobApplicationForm } from "./Step1address";
 const JobApplication = () => {
   const navigate = useNavigate();
   return (
-    <>
-      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }} >
+      <Container >
         <Flex direction="column" align="flex-start" gap={4} >
           <Box maxW="800px" w="100%">
             <Heading as="h1" fontWeight="normal">
@@ -40,7 +39,6 @@ const JobApplication = () => {
           <JobApplicationForm />
        
       </Container>
-    </>
   );
 };
 export default JobApplication;

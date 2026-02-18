@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { Table } from "@chakra-ui/react";
 import Button from "../../../components/common/Button/Button";
-import storageImage from "../../../assets/Storage.jpg";
+import { images } from "../../../assets";
 
 const STORAGE_PRICING = [
   { size: "10 x 20", price: "$260" },
@@ -25,7 +25,7 @@ export default function StoragePage() {
   const [showAll, setShowAll] = useState(false);
 
   return (
-    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+    <Container>
       <Flex
         mb={{ base: 6, lg: 8 }}
         direction={{ base: "column", md: "row" }}
@@ -59,7 +59,7 @@ export default function StoragePage() {
           /> */}
 
           <Image
-            src={storageImage}
+            src={images.storage}
             alt="Storage service facility"
             w="100%"
             h="auto"
@@ -110,7 +110,7 @@ export default function StoragePage() {
         </Stack>
       </SimpleGrid>
 
-      <Box pt={{ base: 10, md: 16 }}>
+      <Box pt="sectionTop">
         <Grid
           templateColumns={{ base: "1fr", lg: "1fr 2fr" }}
           gap={8}

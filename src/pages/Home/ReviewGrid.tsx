@@ -1,6 +1,6 @@
 import { Grid, Box, Text, Heading, Flex, Image } from "@chakra-ui/react";
 import { useState } from "react";
-import avatarImage from "../../assets/dp.jpg";
+import { images } from "../../assets";
 
 export interface ClientSpeak {
   id: number;
@@ -118,7 +118,7 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
       >
         <Flex align="center" gap={4} mb={4}>
           <Image
-            src={client.image || avatarImage}
+            src={client.image || images.profile}
             boxSize="50px"
             borderRadius="full"
             objectFit="cover"

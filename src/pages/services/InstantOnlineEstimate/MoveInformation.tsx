@@ -174,7 +174,7 @@ const handlePhoneChange = (
   };
 
   return (
-    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+    <Container>
       <Box>
         <Flex
           direction={{ base: "column", md: "row" }}

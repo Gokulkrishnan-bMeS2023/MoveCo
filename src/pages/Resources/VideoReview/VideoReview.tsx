@@ -6,7 +6,7 @@ import Button from "../../../components/common/Button/Button";
 const VideoHome = () => {
   const [visibleCount, setVisibleCount] = useState(2); 
   return (
-    <Container maxW="100%" py={{ base: 10, md: 12 }} px={8}>
+    <Container>
       <Heading  mb={{base:6, lg:8}} as="h2" fontWeight="normal" color="brand.primary">
         Video Reviews
       </Heading>

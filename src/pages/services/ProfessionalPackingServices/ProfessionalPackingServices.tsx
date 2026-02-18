@@ -10,9 +10,9 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Table } from "@chakra-ui/react";
-import img1 from "../../../assets/service2.webp";
 import { PACKING_OPTIONS, PACKING_RATES } from "./data";
 import type { PackingOption } from "./DTOs";
+import { images } from "../../../assets";
 
 const OptionCard = ({ icon: Icon, title, description }: PackingOption) => (
   <Box
@@ -37,16 +37,16 @@ const OptionCard = ({ icon: Icon, title, description }: PackingOption) => (
 
 const PackingServicesPage = () => {
   return (
-    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
-      {/* Header Section */}
+    <Container>
       <Flex
         direction={{ base: "column", md: "row" }}
         align={{ base: "flex-start", md: "center" }}
         justify="space-between"
         gap={{ base: 6, md: 10 }}
+        mb={{ base: 6, lg: 8 }}
       >
         <Box maxW="600px" w="100%">
-          <Heading as="h1" fontWeight="normal" mb={2}>
+          <Heading as="h1" fontWeight="normal">
             Professional{" "}
             <Text as="span" color="brand.primary">
               Packing Services
@@ -61,8 +61,7 @@ const PackingServicesPage = () => {
       </Flex>
 
       <VStack gap={8}>
-        {/* Options Grid */}
-        <Box pt={{ base: 10, md: 16 }}>
+        <Box >
           <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={8}>
             <For each={PACKING_OPTIONS}>
               {(option) => <OptionCard key={option.id} {...option} />}
@@ -70,7 +69,6 @@ const PackingServicesPage = () => {
           </Grid>
         </Box>
 
-        {/* Packing Rates Section */}
         <Box
           bg="brand.white"
           p={{ base: 6, md: 8 }}
@@ -131,7 +129,7 @@ const PackingServicesPage = () => {
               height="400px"
             >
               <img
-                src={img1}
+                src={images.img1}
                 alt="Professional packing services"
                 style={{
                   width: "100%",

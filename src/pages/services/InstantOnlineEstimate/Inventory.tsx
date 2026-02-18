@@ -347,7 +347,7 @@ const decrease = (item: string) => {
 
 
   return (
-    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+    <Container>
       <Flex
         justify="space-between"
         align={{ base: "flex-start", md: "center" }}

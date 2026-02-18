@@ -15,8 +15,7 @@ import { QuoteForm } from "./QuoteForm";
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <>
-      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+      <Container>
         <Flex direction={{ base: "column", lg: "row" }} gap={6}>
           <Box flex="7">
             <MainBanner />
@@ -27,7 +26,7 @@ const Home = () => {
           </Box>
         </Flex>
 
-        <Box pt={{ base: 10, md: 16 }}>
+        <Box pt="sectionTop">
           <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
             <Button
               fontSize="xl"
@@ -75,7 +74,7 @@ const Home = () => {
           <VideoGrid limit={2} />
         </Box>
 
-        <Box pt={{ base: 10, md: 16 }}>
+        <Box pt="sectionTop">
           <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
             <Button
               fontSize="xl"
@@ -122,7 +121,6 @@ const Home = () => {
           <ClientSpeaks limit={3} />
         </Box>
       </Container>
-    </>
   );
 };
 

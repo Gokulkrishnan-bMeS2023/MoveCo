@@ -11,8 +11,8 @@ interface HeroBannerProps {
 const HeroBanner = ({
   title,
   bgImage,
-  overlayColor = "black",
-  overlayOpacity = 0.3,
+  overlayColor = "#0000004D",
+  overlayOpacity = 0.9,
 }: HeroBannerProps) => {
   return (
     <Box

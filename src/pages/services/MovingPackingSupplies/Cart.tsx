@@ -29,8 +29,6 @@ const toaster = createToaster({
   duration: 2000,
 });
 
-// QUANTITY SELECT MODAL
-
 interface QuantityModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -453,14 +451,13 @@ const CartPage = () => {
   }, []);
 
   return (
-    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
-      {/* Header */}
+    <Container>
       <Stack
         direction={{ base: "column", sm: "row" }}
         justify="space-between"
         align={{ base: "start", sm: "center" }}
-        mb={8}
-        gap={4}
+        gap={{ base: 6, md: 10 }}
+          mb={{ base: 6, lg: 8 }}
       >
         <Heading as="h1" fontWeight="normal">
           Shopping <Span color="brand.primary">Cart</Span>

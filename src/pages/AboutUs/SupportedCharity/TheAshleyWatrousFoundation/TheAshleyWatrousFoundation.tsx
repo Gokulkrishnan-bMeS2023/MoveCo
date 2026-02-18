@@ -4,7 +4,7 @@ import SideContentSection from "../SideContentSection";
 
 const TheAshleyWatrousFoundation = () => {
   return (
-    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+    <Container>
       {ASHLEY_WATROUS_DATA.map((item) => (
         <SideContentSection
           key={item.title}
