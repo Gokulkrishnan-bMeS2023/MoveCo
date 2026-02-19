@@ -18,17 +18,16 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import type { MoveInformationDTO, MoveInformationErrors } from "./DTOs";
 import { validateMoveInformation } from "./validation";
 import { useEffect } from "react";
+import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
 
 const InHomeMoveEstimate = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
   const [values, setValues] = useState<MoveInformationDTO>({
     firstName: searchParams.get("firstName") || "",
     lastName: searchParams.get("lastName") || "",
     email: searchParams.get("email") || "",
-    cellPhone: searchParams.get("phone") || "",
-
+    phone: searchParams.get("phone") || "",
     homePhone: "",
     workPhone: "",
     faxPhone: "",
@@ -58,29 +57,19 @@ const InHomeMoveEstimate = () => {
   const [errors, setErrors] = useState<MoveInformationErrors>({});
 
   useEffect(() => {
-  const saved = sessionStorage.getItem("moveInfo");
-  if (saved) setValues(JSON.parse(saved));
-}, []);
+    const saved = sessionStorage.getItem("moveInfo");
+    if (saved) setValues(JSON.parse(saved));
+  }, []);
 
+  const handleChange = (field: keyof MoveInformationDTO, value: string) => {
+    const updated = { ...values, [field]: value };
+    setValues(updated);
+    sessionStorage.setItem("moveInfo", JSON.stringify(updated));
 
-
-
-
- const handleChange = (field: keyof MoveInformationDTO, value: string) => {
-  const updated = { ...values, [field]: value };
-
-  setValues(updated);
-
-  // ✅ save to session storage
-  sessionStorage.setItem("moveInfo", JSON.stringify(updated));
-
-  if (errors[field]) {
-    setErrors((prev) => ({ ...prev, [field]: "" }));
-  }
-};
-
-  
-
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: "" }));
+    }
+  };
   const moveTimeOptions = [
     { label: "8AM - 10AM", value: "8-10" },
     { label: "10AM - 12PM", value: "10-12" },
@@ -126,34 +115,6 @@ const InHomeMoveEstimate = () => {
     { label: "200–300 feet", value: "200-300" },
     { label: "300–400 feet", value: "300-400" },
   ];
-
-  const formatUSPhone = (v: string) => {
-  const d = v.replace(/\D/g, "").slice(0, 10);
-  return d.length < 4 ? d
-    : d.length < 7 ? `(${d.slice(0,3)}) ${d.slice(3)}`
-    : `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
-};
-
-const handlePhoneChange = (
-  field: keyof MoveInformationDTO,
-  e: React.ChangeEvent<HTMLInputElement>
-) => {
-  const input = e.target;
-  const cursorPos = input.selectionStart || 0;
-
-  const digits = input.value.replace(/\D/g, "").slice(0, 10);
-
-  setValues((prev) => ({
-    ...prev,
-    [field]: digits,
-  }));
-
-  requestAnimationFrame(() => {
-    input.setSelectionRange(cursorPos, cursorPos);
-  });
-};
-
-
 
   const handleSubmit = () => {
     const newErrors = validateMoveInformation(values);
@@ -247,34 +208,31 @@ const handlePhoneChange = (
             </SimpleGrid>
 
             <SimpleGrid columns={{ base: 1, md: 4 }} gap={6}>
-   <InputField
-  label="Phone"
-  placeholder="(555) 555-5555"
-value={formatUSPhone(values.cellPhone)}
-onChange={(e) => handlePhoneChange("cellPhone", e)}
-  errorMessage={errors.phone}
-/>
+              <PhoneField
+                label="Phone"
+                value={values.phone}
+                onChange={(v) => handleChange("phone", v)}
+                errorMessage={errors.phone}
+                isRequired
+              />
 
-  <InputField
-  label="Work Phone"
-  placeholder="(555) 555-5555"
-  value={formatUSPhone(values.workPhone)}
-  onChange={(e) => handlePhoneChange("workPhone", e)}
-/>
-<InputField
-  label="Cell Phone"
-  placeholder="(555) 555-5555"
-  value={formatUSPhone(values.faxPhone)}
-  onChange={(e) => handlePhoneChange("faxPhone", e)}
-/>
+              <PhoneField
+                label="Work Phone"
+                value={values.workPhone}
+                onChange={(v) => handleChange("workPhone", v)}
+              />
 
-<InputField
-  label="Home Phone"
-  placeholder="(555) 555-5555"
-  value={formatUSPhone(values.homePhone)}
-  onChange={(e) => handlePhoneChange("homePhone", e)}
-/>
+              <PhoneField
+                label="Home Phone"
+                value={values.homePhone}
+                onChange={(v) => handleChange("homePhone", v)}
+              />
 
+              <PhoneField
+                label="Fax Phone"
+                value={values.faxPhone}
+                onChange={(v) => handleChange("faxPhone", v)}
+              />
             </SimpleGrid>
           </VStack>
         </Box>
@@ -415,11 +373,16 @@ onChange={(e) => handlePhoneChange("cellPhone", e)}
               <InputField
                 label="Zip Code"
                 placeholder="Zip Code"
+                type="number"
                 value={values.fromZipCode}
-                onChange={(e) => handleChange("fromZipCode", e.target.value)}
-                isRequired
-                errorMessage={errors.fromZipCode}
+                onChange={(e) =>
+                  handleChange(
+                    "fromZipCode",
+                    e.target.value.replace(/\D/g, "").slice(0, 5),
+                  )
+                }
               />
+
               <SelectField
                 label="Flights of stairs at this address?"
                 options={stairsOptions}
@@ -482,9 +445,16 @@ onChange={(e) => handlePhoneChange("cellPhone", e)}
               <InputField
                 label="Zip Code"
                 placeholder="Zip Code"
+                type="number"
                 value={values.toZipCode}
-                onChange={(e) => handleChange("toZipCode", e.target.value)}
+                onChange={(e) =>
+                  handleChange(
+                    "toZipCode",
+                    e.target.value.replace(/\D/g, "").slice(0, 5),
+                  )
+                }
               />
+
               <SelectField
                 label="Flights of stairs at this address?"
                 options={stairsOptions}

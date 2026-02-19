@@ -26,9 +26,14 @@ export const validateInstantEstimate = (
     errors.date = "Date is required";
   }
 
-  if (!data.phone.trim()) {
-    errors.phone = "Phone number is required";
-  }
+ const cleanedPhone = data.phone.replace(/\D/g, "");
+
+if (!cleanedPhone) {
+  errors.phone = "Phone number is required";
+} else if (cleanedPhone.length !== 10) {
+  errors.phone = "Phone number must be 10 digits";
+}
+
 
   if (!data.email.trim()) {
     errors.email = "Email is required";
@@ -58,13 +63,14 @@ export const validateMoveInformation = (
     errors.email = "Invalid email address";
   }
 
-  const cleanedCell = data.cellPhone.replace(/\D/g, "");
+  const cleanedCell = data.phone.replace(/\D/g, "");
+
 
 
 if (!cleanedCell) {
-  errors.cellPhone = "Phone number is required";
+  errors.phone = "Phone number is required";
 } else if (!PHONE_REGEX.test(cleanedCell)) {
-  errors.cellPhone = "Phone number must be 10 digits";
+  errors.phone = "Phone number must be 10 digits";
 }
 
 

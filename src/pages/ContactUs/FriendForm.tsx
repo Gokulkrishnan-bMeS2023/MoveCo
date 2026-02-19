@@ -13,6 +13,7 @@ import { FaUserFriends } from "react-icons/fa";
 import { useContactForms } from "./useContactForms";
 import Button from "../../components/common/Button/Button";
 import InputField from "../../components/common/Input/Input";
+import PhoneField from "../../components/common/PhoneInput/PhoneInput";
 
 const FriendForm = () => {
   const {
@@ -57,19 +58,17 @@ const FriendForm = () => {
               errorMessage={referralErrors.yourName}
               isRequired
             />
-            <InputField
+            <PhoneField
               label="Friend's Phone Number"
-              placeholder="Friend's Phone Number"
               value={referralValues.friendPhone}
-              onChange={(e) =>
-                handleReferralChange("friendPhone", e.target.value)
-              }
+              onChange={(digits) => handleReferralChange("friendPhone", digits)}
               errorMessage={referralErrors.friendPhone}
               isRequired
             />
             <InputField
               label="Friend's Email Address"
               placeholder="Friend's Email Address"
+              type="email"
               value={referralValues.friendEmail}
               onChange={(e) =>
                 handleReferralChange("friendEmail", e.target.value)

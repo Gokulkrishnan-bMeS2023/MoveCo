@@ -118,6 +118,7 @@ const handleSubmit = () => {
               <InputField
                 label="Email(Email address WILL NOT be displayed on the Testimonial board)"
                 placeholder="Email"
+                type="email"
                 value={values.email}
                 onChange={(e) => handleChange("email", e.target.value)}
                 errorMessage={errors.email}

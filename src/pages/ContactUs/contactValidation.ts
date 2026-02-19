@@ -5,7 +5,7 @@ import type {
 } from "./DTOs";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const phoneRegex = /^[0-9+\-\s()]{7,}$/;
+const PHONE_REGEX = /^\d{10}$/; 
 
 export const validateContactForm = (
   values: ContactFormValues
@@ -22,10 +22,10 @@ export const validateContactForm = (
     errors.email = "Enter a valid email address";
   }
 
-  if (!values.phone.trim()) {
+  if (!values.phone) {
     errors.phone = "Phone number is required";
-  } else if (!phoneRegex.test(values.phone)) {
-    errors.phone = "Enter a valid phone number";
+  } else if (!PHONE_REGEX.test(values.phone)) {
+    errors.phone = "Phone number must be 10 digits";
   }
 
   return errors;
@@ -46,8 +46,10 @@ export const validateReferralForm = (
     errors.friendEmail = "Enter a valid email";
   }
 
-  if (!values.friendPhone.trim()) {
+  if (!values.friendPhone) {
     errors.friendPhone = "Friend's phone number is required";
+  } else if (!PHONE_REGEX.test(values.friendPhone)) {
+    errors.friendPhone = "Phone number must be 10 digits";
   }
 
   return errors;

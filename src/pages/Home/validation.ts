@@ -1,4 +1,5 @@
 import type { QuoteFormDTO, QuoteFormErrors } from "./DTOs";
+const PHONE_REGEX = /^\d{10}$/;
 
 export const validateQuoteForm = (
   data: QuoteFormDTO
@@ -17,8 +18,10 @@ export const validateQuoteForm = (
     errors.date = "Date is required";
   }
 
-  if (!data.phoneNumber.trim()) {
+   if (!data.phoneNumber) {
     errors.phoneNumber = "Phone number is required";
+  } else if (!PHONE_REGEX.test(data.phoneNumber)) {
+    errors.phoneNumber = "Phone number must be 10 digits";
   }
 
   if (!data.email) {

@@ -11,7 +11,7 @@ import type {
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 const PHONE_REGEX = /^\d{10}$/;
-const SSN_REGEX = /^\d{3}-\d{2}-\d{4}$/;
+const SSN_REGEX = /^\d{9}$/; // ✅ just 9 digits, no format check
 
 
 // Step 1 Validation
@@ -31,26 +31,28 @@ export const validateStepOne = (data: StepOneDTO): StepOneErrors => {
   } else if (!EMAIL_REGEX.test(data.email)) {
     errors.email = "Invalid email address";
   }
-   
+
   if (data.HomePhone) {
-  const cleaned = data.HomePhone.replace(/\D/g, "");
-  if (!PHONE_REGEX.test(cleaned)) {
-    errors.HomePhone = "Enter valid 10 digit phone number";
+    const cleaned = data.HomePhone.replace(/\D/g, "");
+    if (!PHONE_REGEX.test(cleaned)) {
+      errors.HomePhone = "Enter valid 10 digit phone number";
+    }
   }
-}
 
-if (data.CellPhone) {
-  const cleaned = data.CellPhone.replace(/\D/g, "");
-  if (!PHONE_REGEX.test(cleaned)) {
-    errors.CellPhone = "Enter valid 10 digit phone number";
+  if (data.CellPhone) {
+    const cleaned = data.CellPhone.replace(/\D/g, "");
+    if (!PHONE_REGEX.test(cleaned)) {
+      errors.CellPhone = "Enter valid 10 digit phone number";
+    }
   }
-}
 
-if (data.SocialSecurityNumber && !SSN_REGEX.test(data.SocialSecurityNumber)) {
-  errors.SocialSecurityNumber = "Enter valid SSN";
-}
-
- 
+  // ✅ Strip formatting, just check 9 digits
+  if (data.SocialSecurityNumber) {
+    const cleaned = data.SocialSecurityNumber.replace(/\D/g, "");
+    if (!SSN_REGEX.test(cleaned)) {
+      errors.SocialSecurityNumber = "Enter 9 digit SSN";
+    }
+  }
 
   if (!data.citizen) {
     errors.citizen = "This field is required";
@@ -83,14 +85,10 @@ export const validateEmploymentExperience = (
 ): EmploymentExperienceErrors => {
   const errors: EmploymentExperienceErrors = {};
 
- 
-
-    if (data.supervisorPhone) {
+  if (data.supervisorPhone) {
     const cleaned = data.supervisorPhone.replace(/\D/g, "");
-
     if (cleaned.length !== 10) {
-      errors.supervisorPhone =
-        "Please enter a valid 10 digit phone number";
+      errors.supervisorPhone = "Please enter a valid 10 digit phone number";
     }
   }
 
@@ -100,10 +98,12 @@ export const validateEmploymentExperience = (
 // Step 2 Validation (Education + Employment)
 export const validateStepTwo = (data: StepTwoDTO): StepTwoErrors => {
   const errors: StepTwoErrors = {};
+
   const educationErrors = validateEducation(data.education);
   if (Object.keys(educationErrors).length > 0) {
     errors.education = educationErrors;
   }
+
   const experienceErrors: EmploymentExperienceErrors[] = [];
   data.experiences.forEach((exp, index) => {
     const expErrors = validateEmploymentExperience(exp);

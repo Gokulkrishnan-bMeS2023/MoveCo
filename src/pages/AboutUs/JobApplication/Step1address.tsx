@@ -12,17 +12,19 @@ import InputField from "../../../components/common/Input/Input";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import RadioField from "../../../components/common/Radio/Radio";
 import SelectField from "../../../components/common/Select/Select";
+import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
+import SSNField from "../../../components/common/SsnInput/SsnInput";
 
-import type { 
-  StepOneDTO, 
-  StepOneErrors, 
+import type {
+  StepOneDTO,
+  StepOneErrors,
   StepTwoDTO,
-  StepTwoErrors,        // 👈 ADD THIS
+  StepTwoErrors,
   StepThreeDTO,
   EmploymentExperienceDTO,
-  EducationDTO 
+  EducationDTO,
 } from "./DTOs";
-import { validateStepOne, validateStepTwo } from "./validation";  // 👈 ADD validateStepTwo
+import { validateStepOne, validateStepTwo } from "./validation";
 import Step2Address from "./Step2address";
 
 const stateOptions = [
@@ -179,7 +181,7 @@ const JobApplicationForm = () => {
     setStepTwoData((prev) => ({
       ...prev,
       experiences: prev.experiences.map((exp, i) =>
-        i === index ? { ...exp, [field]: value } : exp
+        i === index ? { ...exp, [field]: value } : exp,
       ),
     }));
   };
@@ -234,18 +236,18 @@ const JobApplicationForm = () => {
 
       setErrors({});
     }
-   if (page === 1) {
-  const stepTwoValidationErrors = validateStepTwo(stepTwoData);
-  
-  if (Object.keys(stepTwoValidationErrors).length > 0) {
-    setStepTwoErrors(stepTwoValidationErrors);
-    return; 
-  }
+    if (page === 1) {
+      const stepTwoValidationErrors = validateStepTwo(stepTwoData);
 
-  setStepTwoErrors({}); 
-  setPage((p) => p + 1); 
-  return;
-}
+      if (Object.keys(stepTwoValidationErrors).length > 0) {
+        setStepTwoErrors(stepTwoValidationErrors);
+        return;
+      }
+
+      setStepTwoErrors({});
+      setPage((p) => p + 1);
+      return;
+    }
     if (page === 2) {
       if (!step3Ref.current?.validate()) return;
 
@@ -254,7 +256,7 @@ const JobApplicationForm = () => {
         stepTwo: stepTwoData,
         stepThree: stepThreeData,
       };
-      
+
       alert("FORM SUBMITTED");
       console.log("Complete Form Data:", completeFormData);
       console.log("Photo File:", stepThreeData.photoFile);
@@ -271,40 +273,30 @@ const JobApplicationForm = () => {
 
   const step3Ref = useRef<any>(null);
 
-  const formatUSPhone = (value: string) => {
-  const digits = value.replace(/\D/g, "").slice(0, 10);
+  const formatSSN = (value: string) => {
+    const digits = value.replace(/\D/g, "").slice(0, 9);
 
-  if (digits.length < 4) return digits;
-  if (digits.length < 7) return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 5) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
 
-  return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
-};
-
-const formatSSN = (value: string) => {
-  const digits = value.replace(/\D/g, "").slice(0, 9); 
-
-  if (digits.length <= 3) return digits;
-  if (digits.length <= 5) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
-
-  return `${digits.slice(0, 3)}-${digits.slice(3, 5)}-${digits.slice(5)}`;
-};
-// Add this function near your other handlers
-const handleClearExperienceError = (
-  index: number,
-  field: keyof EmploymentExperienceDTO
-) => {
-  setStepTwoErrors((prev) => {
-    const updatedExperiences = [...(prev.experiences || [])];
-    if (updatedExperiences[index]) {
-      updatedExperiences[index] = {
-        ...updatedExperiences[index],
-        [field]: "",  // ✅ Clear that specific field error
-      };
-    }
-    return { ...prev, experiences: updatedExperiences };
-  });
-};
-
+    return `${digits.slice(0, 3)}-${digits.slice(3, 5)}-${digits.slice(5)}`;
+  };
+  // Add this function near your other handlers
+  const handleClearExperienceError = (
+    index: number,
+    field: keyof EmploymentExperienceDTO,
+  ) => {
+    setStepTwoErrors((prev) => {
+      const updatedExperiences = [...(prev.experiences || [])];
+      if (updatedExperiences[index]) {
+        updatedExperiences[index] = {
+          ...updatedExperiences[index],
+          [field]: "", // ✅ Clear that specific field error
+        };
+      }
+      return { ...prev, experiences: updatedExperiences };
+    });
+  };
 
   const renderPage = () => {
     switch (page) {
@@ -365,7 +357,6 @@ const handleClearExperienceError = (
                     onChange={(e) => handleChange("firstName", e.target.value)}
                     errorMessage={errors.firstName}
                   />
-
                   <InputField
                     label="Last Name"
                     placeholder="Last Name"
@@ -374,10 +365,10 @@ const handleClearExperienceError = (
                     onChange={(e) => handleChange("lastName", e.target.value)}
                     errorMessage={errors.lastName}
                   />
-
                   <InputField
                     label="Email"
                     placeholder="Email"
+                    type="email"
                     isRequired
                     value={formData.email}
                     onChange={(e) => handleChange("email", e.target.value)}
@@ -386,32 +377,19 @@ const handleClearExperienceError = (
                 </SimpleGrid>
 
                 <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-<InputField
-  label="Home Phone"
-  placeholder="(555) 555-5555"
-  type="text"
-  value={formatUSPhone(formData.HomePhone)}
-  errorMessage={errors.HomePhone}
-  onChange={(e) =>
-    handleChange("HomePhone", e.target.value.replace(/\D/g, "").slice(0,10))
-  }
-/>
+                  <PhoneField
+                    label="Home Phone"
+                    value={formData.HomePhone}
+                    errorMessage={errors.HomePhone}
+                    onChange={(digits) => handleChange("HomePhone", digits)}
+                  />
 
-
-
-<InputField
-  label="Cell Phone"
-  placeholder="(555) 555-5555"
-  type="text"
-  value={formatUSPhone(formData.CellPhone)}
-  errorMessage={errors.CellPhone}
-  onChange={(e) =>
-    handleChange("CellPhone", e.target.value.replace(/\D/g, "").slice(0,10))
-  }
-/>
-
-
-
+                  <PhoneField
+                    label="Cell Phone"
+                    value={formData.CellPhone}
+                    errorMessage={errors.CellPhone}
+                    onChange={(digits) => handleChange("CellPhone", digits)}
+                  />
                   <InputField
                     label="Address"
                     placeholder="Address"
@@ -436,25 +414,28 @@ const handleClearExperienceError = (
                     isRequired
                     errorMessage={errors.State}
                   />
-
                   <InputField
                     label="Zip Code"
                     placeholder="Zip Code"
+                    type="number"
                     value={formData.ZipCode}
-                    onChange={(e) => handleChange("ZipCode", e.target.value)}
+                    onChange={(e) =>
+                      handleChange(
+                        "ZipCode",
+                        e.target.value.replace(/\D/g, "").slice(0, 5),
+                      )
+                    }
                   />
                 </SimpleGrid>
-
                 <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-                 <InputField
-  label="Social Security Number"
-  placeholder="XXX-XX-XXXX"
-  value={formData.SocialSecurityNumber}
-  errorMessage={errors.SocialSecurityNumber}
-  onChange={(e) =>
-    handleChange("SocialSecurityNumber", formatSSN(e.target.value))
-  }
-/>
+                  <SSNField
+                    label="Social Security Number"
+                    value={formData.SocialSecurityNumber}
+                    onChange={(digits) =>
+                      handleChange("SocialSecurityNumber", digits)
+                    }
+                    errorMessage={errors.SocialSecurityNumber}
+                  />
 
                   <DateInput
                     label="Available Start Date"
@@ -484,9 +465,7 @@ const handleClearExperienceError = (
                     label="Have you ever been convicted of a felony?"
                     options={yesNoOptions}
                     value={formData.felony}
-                    onValueChange={(val) =>
-                      handleChange("felony", val)
-                    }
+                    onValueChange={(val) => handleChange("felony", val)}
                     isRequired
                     errorMessage={errors.felony}
                     direction="row"
@@ -496,9 +475,7 @@ const handleClearExperienceError = (
                     label="Have you ever been involuntarily terminated?"
                     options={yesNoOptions}
                     value={formData.terminated}
-                    onValueChange={(val) =>
-                      handleChange("terminated", val)
-                    }
+                    onValueChange={(val) => handleChange("terminated", val)}
                     isRequired
                     errorMessage={errors.terminated}
                     direction="row"
@@ -508,9 +485,7 @@ const handleClearExperienceError = (
                     label="Are you willing to submit to a drug test?"
                     options={yesNoOptions}
                     value={formData.drugTest}
-                    onValueChange={(val) =>
-                      handleChange("drugTest", val)
-                    }
+                    onValueChange={(val) => handleChange("drugTest", val)}
                     isRequired
                     errorMessage={errors.drugTest}
                     direction="row"
@@ -546,9 +521,7 @@ const handleClearExperienceError = (
               handleStepThreeChange("photoFile", file);
               handleStepThreeChange("photoFileName", fileName);
             }}
-            onAgreedChange={(agreed) =>
-              handleStepThreeChange("agreed", agreed)
-            }
+            onAgreedChange={(agreed) => handleStepThreeChange("agreed", agreed)}
           />
         );
 

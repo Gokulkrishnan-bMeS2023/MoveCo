@@ -8,6 +8,7 @@ import DateInput from "../../components/common/DateInput/DateInput";
 import InputField from "../../components/common/Input/Input";
 import RadioField from "../../components/common/Radio/Radio";
 import Button from "../../components/common/Button/Button";
+import PhoneField from "../../components/common/PhoneInput/PhoneInput";
 
 const QuoteForm = () => {
   const navigate = useNavigate();
@@ -94,17 +95,16 @@ const QuoteForm = () => {
             errorMessage={errors.date}
           />
 
-          <InputField
+          <PhoneField
             label="Phone Number"
             value={formData.phoneNumber}
-            onChange={(e) => handleChange("phoneNumber", e.target.value)}
-            placeholder="Phone"
+            onChange={(digits) => handleChange("phoneNumber", digits)}
             isRequired
             errorMessage={errors.phoneNumber}
           />
-
           <InputField
             label="Email"
+            type="email"
             value={formData.email}
             onChange={(e) => handleChange("email", e.target.value)}
             placeholder="Email"

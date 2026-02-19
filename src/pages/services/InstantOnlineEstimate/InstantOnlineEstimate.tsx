@@ -17,6 +17,8 @@ import { validateInstantEstimate } from "./validation";
 import { useEffect } from "react";
 import { images } from "../../../assets";
 
+import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
+
 const InstantOnlineEstimate = () => {
   const navigate = useNavigate();
 
@@ -138,7 +140,6 @@ const formatUSPhone = (value: string) => {
             <InputField
               label="Last Name"
               placeholder="Last Name"
-              type="tel"
               value={values.lastName}
               onChange={(e) => handleChange("lastName", e.target.value)}
               isRequired
@@ -152,23 +153,20 @@ const formatUSPhone = (value: string) => {
               isRequired
               errorMessage={errors.date}
             />
-           <InputField
+
+<PhoneField
   label="Phone Number"
-  placeholder="(555) 555-5555"
-  value={formatUSPhone(values.phone)}
-  onChange={(e) =>
-    handleChange(
-      "phone",
-      e.target.value.replace(/\D/g, "").slice(0, 10)
-    )
-  }
+  value={values.phone}
+  onChange={(digits) => handleChange("phone", digits)}
   isRequired
   errorMessage={errors.phone}
+  
 />
 
             <InputField
               label="Email"
               placeholder="Email"
+              type="email"
               value={values.email}
               onChange={(e) => handleChange("email", e.target.value)}
               isRequired

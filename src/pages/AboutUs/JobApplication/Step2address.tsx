@@ -10,11 +10,12 @@ import {
 import React from "react";
 import InputField from "../../../components/common/Input/Input";
 import DateInput from "../../../components/common/DateInput/DateInput";
+import PhoneField from "../../../components/common/PhoneInput/PhoneInput"; // ✅ import PhoneField
 
 import type {
   EducationDTO,
   EmploymentExperienceDTO,
-  EmploymentExperienceErrors, // 👈 ADD THIS
+  EmploymentExperienceErrors,
 } from "./DTOs";
 
 import Button from "../../../components/common/Button/Button";
@@ -22,31 +23,23 @@ import Button from "../../../components/common/Button/Button";
 interface Step2AddressProps {
   education: EducationDTO;
   experiences: EmploymentExperienceDTO[];
-  onEducationChange: <K extends keyof EducationDTO>(field: K, value: EducationDTO[K]) => void;
+  onEducationChange: <K extends keyof EducationDTO>(
+    field: K,
+    value: EducationDTO[K],
+  ) => void;
   onExperienceChange: <K extends keyof EmploymentExperienceDTO>(
-    index: number, field: K, value: EmploymentExperienceDTO[K]
+    index: number,
+    field: K,
+    value: EmploymentExperienceDTO[K],
   ) => void;
   onAddExperience: () => void;
   onRemoveExperience: (index: number) => void;
-  experienceErrors?: EmploymentExperienceErrors[]; // 👈 ADD THIS
-  onClearExperienceError: (index: number, field: keyof EmploymentExperienceDTO) => void;
+  experienceErrors?: EmploymentExperienceErrors[];
+  onClearExperienceError: (
+    index: number,
+    field: keyof EmploymentExperienceDTO,
+  ) => void;
 }
-
-const formatUSPhone = (value: string) => {
-  const digits = value.replace(/\D/g, "").slice(0, 10);
-
-  if (digits.length < 4) return digits;
-  if (digits.length < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
-
-  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
-};
-
-const validateUSPhone = (value: string) => {
-  const phoneRegex = /^\(\d{3}\) \d{3}-\d{4}$/;
-  return phoneRegex.test(value);
-};
-
-
 
 const Step2Address: React.FC<Step2AddressProps> = ({
   education,
@@ -58,8 +51,6 @@ const Step2Address: React.FC<Step2AddressProps> = ({
   experienceErrors,
   onClearExperienceError,
 }) => {
-
-  
   return (
     <>
       <Box
@@ -90,6 +81,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
             <InputField
               label="Years"
               placeholder="Years"
+              type="alphanumeric"
               value={education.years}
               onChange={(e) => onEducationChange("years", e.target.value)}
             />
@@ -149,8 +141,9 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 {experiences.length > 1 && (
                   <Button
                     variant="outline"
-                    onClick={() => onRemoveExperience(index)} label={"Remove"}                   >
-                  </Button>
+                    onClick={() => onRemoveExperience(index)}
+                    label={"Remove"}
+                  />
                 )}
               </Flex>
 
@@ -171,8 +164,8 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                     onExperienceChange(index, "jobTitle", e.target.value)
                   }
                 />
-                 <Field.Root>
-                  <Field.Label  p={0}>Dates Employed from &amp; to</Field.Label>
+                <Field.Root>
+                  <Field.Label p={0}>Dates Employed from &amp; to</Field.Label>
                   <Flex gap={4} align="center">
                     <DateInput
                       placeholder="From"
@@ -181,7 +174,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                       onChange={(e) =>
                         onExperienceChange(index, "from", e.target.value)
                       }
-                      />
+                    />
                     <Text color="gray.500" fontSize="sm">
                       to
                     </Text>
@@ -189,13 +182,12 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                       placeholder="To"
                       value={experience.to}
                       variant="today-and-past"
-                      min={experience.from} // 👈 From date-ku munnadi disable
+                      min={experience.from}
                       onChange={(e) =>
                         onExperienceChange(index, "to", e.target.value)
                       }
                     />
                   </Flex>
-
                 </Field.Root>
               </SimpleGrid>
 
@@ -203,6 +195,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 <InputField
                   label="Prior Positions"
                   placeholder="Prior Positions"
+                  type="alphanumeric"
                   value={experience.priorPosition}
                   onChange={(e) =>
                     onExperienceChange(index, "priorPosition", e.target.value)
@@ -211,6 +204,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 <InputField
                   label="Starting Salary"
                   placeholder="Starting salary"
+                  type="alphanumeric"
                   value={experience.startSalary}
                   onChange={(e) =>
                     onExperienceChange(index, "startSalary", e.target.value)
@@ -219,6 +213,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 <InputField
                   label="Ending Salary"
                   placeholder="Ending Salary"
+                  type="alphanumeric"
                   value={experience.endSalary}
                   onChange={(e) =>
                     onExperienceChange(index, "endSalary", e.target.value)
@@ -235,26 +230,26 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                     onExperienceChange(index, "supervisorName", e.target.value)
                   }
                 />
-<InputField
-  label="Supervisor Phone"
-  placeholder="(XXX) XXX-XXXX"
-  value={experience.supervisorPhone}
-  errorMessage={experienceErrors?.[index]?.supervisorPhone}
-  onChange={(e) => {
-    const formatted = formatUSPhone(e.target.value);
-    onExperienceChange(index, "supervisorPhone", formatted);
 
-    // ✅ Auto-clear error once user reaches 10 digits
-    const digits = e.target.value.replace(/\D/g, "");
-    if (digits.length === 10) {
-      onClearExperienceError(index, "supervisorPhone");
-    }
-  }}
-/>
+                {/* ✅ Replaced InputField with PhoneField */}
+                <PhoneField
+                  label="Supervisor Phone"
+                  value={experience.supervisorPhone}
+                  errorMessage={experienceErrors?.[index]?.supervisorPhone}
+                  onChange={(digits) => {
+                    onExperienceChange(index, "supervisorPhone", digits);
+
+                    // ✅ Auto-clear error once user reaches 10 digits
+                    if (digits.length === 10) {
+                      onClearExperienceError(index, "supervisorPhone");
+                    }
+                  }}
+                />
 
                 <InputField
                   label="Reason for Leaving"
                   placeholder="Reason for Leaving"
+                  type="alphanumeric"
                   value={experience.reason}
                   onChange={(e) =>
                     onExperienceChange(index, "reason", e.target.value)
@@ -266,6 +261,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 <InputField
                   label="Duties Performed"
                   placeholder="Duties Performed"
+                  type="alphanumeric"
                   value={experience.duties}
                   onChange={(e) =>
                     onExperienceChange(index, "duties", e.target.value)
@@ -274,8 +270,11 @@ const Step2Address: React.FC<Step2AddressProps> = ({
               </SimpleGrid>
             </Box>
           ))}
-          <Button onClick={onAddExperience} label={"+ Add Another Experience"} variant={"primary"}>
-          </Button>
+          <Button
+            onClick={onAddExperience}
+            label={"+ Add Another Experience"}
+            variant={"primary"}
+          />
         </Stack>
       </Box>
     </>

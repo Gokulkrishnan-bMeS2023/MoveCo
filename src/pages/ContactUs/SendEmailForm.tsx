@@ -14,6 +14,7 @@ import InputField from "../../components/common/Input/Input";
 import Notes from "../../components/common/Notes/Notes";
 import Button from "../../components/common/Button/Button";
 import { FaEnvelope } from "react-icons/fa";
+import PhoneField from "../../components/common/PhoneInput/PhoneInput";
 
 const SendEmailForm = () => {
   const {
@@ -65,19 +66,19 @@ const SendEmailForm = () => {
             />
             <InputField
               label="Your Email"
+              type="email"
               value={contactValues.email}
               onChange={(e) => handleContactChange("email", e.target.value)}
               errorMessage={contactErrors.email}
               isRequired
               placeholder="Your Email"
             />
-            <InputField
+            <PhoneField
               label="Your Phone Number"
               value={contactValues.phone}
-              onChange={(e) => handleContactChange("phone", e.target.value)}
+              onChange={(digits) => handleContactChange("phone", digits)}
               errorMessage={contactErrors.phone}
               isRequired
-              placeholder="Your Phone Number"
             />
             <Notes
               label="Your Message"

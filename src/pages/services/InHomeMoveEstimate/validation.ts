@@ -4,6 +4,7 @@ import type {
 } from "./DTOs";
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
+const PHONE_REGEX = /^\d{10}$/; // ✅ exactly 10 digits
 
 export const validateMoveEstimate = (
   values: MoveEstimateFormValues
@@ -30,8 +31,27 @@ export const validateMoveEstimate = (
     errors.email = "Invalid email address";
   }
 
-  if (!values.homePhone.trim())
+  // ✅ Home Phone — required + must be 10 digits
+  if (!values.homePhone) {
     errors.homePhone = "Home phone is required";
+  } else if (!PHONE_REGEX.test(values.homePhone)) {
+    errors.homePhone = "Phone number must be 10 digits";
+  }
+
+  // ✅ Cell Phone — optional, but if entered must be 10 digits
+  if (values.cellPhone && !PHONE_REGEX.test(values.cellPhone)) {
+    errors.cellPhone = "Phone number must be 10 digits";
+  }
+
+  // ✅ Work Phone — optional, but if entered must be 10 digits
+  if (values.workPhone && !PHONE_REGEX.test(values.workPhone)) {
+    errors.workPhone = "Phone number must be 10 digits";
+  }
+
+  // ✅ Fax Phone — optional, but if entered must be 10 digits
+  if (values.faxPhone && !PHONE_REGEX.test(values.faxPhone)) {
+    errors.faxPhone = "Phone number must be 10 digits";
+  }
 
   // Move Location
   if (!values.fromAddress.trim())
