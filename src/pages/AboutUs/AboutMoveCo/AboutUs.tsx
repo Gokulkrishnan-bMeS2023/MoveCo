@@ -1,10 +1,4 @@
-import {
-  Box,
-  Heading,
-  Text,
-  Flex,
-  Container,
-} from "@chakra-ui/react";
+import { Box, Heading, Text, Flex, Container } from "@chakra-ui/react";
 import { section } from "framer-motion/client";
 import Button from "../../../components/common/Button/Button";
 import { benefits, features } from "./data";
@@ -13,7 +7,7 @@ import ImageTextSection from "../AboutUsComponents/TextWithImageSection";
 import CardTemplate from "../AboutUsComponents/CardTemplate";
 import AboutFeatureSwitcher from "../AboutUsComponents/AboutFeatureSwitcher";
 import { useNavigate } from "react-router-dom";
-import { images } from "../../../assets";
+import Badge from "../../../components/common/Badge/Badge";
 
 const AboutUs = () => {
   const navigate = useNavigate();
@@ -25,14 +19,8 @@ const AboutUs = () => {
           overlayColor="brand.primary"
           title="About Us"
         />
-        <Box pt="sectionTop">
-          <Button
-            fontSize="xl"
-            rounded="full"
-            variant="primary"
-            label="About Us"
-            mb={{ base: 4, lg: 6 }}
-          />
+        <Box pt={{ base: 10, md: 16 }}>
+          <Badge label="About Us" />
           <Flex
             mb={{ base: 6, lg: 8 }}
             direction={{ base: "column", md: "row" }}

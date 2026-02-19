@@ -7,7 +7,7 @@ import {
   Flex,
   Card,
 } from "@chakra-ui/react";
-import contactImage from "../../assets/contact.webp";
+import { images } from "../../assets";
 import HeroBanner from "../AboutUs/AboutUsComponents/HeroBanner";
 import ContactCard from "./ContactCard";
 import React from "react";
@@ -32,7 +32,7 @@ const ContactUsPage = () => {
 
   return (
     <Container>
-      <HeroBanner bgImage={contactImage} title="Contact Us" />
+      <HeroBanner bgImage={images.contact} title="Contact Us" />
       <Box pt="sectionTop">
         <Flex
           direction={{ base: "column", md: "row" }}
