@@ -1,19 +1,18 @@
 import { Box, Text, Container, Heading, Flex } from "@chakra-ui/react";
-import InsuranceImg from "../../../assets/insurance-banner.webp";
-import packerImg from "../../../assets/packer.webp";
 import { coveredWays, inHomePolicy } from "./data";
 import Button from "../../../components/common/Button/Button";
 import CardTemplate from "../AboutUsComponents/CardTemplate";
 import CommonAccordion from "../AboutUsComponents/CommonAccordion";
 import HeroBanner from "../AboutUsComponents/HeroBanner";
 import ImageTextSection from "../AboutUsComponents/TextWithImageSection";
+import { images } from "../../../assets";
 
 const OurInsurance = () => {
   return (
     <div>
-      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
-        <HeroBanner title="Our Insurance" bgImage={InsuranceImg} />
-        <Box pt={{ base: 10, md: 16 }}>
+      <Container>
+        <HeroBanner title="Our Insurance" bgImage={images.insuranceBanner} />
+        <Box pt="sectionTop">
           <Box>
             <Button
               fontSize="xl"
@@ -49,7 +48,7 @@ const OurInsurance = () => {
               </Box>
             </Flex>
             <ImageTextSection
-              image={packerImg}
+              image={images.packer}
               buttonLabel="Our Mission"
               content={
                 <>
@@ -65,7 +64,7 @@ const OurInsurance = () => {
             />
           </Box>
         </Box>
-        <Box pt={{ base: 10, md: 16 }}>
+        <Box pt="sectionTop">
           <Box>
             <Button
               fontSize="xl"

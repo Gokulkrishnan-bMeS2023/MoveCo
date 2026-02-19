@@ -11,30 +11,26 @@ import {
   Container,
 } from "@chakra-ui/react";
 import { FaWhatsapp, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
-import MoveCo from "../../../assets/moveco.webp";
-import BBB from "../../../assets/card-item-3.webp";
-import SMA from "../../../assets/smalogo.png";
-import AMSA from "../../../assets/amsa-logo-blue.png";
-import MFH from "../../../assets/mfh.svg";
 import { useNavigate } from "react-router-dom";
 import { memo, useMemo } from "react";
+import { images } from "../../../assets";
 
 const RESPONSIVE_ALIGN = { base: "center", md: "flex-start" } as const;
 const RESPONSIVE_TEXT_ALIGN = { base: "center", md: "start" } as const;
 
 const CERTIFICATIONS = [
-  { img: BBB, link: "https://www.bbb.org/", alt: "Better Business Bureau" },
+  { img: images.BBB, link: "https://www.bbb.org/", alt: "Better Business Bureau" },
   {
-    img: SMA,
+    img: images.SMA,
     link: "https://www.mytexasmover.com/",
     alt: "Southwest Movers Association",
   },
   {
-    img: AMSA,
+    img: images.AMSA,
     link: "https://www.moving.org/",
     alt: "American Moving & Storage Association",
   },
-  { img: MFH, link: "https://www.moveforhunger.org/", alt: "Move For Hunger" },
+  { img: images.MFH, link: "https://www.moveforhunger.org/", alt: "Move For Hunger" },
 ];
 
 const CONTACT_INFO = [
@@ -306,7 +302,7 @@ const Footer = () => {
       />
 
       {/* Main Footer Content */}
-      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+      <Container >
         <Box
         // mx="auto"
         // px={{ base: "4", md: "6", lg: "8" }}
@@ -323,7 +319,7 @@ const Footer = () => {
             {/* Company Info Section */}
             <Stack gap="5" alignItems={RESPONSIVE_ALIGN}>
               <Image
-                src={MoveCo}
+                src={images.MoveCo}
                 alt="MoveCo.Net Logo"
                 height="55px"
                 objectFit="contain"

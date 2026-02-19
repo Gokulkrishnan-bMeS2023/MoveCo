@@ -1,8 +1,5 @@
 import { Box, Heading, Text, Flex, Container } from "@chakra-ui/react";
 import { section } from "framer-motion/client";
-import BannerImg from "../../../assets/about-us-banner.webp";
-import ServiceImg from "../../../assets/service1.webp";
-import ServiceImg2 from "../../../assets/service2.webp";
 import Button from "../../../components/common/Button/Button";
 import { benefits, features } from "./data";
 import HeroBanner from "../AboutUsComponents/HeroBanner";
@@ -16,9 +13,9 @@ const AboutUs = () => {
   const navigate = useNavigate();
   return (
     <Box as={section}>
-      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+      <Container>
         <HeroBanner
-          bgImage={BannerImg}
+          bgImage={images.aboutUsBanner}
           overlayColor="brand.primary"
           title="About Us"
         />
@@ -51,7 +48,7 @@ const AboutUs = () => {
             </Box>
           </Flex>
           <ImageTextSection
-            image={ServiceImg}
+            image={images.service1}
             buttonLabel="Our Mission"
             content={
               <>
@@ -63,9 +60,9 @@ const AboutUs = () => {
             }
           />
         </Box>
-        <Box pt={{ base: 10, md: 16 }}>
+        <Box pt="sectionTop">
           <ImageTextSection
-            image={ServiceImg2}
+            image={images.service2}
             buttonLabel="Testimonials"
             reverse
             content={
@@ -79,7 +76,7 @@ const AboutUs = () => {
             }
           />
         </Box>
-        <Box pt={{ base: 10, md: 16 }}>
+        <Box pt="sectionTop">
           <Button
             fontSize="xl"
             rounded="full"
@@ -115,10 +112,10 @@ const AboutUs = () => {
           </Flex>
           <CardTemplate data={features} />
         </Box>
-        <Box pt={{ base: 10, md: 16 }}>
+        <Box pt="sectionTop">
           <AboutFeatureSwitcher />
         </Box>
-        <Box pt={{ base: 10, md: 16 }}>
+        <Box pt="sectionTop">
           <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
             <Button
               fontSize="xl"

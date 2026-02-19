@@ -14,9 +14,12 @@ import {
 } from "@chakra-ui/react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import Button from "../../../components/common/Button/Button";
-import type { InventoryDTO, InventorySection } from "./DTOs";
+import type { InventoryDTO, InventorySection, MoveInformationDTO } from "./DTOs";
 import { validateInventory } from "./validation";
+import { useEffect } from "react";
+
 
 const inventorySections: InventorySection[] = [
   {
@@ -158,7 +161,6 @@ const inventorySections: InventorySection[] = [
       "Wine Rack",
     ],
   },
-
   {
     title: "Living Room",
     items: [
@@ -260,36 +262,53 @@ const inventorySections: InventorySection[] = [
   },
 ];
 
-const Inventory = () => {
- const [quantities, setQuantities] = useState<InventoryDTO["quantities"]>(() => {
-  const saved = localStorage.getItem("inventoryData");
-  return saved ? JSON.parse(saved) : {};
-});
+// All MoveInformationDTO keys to read from URL params
+const MOVE_INFO_KEYS: Array<keyof MoveInformationDTO> = [
+  "firstName", "lastName", "email", "phone", "homePhone", "workPhone", "faxPhone",
+  "moveDate", "moveTime", "dropDate", "dropTime",
+  "moveType", "hearAbout", "notes",
+  "fromAddress", "fromApt", "fromCity", "fromState", "fromZipCode", "fromStairs", "fromDistance",
+  "toAddress", "toApt", "toCity", "toState", "toZipCode", "toStairs", "toDistance",
+];
 
+const Inventory = () => {
+  const [searchParams] = useSearchParams();
+
+  // Read all move information from URL params (no localStorage needed)
+  const moveInfo = MOVE_INFO_KEYS.reduce((acc, key) => {
+    acc[key] = searchParams.get(key) || "";
+    return acc;
+  }, {} as MoveInformationDTO);
+
+  const [quantities, setQuantities] = useState<InventoryDTO["quantities"]>({});
   const [openItems, setOpenItems] = useState<string[]>([]);
   const [errors, setErrors] = useState<{ quantities?: string }>({});
   const [successMessage, setSuccessMessage] = useState("");
 
- const increase = (item: string) => {
-  setQuantities((prev) => {
-    const updated = {
-      ...prev,
-      [item]: (prev[item] || 0) + 1,
-    };
-    localStorage.setItem("inventoryData", JSON.stringify(updated));
-    return updated;
-  });
+  useEffect(() => {
+  const saved = sessionStorage.getItem("inventory");
+  if (saved) {
+    setQuantities(JSON.parse(saved));
+  }
+}, []);
+
+
+  const increase = (item: string) => {
+  const updated = {
+    ...quantities,
+    [item]: (quantities[item] || 0) + 1,
+  };
+  setQuantities(updated);
+  sessionStorage.setItem("inventory", JSON.stringify(updated));
 };
 
 const decrease = (item: string) => {
-  setQuantities((prev) => {
-    const updated = {
-      ...prev,
-      [item]: Math.max((prev[item] || 0) - 1, 0),
-    };
-    localStorage.setItem("inventoryData", JSON.stringify(updated));
-    return updated;
-  });
+  const updated = {
+    ...quantities,
+    [item]: Math.max((quantities[item] || 0) - 1, 0),
+  };
+  setQuantities(updated);
+  sessionStorage.setItem("inventory", JSON.stringify(updated));
 };
 
   const handleCollapseAll = () => {
@@ -302,23 +321,33 @@ const decrease = (item: string) => {
   };
 
   const handleSubmit = () => {
-    const inventoryData = { quantities };
-    const validationErrors = validateInventory(inventoryData);
+  const inventoryData = { quantities };
+  const validationErrors = validateInventory(inventoryData);
 
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      setSuccessMessage("");
-      return;
-    }
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors);
+    setSuccessMessage("");
+    return;
+  }
 
-    setErrors({});
-    setSuccessMessage("Inventory successfully submitted!");
+ sessionStorage.clear(); 
 
-    console.log("Submitted Inventory:", quantities);
+  setQuantities({});
+  setOpenItems([]);
+  setErrors({});
+  setSuccessMessage("Inventory successfully submitted!");
+
+  const finalPayload = {
+    ...moveInfo,
+    inventory: quantities,
   };
 
+  console.log("Final Submitted Data:", finalPayload);
+};
+
+
   return (
-    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+    <Container>
       <Flex
         justify="space-between"
         align={{ base: "flex-start", md: "center" }}
@@ -451,7 +480,6 @@ const decrease = (item: string) => {
             {errors.quantities}
           </Text>
         )}
-
         {successMessage && (
           <Text color="green.600" mt={4}>
             {successMessage}

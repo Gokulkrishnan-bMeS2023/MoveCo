@@ -1,4 +1,4 @@
-import ScottishImg from "../../../../assets/scottish-rite.jpg";
+import { images } from "../../../../assets";
 
 export const SCOTTISH_RITE_DATA = [
   {
@@ -9,7 +9,7 @@ recognized globally for their leadership in: Providing extraordinary patient car
 range of pediatric orthopedic conditions. Solving many of the world’s most complex orthopedic cases. 
 Pioneering research and innovation of leading-edge technologies. Discovering genetic breakthroughs. 
 Educating future leaders in pediatric orthopedics.`,
-    image: ScottishImg,
+    image: images.scottishRite,
     linkText: "Find more",
     linkHref: "/ScottishRiteHospital",
     reverse: false,

@@ -14,34 +14,25 @@ import Notes from "../../../components/common/Notes/Notes";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import Button from "../../../components/common/Button/Button";
 import SelectField from "../../../components/common/Select/Select";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import type { MoveInformationDTO, MoveInformationErrors } from "./DTOs";
 import { validateMoveInformation } from "./validation";
-import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const InHomeMoveEstimate = () => {
   const [searchParams] = useSearchParams();
-  const firstName = searchParams.get("firstName") || "";
-  const lastName = searchParams.get("lastName") || "";
-  const email = searchParams.get("email") || "";
-  const phone = searchParams.get("phone") || "";
-  const moveDate = searchParams.get("moveDate") || "";
+  const navigate = useNavigate();
 
-  // 2️⃣ THEN use them in useState
- const [values, setValues] = useState<MoveInformationDTO>(() => {
-  const saved = localStorage.getItem("moveInformation");
+  const [values, setValues] = useState<MoveInformationDTO>({
+    firstName: searchParams.get("firstName") || "",
+    lastName: searchParams.get("lastName") || "",
+    email: searchParams.get("email") || "",
+    cellPhone: searchParams.get("phone") || "",
 
-  if (saved) return JSON.parse(saved);
-
-  return {
-    firstName,
-    lastName,
-    email,
-    cellPhone: phone,
     homePhone: "",
     workPhone: "",
     faxPhone: "",
-    moveDate,
+    moveDate: searchParams.get("moveDate") || "",
     moveTime: "",
     dropDate: "",
     dropTime: "",
@@ -62,24 +53,33 @@ const InHomeMoveEstimate = () => {
     toZipCode: "",
     toStairs: "",
     toDistance: "",
-  };
-});
-
+  });
 
   const [errors, setErrors] = useState<MoveInformationErrors>({});
 
-  const handleChange = (field: keyof MoveInformationDTO, value: string) => {
-  const updatedValues = { ...values, [field]: value };
-  setValues(updatedValues);
+  useEffect(() => {
+  const saved = sessionStorage.getItem("moveInfo");
+  if (saved) setValues(JSON.parse(saved));
+}, []);
 
-  // ⭐ save to localStorage
-  localStorage.setItem("moveInformation", JSON.stringify(updatedValues));
+
+
+
+
+ const handleChange = (field: keyof MoveInformationDTO, value: string) => {
+  const updated = { ...values, [field]: value };
+
+  setValues(updated);
+
+  // ✅ save to session storage
+  sessionStorage.setItem("moveInfo", JSON.stringify(updated));
 
   if (errors[field]) {
     setErrors((prev) => ({ ...prev, [field]: "" }));
   }
 };
 
+  
 
   const moveTimeOptions = [
     { label: "8AM - 10AM", value: "8-10" },
@@ -100,7 +100,7 @@ const InHomeMoveEstimate = () => {
     { label: "Better Business Bureau", value: "Better Business Bureau" },
     { label: "HMS", value: "HMS" },
     { label: "MoveCo Truck", value: "MoveCo Truck" },
-    { label: "Referred By Someone ", value: "Referred By Someone" },
+    { label: "Referred By Someone", value: "Referred By Someone" },
     { label: "Repeat Customer", value: "Repeat Customer" },
     { label: "Received Mail", value: "Received Mail" },
     { label: "Online Methods", value: "Online Methods" },
@@ -127,7 +127,33 @@ const InHomeMoveEstimate = () => {
     { label: "300–400 feet", value: "300-400" },
   ];
 
-  const navigate = useNavigate();
+  const formatUSPhone = (v: string) => {
+  const d = v.replace(/\D/g, "").slice(0, 10);
+  return d.length < 4 ? d
+    : d.length < 7 ? `(${d.slice(0,3)}) ${d.slice(3)}`
+    : `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
+};
+
+const handlePhoneChange = (
+  field: keyof MoveInformationDTO,
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
+  const input = e.target;
+  const cursorPos = input.selectionStart || 0;
+
+  const digits = input.value.replace(/\D/g, "").slice(0, 10);
+
+  setValues((prev) => ({
+    ...prev,
+    [field]: digits,
+  }));
+
+  requestAnimationFrame(() => {
+    input.setSelectionRange(cursorPos, cursorPos);
+  });
+};
+
+
 
   const handleSubmit = () => {
     const newErrors = validateMoveInformation(values);
@@ -136,11 +162,19 @@ const InHomeMoveEstimate = () => {
       return;
     }
     setErrors({});
-    navigate("/inventory");
+
+    const params = new URLSearchParams();
+    (Object.keys(values) as Array<keyof MoveInformationDTO>).forEach((key) => {
+      if (values[key]) {
+        params.set(key, values[key]);
+      }
+    });
+
+    navigate(`/inventory?${params.toString()}`);
   };
 
   return (
-    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+    <Container>
       <Box>
         <Flex
           direction={{ base: "column", md: "row" }}
@@ -169,6 +203,7 @@ const InHomeMoveEstimate = () => {
         </Flex>
       </Box>
       <Stack gap={8}>
+        {/* ================= CONTACT INFO ================= */}
         <Box
           bg="white"
           p={{ base: 6, md: 8 }}
@@ -212,32 +247,34 @@ const InHomeMoveEstimate = () => {
             </SimpleGrid>
 
             <SimpleGrid columns={{ base: 1, md: 4 }} gap={6}>
-              <InputField
-                label="Phone"
-                placeholder="Phone"
-                value={values.cellPhone}
-                onChange={(e) => handleChange("cellPhone", e.target.value)}
-                isRequired
-                errorMessage={errors.cellPhone}
-              />
-              <InputField
-                label="Work Phone"
-                placeholder="Work Phone"
-                value={values.workPhone}
-                onChange={(e) => handleChange("workPhone", e.target.value)}
-              />
-              <InputField
-                label="Cell Phone"
-                placeholder="Cell Phone"
-                value={values.homePhone}
-                onChange={(e) => handleChange("homePhone", e.target.value)}
-              />
-              <InputField
-                label="Home Phone"
-                placeholder="Home Phone"
-                value={values.faxPhone}
-                onChange={(e) => handleChange("faxPhone", e.target.value)}
-              />
+   <InputField
+  label="Phone"
+  placeholder="(555) 555-5555"
+value={formatUSPhone(values.cellPhone)}
+onChange={(e) => handlePhoneChange("cellPhone", e)}
+  errorMessage={errors.phone}
+/>
+
+  <InputField
+  label="Work Phone"
+  placeholder="(555) 555-5555"
+  value={formatUSPhone(values.workPhone)}
+  onChange={(e) => handlePhoneChange("workPhone", e)}
+/>
+<InputField
+  label="Cell Phone"
+  placeholder="(555) 555-5555"
+  value={formatUSPhone(values.faxPhone)}
+  onChange={(e) => handlePhoneChange("faxPhone", e)}
+/>
+
+<InputField
+  label="Home Phone"
+  placeholder="(555) 555-5555"
+  value={formatUSPhone(values.homePhone)}
+  onChange={(e) => handlePhoneChange("homePhone", e)}
+/>
+
             </SimpleGrid>
           </VStack>
         </Box>
@@ -295,6 +332,7 @@ const InHomeMoveEstimate = () => {
               </SimpleGrid>
             </VStack>
           </Box>
+
           {/* RIGHT */}
           <Box
             bg="gray.50"
@@ -444,10 +482,8 @@ const InHomeMoveEstimate = () => {
               <InputField
                 label="Zip Code"
                 placeholder="Zip Code"
-                value={values.fromZipCode}
-                onChange={(e) => handleChange("fromZipCode", e.target.value)}
-                isRequired
-                errorMessage={errors.fromZipCode}
+                value={values.toZipCode}
+                onChange={(e) => handleChange("toZipCode", e.target.value)}
               />
               <SelectField
                 label="Flights of stairs at this address?"
@@ -465,7 +501,6 @@ const InHomeMoveEstimate = () => {
           </VStack>
         </Box>
 
-        {/* SUBMIT */}
         <Box textAlign={{ base: "center", md: "right" }}>
           <Button label="Next" variant="primary" onClick={handleSubmit} />
         </Box>

@@ -14,7 +14,7 @@ export interface MoveInformationDTO {
   lastName: string;
   email: string;
   homePhone: string;
-  cellPhone: string;
+  phone: string;
   workPhone: string;
   faxPhone: string;
 
@@ -54,7 +54,6 @@ export interface InventoryDTO {
   quantities: Record<string, number>;
 }
 
-// Inventory section structure
 export interface InventorySection {
   title: string;
   items: string[];

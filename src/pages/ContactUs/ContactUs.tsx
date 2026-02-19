@@ -7,7 +7,7 @@ import {
   Flex,
   Card,
 } from "@chakra-ui/react";
-import contactImage from "../../assets/contact.webp";
+import { images } from "../../assets";
 import HeroBanner from "../AboutUs/AboutUsComponents/HeroBanner";
 import ContactCard from "./ContactCard";
 import React from "react";
@@ -31,9 +31,9 @@ const ContactUsPage = () => {
   }, [location]);
 
   return (
-    <Container maxW="100%" py={{ base: 10, md: 12 }} px={8}>
-      <HeroBanner bgImage={contactImage} title="Contact Us" />
-      <Box pt={{ base: 10, md: 16 }}>
+    <Container>
+      <HeroBanner bgImage={images.contact} title="Contact Us" />
+      <Box pt="sectionTop">
         <Flex
           direction={{ base: "column", md: "row" }}
           align={{ base: "flex-start", md: "center" }}
@@ -71,7 +71,7 @@ const ContactUsPage = () => {
         </SimpleGrid>
       </Box>
 
-      <Box pt={{ base: 10, md: 16 }}>
+      <Box pt="sectionTop">
         <Box maxW={{ lg: "45%" }} mb={{ base: 6, lg: 8 }}>
           <Heading as="h1" fontWeight="normal">
             Visit Our {""}
@@ -94,7 +94,7 @@ const ContactUsPage = () => {
         </Card.Root>
       </Box>
 
-      <Box pt={{ base: 10, md: 16 }}>
+      <Box pt="sectionTop">
         <Flex
           direction={{ base: "column", md: "row" }}
           align={{ base: "flex-start", md: "center" }}
@@ -122,7 +122,7 @@ const ContactUsPage = () => {
         </Flex>
 
         <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 6, md: 8 }}>
-          <SendEmailForm  />
+          <SendEmailForm />
           <Box id="friend-form">
             <FriendForm />
           </Box>

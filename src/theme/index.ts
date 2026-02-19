@@ -95,7 +95,14 @@ const tableRecipe = defineSlotRecipe({
   },
 });
 
- 
+ const containerRecipe = defineRecipe({
+  base: {
+    maxW: "100%",
+    px: 8,
+    py: 6,
+  },
+});
+
 const system = createSystem(defaultConfig, {
   globalCss: {
     body: {
@@ -147,10 +154,21 @@ const system = createSystem(defaultConfig, {
       },
     },
  
+     semanticTokens: {
+      spacing: {
+        sectionTop: {
+          value: {
+            base: "40px", //10
+            md: "64px",  //16
+          },
+        },
+      },
+    },
  
     recipes: {
       heading: headingRecipe,
       text: textRecipe,
+      container: containerRecipe,
     },
     slotRecipes: {
       table: tableRecipe, // ✅ IMPORTANT

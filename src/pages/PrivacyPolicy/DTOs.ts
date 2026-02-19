@@ -8,6 +8,7 @@ interface PolicySectionProps {
   image: string;
   reverse?: boolean;
   children: ReactNode;
+  pt?:any
 }
 interface PolicyItem {
   icon: IconType;

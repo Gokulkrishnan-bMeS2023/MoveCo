@@ -43,7 +43,7 @@ const handleSubmit = () => {
 };
 
   return (
-    <Container maxW="100%" py={{ base: 10, md: 12 }} px={8}>
+    <Container>
       <Flex
         direction={{ base: "column", lg: "row" }}
         justify="space-between"

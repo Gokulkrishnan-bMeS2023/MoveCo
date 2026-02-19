@@ -1,4 +1,4 @@
-import SensImg from "../../../../assets/SENS.jpg";
+import { images } from "../../../../assets";
 
 export const SENS_DATA = [
   {
@@ -7,7 +7,7 @@ export const SENS_DATA = [
 That’s why we’re funding work at universities across the world and at our own Research Center in Mountain View, 
 CA. Our research emphasizes the application of regenerative medicine to age-related disease, with the intent of repairing underlying damage to the body’s tissues, cells, and molecules. 
 Our goal is to help build the industry that will cure the diseases of aging.`,
-    image: SensImg,
+    image: images.sens,
     linkText: "Find more",
     linkHref: "https://lifespan.io/",
     reverse: false,

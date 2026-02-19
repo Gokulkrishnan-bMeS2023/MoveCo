@@ -16,11 +16,11 @@ import { PRODUCTS } from "./data";
 import { useShoppingCart } from "./Useshoppingcart";
 
 const PageHeader = () => (
-  <VStack mb={12} gap={{ base: 4, md: 6 }} align="start">
+  <VStack mb={{ base: 6, lg: 8 }} gap={{ base: 4, md: 6 }} align="start">
     <Heading as="h1" fontWeight="normal">
       Moving & <Span color="brand.primary">Packing Supplies</Span>
     </Heading>
-    <Text textStyle="size-lg" color="gray.600">
+    <Text textStyle="size-lg">
       When you plan a move, you certainly want to keep your possessions safe and
       organized. Boxes, packing material, moving safety material, and all the
       other rest of moving supplies are also sold here in our online shop. With
@@ -39,7 +39,7 @@ const ProductPage = () => {
   }, [navigate]);
 
   return (
-    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+    <Container>
       <PageHeader />
       <Grid
         templateColumns={{

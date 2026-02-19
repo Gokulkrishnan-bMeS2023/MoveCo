@@ -13,11 +13,11 @@ import InputField from "../../../components/common/Input/Input";
 import Notes from "../../../components/common/Notes/Notes";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import Button from "../../../components/common/Button/Button";
-import inhomemoveestimate from "../../../assets/in-home.jpg";
 import SelectField from "../../../components/common/Select/Select";
 import { useNavigate } from "react-router-dom";
 import type { MoveEstimateFormValues, MoveEstimateErrors } from "./DTOs";
 import { validateMoveEstimate } from "./validation";
+import { images } from "../../../assets";
 
 const timeOptions = [
   { label: "8AM - 10AM", value: "8AM-10AM" },
@@ -106,7 +106,7 @@ const stateOptions = [
 ];
 
 const InHomeMoveEstimate = () => {
-  const navigate = useNavigate();
+const navigate = useNavigate();
 const [values, setValues] = useState<MoveEstimateFormValues>({
   visitDate: "",
   visitTime: "",
@@ -132,7 +132,6 @@ const [errors, setErrors] = useState<MoveEstimateErrors>({});
 
  const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
   setValues((prev) => ({ ...prev, [field]: value }));
-
   if (errors[field]) {
     setErrors((prev) => ({
       ...prev,
@@ -152,8 +151,7 @@ const handleSubmit = () => {
 };
 
   return (
-    <>
-      <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
+      <Container>
         <Flex
           direction={{ base: "column", md: "row" }}
           align={{ base: "flex-start", md: "center" }}
@@ -191,7 +189,7 @@ const handleSubmit = () => {
         <SimpleGrid columns={{ base: 1, md: 2 }} alignItems="center">
           <Box w="100%" maxW={{ base: "100%", md: "550px" }}>
             <Image
-              src={inhomemoveestimate}
+              src={images.inHomeMove}
               alt="footprint"
               w="100%"
               h="auto"
@@ -208,7 +206,7 @@ const handleSubmit = () => {
             </Text>
           </Box>
         </SimpleGrid>
-        <Box pt={{base: 10, md: 16}}>
+        <Box pt="sectionTop">
         <Stack gap={8}>
           <Box
             bg="brand.white"
@@ -423,7 +421,6 @@ const handleSubmit = () => {
         </Stack>
         </Box>
       </Container>
-    </>
   );
 };
 

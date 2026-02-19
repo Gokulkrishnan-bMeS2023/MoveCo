@@ -1,18 +1,16 @@
 import { Box, Heading, Text, Container } from "@chakra-ui/react";
-import customerImg from "../../../assets/customer-relationships.jpg";
-import InsuranceImg from "../../../assets/insurance-banner.webp";
-import DealOfficeImg from "../../../assets/deal.jpg";
 import { dressCode } from "./data";
 import { customerPoints, officePoints } from "./data";
 import CardTemplate from "../AboutUsComponents/CardTemplate";
 import HeroBanner from "../AboutUsComponents/HeroBanner";
 import ImageListSection from "../AboutUsComponents/ImageWithListContent";
+import { images } from "../../../assets";
 
 const AssociateCodeOfConduct = () => {
   return (
-    <Container maxW="100%" px={8} py={{ base: 10, md: 12 }}>
-      <HeroBanner title="Associate Code of Conduct" bgImage={InsuranceImg} />
-      <Box pt={{ base: 10, md: 16 }}>
+    <Container>
+      <HeroBanner title="Associate Code of Conduct" bgImage={images.insuranceBanner} />
+      <Box pt="sectionTop">
         <Heading mb={{ base: 6, lg: 8 }} as="h1" fontWeight="normal">
           {" "}
           Dress{" "}
@@ -22,7 +20,7 @@ const AssociateCodeOfConduct = () => {
         </Heading>
         <CardTemplate data={dressCode} columns={{ base: 1, sm: 2, md: 3 }} />
       </Box>
-      <Box pt={{ base: 10, md: 16 }}>
+      <Box pt="sectionTop">
         <Heading
           mb={{ base: 6, lg: 8 }}
           w={{ base: "100%", lg: "50%" }}
@@ -36,12 +34,12 @@ const AssociateCodeOfConduct = () => {
           </Text>
         </Heading>
         <ImageListSection
-          image={customerImg}
+          image={images.customerRelationships}
           points={customerPoints}
           imagePosition="left"
         />
       </Box>
-      <Box pt={{ base: 10, md: 16 }}>
+      <Box pt="sectionTop">
         <Heading
           mb={{ base: 6, lg: 8 }}
           as="h1"
@@ -55,7 +53,7 @@ const AssociateCodeOfConduct = () => {
           </Text>
         </Heading>
         <ImageListSection
-          image={DealOfficeImg}
+          image={images.dealWithOffice}
           points={officePoints}
           imagePosition="right"
         />

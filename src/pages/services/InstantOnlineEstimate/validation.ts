@@ -7,6 +7,7 @@ import type {
 import type { InventoryDTO } from "./DTOs";
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
+const PHONE_REGEX = /^\d{10}$/;
 
 export const validateInstantEstimate = (
   data: InstantEstimateDTO
@@ -57,9 +58,15 @@ export const validateMoveInformation = (
     errors.email = "Invalid email address";
   }
 
-  if (!data.cellPhone.trim()) {
-    errors.cellPhone = "Phone number is required";
-  }
+  const cleanedCell = data.cellPhone.replace(/\D/g, "");
+
+
+if (!cleanedCell) {
+  errors.cellPhone = "Phone number is required";
+} else if (!PHONE_REGEX.test(cleanedCell)) {
+  errors.cellPhone = "Phone number must be 10 digits";
+}
+
 
   if (!data.moveDate) {
     errors.moveDate = "Move date is required";
