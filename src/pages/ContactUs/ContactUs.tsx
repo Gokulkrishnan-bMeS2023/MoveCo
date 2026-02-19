@@ -122,7 +122,7 @@ const ContactUsPage = () => {
         </Flex>
 
         <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 6, md: 8 }}>
-          <SendEmailForm />
+          <SendEmailForm  />
           <Box id="friend-form">
             <FriendForm />
           </Box>

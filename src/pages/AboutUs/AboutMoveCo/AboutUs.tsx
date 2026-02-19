@@ -1,10 +1,4 @@
-import {
-  Box,
-  Heading,
-  Text,
-  Flex,
-  Container,
-} from "@chakra-ui/react";
+import { Box, Heading, Text, Flex, Container } from "@chakra-ui/react";
 import { section } from "framer-motion/client";
 import BannerImg from "../../../assets/about-us-banner.webp";
 import ServiceImg from "../../../assets/service1.webp";
@@ -16,6 +10,7 @@ import ImageTextSection from "../AboutUsComponents/TextWithImageSection";
 import CardTemplate from "../AboutUsComponents/CardTemplate";
 import AboutFeatureSwitcher from "../AboutUsComponents/AboutFeatureSwitcher";
 import { useNavigate } from "react-router-dom";
+import Badge from "../../../components/common/Badge/Badge";
 
 const AboutUs = () => {
   const navigate = useNavigate();
@@ -28,13 +23,7 @@ const AboutUs = () => {
           title="About Us"
         />
         <Box pt={{ base: 10, md: 16 }}>
-          <Button
-            fontSize="xl"
-            rounded="full"
-            variant="primary"
-            label="About Us"
-            mb={{ base: 4, lg: 6 }}
-          />
+          <Badge label="About Us" />
           <Flex
             mb={{ base: 6, lg: 8 }}
             direction={{ base: "column", md: "row" }}
