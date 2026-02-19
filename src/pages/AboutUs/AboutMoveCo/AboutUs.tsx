@@ -8,6 +8,7 @@ import CardTemplate from "../AboutUsComponents/CardTemplate";
 import AboutFeatureSwitcher from "../AboutUsComponents/AboutFeatureSwitcher";
 import { useNavigate } from "react-router-dom";
 import Badge from "../../../components/common/Badge/Badge";
+import { images } from "../../../assets";
 
 const AboutUs = () => {
   const navigate = useNavigate();
