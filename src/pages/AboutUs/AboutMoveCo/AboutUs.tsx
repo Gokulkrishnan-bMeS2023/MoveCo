@@ -118,12 +118,7 @@ const AboutUs = () => {
         </Box>
         <Box pt="sectionTop">
           <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
-            <Button
-              fontSize="xl"
-              rounded="full"
-              variant="primary"
-              label="Benefits"
-            />
+            <Badge label="Benefits" />
             <Button
               fontSize="xl"
               rounded="full"
