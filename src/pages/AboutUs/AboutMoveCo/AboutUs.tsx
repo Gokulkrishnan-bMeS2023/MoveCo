@@ -8,6 +8,7 @@ import CardTemplate from "../AboutUsComponents/CardTemplate";
 import AboutFeatureSwitcher from "../AboutUsComponents/AboutFeatureSwitcher";
 import { useNavigate } from "react-router-dom";
 import Badge from "../../../components/common/Badge/Badge";
+// import { images } from "../../../assets";
 
 import aboutUsBanner from "../../../assets/about-us-banner.webp";
 import service1 from "../../../assets/service1.webp";
@@ -128,12 +129,7 @@ const AboutUs = () => {
         </Box>
         <Box pt="sectionTop">
           <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
-            <Button
-              fontSize="xl"
-              rounded="full"
-              variant="primary"
-              label="Benefits"
-            />
+            <Badge label="Benefits" />
             <Button
               fontSize="xl"
               rounded="full"
