@@ -1,11 +1,3 @@
-import {
-  FaEnvelope,
-  FaCookie,
-  FaLink,
-  FaLock,
-  FaUserShield,
-  FaInfoCircle,
-} from "react-icons/fa";
 import type { PolicyItem } from "./DTOs";
 import { images } from "../../assets";
 
@@ -20,7 +12,6 @@ const policyImages = {
 
 export const POLICY_DATA: PolicyItem[] = [
   {
-    icon: FaUserShield,
     title: "Collecting and Using Personal Information",
     image: policyImages.personalInfo,
     content: [
@@ -29,7 +20,6 @@ export const POLICY_DATA: PolicyItem[] = [
     ],
   },
   {
-    icon: FaEnvelope,
     title: "Your E-Mail",
     image: policyImages.email,
     reverse: true,
@@ -40,7 +30,6 @@ export const POLICY_DATA: PolicyItem[] = [
     ],
   },
   {
-    icon: FaCookie,
     title: 'Other Information; "Cookies" and "Tags""',
     image: policyImages.cookies,
     content: [
@@ -50,7 +39,6 @@ export const POLICY_DATA: PolicyItem[] = [
     ],
   },
   {
-    icon: FaLink,
     title: "Linking to Other Sites",
     image: policyImages.linking,
     reverse: true,
@@ -59,7 +47,6 @@ export const POLICY_DATA: PolicyItem[] = [
     ],
   },
   {
-    icon: FaLock,
     title: "Security",
     image: policyImages.security,
     content: [
@@ -67,7 +54,6 @@ export const POLICY_DATA: PolicyItem[] = [
     ],
   },
   {
-    icon: FaInfoCircle,
     title: "Changes to This Statement",
     image: policyImages.statement,
     reverse: true,
