@@ -73,7 +73,7 @@ export const validateStepOne = (data: StepOneDTO): StepOneErrors => {
   return errors;
 };
 
-export const validateEducation = (data: EducationDTO): EducationErrors => {
+export const validateEducation = (_data: EducationDTO): EducationErrors => {
   const errors: EducationErrors = {};
 
   return errors;

@@ -9,6 +9,16 @@ import AboutFeatureSwitcher from "../AboutUsComponents/AboutFeatureSwitcher";
 import { useNavigate } from "react-router-dom";
 import Badge from "../../../components/common/Badge/Badge";
 
+import aboutUsBanner from "../../../assets/about-us-banner.webp";
+import service1 from "../../../assets/service1.webp";
+import service2 from "../../../assets/service2.webp";
+
+const images = {
+  aboutUsBanner,
+  service1,
+  service2,
+};
+
 const AboutUs = () => {
   const navigate = useNavigate();
   return (
@@ -18,6 +28,7 @@ const AboutUs = () => {
           bgImage={images.aboutUsBanner}
           overlayColor="brand.primary"
           title="About Us"
+          
         />
         <Box pt={{ base: 10, md: 16 }}>
           <Badge label="About Us" />

@@ -29,6 +29,7 @@ export interface EducationDTO {
   major: string;
   otherTraining: string;
   additionalInfo: string;
+ 
 }
 
 // Step 2 - Employment Experience
