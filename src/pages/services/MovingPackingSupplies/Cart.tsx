@@ -282,7 +282,6 @@ const CartItemCard = memo(
                       value={item.quantity.toString()}
                       onValueChange={handleQuantityChange}
                       placeholder="Select"
-                      aria-label={`Quantity for ${item.name}`}
                     />
                   </Box>
                 </HStack>
