@@ -36,7 +36,7 @@ interface CommonBadgeProps {
 const Badge = ({ label, mb }: CommonBadgeProps) => {
   return (
     <Box
-      px={{base:2, md:6}}
+      px={6}
       py={2}
       fontWeight="400"
       transition="all 0.2s"

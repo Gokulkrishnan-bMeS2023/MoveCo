@@ -114,6 +114,7 @@ const JobApplicationForm = () => {
       major: "",
       otherTraining: "",
       additionalInfo: "",
+  
     },
     experiences: [
       {
@@ -282,7 +283,7 @@ const JobApplicationForm = () => {
       if (updatedExperiences[index]) {
         updatedExperiences[index] = {
           ...updatedExperiences[index],
-          [field]: "", // ✅ Clear that specific field error
+          [field]: "", 
         };
       }
       return { ...prev, experiences: updatedExperiences };

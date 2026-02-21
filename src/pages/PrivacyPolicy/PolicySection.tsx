@@ -1,11 +1,9 @@
 import { memo } from "react";
-
 import {
   Box,
   Heading,
   VStack,
   HStack,
-  Icon,
   Image,
   Grid,
   GridItem,
@@ -13,7 +11,13 @@ import {
 import type { PolicySectionProps } from "./DTOs";
 
 const PolicySection = memo<PolicySectionProps>(
-  ({ icon, title, image, reverse = false, children,pt="sectionTop" }: PolicySectionProps) => {
+  ({
+    title,
+    image,
+    reverse = false,
+    children,
+    pt = "sectionTop",
+  }: PolicySectionProps) => {
     return (
       <Box pt={pt}>
         <Grid
@@ -25,12 +29,6 @@ const PolicySection = memo<PolicySectionProps>(
           <GridItem order={{ base: 1, lg: reverse ? 2 : 1 }}>
             <VStack align="start" gap={6}>
               <HStack gap={3} align={{ base: "self-start", md: "center" }}>
-                <Icon
-                  as={icon}
-                  fontSize="3xl"
-                  color="brand.primary"
-                  mt={{ base: 2, md: 0 }}
-                />
                 <Heading as="h3" size="lg" color="brand.primary">
                   {title}
                 </Heading>

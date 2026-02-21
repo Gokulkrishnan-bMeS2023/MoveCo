@@ -16,7 +16,6 @@ const PrivacyPolicyPage = () => {
         {POLICY_DATA.map((item,index) => (
           <PolicySection
             key={item.title}
-            icon={item.icon}
             title={item.title}
             image={item.image}
             reverse={item.reverse}
