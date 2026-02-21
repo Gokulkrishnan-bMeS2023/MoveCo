@@ -1,15 +1,3 @@
-// const images = import.meta.glob("./**/*.{png,jpg,jpeg,webp}", {
-//   eager: true,
-//   import: "default",
-// });
-
-// export const getImage = (name: string): string => {
-//   return images[`./${name}`] as string;
-// };
-
-
-
-
 import aboutUsBanner from "./about-us-banner.webp";
 import AMSA from "./AMSAlogo.webp";
 import ashleyWatrous from "./ashley-watrous.webp";
@@ -58,6 +46,7 @@ import storage from "./Storage.webp";
 import truck2 from "./truck2.webp";
 import yt1 from "./yt1.webp";
 import yt2 from "./yt2.webp";
+import product from "./Product.webp";
 
 export const images = {
   aboutUsBanner,
@@ -108,4 +97,5 @@ export const images = {
   truck2,
   yt1,
   yt2,
+  product,
 };

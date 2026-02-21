@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 
 interface CommonBadgeProps {
   label?: string;
-  mb?: any; // optional margin-bottom
+  mb?: any;
 }
 
 const Badge = ({ label, mb }: CommonBadgeProps) => {
@@ -17,7 +17,7 @@ const Badge = ({ label, mb }: CommonBadgeProps) => {
       bg="brand.primary"
       w="fit-content"
       color="brand.white"
-      mb={mb}   // control from outside
+      mb={mb}
     >
       {label}
     </Box>
