@@ -31,6 +31,8 @@ const ImageWithListContent = ({
           objectFit="cover"
           w="100%"
           maxH="420px"
+          loading="eager"
+          fetchPriority="high"
         />
       </Box>
 

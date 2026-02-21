@@ -8,6 +8,7 @@ import CardTemplate from "../AboutUsComponents/CardTemplate";
 import AboutFeatureSwitcher from "../AboutUsComponents/AboutFeatureSwitcher";
 import { useNavigate } from "react-router-dom";
 import Badge from "../../../components/common/Badge/Badge";
+import { images } from "../../../assets";
 
 const AboutUs = () => {
   const navigate = useNavigate();
@@ -18,9 +19,10 @@ const AboutUs = () => {
           bgImage={images.aboutUsBanner}
           overlayColor="brand.primary"
           title="About Us"
+          overlayOpacity = {0.1}
         />
-        <Box pt={{ base: 10, md: 16 }}>
-          <Badge label="About Us" />
+        <Box pt="sectionTop">
+          <Badge label="About Us" mb={{ base: 4, lg: 6 }}/>
           <Flex
             mb={{ base: 6, lg: 8 }}
             direction={{ base: "column", md: "row" }}
@@ -77,13 +79,7 @@ const AboutUs = () => {
           />
         </Box>
         <Box pt="sectionTop">
-          <Button
-            fontSize="xl"
-            rounded="full"
-            variant="primary"
-            label="Features"
-            mb={{ base: 4, lg: 6 }}
-          />
+          <Badge label="Features" mb={{ base: 4, lg: 6 }}/>
           <Flex
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
@@ -117,12 +113,7 @@ const AboutUs = () => {
         </Box>
         <Box pt="sectionTop">
           <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
-            <Button
-              fontSize="xl"
-              rounded="full"
-              variant="primary"
-              label="Benefits"
-            />
+           <Badge label="Benefits" mb={{ base: 4, lg: 6 }}/>
             <Button
               fontSize="xl"
               rounded="full"

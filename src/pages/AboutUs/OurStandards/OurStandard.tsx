@@ -1,11 +1,11 @@
 import { Box, Text, Container, Heading, Flex } from "@chakra-ui/react";
-import Button from "../../../components/common/Button/Button";
 import { standardFeature } from "./data";
 import { professionalStandards } from "./data";
 import CardTemplate from "../AboutUsComponents/CardTemplate";
 import CommonAccordion from "../AboutUsComponents/CommonAccordion";
 import HeroBanner from "../AboutUsComponents/HeroBanner";
 import { images } from "../../../assets";
+import Badge from "../../../components/common/Badge/Badge";
 
 const OurStandard = () => {
   return (
@@ -13,10 +13,7 @@ const OurStandard = () => {
       <Container>
         <HeroBanner title="Our Standard" bgImage={images.insuranceBanner} />
         <Box pt="sectionTop">
-          <Button
-            fontSize="xl"
-            rounded="full"
-            variant="primary"
+          <Badge
             label="Benefits"
             mb={{ base: 4, lg: 6 }}
           />

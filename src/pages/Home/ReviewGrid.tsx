@@ -120,8 +120,11 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
           <Image
             src={client.image || images.profile}
             boxSize="50px"
+            alt="review"
             borderRadius="full"
             objectFit="cover"
+            loading="eager"
+            fetchPriority="high"
           />
           <Heading as="h4" fontSize="lg">
             {client.name}

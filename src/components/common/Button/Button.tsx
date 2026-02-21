@@ -56,6 +56,7 @@ const Button = ({
       styleProps = {
         bg: warning,
         color: secondary,
+        _hover: { bg: white, color: secondary },
       };
       break;
     case "outline":

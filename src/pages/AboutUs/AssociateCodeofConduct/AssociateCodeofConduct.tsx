@@ -1,18 +1,18 @@
 import { Box, Heading, Text, Container } from "@chakra-ui/react";
 import { dressCode } from "./data";
 import { customerPoints, officePoints } from "./data";
-import CardTemplate from "../AboutUsComponents/CardTemplate";
 import HeroBanner from "../AboutUsComponents/HeroBanner";
-import ImageListSection from "../AboutUsComponents/ImageWithListContent";
 import { images } from "../../../assets";
+import React from "react";
 
+const CardTemplate = React.lazy(() => import("../AboutUsComponents/CardTemplate"));
+const ImageListSection = React.lazy(() => import("../AboutUsComponents/ImageWithListContent"));
 const AssociateCodeOfConduct = () => {
   return (
     <Container>
-      <HeroBanner title="Associate Code of Conduct" bgImage={images.insuranceBanner} />
+      <HeroBanner title="Associate Code of Conduct" bgImage={images.insuranceBanner}  />
       <Box pt="sectionTop">
         <Heading mb={{ base: 6, lg: 8 }} as="h1" fontWeight="normal">
-          {" "}
           Dress{" "}
           <Text as="span" color="brand.primary">
             Code
@@ -37,6 +37,7 @@ const AssociateCodeOfConduct = () => {
           image={images.customerRelationships}
           points={customerPoints}
           imagePosition="left"
+          
         />
       </Box>
       <Box pt="sectionTop">

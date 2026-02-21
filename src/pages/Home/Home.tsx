@@ -11,6 +11,7 @@ import ClientSpeaks from "./ReviewGrid";
 import Button from "../../components/common/Button/Button";
 import { MainBanner } from "./HomeBanner";
 import { QuoteForm } from "./QuoteForm";
+import Badge from "../../components/common/Badge/Badge";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -27,13 +28,8 @@ const Home = () => {
         </Flex>
 
         <Box pt="sectionTop">
-          <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
-            <Button
-              fontSize="xl"
-              rounded="full"
-              variant="primary"
-              label="Client Review"
-            />
+          <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>          
+            <Badge label="Client Review" />
             <Button
               fontSize="xl"
               rounded="full"
@@ -76,12 +72,7 @@ const Home = () => {
 
         <Box pt="sectionTop">
           <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
-            <Button
-              fontSize="xl"
-              rounded="full"
-              variant="primary"
-              label="Client Speak"
-            />
+            <Badge label="Client Speaks" />
             <Button
               fontSize="xl"
               rounded="full"

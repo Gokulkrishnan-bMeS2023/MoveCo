@@ -33,6 +33,7 @@ const HeroBanner = ({
         position="absolute"
         inset={0}
         loading="eager"
+        fetchPriority="high"
       />
       <Box
         position="absolute"
@@ -41,7 +42,7 @@ const HeroBanner = ({
         opacity={overlayOpacity}
       />
       <Box position="relative" textAlign="center">
-        <Heading as="h1" fontWeight="normal" color="white" mb={4}>
+        <Heading as="h1" fontWeight="normal" color="brand.white" mb={4}>
           {title}
         </Heading>
       </Box>

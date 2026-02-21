@@ -195,6 +195,8 @@ const InHomeMoveEstimate = () => {
             w="100%"
             h="auto"
             borderRadius="2xl"
+            loading="eager"
+            fetchPriority="high"
           />
         </Box>
 

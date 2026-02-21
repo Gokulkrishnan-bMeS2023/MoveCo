@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, Image } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Image, AspectRatio } from "@chakra-ui/react";
 import Button from "../../../components/common/Button/Button";
 
 interface SideContentSectionProps {
@@ -7,7 +7,7 @@ interface SideContentSectionProps {
   image: string;
   linkText?: string;
   linkHref?: string;
-  reverse?: boolean; 
+  reverse?: boolean;
 }
 
 const SideContentSection = ({
@@ -37,7 +37,7 @@ const SideContentSection = ({
       <Flex
         direction={{
           base: "column",
-          lg: reverse ? "row-reverse" : "row", 
+          lg: reverse ? "row-reverse" : "row",
         }}
         gap={{ base: "8", lg: "16" }}
         align="center"
@@ -45,14 +45,16 @@ const SideContentSection = ({
       >
 
         <Box w={{ base: "100%", lg: "50%" }}>
-          <Image
-            src={image}
-            alt={title}
-            mt={4}
-            rounded="2xl"
-            w="100%"
-            height="auto"
-          />
+          <AspectRatio ratio={16 / 9}>
+            <Image
+              src={image}
+              alt={title}
+              rounded="2xl"
+              objectFit="cover"
+              loading="eager"  
+              fetchPriority="high"
+            />
+          </AspectRatio>
         </Box>
         <Box w={{ base: "100%", lg: "50%" }}>
           <Text textStyle="size-xl" mb={4}>
@@ -73,3 +75,4 @@ const SideContentSection = ({
 };
 
 export default SideContentSection;
+

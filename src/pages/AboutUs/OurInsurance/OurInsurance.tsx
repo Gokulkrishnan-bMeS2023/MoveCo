@@ -1,11 +1,11 @@
 import { Box, Text, Container, Heading, Flex } from "@chakra-ui/react";
 import { coveredWays, inHomePolicy } from "./data";
-import Button from "../../../components/common/Button/Button";
 import CardTemplate from "../AboutUsComponents/CardTemplate";
 import CommonAccordion from "../AboutUsComponents/CommonAccordion";
 import HeroBanner from "../AboutUsComponents/HeroBanner";
 import ImageTextSection from "../AboutUsComponents/TextWithImageSection";
 import { images } from "../../../assets";
+import Badge from "../../../components/common/Badge/Badge";
 
 const OurInsurance = () => {
   return (
@@ -14,10 +14,7 @@ const OurInsurance = () => {
         <HeroBanner title="Our Insurance" bgImage={images.insuranceBanner} />
         <Box pt="sectionTop">
           <Box>
-            <Button
-              fontSize="xl"
-              rounded="full"
-              variant="primary"
+            <Badge
               label="Our Insurance"
               mb={{ base: 4, lg: 6 }}
             />
@@ -66,10 +63,7 @@ const OurInsurance = () => {
         </Box>
         <Box pt="sectionTop">
           <Box>
-            <Button
-              fontSize="xl"
-              rounded="full"
-              variant="primary"
+            <Badge
               label="Our Coverage"
               mb={{ base: 4, lg: 6 }}
             />
@@ -102,7 +96,7 @@ const OurInsurance = () => {
           </Box>
         </Box>
       </Container>
-      <Box bg={"white"} px="-8">
+      <Box bg={"brand.white"} px="-8">
         <Container px={8} pt={4} pb={10}>
           <Flex
             direction={{ base: "column", md: "row" }}

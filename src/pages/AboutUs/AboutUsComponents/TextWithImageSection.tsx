@@ -1,6 +1,6 @@
 import { Box, SimpleGrid, Image, Text } from "@chakra-ui/react";
 import type { ReactNode } from "react";
-import Button from "../../../components/common/Button/Button";
+import Badge from "../../../components/common/Badge/Badge";
 
 interface ImageTextSectionProps {
   image: string;
@@ -33,17 +33,14 @@ const TextWithImageSection = ({
           w="100%"
           h="auto"
           borderRadius="2xl"
+          loading="eager"
+          fetchPriority="high"
         />
       </Box>
       <Box order={{ base: 2, md: reverse ? 1 : 2 }}>
         {buttonLabel && (
           <Box mb={{ base: 4, lg: 6 }}>
-            <Button
-              fontSize="xl"
-              rounded="full"
-              variant="primary"
-              label={buttonLabel}
-            />
+            <Badge label={buttonLabel} />
           </Box>
         )}
 
