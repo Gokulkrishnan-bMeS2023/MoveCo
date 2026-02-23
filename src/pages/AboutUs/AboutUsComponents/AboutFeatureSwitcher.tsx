@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Box, Text, VStack, SimpleGrid, Image } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import OnlineImg from "../../../assets/img1.webp";
@@ -11,14 +11,12 @@ const MotionBox = motion(Box);
 
 const features = [
   {
-    label: "Online real-time quote",
     title: "Online real-time quote",
     description:
       "Our advanced  real-time move quotation software  allows you to create binding quotations just by specifying the inventory you want to move and their locations. It is that simple, in minutes you get your quotation number along with all the binding documents, sent directly to your email inbox.",
     image: OnlineImg,
   },
   {
-    label: "Schedule a free In-Home Estimate",
     title: "Schedule a free In-Home Estimate",
     description: (
       <>
@@ -43,21 +41,18 @@ const features = [
     image: EstimateImg,
   },
   {
-    label: "Moving Supplies",
     title: "Moving Supplies",
     description:
       "When you plan a move, you certainly want to keep your possessions safe and organized. Boxes, packing material, moving safety material, and all the other rest of moving supplies are also sold here in our online shop. You can visit our  online Packing supply store  and have them delivered directly at your doorstep with FREE* shipping",
     image: MovingImg,
   },
   {
-    label: "Storage Services",
     title: "Storage Services",
     description:
       "Moving from one house to another, and need an intermediate place to store your belongings? Out of Lewisville area for a few months and want to safely store your belongings? You can try MoveCo.Net as we offer  professional storage services  for our moving customers. Our professional storage service comes with free safety Packing of your belongings, and offer hassle free end-to-end moving. You can buy storage space from 10×20 feet to a 10×30, with any number of multiples and combinations. This service is currently offered in the Dallas area only.",
     image: StorageImg,
   },
   {
-    label: "Professional Packing",
     title: "Professional Packing",
     description:
       "Get your belongings packaged by professionals right in front of you: Our professional movers can also give you an estimation of our professional packing services when they visit your house for the free In-Home Estimate. Our  professional packing service  ensures just the right packing of your possessions by professional movers who have years of current experience in packing and moving valuable goods.",
@@ -67,16 +62,29 @@ const features = [
 
 export default function AnimatedFeatureSwitcher() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const descriptionRef = useRef<HTMLDivElement>(null);
+
+  const handleTitleClick = (index: number) => {
+    setActiveIndex(index);
+
+    if (window.innerWidth < 768) {
+      setTimeout(() => {
+        descriptionRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 50);
+    }
+  };
 
   return (
     <SimpleGrid columns={{ base: 1, md: 2 }} gap={12} alignItems="start">
-      {/* LEFT SIDE – 50% */}
-      <VStack align="start" gap={{base: 1,md:2}}>
+      <VStack align="start" gap={{ base: 1, md: 2 }}>
         {features.map((item, index) => (
           <Box
             key={index}
-            w="100%" // make it full width of the VStack
-            bg={activeIndex === index ? "white" : "transparent"} // white when active
+            w="100%"
+            bg={activeIndex === index ? "white" : "transparent"}
             borderLeft={
               activeIndex === index
                 ? "3px solid #266F5D"
@@ -84,24 +92,28 @@ export default function AnimatedFeatureSwitcher() {
             }
             cursor="pointer"
             transition="all 0.2s"
-            _hover={{ bg: "brand.white", color: "brand.primary" }} // hover effect
-            onClick={() => setActiveIndex(index)}
+            _hover={{ bg: "brand.white", color: "brand.primary" }}
+            onClick={() => handleTitleClick(index)}
           >
             <Text
-              pl={4} 
+              pl={4}
               textStyle="size-xl"
               fontWeight={activeIndex === index ? "bold" : "normal"}
-              color={activeIndex === index ? "brand.primary" : "brand.secondary"}
+              color={
+                activeIndex === index ? "brand.primary" : "brand.secondary"
+              }
               py={4}
             >
-              {item.label}
+              {item.title}
             </Text>
           </Box>
         ))}
       </VStack>
-
-      {/* RIGHT SIDE – 50% */}
-      <Box w="100%" overflow="hidden">
+      <Box
+        ref={descriptionRef as React.RefObject<HTMLDivElement>}
+        w="100%"
+        overflow="hidden"
+      >
         <AnimatePresence mode="wait">
           <MotionBox
             key={activeIndex}
@@ -110,7 +122,6 @@ export default function AnimatedFeatureSwitcher() {
             exit={{ x: -80, opacity: 0 }}
             transition={{ duration: 0.45, ease: "easeInOut" }}
           >
-            {/* ✅ FIXED IMAGE SIZE */}
             <Image
               src={features[activeIndex].image}
               alt={features[activeIndex].title}
@@ -120,14 +131,15 @@ export default function AnimatedFeatureSwitcher() {
               objectFit="cover"
               mb={6}
             />
-
-            <Text textStyle="size-xl" fontWeight="bold" color="brand.primary" mb={3}>
+            <Text
+              textStyle="size-xl"
+              fontWeight="bold"
+              color="brand.primary"
+              mb={3}
+            >
               {features[activeIndex].title}
             </Text>
-
-            <Text  lineHeight="1.8">
-              {features[activeIndex].description}
-            </Text>
+            <Text lineHeight="1.8">{features[activeIndex].description}</Text>
           </MotionBox>
         </AnimatePresence>
       </Box>
