@@ -19,7 +19,11 @@ const RESPONSIVE_ALIGN = { base: "center", md: "flex-start" } as const;
 const RESPONSIVE_TEXT_ALIGN = { base: "center", md: "start" } as const;
 
 const CERTIFICATIONS = [
-  { img: images.BBB, link: "https://www.bbb.org/", alt: "Better Business Bureau" },
+  {
+    img: images.BBB,
+    link: "https://www.bbb.org/",
+    alt: "Better Business Bureau",
+  },
   {
     img: images.SMA,
     link: "https://www.mytexasmover.com/",
@@ -30,7 +34,11 @@ const CERTIFICATIONS = [
     link: "https://www.moving.org/",
     alt: "American Moving & Storage Association",
   },
-  { img: images.MFH, link: "https://www.moveforhunger.org/", alt: "Move For Hunger" },
+  {
+    img: images.MFH,
+    link: "https://www.moveforhunger.org/",
+    alt: "Move For Hunger",
+  },
 ];
 
 const CONTACT_INFO = [
@@ -123,7 +131,12 @@ const ContactNumber = memo(
     number: string;
     href: string;
   }) => (
-    <Box w="100%">
+    <Box
+      w="100%"
+      display={"flex"}
+      flexDirection="column"
+      alignItems={RESPONSIVE_ALIGN}
+    >
       <Text
         textStyle="size-lg"
         color="brand.warning"
@@ -131,19 +144,18 @@ const ContactNumber = memo(
         fontWeight="600"
         textTransform="uppercase"
         letterSpacing="wide"
-        textAlign={RESPONSIVE_TEXT_ALIGN}
       >
         {label}
       </Text>
       <Link
         href={href}
         textStyle="size-xl"
+        w={"fit-content"}
         fontWeight="700"
         color="brand.white"
         _hover={{ color: "brand.warning", textDecoration: "none" }}
         transition="all 0.2s"
         display="block"
-        textAlign={RESPONSIVE_TEXT_ALIGN}
       >
         {number}
       </Link>
@@ -302,7 +314,7 @@ const Footer = () => {
       />
 
       {/* Main Footer Content */}
-      <Container >
+      <Container>
         <Box
         // mx="auto"
         // px={{ base: "4", md: "6", lg: "8" }}
