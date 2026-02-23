@@ -429,7 +429,7 @@ const CartPage = () => {
         direction={{ base: "column", sm: "row" }}
         justify="space-between"
         align={{ base: "start", sm: "center" }}
-        gap={{ base: 6, md: 10 }}
+        gap={{ base: 4, md: 10 }}
         mb={{ base: 6, lg: 8 }}
       >
         <Heading as="h1" fontWeight="normal">

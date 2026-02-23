@@ -19,7 +19,7 @@ const QuoteForm = () => {
     date: "",
     phoneNumber: "",
     email: "",
-    estimate: "",
+    estimate: "Instant Online Estimate",
   });
 
   const [errors, setErrors] = useState<
@@ -58,9 +58,8 @@ const QuoteForm = () => {
   return (
     <Box>
       <Image src={QuoteFormImage} alt="Quote Form" w="100%" rounded="2xl" />
-
       <Box bg="brand.white" p={6} mt={4} rounded="2xl">
-        <Heading fontSize="xl" textAlign="center" fontWeight="medium" mb={4}>
+        <Heading as="h3" textAlign="center" fontWeight="normal" mb={4}>
           Get a Moving{" "}
           <Text as="span" color="brand.primary">
             Quote
@@ -76,7 +75,6 @@ const QuoteForm = () => {
             isRequired
             errorMessage={errors.firstName}
           />
-
           <InputField
             label="Last Name"
             value={formData.lastName}
@@ -85,7 +83,6 @@ const QuoteForm = () => {
             isRequired
             errorMessage={errors.lastName}
           />
-
           <DateInput
             label="Date"
             value={formData.date}
@@ -94,7 +91,6 @@ const QuoteForm = () => {
             isRequired
             errorMessage={errors.date}
           />
-
           <PhoneField
             label="Phone Number"
             value={formData.phoneNumber}
@@ -111,7 +107,6 @@ const QuoteForm = () => {
             isRequired
             errorMessage={errors.email}
           />
-
           <RadioField
             options={[
               {
@@ -130,7 +125,7 @@ const QuoteForm = () => {
             errorMessage={errors.estimate}
           />
 
-          <Button variant="primary" label="Next" onClick={handleSubmit} />
+          <Button variant="primary" label="Next" onClick={handleSubmit} mt={2}/>
         </Stack>
       </Box>
     </Box>

@@ -157,10 +157,10 @@ const InHomeMoveEstimate = () => {
         direction={{ base: "column", md: "row" }}
         align={{ base: "flex-start", md: "center" }}
         justify="space-between"
-        gap={{ base: 6, md: 10 }}
+        gap={{ base: 4, md: 10 }}
         mb={{ base: 6, lg: 8 }}
       >
-        <Heading as="h1" fontWeight="normal" w={{ base: "100%", lg: "50%" }}>
+        <Heading as="h1" fontWeight="normal" w={{ base: "100%", lg: "50%" }} mt={0} >
           In-Home <br />
           <Text as="span" color="brand.primary">
             Move Estimate
@@ -186,7 +186,7 @@ const InHomeMoveEstimate = () => {
           </Text>
         </Box>
       </Flex>
-
+      
       <SimpleGrid columns={{ base: 1, md: 2 }} alignItems="center">
         <Box w="100%" maxW={{ base: "100%", md: "550px" }}>
           <Image
@@ -399,6 +399,7 @@ const InHomeMoveEstimate = () => {
                     placeholder="Zip Code"
                     type="number"
                     value={values.zipCode}
+                    isRequired
                     onChange={(e) =>
                       handleChange(
                         "zipCode",

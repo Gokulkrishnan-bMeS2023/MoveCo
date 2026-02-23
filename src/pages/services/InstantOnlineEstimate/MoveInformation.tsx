@@ -141,7 +141,7 @@ const InHomeMoveEstimate = () => {
           direction={{ base: "column", md: "row" }}
           align={{ base: "flex-start", md: "center" }}
           justify="space-between"
-          gap={{ base: 6, md: 10 }}
+          gap={{ base: 4, md: 10 }}
           mb={8}
         >
           <Box maxW="400px" w="100%">

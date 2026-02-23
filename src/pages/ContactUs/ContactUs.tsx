@@ -38,7 +38,7 @@ const ContactUsPage = () => {
           direction={{ base: "column", md: "row" }}
           align={{ base: "flex-start", md: "center" }}
           justify="space-between"
-          gap={{ base: 6, md: 10 }}
+          gap={{ base: 4, md: 10 }}
           mb={{ base: 6, lg: 8 }}
         >
           <Box maxW={{ lg: "45%" }}>
@@ -99,7 +99,7 @@ const ContactUsPage = () => {
           direction={{ base: "column", md: "row" }}
           align={{ base: "flex-start", md: "center" }}
           justify="space-between"
-          gap={{ base: 6, md: 10 }}
+          gap={{ base: 4, md: 10 }}
           mb={{ base: 6, lg: 8 }}
         >
           <Box maxW={{ lg: "45%" }}>

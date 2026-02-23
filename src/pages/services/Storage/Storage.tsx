@@ -31,7 +31,7 @@ export default function StoragePage() {
         direction={{ base: "column", md: "row" }}
         align={{ base: "flex-start", md: "center" }}
         justify="space-between"
-        gap={{ base: 6, md: 10 }}
+        gap={{ base: 4, md: 10 }}
       >
         <Box maxW="600px" w="100%">
           <Heading as="h1" fontWeight="normal" color={"brand.primary"}>
