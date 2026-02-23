@@ -1,5 +1,4 @@
 import { Box, Heading, Text, Flex, Container } from "@chakra-ui/react";
-import { section } from "framer-motion/client";
 import Button from "../../../components/common/Button/Button";
 import { benefits, features } from "./data";
 import HeroBanner from "../AboutUsComponents/HeroBanner";
@@ -12,17 +11,36 @@ import { images } from "../../../assets";
 
 const AboutUs = () => {
   const navigate = useNavigate();
+  const missionContent = (
+    <>
+      <Badge label="Our Mission" mb={{ base: 4, lg: 6 }} />
+      We aim to impress you with our service so much that you'll share our
+      business cards with your friends and colleagues, post your text and video
+      testimonials on our website, and choose us for your next move.
+    </>
+  );
+
+  const testimonialContent = (
+    <>
+      <Badge label="Testimonials" mb={{ base: 4, lg: 6 }} />
+      Our online testimonial board goes a step further. You can post your moving
+      experience for our future customers to see. You can also go to our website
+      & see over 10 years of customer reviews. Our crews make the difference. We
+      conduct background checks and random drug tests.
+    </>
+  );
+
   return (
-    <Box as={section}>
+    <Box>
       <Container>
         <HeroBanner
           bgImage={images.aboutUsBanner}
           overlayColor="brand.primary"
           title="About Us"
-          overlayOpacity = {0.1}
+          overlayOpacity={0.1}
         />
         <Box pt="sectionTop">
-          <Badge label="About Us" mb={{ base: 4, lg: 6 }}/>
+          <Badge label="About Us" mb={{ base: 4, lg: 6 }} />
           <Flex
             mb={{ base: 6, lg: 8 }}
             direction={{ base: "column", md: "row" }}
@@ -49,37 +67,18 @@ const AboutUs = () => {
               </Text>
             </Box>
           </Flex>
-          <ImageTextSection
-            image={images.service1}
-            buttonLabel="Our Mission"
-            content={
-              <>
-                We aim to impress you with our service so much that you'll share
-                our business cards with your friends and colleagues, post your
-                text and video testimonials on our website, and choose us for
-                your next move.
-              </>
-            }
-          />
+
+          <ImageTextSection image={images.service1} content={missionContent} />
         </Box>
         <Box pt="sectionTop">
           <ImageTextSection
             image={images.service2}
-            buttonLabel="Testimonials"
             reverse
-            content={
-              <>
-                Our online testimonial board goes a step further. You can post
-                your moving experience for our future customers to see. You can
-                also go to our website & see over 10 years of customer reviews.
-                Our crews make the difference. We conduct background checks and
-                random drug tests.
-              </>
-            }
+            content={testimonialContent}
           />
         </Box>
         <Box pt="sectionTop">
-          <Badge label="Features" mb={{ base: 4, lg: 6 }}/>
+          <Badge label="Features" mb={{ base: 4, lg: 6 }} />
           <Flex
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
@@ -113,7 +112,7 @@ const AboutUs = () => {
         </Box>
         <Box pt="sectionTop">
           <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
-           <Badge label="Benefits" mb={{ base: 4, lg: 6 }}/>
+            <Badge label="Benefits" />
             <Button
               fontSize="xl"
               rounded="full"

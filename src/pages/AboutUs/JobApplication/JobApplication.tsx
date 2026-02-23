@@ -1,6 +1,6 @@
 import { Box, Heading, Text, Flex, Container } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { JobApplicationForm } from "./Step1address";
+import JobApplicationForm from "./Jobapplicationform";
 
 const JobApplication = () => {
   const navigate = useNavigate();
