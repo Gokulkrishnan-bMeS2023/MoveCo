@@ -5,6 +5,7 @@ import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import RadioField from "../../../components/common/Radio/Radio";
 import SSNField from "../../../components/common/SsnInput/SsnInput";
+import { FaBriefcase, FaUser } from "react-icons/fa";
 
 const stateOptions = [
   { label: "Texas", value: "TX" },
