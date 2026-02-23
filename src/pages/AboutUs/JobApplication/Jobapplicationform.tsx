@@ -1,8 +1,10 @@
-import { Stack, Box, Button, Progress } from "@chakra-ui/react";
+import { Stack, Box, Button } from "@chakra-ui/react";
 import { useJobApplicationForm } from "./Usejobapplicationform";
 import Step1PersonalInfo from "./Step1personalInfo";
 import Step2Address from "./Step2address";
 import Step3Experience from "./Step3experience";
+
+const steps = ["Personal Info", "Education", "Review"];
 
 const JobApplicationForm = () => {
   const {
@@ -24,20 +26,94 @@ const JobApplicationForm = () => {
     prevPage,
   } = useJobApplicationForm();
 
-  const progressValue = ((page + 1) / 3) * 100;
-
   return (
     <>
-      {/* Progress Bar */}
+      {/* ── Progress Bar ── */}
       <Box py={12}>
-        <Progress.Root value={progressValue}>
-          <Progress.Track>
-            <Progress.Range bg="brand.primary" />
-          </Progress.Track>
-        </Progress.Root>
+        <Box position="relative">
+          {/* Base gray line */}
+          <Box
+            position="absolute"
+            top="20px"
+            left="20px"
+            right="20px"
+            height="2px"
+            bg="brand.gray"
+            zIndex={0}
+          />
+
+          {/* Active progress line */}
+          <Box
+            position="absolute"
+            top="20px"
+            left="20px"
+            height="3px"
+            bg="brand.primary"
+            zIndex={0}
+            transition="width 0.4s ease"
+            width={
+              page === 0
+                ? "0%"
+                : page === 1
+                  ? "calc(50% - 20px)"
+                  : "calc(100% - 40px)"
+            }
+          />
+
+          {/* Step circles + labels */}
+          <Stack
+            direction="row"
+            justify="space-between"
+            position="relative"
+            zIndex={1}
+          >
+            {steps.map((label, index) => {
+              const isCompleted = index < page;
+              const isActive = index === page;
+
+              return (
+                <Stack key={index} align="center" gap={2} zIndex={1}>
+                  {/* Circle */}
+                  <Box
+                    w="40px"
+                    h="40px"
+                    borderRadius="full"
+                    bg={isCompleted || isActive ? "brand.primary" : "brand.white"}
+                    border="2px solid"
+                    borderColor={
+                      isCompleted || isActive ? "brand.primary" : "brand.gray"
+                    }
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    color={isCompleted || isActive ? "brand.white" : "brand.gray"}
+                    fontWeight="bold"
+                    fontSize="sm"
+                    transition="all 0.3s ease"
+                  >
+                    {isCompleted ? "✓" : index + 1}
+                  </Box>
+
+                  {/* Label */}
+                  <Box
+                    fontSize="xs"
+                    fontWeight={isActive ? "600" : "400"}
+                    color={
+                      isCompleted || isActive ? "brand.primary" : "brand.gray"
+                    }
+                    textAlign="center"
+                    transition="all 0.3s ease"
+                  >
+                    {label}
+                  </Box>
+                </Stack>
+              );
+            })}
+          </Stack>
+        </Box>
       </Box>
 
-      {/* Step Content */}
+      {/* ── Step Content ── */}
       <Stack gap={8}>
         {page === 0 && (
           <Step1PersonalInfo
@@ -73,7 +149,7 @@ const JobApplicationForm = () => {
         )}
       </Stack>
 
-      {/* Navigation Buttons */}
+      {/* ── Navigation Buttons ── */}
       <Stack direction="row" justify="space-between" pt={10}>
         <Button
           variant="outline"
@@ -101,3 +177,4 @@ const JobApplicationForm = () => {
 };
 
 export default JobApplicationForm;
+

@@ -171,7 +171,7 @@ const system = createSystem(defaultConfig, {
       container: containerRecipe,
     },
     slotRecipes: {
-      table: tableRecipe, // ✅ IMPORTANT
+      table: tableRecipe, 
     },
   },
 });

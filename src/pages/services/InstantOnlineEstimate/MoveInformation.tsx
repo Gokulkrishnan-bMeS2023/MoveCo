@@ -375,6 +375,7 @@ const InHomeMoveEstimate = () => {
                 placeholder="Zip Code"
                 type="number"
                 value={values.fromZipCode}
+                isRequired
                 onChange={(e) =>
                   handleChange(
                     "fromZipCode",
@@ -447,6 +448,7 @@ const InHomeMoveEstimate = () => {
                 placeholder="Zip Code"
                 type="number"
                 value={values.toZipCode}
+                isRequired
                 onChange={(e) =>
                   handleChange(
                     "toZipCode",
