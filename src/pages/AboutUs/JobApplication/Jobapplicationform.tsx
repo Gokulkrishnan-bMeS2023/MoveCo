@@ -25,7 +25,6 @@ const JobApplicationForm = () => {
   } = useJobApplicationForm();
 
   const progressValue = ((page + 1) / 3) * 100;
-  
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { Stack, SimpleGrid, Heading, Box} from "@chakra-ui/react";
+import { Stack, SimpleGrid, Heading, Box } from "@chakra-ui/react";
 import InputField from "../../../components/common/Input/Input";
 import SelectField from "../../../components/common/Select/Select";
 import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
@@ -62,7 +62,6 @@ const stateOptions = [
   { label: "Wyoming", value: "WY" },
 ];
 
-
 const yesNoOptions = [
   { label: "Yes", value: "yes" },
   { label: "No", value: "no" },
@@ -98,7 +97,9 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
           <InputField
             label="How did you learn about the position?"
             value={formData.Howdidyoulearnabouttheposition}
-            onChange={(e) => handleChange("Howdidyoulearnabouttheposition", e.target.value)}
+            onChange={(e) =>
+              handleChange("Howdidyoulearnabouttheposition", e.target.value)
+            }
           />
         </SimpleGrid>
       </Box>
@@ -188,7 +189,10 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
               type="number"
               value={formData.ZipCode}
               onChange={(e) =>
-                handleChange("ZipCode", e.target.value.replace(/\D/g, "").slice(0, 5))
+                handleChange(
+                  "ZipCode",
+                  e.target.value.replace(/\D/g, "").slice(0, 5),
+                )
               }
             />
           </SimpleGrid>
@@ -197,7 +201,9 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             <SSNField
               label="Social Security Number"
               value={formData.SocialSecurityNumber}
-              onChange={(digits) => handleChange("SocialSecurityNumber", digits)}
+              onChange={(digits) =>
+                handleChange("SocialSecurityNumber", digits)
+              }
               errorMessage={errors.SocialSecurityNumber}
             />
             <DateInput
@@ -205,7 +211,10 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
               placeholder="Available start Date"
               value={formData.Onwhatdatewouldyoubeavailableforwork}
               onChange={(e) =>
-                handleChange("Onwhatdatewouldyoubeavailableforwork", e.target.value)
+                handleChange(
+                  "Onwhatdatewouldyoubeavailableforwork",
+                  e.target.value,
+                )
               }
             />
           </SimpleGrid>
