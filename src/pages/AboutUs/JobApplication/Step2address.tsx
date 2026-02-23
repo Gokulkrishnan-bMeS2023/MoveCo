@@ -231,7 +231,6 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                   }
                 />
 
-                {/* ✅ Replaced InputField with PhoneField */}
                 <PhoneField
                   label="Supervisor Phone"
                   value={experience.supervisorPhone}
@@ -239,7 +238,6 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                   onChange={(digits) => {
                     onExperienceChange(index, "supervisorPhone", digits);
 
-                    // ✅ Auto-clear error once user reaches 10 digits
                     if (digits.length === 10) {
                       onClearExperienceError(index, "supervisorPhone");
                     }

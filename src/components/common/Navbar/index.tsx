@@ -376,7 +376,7 @@ export const Navbar = () => {
           </Flex>
 
           {/* DESKTOP ACTIONS */}
-          <Flex display={{ base: "none", lg: "flex" }} gap={4}>
+          <Flex display={{ base: "none", lg: "flex" }} gap={4} alignItems={"center"}>
             <Button
               label="Contact Us"
               variant="outline"

@@ -110,9 +110,12 @@ const InstantOnlineEstimate = () => {
           boxShadow="lg"
           w={{ base: "100%", md: "420px" }}
         >
-          <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
-            Get a Moving Quote
-          </Heading>
+          <Heading as="h3" textAlign="center" fontWeight="normal" mb={4}>
+          Get a Moving{" "}
+          <Text as="span" color="brand.primary">
+            Quote
+          </Text>
+        </Heading>
           <Stack gap={4}>
             <InputField
               label="Name"

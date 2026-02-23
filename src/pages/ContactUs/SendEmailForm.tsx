@@ -29,7 +29,7 @@ const SendEmailForm = () => {
       {/* Send Email Form */}
       <Card.Root variant="elevated" size="lg">
         <Card.Body gap={{ base: 4, md: 6 }}>
-          <HStack gap={3} flexWrap="wrap">
+          <HStack gap={3} alignItems={"flex-start"}>
             <Flex bg="brand.primary" px={3} py={2} borderRadius="md">
               <Box color="brand.white">
                 <Icon
