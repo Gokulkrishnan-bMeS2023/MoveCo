@@ -1,11 +1,4 @@
-import {
-  Stack,
-  Input,
-  Field,
-  Heading,
-  Text,
-  Box,
-} from "@chakra-ui/react";
+import { Stack, Input, Field, Heading, Text, Box } from "@chakra-ui/react";
 import { forwardRef, useImperativeHandle, useState, useRef } from "react";
 import CheckboxField from "../../../components/common/CheckBox/Checkbox";
 
@@ -139,14 +132,15 @@ const Step3Experience = forwardRef<any, Step3ExperienceProps>(
                 onAgreedChange(e.target.checked);
                 setShowError(false);
               }}
-              errorMessage={showError && !agreed ? "You need to accept the policy" : ""}
+              errorMessage={
+                showError && !agreed ? "You need to accept the policy" : ""
+              }
             />
-
           </Stack>
         </Box>
       </>
     );
-  }
+  },
 );
 
 export default Step3Experience;

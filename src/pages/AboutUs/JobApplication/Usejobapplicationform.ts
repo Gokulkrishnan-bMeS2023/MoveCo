@@ -149,7 +149,10 @@ export const useJobApplicationForm = () => {
     setStepTwoErrors((prev) => {
       const updatedExperiences = [...(prev.experiences || [])];
       if (updatedExperiences[index]) {
-        updatedExperiences[index] = { ...updatedExperiences[index], [field]: "" };
+        updatedExperiences[index] = {
+          ...updatedExperiences[index],
+          [field]: "",
+        };
       }
       return { ...prev, experiences: updatedExperiences };
     });

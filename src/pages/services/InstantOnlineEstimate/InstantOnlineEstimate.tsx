@@ -16,7 +16,6 @@ import type { InstantEstimateDTO, InstantEstimateErrors } from "./DTOs";
 import { validateInstantEstimate } from "./validation";
 import { useEffect } from "react";
 import { images } from "../../../assets";
-
 import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
 
 const InstantOnlineEstimate = () => {
@@ -34,24 +33,20 @@ const InstantOnlineEstimate = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-  const saved = sessionStorage.getItem("instantEstimate");
-  if (saved) {
-    setValues(JSON.parse(saved));
-  }
-}, []);
+    const saved = sessionStorage.getItem("instantEstimate");
+    if (saved) {
+      setValues(JSON.parse(saved));
+    }
+  }, []);
 
-
-const handleChange = (field: keyof InstantEstimateDTO, value: string) => {
-  const updated = { ...values, [field]: value };
-  setValues(updated);
-
-  // ✅ save updated values
-  sessionStorage.setItem("instantEstimate", JSON.stringify(updated));
-
-  if (errors[field]) {
-    setErrors((prev) => ({ ...prev, [field]: "" }));
-  }
-};
+  const handleChange = (field: keyof InstantEstimateDTO, value: string) => {
+    const updated = { ...values, [field]: value };
+    setValues(updated);
+    sessionStorage.setItem("instantEstimate", JSON.stringify(updated));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: "" }));
+    }
+  };
 
   const handleSubmit = () => {
     const newErrors = validateInstantEstimate(values);
@@ -89,7 +84,7 @@ const handleChange = (field: keyof InstantEstimateDTO, value: string) => {
         direction={{ base: "column", md: "row" }}
         align={{ base: "flex-start", md: "center" }}
         justify="space-between"
-        gap={{ base: 6, md: 10 }}
+        gap={{ base: 4, md: 10 }}
         mb={{ base: 6, lg: 8 }}
       >
         <Box maxW="600px" w="100%">
@@ -147,15 +142,14 @@ const handleChange = (field: keyof InstantEstimateDTO, value: string) => {
               errorMessage={errors.date}
             />
 
-<PhoneField
-  label="Phone Number"
-  value={values.phone}
-  onChange={(digits) => handleChange("phone", digits)}
-  isRequired
-  errorMessage={errors.phone}
-  
-/>
+            <PhoneField
+              label="Phone Number"
+              value={values.phone}
+              onChange={(digits) => handleChange("phone", digits)}
+              isRequired
+              errorMessage={errors.phone}
 
+            />
             <InputField
               label="Email"
               placeholder="Email"

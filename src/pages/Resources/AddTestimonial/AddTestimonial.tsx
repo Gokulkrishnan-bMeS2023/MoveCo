@@ -86,6 +86,9 @@ const handleSubmit = () => {
         borderColor="gray.100"
       >
         <Stack gap={4}>
+          <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
+              Add Testimonial
+            </Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
             <InputField
               label="First Name"

@@ -38,7 +38,7 @@ const JobApplicationForm = () => {
             left="20px"
             right="20px"
             height="2px"
-            bg="gray.200"
+            bg="brand.gray"
             zIndex={0}
           />
 
@@ -78,15 +78,15 @@ const JobApplicationForm = () => {
                     w="40px"
                     h="40px"
                     borderRadius="full"
-                    bg={isCompleted || isActive ? "brand.primary" : "white"}
+                    bg={isCompleted || isActive ? "brand.primary" : "brand.white"}
                     border="2px solid"
                     borderColor={
-                      isCompleted || isActive ? "brand.primary" : "gray.300"
+                      isCompleted || isActive ? "brand.primary" : "brand.gray"
                     }
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    color={isCompleted || isActive ? "white" : "gray.400"}
+                    color={isCompleted || isActive ? "brand.white" : "brand.gray"}
                     fontWeight="bold"
                     fontSize="sm"
                     transition="all 0.3s ease"
@@ -99,7 +99,7 @@ const JobApplicationForm = () => {
                     fontSize="xs"
                     fontWeight={isActive ? "600" : "400"}
                     color={
-                      isCompleted || isActive ? "brand.primary" : "gray.400"
+                      isCompleted || isActive ? "brand.primary" : "brand.gray"
                     }
                     textAlign="center"
                     transition="all 0.3s ease"
@@ -177,3 +177,4 @@ const JobApplicationForm = () => {
 };
 
 export default JobApplicationForm;
+

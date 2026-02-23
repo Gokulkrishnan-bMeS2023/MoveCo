@@ -12,6 +12,7 @@ import Button from "../../components/common/Button/Button";
 import { MainBanner } from "./HomeBanner";
 import { QuoteForm } from "./QuoteForm";
 import Badge from "../../components/common/Badge/Badge";
+import { LuArrowUpRight } from "react-icons/lu";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const Home = () => {
               variant="outline"
               onClick={() => navigate("/video-review")}
               label="View all"
+              rightIcon={<LuArrowUpRight size={16} />}
             />
           </Flex>
 
@@ -79,6 +81,7 @@ const Home = () => {
               variant="outline"
               onClick={() => navigate("/client-testimonial")}
               label="View all"
+              rightIcon={<LuArrowUpRight size={16} />}
             />
           </Flex>
 
