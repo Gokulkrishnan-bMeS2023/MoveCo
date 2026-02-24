@@ -202,30 +202,19 @@ const Button = ({
       href={href}
       as={as}
       role="group"   // 👈 IMPORTANT
-      _groupHover={{
-        ".right-icon": {
-          transform: "translate(3px, -3px)", // ↗ move
-        },
-      }}
       {...styleProps}
       {...props}
     >
       {children ? (
         children
       ) : (
-        <HStack gap={2} justify="center">
+        <HStack gap={2} justify="center" align="center">
           {leftIcon && <span>{leftIcon}</span>}
 
           {label && <span>{label}</span>}
 
           {rightIcon && (
-            <span
-              className="right-icon"
-              style={{
-                display: "flex",
-                transition: "transform 0.3s ease",
-              }}
-            >
+            <span>
               {rightIcon}
             </span>
           )}

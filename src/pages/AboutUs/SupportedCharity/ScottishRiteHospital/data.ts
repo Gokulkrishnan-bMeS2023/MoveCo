@@ -11,7 +11,7 @@ Pioneering research and innovation of leading-edge technologies. Discovering gen
 Educating future leaders in pediatric orthopedics.`,
     image: images.scottishRite,
     linkText: "Find more",
-    linkHref: "/ScottishRiteHospital",
+    linkHref: "https://scottishritehospital.org/",
     reverse: false,
   },
 ];

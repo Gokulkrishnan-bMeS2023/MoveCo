@@ -1,9 +1,11 @@
 import { Box, Flex, Heading, Text, Image, AspectRatio } from "@chakra-ui/react";
 import Button from "../../../components/common/Button/Button";
+import { LuArrowUpRight } from "react-icons/lu";
 
 interface SideContentSectionProps {
   title: string;
   description: string;
+  description2?: string;
   image: string;
   linkText?: string;
   linkHref?: string;
@@ -13,6 +15,7 @@ interface SideContentSectionProps {
 const SideContentSection = ({
   title,
   description,
+  description2,
   image,
   linkText = "Read More",
   linkHref = "#",
@@ -61,12 +64,20 @@ const SideContentSection = ({
             {description}
           </Text>
 
+          {description2 && (
+            <Text textStyle="size-xl" mb={4}>
+              {description2}
+            </Text>
+          )}
+
           <Button
+           fontSize="xl"
             label={linkText}
             variant="outline"
             as="a"
             href={linkHref}
             rounded="full"
+            rightIcon={<LuArrowUpRight size={16} />}
           />
         </Box>
       </Flex>

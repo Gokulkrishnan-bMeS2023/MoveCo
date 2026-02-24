@@ -88,7 +88,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
           <Heading as="h3" color="brand.primary" fontWeight="normal">
             Position Details
           </Heading>
-          <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+         <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
             <InputField
               label="Position Sought"
               value={formData.PositionSought}
@@ -119,7 +119,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             Your Information
           </Heading>
 
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
             <InputField
               label="First Name"
               placeholder="First Name"
@@ -147,7 +147,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             />
           </SimpleGrid>
 
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
             <PhoneField
               label="Home Phone"
               value={formData.HomePhone}
@@ -168,7 +168,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             />
           </SimpleGrid>
 
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
             <InputField
               label="City"
               placeholder="City"
@@ -198,7 +198,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             />
           </SimpleGrid>
 
-          <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+         <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
             <SSNField
               label="Social Security Number"
               value={formData.SocialSecurityNumber}
