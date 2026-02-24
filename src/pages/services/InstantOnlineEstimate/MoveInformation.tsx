@@ -220,18 +220,21 @@ const InHomeMoveEstimate = () => {
                 label="Work Phone"
                 value={values.workPhone}
                 onChange={(v) => handleChange("workPhone", v)}
+                errorMessage={errors.workPhone}
               />
 
               <PhoneField
                 label="Home Phone"
                 value={values.homePhone}
                 onChange={(v) => handleChange("homePhone", v)}
+                errorMessage={errors.homePhone}
               />
 
               <PhoneField
                 label="Fax Phone"
                 value={values.faxPhone}
                 onChange={(v) => handleChange("faxPhone", v)}
+                errorMessage={errors.faxPhone}
               />
             </SimpleGrid>
           </VStack>
@@ -371,17 +374,16 @@ const InHomeMoveEstimate = () => {
                 onChange={(e) => handleChange("fromState", e.target.value)}
               />
               <InputField
-                label="Zip Code"
+                label="From Zip Code"
                 placeholder="Zip Code"
                 type="number"
                 value={values.fromZipCode}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, "").slice(0, 5);
+                  handleChange("fromZipCode", value);
+                }}
+                errorMessage={errors.fromZipCode}
                 isRequired
-                onChange={(e) =>
-                  handleChange(
-                    "fromZipCode",
-                    e.target.value.replace(/\D/g, "").slice(0, 5),
-                  )
-                }
               />
 
               <SelectField
@@ -444,17 +446,16 @@ const InHomeMoveEstimate = () => {
                 onChange={(e) => handleChange("toState", e.target.value)}
               />
               <InputField
-                label="Zip Code"
+                label="To Zip Code"
                 placeholder="Zip Code"
                 type="number"
                 value={values.toZipCode}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, "").slice(0, 5);
+                  handleChange("toZipCode", value);
+                }}
+                errorMessage={errors.toZipCode}
                 isRequired
-                onChange={(e) =>
-                  handleChange(
-                    "toZipCode",
-                    e.target.value.replace(/\D/g, "").slice(0, 5),
-                  )
-                }
               />
 
               <SelectField

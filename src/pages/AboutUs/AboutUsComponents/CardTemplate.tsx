@@ -8,12 +8,12 @@ export interface IconGridItem {
 
 interface CommonIconGridProps {
   data: IconGridItem[];
-  columns?: { base?: number; sm?: number; md?: number };
+  columns?: { base?: number; sm?: number; md?: number; lg?: number };
 }
 
 export default function CommonIconGrid({
   data,
-  columns = { base: 1, sm: 2, md: 4 },
+  columns = { base: 1, sm: 2, md: 2, lg: 4 },
 }: CommonIconGridProps) {
   return (
     <SimpleGrid columns={columns} gap={8}>
