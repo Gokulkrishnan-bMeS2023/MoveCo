@@ -149,17 +149,16 @@ export const UrlPages: AppRoute[] = [
     path: "/contact-us",
     component: lazy(() => import("../pages/ContactUs/ContactUs")),
   },
-
-<<<<<<< HEAD
   {
     path: "/product-and-services",
     component: lazy(
       () => import("../pages/services/ProductandServices/ProductandServices"),
     ),
-=======
-   {
+  },
+  {
     path: "/conformation",
-    component: lazy(() => import("../pages/services/InstantOnlineEstimate/Conformation")),
->>>>>>> ae901a525be5a704a4a482e9ce2a84fc5e4c5bc3
+    component: lazy(
+      () => import("../pages/services/InstantOnlineEstimate/Conformation"),
+    ),
   },
 ];
