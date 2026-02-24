@@ -28,7 +28,7 @@ const JobApplication = () => {
               textDecoration="underline"
               cursor="pointer"
               _hover={{ opacity: 0.8 }}
-              onClick={() => navigate("/AssociateCodeofConduct")}
+              onClick={() => navigate("/associate-code-of-conduct")}
             >
               Associate Code of Conduct
             </Text>
