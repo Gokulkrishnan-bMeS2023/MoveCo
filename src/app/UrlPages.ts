@@ -156,9 +156,9 @@ export const UrlPages: AppRoute[] = [
     ),
   },
   {
-    path: "/conformation",
+    path: "/confirmation",
     component: lazy(
-      () => import("../pages/services/InstantOnlineEstimate/Conformation"),
+      () => import("../pages/services/InstantOnlineEstimate/Confirmation"),
     ),
   },
 ];
