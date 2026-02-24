@@ -5,12 +5,19 @@ import HeroBanner from "../AboutUsComponents/HeroBanner";
 import { images } from "../../../assets";
 import React from "react";
 
-const CardTemplate = React.lazy(() => import("../AboutUsComponents/CardTemplate"));
-const ImageListSection = React.lazy(() => import("../AboutUsComponents/ImageWithListContent"));
+const CardTemplate = React.lazy(
+  () => import("../AboutUsComponents/CardTemplate"),
+);
+const ImageListSection = React.lazy(
+  () => import("../AboutUsComponents/ImageWithListContent"),
+);
 const AssociateCodeOfConduct = () => {
   return (
     <Container>
-      <HeroBanner title="Associate Code of Conduct" bgImage={images.insuranceBanner}  />
+      <HeroBanner
+        title="Associate Code of Conduct"
+        bgImage={images.insuranceBanner}
+      />
       <Box pt="sectionTop">
         <Heading mb={{ base: 6, lg: 8 }} as="h1" fontWeight="normal">
           Dress{" "}
@@ -18,7 +25,7 @@ const AssociateCodeOfConduct = () => {
             Code
           </Text>
         </Heading>
-        <CardTemplate data={dressCode} columns={{ base: 1, sm: 2, md: 3 }} />
+        <CardTemplate data={dressCode} columns={{ base: 1, md: 2, lg: 3 }} />
       </Box>
       <Box pt="sectionTop">
         <Heading
@@ -37,7 +44,6 @@ const AssociateCodeOfConduct = () => {
           image={images.customerRelationships}
           points={customerPoints}
           imagePosition="left"
-          
         />
       </Box>
       <Box pt="sectionTop">
