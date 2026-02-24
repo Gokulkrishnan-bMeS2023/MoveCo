@@ -31,9 +31,9 @@ const IconGridCard = memo(function IconGridCard({
         boxShadow: "2xl",
         borderColor: "brand.primary",
       }}
-      flexDirection={{ base: "row", md: "column" }}
+      flexDirection={{ base: "row", md: "column" }}   // ✅ SAME layout
       alignItems="center"
-      p={{ base: 4, md: 8 }}
+      p={{ base: 6, md: 8 }}                          // ✅ Bigger padding like old UI
       minH={{ base: "unset", md: "320px" }}
       gap={{ base: 4, md: 0 }}
     >
@@ -57,12 +57,11 @@ const IconGridCard = memo(function IconGridCard({
           color="brand.white"
         />
       </Box>
+
       <Text
-        textStyle="size-2xl"
+        textStyle="size-2xl"                         
         textAlign={{ base: "left", md: "center" }}
-        fontSize={{ base: "md", md: undefined }}
-        fontWeight={{ base: "semibold", md: undefined }}
-        lineHeight="1.3"
+        lineHeight="1.4"                              
       >
         {item.text}
       </Text>
@@ -75,7 +74,7 @@ const CommonIconGrid = memo(function CommonIconGrid({
   columns = { base: 1, md: 2, lg: 4 },
 }: CommonIconGridProps) {
   return (
-    <SimpleGrid columns={columns} gap={{ base: 3, md: 8 }}>
+    <SimpleGrid columns={columns} gap={{ base: 6, md: 8 }}> 
       {data.map((item, index) => (
         <IconGridCard key={index} item={item} />
       ))}
