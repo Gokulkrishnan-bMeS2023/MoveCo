@@ -78,7 +78,6 @@ const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
   const speaksToShow = limit ? CLIENT_SPEAKS.slice(0, limit) : CLIENT_SPEAKS;
 
   return (
-    <Box mt={8}>
       <Grid
         templateColumns={{
           base: "1fr",
@@ -92,7 +91,6 @@ const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
           <ReviewCard key={client.id} client={client} />
         ))}
       </Grid>
-    </Box>
   );
 };
 
@@ -105,7 +103,6 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
       onMouseLeave={() => setIsHovered(false)}
       position="relative"
       zIndex={isHovered ? 20 : 1}
-      pb="10px"
     >
       <Box
         bg="brand.white"
@@ -126,7 +123,7 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
             loading="eager"
             fetchPriority="high"
           />
-          <Heading as="h4" fontSize="lg">
+          <Heading as="h5">
             {client.name}
           </Heading>
         </Flex>

@@ -1,4 +1,4 @@
-import { Grid, AspectRatio, Box } from "@chakra-ui/react";
+import { Grid, AspectRatio } from "@chakra-ui/react";
 
 const VIDEO_IDS = [
   "RVf3ANbGWVg",
@@ -21,7 +21,6 @@ const VideoGrid = ({ limit }: VideoGridProps) => {
   const videosToShow = limit ? VIDEO_IDS.slice(0, limit) : VIDEO_IDS;
 
   return (
-    <Box mt={8}>
       <Grid
         templateColumns={{
           base: "1fr",
@@ -44,7 +43,6 @@ const VideoGrid = ({ limit }: VideoGridProps) => {
           </AspectRatio>
         ))}
       </Grid>
-    </Box>
   );
 };
 

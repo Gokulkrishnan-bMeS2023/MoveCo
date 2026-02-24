@@ -65,7 +65,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
           <Heading as="h3" color="brand.primary" fontWeight="normal">
             Education
           </Heading>
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
             <InputField
               label="School Name"
               placeholder="School Name"
@@ -86,7 +86,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
               onChange={(e) => onEducationChange("years", e.target.value)}
             />
           </SimpleGrid>
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
             <InputField
               label="Degree Received"
               placeholder="Degree Received"
@@ -108,7 +108,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
               }
             />
           </SimpleGrid>
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
             <InputField
               label="List other information pertinent to the employment you are seeking:"
               placeholder="Additional Information"
@@ -147,7 +147,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 )}
               </Flex>
              <Stack gap={4}>
-              <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
+              <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
                 <InputField
                   label="Employer"
                   placeholder="Employer"
@@ -221,7 +221,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 />
               </SimpleGrid>
 
-              <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
+              <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
                 <InputField
                   label="Supervisor Name"
                   placeholder="Supervisor Name"

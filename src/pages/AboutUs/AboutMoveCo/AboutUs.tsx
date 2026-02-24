@@ -8,6 +8,7 @@ import AboutFeatureSwitcher from "../AboutUsComponents/AboutFeatureSwitcher";
 import { useNavigate } from "react-router-dom";
 import Badge from "../../../components/common/Badge/Badge";
 import { images } from "../../../assets";
+import { LuArrowUpRight } from "react-icons/lu";
 
 const AboutUs = () => {
   const navigate = useNavigate();
@@ -119,6 +120,7 @@ const AboutUs = () => {
               variant="outline"
               onClick={() => navigate("/our-standard")}
               label="View all"
+              rightIcon={<LuArrowUpRight size={16} />}
             />
           </Flex>
           <Flex

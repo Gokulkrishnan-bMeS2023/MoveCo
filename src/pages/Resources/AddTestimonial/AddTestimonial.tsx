@@ -47,11 +47,11 @@ const handleSubmit = () => {
       <Flex
         direction={{ base: "column", lg: "row" }}
         justify="space-between"
-        align="center"
+        align={{base:"left",md:"center"}}
         mb={{ base: 6, lg: 8 }}
          gap={{ base: 4, md: 10 }}
       >
-        <Box maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "left" }}>
+        <Box maxW={{ lg: "45%" }}>
           <Heading as="h1" fontWeight="normal">
             Add
             <Text as="span" color="brand.primary">
@@ -60,7 +60,7 @@ const handleSubmit = () => {
             </Text>
           </Heading>
         </Box>
-        <Box textAlign={{ base: "center", lg: "right" }} maxW={{ lg: "46%" }}>
+        <Box maxW={{ lg: "46%" }}>
           <Text textStyle={"size-2xl"}>
             You are about to post a comment on our “testimonial board”.If you
             need to contact customer service please {" "}
@@ -90,7 +90,7 @@ const handleSubmit = () => {
           <Heading as="h3" fontWeight="normal" color="brand.primary">
               Add Testimonial
             </Heading>
-          <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+         <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
             <InputField
               label="First Name"
               placeholder="First Name"
@@ -109,7 +109,7 @@ const handleSubmit = () => {
             />
           </SimpleGrid>
 
-          <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+         <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
             <DateInput
               label="Move Date"
               variant="future-only"
