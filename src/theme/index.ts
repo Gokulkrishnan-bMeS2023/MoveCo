@@ -126,7 +126,7 @@ const system = createSystem(defaultConfig, {
           black: { value: "#000000" },
           white: { value: "#ffffff" },
           red: { value: "#ff0000" },
-          gray: { value: "#718096" },
+          gray: { value: "#B0B0B0" },
         },
       },
  

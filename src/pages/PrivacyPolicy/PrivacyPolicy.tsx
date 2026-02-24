@@ -13,13 +13,13 @@ const PrivacyPolicyPage = () => {
       </Heading>
 
       <VStack gap={0} align="stretch">
-        {POLICY_DATA.map((item,index) => (
+        {POLICY_DATA.map((item, index) => (
           <PolicySection
             key={item.title}
             title={item.title}
             image={item.image}
             reverse={item.reverse}
-             pt={index === 0 ? 0 : "sectionTop"}
+            pt={index === 0 ? 0 : "sectionTop"}
           >
             {item.content.map((text, index) => (
               <Text key={index} color="brand.secondary" textStyle="size-lg">

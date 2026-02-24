@@ -209,16 +209,22 @@ TollFreeBox.displayName = "TollFreeBox";
 const LicensingItem = memo(
   ({ label, value, href }: { label: string; value: string; href: string }) => (
     <Box textAlign={RESPONSIVE_TEXT_ALIGN}>
-      <Text textStyle="size-lg" color="whiteAlpha.700" mb="1">
+      <Text textStyle="size-lg" color="brand.gray" mb="1">
         {label}
       </Text>
+
       <Link
         href={href}
         target="_blank"
         color="brand.white"
         fontWeight="600"
         textStyle="size-lg"
-        _hover={{ color: "brand.warning", textDecoration: "underline" }}
+        textDecoration="none"
+        _hover={{
+          color: "brand.warning",
+          textDecoration: "none",
+        }}
+        _focus={{ boxShadow: "none" }}
         transition="all 0.2s"
       >
         {value}
@@ -226,7 +232,6 @@ const LicensingItem = memo(
     </Box>
   ),
 );
-LicensingItem.displayName = "LicensingItem";
 
 const CertificationGrid = memo(() => (
   <Grid gridTemplateColumns="repeat(2, 1fr)" gap="5" w="100%">
@@ -315,11 +320,7 @@ const Footer = () => {
 
       {/* Main Footer Content */}
       <Container>
-        <Box
-        // mx="auto"
-        // px={{ base: "4", md: "6", lg: "8" }}
-        // py={{ base: "10", md: "14", lg: "16" }}
-        >
+        <Box >
           <Grid
             gridTemplateColumns={{
               base: "1fr",
