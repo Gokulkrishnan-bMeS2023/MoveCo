@@ -44,11 +44,11 @@ const Step3Experience = forwardRef<any, Step3ExperienceProps>(
           border="1px solid"
           borderColor="gray.100"
         >
-          <Heading as="h3" mb={4} color="brand.primary" fontWeight="normal">
+          <Stack gap={4}>
+            <Heading as="h3" color="brand.primary" fontWeight="normal">
             Attach a photo of yourself (JPEG format)
           </Heading>
 
-          <Stack gap={4}>
             <Field.Root>
               <Field.Label>Upload Photo</Field.Label>
               <Input
@@ -87,11 +87,11 @@ const Step3Experience = forwardRef<any, Step3ExperienceProps>(
           border="1px solid"
           borderColor="gray.100"
         >
-          <Heading as="h3" mb={4} color="brand.primary" fontWeight="normal">
-            Acknowledgments & Authorization
-          </Heading>
 
           <Stack gap={4}>
+            <Heading as="h3" color="brand.primary" fontWeight="normal">
+            Acknowledgments & Authorization
+          </Heading>
             <Text textStyle="size-sm">
               1. I certify that answers given herein are true and complete to
               the best of my knowledge.

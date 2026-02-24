@@ -173,11 +173,11 @@ const InHomeMoveEstimate = () => {
           border="1px solid"
           borderColor="gray.100"
         >
-          <Heading as="h3" mb={4} color="brand.primary" fontWeight="normal">
-            Contact Information
-          </Heading>
 
           <VStack align="stretch" gap={4}>
+            <Heading as="h3" color="brand.primary" fontWeight="normal">
+            Contact Information
+          </Heading>
             <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <InputField
@@ -240,9 +240,7 @@ const InHomeMoveEstimate = () => {
           </VStack>
         </Box>
 
-        {/* ================= CARD 2 + 3 ================= */}
-        <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-          {/* LEFT */}
+        <SimpleGrid columns={{ base: 1, md: 2 }} gap={8}>
           <Box
             bg="brand.white"
             p={{ base: 6, md: 8 }}
@@ -251,11 +249,11 @@ const InHomeMoveEstimate = () => {
             border="1px solid"
             borderColor="gray.100"
           >
-            <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
-              Move - Drop date and time
-            </Heading>
 
             <VStack align="stretch" gap={4}>
+              <Heading as="h3" color="brand.primary" fontWeight="normal">
+              Move - Drop date and time
+            </Heading>
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <DateInput
                   label="Move Date"
@@ -296,18 +294,18 @@ const InHomeMoveEstimate = () => {
 
           {/* RIGHT */}
           <Box
-            bg="gray.50"
+            bg="brand.white"
             p={{ base: 6, md: 8 }}
             borderRadius="2xl"
             boxShadow="lg"
             border="1px solid"
             borderColor="gray.200"
           >
-            <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
+            <VStack align="stretch" gap={4}>
+               <Heading as="h3" color="brand.primary" fontWeight="normal" >
               Move Type
             </Heading>
 
-            <VStack align="stretch" gap={6}>
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                 <SelectField
                   label="Move Type"
@@ -340,10 +338,10 @@ const InHomeMoveEstimate = () => {
           border="1px solid"
           borderColor="gray.100"
         >
-          <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
+          <VStack align="stretch" gap={4}>
+             <Heading as="h3" color="brand.primary" fontWeight="normal">
             Move Location
           </Heading>
-          <VStack align="stretch" gap={6}>
             <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
               <InputField
                 label="From Address"
@@ -404,17 +402,17 @@ const InHomeMoveEstimate = () => {
 
         {/* ================= DROP LOCATION ================= */}
         <Box
-          bg="white"
+          bg="brand.white"
           p={{ base: 6, md: 8 }}
           borderRadius="2xl"
           boxShadow="lg"
           border="1px solid"
           borderColor="gray.100"
         >
-          <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
+          <VStack align="stretch" gap={4}>
+            <Heading as="h3" color="brand.primary" fontWeight="normal">
             Drop Location
           </Heading>
-          <VStack align="stretch" gap={4}>
             <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
               <InputField
                 label="To Address"

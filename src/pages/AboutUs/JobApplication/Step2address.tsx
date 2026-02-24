@@ -62,7 +62,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
         borderColor="gray.100"
       >
         <Stack gap={4}>
-          <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
+          <Heading as="h3" color="brand.primary" fontWeight="normal">
             Education
           </Heading>
           <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
@@ -130,7 +130,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
         borderColor="gray.100"
       >
         <Stack gap={4}>
-          <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
+          <Heading as="h3" color="brand.primary" fontWeight="normal">
             Previous Employment (Most Recent First)
           </Heading>
 
@@ -146,7 +146,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                   />
                 )}
               </Flex>
-
+             <Stack gap={4}>
               <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
                 <InputField
                   label="Employer"
@@ -191,7 +191,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 </Field.Root>
               </SimpleGrid>
 
-              <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={4}>
+              <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} >
                 <InputField
                   label="Prior Positions"
                   placeholder="Prior Positions"
@@ -221,7 +221,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 />
               </SimpleGrid>
 
-              <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={4}>
+              <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
                 <InputField
                   label="Supervisor Name"
                   placeholder="Supervisor Name"
@@ -255,7 +255,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 />
               </SimpleGrid>
 
-              <SimpleGrid columns={{ base: 1, md: 1 }} gap={6} mt={4}>
+              <SimpleGrid columns={{ base: 1, md: 1 }} gap={6}>
                 <InputField
                   label="Duties Performed"
                   placeholder="Duties Performed"
@@ -266,6 +266,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                   }
                 />
               </SimpleGrid>
+              </Stack>
             </Box>
           ))}
           <Button
