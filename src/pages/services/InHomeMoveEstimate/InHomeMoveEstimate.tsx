@@ -172,9 +172,11 @@ const InHomeMoveEstimate = () => {
             All information will not be released to any other person or company,
             please read our{" "}
             <Text
-              as="span"
+               as="span"
+             color="brand.primary"
+              textDecoration="underline"
               cursor="pointer"
-              color="brand.primary"
+              _hover={{ opacity: 0.8 }}
               onClick={() => navigate("/privacy-policy")}
             >
               privacy policy
@@ -217,11 +219,11 @@ const InHomeMoveEstimate = () => {
             borderRadius="2xl"
             boxShadow="lg"
           >
-            <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
+            <Stack gap={4}>
+              <Heading as="h3" fontWeight="normal"  color="brand.primary">
               General Information
             </Heading>
 
-            <Stack gap={4}>
               <Text textStyle="size-md" color="brand.secondary">
                 Which date and time is convenient for one of our trained
                 professional estimators to come out and visit you?
@@ -280,11 +282,11 @@ const InHomeMoveEstimate = () => {
               borderRadius="2xl"
               boxShadow="lg"
             >
-              <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
+              <Stack gap={4}>
+                 <Heading as="h3" fontWeight="normal" color="brand.primary">
                 Contact Information
               </Heading>
 
-              <Stack gap={4}>
                 <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
                   <InputField
                     label="First Name"
@@ -354,11 +356,11 @@ const InHomeMoveEstimate = () => {
               borderRadius="2xl"
               boxShadow="lg"
             >
-              <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
-                Move Location
-              </Heading>
 
               <Stack gap={4}>
+                 <Heading as="h3" fontWeight="normal" color="brand.primary">
+                Move Location
+              </Heading>
                 <InputField
                   label="From Address"
                   placeholder="From Address"

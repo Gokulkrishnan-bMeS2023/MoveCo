@@ -76,34 +76,35 @@ interface Props {
 const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
   return (
     <Stack gap={8}>
-      {/* Position Details */}
-      <Box
-        bg="brand.white"
-        p={{ base: 6, md: 8 }}
-        borderRadius="2xl"
-        boxShadow="lg"
-        border="1px solid"
-        borderColor="gray.100"
-      >
-        <Heading as="h3" color="brand.primary" fontWeight="normal" mb={4}>
-          Position Details
-        </Heading>
-        <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-          <InputField
-            label="Position Sought"
-            value={formData.PositionSought}
-            onChange={(e) => handleChange("PositionSought", e.target.value)}
-          />
-          <InputField
-            label="How did you learn about the position?"
-            value={formData.Howdidyoulearnabouttheposition}
-            onChange={(e) =>
-              handleChange("Howdidyoulearnabouttheposition", e.target.value)
-            }
-          />
-        </SimpleGrid>
-      </Box>
-
+        <Box
+          bg="brand.white"
+          p={{ base: 6, md: 8 }}
+          borderRadius="2xl"
+          boxShadow="lg"
+          border="1px solid"
+          borderColor="gray.100"
+        >
+          <Stack gap={4}>
+          <Heading as="h3" color="brand.primary" fontWeight="normal">
+            Position Details
+          </Heading>
+          <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+            <InputField
+              label="Position Sought"
+              value={formData.PositionSought}
+              onChange={(e) => handleChange("PositionSought", e.target.value)}
+            />
+            <InputField
+              label="How did you learn about the position?"
+              value={formData.Howdidyoulearnabouttheposition}
+              onChange={(e) =>
+                handleChange("Howdidyoulearnabouttheposition", e.target.value)
+              }
+            />
+          </SimpleGrid>
+          </Stack>
+        </Box>
+      
       {/* Personal Information */}
       <Box
         bg="brand.white"

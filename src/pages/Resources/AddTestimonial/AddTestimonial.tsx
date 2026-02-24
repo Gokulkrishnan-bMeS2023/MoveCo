@@ -49,7 +49,7 @@ const handleSubmit = () => {
         justify="space-between"
         align="center"
         mb={{ base: 6, lg: 8 }}
-        gap={{ base: 6, lg: 12 }}
+         gap={{ base: 4, md: 10 }}
       >
         <Box maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "left" }}>
           <Heading as="h1" fontWeight="normal">
@@ -63,17 +63,18 @@ const handleSubmit = () => {
         <Box textAlign={{ base: "center", lg: "right" }} maxW={{ lg: "46%" }}>
           <Text textStyle={"size-2xl"}>
             You are about to post a comment on our “testimonial board”.If you
-            need to contact customer service please
+            need to contact customer service please {" "}
             <Text
-              as="span"
-              mx={1}
+             as="span"
+             color="brand.primary"
+              textDecoration="underline"
               cursor="pointer"
-              color="brand.primary"
+              _hover={{ opacity: 0.8 }}
               onClick={() => navigate("/contact-us")}
             >
-              email us
+              email us 
             </Text>
-             This board is for actual customers only.
+            . This board is for actual customers only.
           </Text>
         </Box>
       </Flex>
@@ -86,7 +87,7 @@ const handleSubmit = () => {
         borderColor="gray.100"
       >
         <Stack gap={4}>
-          <Heading as="h3" fontWeight="normal" mb={4} color="brand.primary">
+          <Heading as="h3" fontWeight="normal" color="brand.primary">
               Add Testimonial
             </Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
