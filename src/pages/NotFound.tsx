@@ -24,7 +24,7 @@ const NotFound = () => {
           <Heading
             as="h1"
             fontWeight="700"
-            fontSize={{ base: "6xl", sm: "7xl", md: "9xl" }}
+            textStyle={{ base: "6xl", sm: "7xl", md: "9xl" }}
             color="brand.primary"
           >
             404

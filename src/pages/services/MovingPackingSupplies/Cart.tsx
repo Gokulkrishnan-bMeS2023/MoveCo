@@ -66,7 +66,7 @@ const QuantityModal = memo(
         <Dialog.Positioner>
           <Dialog.Content maxW="400px">
             <Dialog.Header>
-              <Dialog.Title fontSize="xl" fontWeight="bold">
+              <Dialog.Title textStyle="xl" fontWeight="bold">
                 Enter Quantity
               </Dialog.Title>
             </Dialog.Header>
@@ -76,7 +76,7 @@ const QuantityModal = memo(
                   Update quantity for <strong>{itemName}</strong>
                 </Text>
                 <Box>
-                  <Text fontSize="sm" mb={2}>
+                  <Text textStyle="sm" mb={2}>
                     Quantity
                   </Text>
                   <ChakraInput
@@ -128,7 +128,7 @@ const EmptyCart = memo(
       mx="auto"
     >
       <Box
-        fontSize={{ base: "4xl", md: "5xl" }}
+        textStyle={{ base: "4xl", md: "5xl" }}
         color="gray.300"
         mb={4}
         display="flex"
@@ -139,7 +139,7 @@ const EmptyCart = memo(
       <Heading as={"h3"} mb={2}>
         Your cart is empty
       </Heading>
-      <Text fontSize="lg" mb={6}>
+      <Text textStyle="lg" mb={6}>
         Add some products to get started
       </Text>
       <Button
@@ -350,7 +350,7 @@ const CartTotals = memo(
 
           <HStack justify="space-between" flexWrap="wrap">
             <Text textStyle="size-lg">Shipping</Text>
-            <Badge fontSize="sm" px={3} py={1}>
+            <Badge textStyle="sm" px={3} py={1}>
               FREE Shipping
             </Badge>
           </HStack>
@@ -435,7 +435,7 @@ const CartPage = () => {
         <Heading as="h1" fontWeight="normal">
           Shopping <Span color="brand.primary">Cart</Span>
           {cartItems.length > 0 && (
-            <Span fontSize="xl" fontWeight="normal" ml={2}>
+            <Span textStyle="xl" fontWeight="normal" ml={2}>
               ({cartItems.length} {cartItems.length === 1 ? "item" : "items"})
             </Span>
           )}

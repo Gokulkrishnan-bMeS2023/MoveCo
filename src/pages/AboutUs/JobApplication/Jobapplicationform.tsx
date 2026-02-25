@@ -88,7 +88,7 @@ const JobApplicationForm = () => {
                     justifyContent="center"
                     color={isCompleted || isActive ? "brand.white" : "brand.gray"}
                     fontWeight="bold"
-                    fontSize="sm"
+                    textStyle="sm"
                     transition="all 0.3s ease"
                   >
                     {isCompleted ? "✓" : index + 1}
@@ -96,7 +96,7 @@ const JobApplicationForm = () => {
 
                   {/* Label */}
                   <Box
-                    fontSize="xs"
+                    textStyle="xs"
                     fontWeight={isActive ? "600" : "400"}
                     color={
                       isCompleted || isActive ? "brand.primary" : "brand.gray"
@@ -153,7 +153,7 @@ const JobApplicationForm = () => {
       <Stack direction="row" justify="space-between" pt={10}>
         <Button
           variant="outline"
-          fontSize="sm"
+          textStyle="sm"
           color="brand.primary"
           borderWidth="1px"
           borderColor="brand.primary"

@@ -158,7 +158,7 @@ const system = createSystem(defaultConfig, {
       spacing: {
         sectionTop: {
           value: {
-            base: "40px", //10
+            base: "40px", 
             md: "64px",  //16
           },
         },

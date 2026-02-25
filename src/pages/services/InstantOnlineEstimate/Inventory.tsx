@@ -363,7 +363,7 @@ const decrease = (item: string) => {
           <Button
             label="Collapse All"
             variant="outline"
-            fontSize="sm"
+            textStyle="sm"
             px={5}
             py={3}
             onClick={handleCollapseAll}
@@ -371,7 +371,7 @@ const decrease = (item: string) => {
           <Button
             label="Expand All"
             variant="primary"
-            fontSize="sm"
+            textStyle="sm"
             px={5}
             py={3}
             onClick={handleExpandAll}
@@ -425,7 +425,7 @@ const decrease = (item: string) => {
                       borderColor="gray.200"
                       borderRadius="md"
                     >
-                      <Text fontSize="sm" fontWeight="500">
+                      <Text textStyle="sm" fontWeight="500">
                         {item}
                       </Text>
 
@@ -442,7 +442,7 @@ const decrease = (item: string) => {
                           <FaMinus size={4} fontWeight="normal" />
                         </Button>
 
-                        <Text w="20px" textAlign="center" fontSize="sm">
+                        <Text w="20px" textAlign="center" textStyle="sm">
                           {count}
                         </Text>
 

@@ -12,7 +12,7 @@ const Badge = ({ label, mb }: CommonBadgeProps) => {
       py={2}
       fontWeight="400"
       transition="all 0.2s"
-      fontSize="xl"
+      textStyle="xl"
       rounded="full"
       bg="brand.primary"
       w="fit-content"

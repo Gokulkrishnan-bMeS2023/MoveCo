@@ -175,7 +175,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                         onExperienceChange(index, "from", e.target.value)
                       }
                     />
-                    <Text color="gray.500" fontSize="sm">
+                    <Text color="gray.500" textStyle="sm">
                       to
                     </Text>
                     <DateInput
