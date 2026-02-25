@@ -74,7 +74,7 @@ const CommonIconGrid = memo(function CommonIconGrid({
   columns = { base: 1, md: 2, lg: 4 },
 }: CommonIconGridProps) {
   return (
-    <SimpleGrid columns={columns} gap={{ base: 6, md: 8 }}> 
+    <SimpleGrid columns={columns} gap={{ base: 4, md: 8 }}> 
       {data.map((item, index) => (
         <IconGridCard key={index} item={item} />
       ))}

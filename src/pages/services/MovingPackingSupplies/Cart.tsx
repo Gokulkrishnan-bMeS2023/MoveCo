@@ -430,7 +430,7 @@ const CartPage = () => {
         justify="space-between"
         align={{ base: "start", sm: "center" }}
         gap={{ base: 4, md: 10 }}
-        mb={{ base: 6, lg: 8 }}
+        mb={{ base: 4, lg: 6 }}
       >
         <Heading as="h1" fontWeight="normal">
           Shopping <Span color="brand.primary">Cart</Span>

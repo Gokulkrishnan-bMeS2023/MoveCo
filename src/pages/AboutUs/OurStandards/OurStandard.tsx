@@ -15,14 +15,13 @@ const OurStandard = () => {
         <Box pt="sectionTop">
           <Badge
             label="Benefits"
-            mb={{ base: 4, lg: 6 }}
           />
           <Flex
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"
             gap={{ base: 4, md: 10 }}
-            mb={{ base: 6, lg: 8 }}
+            mb={{ base: 4, lg: 6 }}
           >
             <Box maxW="600px" w="100%">
               <Heading as="h1" fontWeight="normal">
@@ -48,7 +47,7 @@ const OurStandard = () => {
       <Box bg={"brand.white"} px="-8">
         <Container px={8} pt={4} pb={10}>
           <Flex
-            mb={{ base: 6, lg: 8 }}
+            mb={{ base: 4, lg: 6 }}
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"

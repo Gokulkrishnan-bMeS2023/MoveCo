@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Stack, Span } from "@chakra-ui/react";
+import { Box, Flex, Text, Stack, Span, Container } from "@chakra-ui/react";
 import { useState, useRef, useEffect } from "react";
 import { FiPhone, FiMenu, FiX, FiUsers, FiChevronDown } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
@@ -335,9 +335,9 @@ export const Navbar = () => {
 
   return (
     <Box pt={6} ref={navbarRef}>
+      <Container py={0}>
       <Box
-        bg="white"
-        mx={{ base: 6, lg: 8 }}
+        bg="brand.white"
         px={{ base: 5, lg: 10 }}
         rounded="full"
         shadow="xl"
@@ -554,6 +554,7 @@ export const Navbar = () => {
           </Box>
         )}
       </Box>
+      </Container>
     </Box>
   );
 };

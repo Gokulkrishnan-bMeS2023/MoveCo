@@ -8,7 +8,7 @@ export const SUPPORTED_CHARITY_DATA = [
       Providing extraordinary patient care. Treating a complete range of pediatric orthopedic conditions. Solving many of the world’s most complex orthopedic cases.
       Pioneering research and innovation of leading-edge technologies. Discovering genetic breakthroughs. Educating future leaders in pediatric orthopedics.`,
     image: images.scottishRite,
-    linkText: "Read more",
+    linkText: "Find more",
     linkHref: "https://scottishritehospital.org/",
     reverse: false,
   },
@@ -19,7 +19,7 @@ export const SUPPORTED_CHARITY_DATA = [
       Our research emphasizes the application of regenerative medicine to age-related disease, with the intent of repairing 
       underlying damage to the body’s tissues, cells, and molecules. Our goal is to help build the industry that will cure the diseases of aging.`,
     image: images.sens,
-    linkText: "Read more",
+    linkText: "Find more",
     linkHref: "https://lifespan.io/",
     reverse: true,
   },
@@ -27,10 +27,11 @@ export const SUPPORTED_CHARITY_DATA = [
     title: "The Ashley Watrous Foundation",
     description: `Dedicated to America’s positive future. Our children are our future. The problems of tomorrow can 
      only be confronted with well-educated, responsible, courageous and trustworthy people. A generation that does 
-     not want what others have, but wants to create for themselves. \n
-     We need scientists, business owners, and inventors. For these people create jobs, create wealth, and create tomorrow.  America needs Leaders of leaders – people that make their own decisions and are independent thinkers.  `,
+     not want what others have, but wants to create for themselves.`,
+    description2:
+      "We need scientists, business owners, and inventors. For these people create jobs, create wealth, and create tomorrow.  America needs Leaders of leaders – people that make their own decisions and are independent thinkers.",
     image: images.ashleyWatrous,
-    linkText: "Read more",
+    linkText: "Find more",
     linkHref: "https://ashleywatrous.com/",
     reverse: false,
   },

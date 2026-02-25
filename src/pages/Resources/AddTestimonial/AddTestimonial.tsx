@@ -15,6 +15,7 @@ import Button from "../../../components/common/Button/Button";
 import { useNavigate } from "react-router-dom";
 import type { TestimonialFormValues, TestimonialErrors } from "./DTOs";
 import { validateTestimonial } from "./validation";
+import { postTestimonial } from "../../../api/testimonialService";
 
 const AddTestimonial = () => {
   const navigate = useNavigate();
@@ -32,14 +33,84 @@ const AddTestimonial = () => {
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-const handleSubmit = () => {
-  const newErrors = validateTestimonial(values);
-  if (Object.keys(newErrors).length > 0) {
-    setErrors(newErrors);
-    return;
-  }
-  setErrors({});
-  alert("Testimonial Submitted Successfully!");
+// const handleSubmit = () => {
+//   const newErrors = validateTestimonial(values);
+//   if (Object.keys(newErrors).length > 0) {
+//     setErrors(newErrors);
+//     return;
+//   }
+//   setErrors({});
+//   alert("Testimonial Submitted Successfully!");
+// };
+
+// const handleSubmit = async () => {
+//     const newErrors = validateTestimonial(values);
+//     if (Object.keys(newErrors).length > 0) {
+//       setErrors(newErrors);
+//       return;
+//     }
+
+//     const payload = {
+//       firstName: values.firstName,
+//       lastName: values.lastName,
+//       moveDate: new Date(values.moveDate).toISOString(),
+//       email: values.email,
+//       comments: values.comments,
+//       isActive: true,
+//     };
+// console.log(payload);
+//     try {
+//       await postTestimonial(payload);
+//       alert("Testimonial submitted successfully!");
+//       navigate("/");
+//     } catch (error: any) {
+//   if (error.response) {
+//     console.error("Status:", error.response.status);
+//     console.error("Data:", error.response.data);
+//     alert(error.response.data?.message || "Server error");
+//   } else if (error.request) {
+//     console.error("No response from server:", error.request);
+//     alert("No response from server");
+//   } else {
+//     console.error("Error:", error.message);
+//     alert(error.message);
+//   }
+// }
+//   };
+
+const handleSubmit = async () => {
+    const newErrors = validateTestimonial(values);
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+   const payload = {
+  FirstName: values.firstName,
+  LastName: values.lastName,
+  MoveDate: values.moveDate, 
+  Email: values.email,
+  Comments: values.comments,
+  IsActive: true,
+} as any; // Type error-a avoid panna 'as any' use pannunga
+    console.log("Sending payload:", payload);
+
+    try {
+      await postTestimonial(payload);
+      alert("Testimonial submitted successfully!");
+      navigate("/");
+    } catch (error: any) {
+      if (error.response) {
+        // Console-la intha array-va click panni '0' index-la enna irukunu paarunga
+        console.error("Exact Error:", error.response.data);
+        
+        // Error details-a screen-la kaata
+        const errorDetails = error.response.data[0]?.errorMessage || "Validation failed";
+        alert(`Server Error: ${errorDetails}`);
+      } else {
+        alert("Something went wrong");
+      }
+    }
 };
 
   return (
@@ -48,7 +119,7 @@ const handleSubmit = () => {
         direction={{ base: "column", lg: "row" }}
         justify="space-between"
         align={{base:"left",md:"center"}}
-        mb={{ base: 6, lg: 8 }}
+        mb={{ base: 4, lg: 6 }}
          gap={{ base: 4, md: 10 }}
       >
         <Box maxW={{ lg: "45%" }}>
