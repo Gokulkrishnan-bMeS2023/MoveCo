@@ -57,10 +57,9 @@ const MainBanner = () => {
                 width="85%"
                 gap={6}
                 flexWrap="wrap"
-                justifyContent={{ lg: "center", xl: "space-between" }}
+                justifyContent={{ lg: "center", '2xl': "space-between" }}
                 alignItems="center"
               >
-                {/* Customers */}
                 <Stack alignItems="center" gap={2}>
                   <Heading as="h3">5000+</Heading>
                   <Flex>

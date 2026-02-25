@@ -146,12 +146,11 @@ const FriendForm = () => {
             </Heading>
           </HStack>
 
-          <Text textStyle="size-lg">
+          <VStack gap={4} align="stretch">
+            <Text textStyle="size-lg">
             To email a friend about MoveCo, fill out the information below
           </Text>
           <Separator />
-
-          <VStack gap={4} align="stretch">
             <InputField
               label="Your Name"
               placeholder="Your Name"

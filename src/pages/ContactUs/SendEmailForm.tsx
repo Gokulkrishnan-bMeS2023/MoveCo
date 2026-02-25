@@ -46,8 +46,8 @@ const SendEmailForm = () => {
               </Text>
             </Heading>
           </HStack>
-
-          <Text textStyle="size-lg">
+          <VStack gap={4} align="stretch">
+            <Text textStyle="size-lg">
             Send us an email, we would love to hear from you!
           </Text>
           <Text textStyle="size-lg">
@@ -55,7 +55,6 @@ const SendEmailForm = () => {
             soon as possible
           </Text>
           <Separator />
-          <VStack gap={4} align="stretch">
             <InputField
               label="Your Name"
               value={contactValues.name}

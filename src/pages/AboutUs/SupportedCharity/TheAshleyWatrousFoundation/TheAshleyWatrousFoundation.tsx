@@ -10,6 +10,7 @@ const TheAshleyWatrousFoundation = () => {
           key={item.title}
           title={item.title}
           description={item.description}
+          description2={item.description2}
           image={item.image}
           linkText={item.linkText}
           linkHref={item.linkHref}

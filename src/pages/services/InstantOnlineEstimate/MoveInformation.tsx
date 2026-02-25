@@ -178,8 +178,8 @@ const InHomeMoveEstimate = () => {
             <Heading as="h3" color="brand.primary" fontWeight="normal">
             Contact Information
           </Heading>
-            <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+           <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+             <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
                 <InputField
                   label="First Name"
                   placeholder="First Name"
@@ -207,7 +207,7 @@ const InHomeMoveEstimate = () => {
               />
             </SimpleGrid>
 
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={6}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{base: 4,md: 6}}>
               <PhoneField
                 label="Phone"
                 value={values.phone}
@@ -254,7 +254,7 @@ const InHomeMoveEstimate = () => {
               <Heading as="h3" color="brand.primary" fontWeight="normal">
               Move - Drop date and time
             </Heading>
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+             <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
                 <DateInput
                   label="Move Date"
                   variant="future-only"
@@ -273,7 +273,7 @@ const InHomeMoveEstimate = () => {
                 />
               </SimpleGrid>
 
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+             <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
                 <DateInput
                   label="Drop Date"
                   variant="future-only"
@@ -306,7 +306,7 @@ const InHomeMoveEstimate = () => {
               Move Type
             </Heading>
 
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+             <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
                 <SelectField
                   label="Move Type"
                   options={moveTypeOptions}
@@ -342,14 +342,14 @@ const InHomeMoveEstimate = () => {
              <Heading as="h3" color="brand.primary" fontWeight="normal">
             Move Location
           </Heading>
-            <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+           <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
               <InputField
                 label="From Address"
                 placeholder="From Address"
                 value={values.fromAddress}
                 onChange={(e) => handleChange("fromAddress", e.target.value)}
               />
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+             <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
                 <InputField
                   label="Apt / Suite / Other"
                   placeholder="Apt / Suite / Other"
@@ -364,7 +364,7 @@ const InHomeMoveEstimate = () => {
                 />
               </SimpleGrid>
             </SimpleGrid>
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={6}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{base: 4,md: 6}}>
               <InputField
                 label="State"
                 placeholder="State"
@@ -413,14 +413,14 @@ const InHomeMoveEstimate = () => {
             <Heading as="h3" color="brand.primary" fontWeight="normal">
             Drop Location
           </Heading>
-            <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+           <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
               <InputField
                 label="To Address"
                 placeholder="To Address"
                 value={values.toAddress}
                 onChange={(e) => handleChange("toAddress", e.target.value)}
               />
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+             <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
                 <InputField
                   label="Apt / Suite / Other"
                   placeholder="Apt / Suite / Other"
@@ -436,7 +436,7 @@ const InHomeMoveEstimate = () => {
               </SimpleGrid>
             </SimpleGrid>
 
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={6}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{base: 4,md: 6}}>
               <InputField
                 label="State"
                 placeholder="State"

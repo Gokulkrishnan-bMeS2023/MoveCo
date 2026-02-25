@@ -40,7 +40,7 @@ import sens from "./SENS.webp";
 import service1 from "./service1.webp";
 import service2 from "./service2.webp";
 import service3 from "./service3.webp";
-import SMA from "./smalogo.webp";
+import SMA from "./SMAlogo.webp";
 import statement from "./Statement.webp";
 import storage from "./Storage.webp";
 import truck2 from "./truck2.webp";
