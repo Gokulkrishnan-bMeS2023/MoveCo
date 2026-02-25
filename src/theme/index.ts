@@ -22,10 +22,10 @@ const headingRecipe = defineRecipe({
 const textRecipe = defineRecipe({
   variants: {
     textStyle: {
-      "size-3xl": { fontSize: { base: "xl", md: "3xl" }, lineHeight: "base" }, // Defined: 20px - 30px
-      "size-2xl": { fontSize: { base: "lg", md: "2xl" }, lineHeight: "base" }, // Defined: 18px - 24px
-      "size-xl": { fontSize: { base: "md", md: "xl" }, lineHeight: "base" }, // Defined: 16px - 20px
-      "size-lg": { fontSize: { base: "sm", md: "lg" }, lineHeight: "base" }, // Defined: 14px - 18px
+      "size-3xl": { fontSize: { base: "xl", lg: "3xl" }, lineHeight: "base" }, // Defined: 20px - 30px
+      "size-2xl": { fontSize: { base: "lg", lg: "2xl" }, lineHeight: "base" }, // Defined: 18px - 24px
+      "size-xl": { fontSize: { base: "md", lg: "xl" }, lineHeight: "base" }, // Defined: 16px - 20px
+      "size-lg": { fontSize: { base: "sm", lg: "lg" }, lineHeight: "base" }, // Defined: 14px - 18px
       "size-md": { fontSize: "md", lineHeight: "shorter" }, // Fixed: 16px
       "size-sm": { fontSize: "sm", lineHeight: "shorter" }, // Fixed: 14px
       "size-xs": { fontSize: "xs", lineHeight: "shorter" }, // Fixed: 12px
@@ -98,7 +98,7 @@ const tableRecipe = defineSlotRecipe({
  const containerRecipe = defineRecipe({
   base: {
     maxW: "100%",
-    px: 8,
+    px: {base: 4,md: 8},
     py: 6,
   },
 });
@@ -158,8 +158,8 @@ const system = createSystem(defaultConfig, {
       spacing: {
         sectionTop: {
           value: {
-            base: "40px", //10
-            md: "64px",  //16
+            base: "24px", //10
+            md: "40px",  //10
           },
         },
       },

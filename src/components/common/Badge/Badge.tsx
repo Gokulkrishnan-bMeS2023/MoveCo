@@ -5,7 +5,7 @@ interface CommonBadgeProps {
   mb?: any;
 }
 
-const Badge = ({ label, mb }: CommonBadgeProps) => {
+const Badge = ({ label }: CommonBadgeProps) => {
   return (
     <Box
       px={6}
@@ -17,7 +17,7 @@ const Badge = ({ label, mb }: CommonBadgeProps) => {
       bg="brand.primary"
       w="fit-content"
       color="brand.white"
-      mb={mb}
+      mb={4}
     >
       {label}
     </Box>

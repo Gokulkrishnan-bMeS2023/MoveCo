@@ -158,9 +158,9 @@ const InHomeMoveEstimate = () => {
         align={{ base: "flex-start", md: "center" }}
         justify="space-between"
         gap={{ base: 4, md: 10 }}
-        mb={{ base: 6, lg: 8 }}
+        mb={{ base: 4, lg: 6 }}
       >
-        <Heading as="h1" fontWeight="normal" w={{ base: "100%", lg: "50%" }} mt={0} >
+        <Heading as="h1" fontWeight="normal" w={{ base: "100%", lg: "50%" }}>
           In-Home <br />
           <Text as="span" color="brand.primary">
             Move Estimate
@@ -202,14 +202,12 @@ const InHomeMoveEstimate = () => {
           />
         </Box>
 
-        <Box p={4}>
           <Text mt={{ base: "4", md: "6" }} textStyle="size-3xl">
             After filling out this form, an appointment will be made to have a
             real, live person come out and estimate your move costs. This is a
             free service, and is perfect for individuals who are unsure as to
             how items can and will be moved.
           </Text>
-        </Box>
       </SimpleGrid>
       <Box pt="sectionTop">
         <Stack gap={8}>

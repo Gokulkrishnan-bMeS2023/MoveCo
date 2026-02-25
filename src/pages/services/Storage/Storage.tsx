@@ -27,7 +27,7 @@ export default function StoragePage() {
   return (
     <Container>
       <Flex
-        mb={{ base: 6, lg: 8 }}
+        mb={{ base: 4, lg: 6 }}
         direction={{ base: "column", md: "row" }}
         align={{ base: "flex-start", md: "center" }}
         justify="space-between"

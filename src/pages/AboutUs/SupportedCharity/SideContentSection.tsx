@@ -25,16 +25,17 @@ const SideContentSection = ({
   const normalText = words.slice(0, -1).join(" ");
   const coloredText = words.slice(-1).join(" ");
 
+  const isExternal = linkHref?.startsWith("https");
+
   return (
     <>
-      <Box w={{ base: "100%", lg: "50%" }} textAlign={{ base: "center", lg: "left" }}>
-        <Heading mb={4} as="h2" fontWeight="normal">
+      <Box w={{ base: "100%", lg: "50%" }}>
+        <Heading mb={{ base: 4, lg: 6 }} as="h2" fontWeight="normal">
           {normalText}{" "}
           <Text as="span" color="brand.primary">
             {coloredText}
           </Text>
         </Heading>
-
       </Box>
 
       <Flex
@@ -42,11 +43,10 @@ const SideContentSection = ({
           base: "column",
           lg: reverse ? "row-reverse" : "row",
         }}
-        gap={{ base: "8", lg: "16" }}
+        gap={{ base: "4", lg: "14" }}
         align="center"
         justify="center"
       >
-
         <Box w={{ base: "100%", lg: "50%" }}>
           <AspectRatio ratio={16 / 9}>
             <Image
@@ -54,30 +54,38 @@ const SideContentSection = ({
               alt={title}
               rounded="2xl"
               objectFit="cover"
-              loading="eager"  
+              loading="eager"
               fetchPriority="high"
             />
           </AspectRatio>
         </Box>
+
         <Box w={{ base: "100%", lg: "50%" }}>
-          <Text textStyle="size-xl" mb={4}>
+          <Text textStyle="size-xl" mb={3}>
             {description}
           </Text>
 
           {description2 && (
-            <Text textStyle="size-xl" mb={4}>
+            <Text textStyle="size-xl" mb={3}>
               {description2}
             </Text>
           )}
 
+
+
           <Button
-           fontSize="xl"
+            fontSize="xl"
             label={linkText}
             variant="outline"
             as="a"
-            href={linkHref}
+            href={isExternal ? undefined : linkHref}
             rounded="full"
             rightIcon={<LuArrowUpRight size={16} />}
+            onClick={() => {
+              if (isExternal && linkHref) {
+                window.open(linkHref, "_blank", "noopener,noreferrer");
+              }
+            }}
           />
         </Box>
       </Flex>
@@ -86,4 +94,3 @@ const SideContentSection = ({
 };
 
 export default SideContentSection;
-

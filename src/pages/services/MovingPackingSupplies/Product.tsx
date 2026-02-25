@@ -16,7 +16,7 @@ import { PRODUCTS } from "./data";
 import { useShoppingCart } from "./Useshoppingcart";
 
 const PageHeader = () => (
-  <VStack mb={{ base: 6, lg: 8 }} gap={{ base: 4, md: 6 }} align="start">
+  <VStack mb={{ base: 4, lg: 6 }} gap={{ base: 4, md: 6 }} align="start">
     <Heading as="h1" fontWeight="normal">
       Moving & <Span color="brand.primary">Packing Supplies</Span>
     </Heading>

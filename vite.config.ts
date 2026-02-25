@@ -3,6 +3,15 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://bmes.runasp.net',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
   build: {
     sourcemap: false,
     minify: "esbuild",
@@ -19,5 +28,6 @@ export default defineConfig({
         },
       },
     },
+    
   },
 });

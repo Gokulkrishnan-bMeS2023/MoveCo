@@ -351,7 +351,7 @@ const decrease = (item: string) => {
       <Flex
         justify="space-between"
         align={{ base: "flex-start", md: "center" }}
-        mb={{ base: 6, lg: 8 }}
+        mb={{ base: 4, lg: 6 }}
         direction={{ base: "column", md: "row" }}
         gap={{ base: 4, md: 0 }}
       >
