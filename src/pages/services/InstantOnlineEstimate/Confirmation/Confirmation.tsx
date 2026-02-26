@@ -19,7 +19,7 @@ const Confirmation = () => {
   return (
     <div>
       <Container>
-        <Flex direction="column" align="flex-start" gap={4} mb={12}>
+        <Flex direction="column" align="flex-start" mb={{ base: 4, lg: 6 }} gap={{ base: 4, md: 10 }}>
           <Box maxW="800px" w="100%">
             <Heading as="h1" fontWeight="normal">
               Quote for your{" "}
@@ -44,9 +44,7 @@ const Confirmation = () => {
                 Quote Confirmation
               </Heading>
 
-              {/* Quote Summary Table */}
               <Box border="1px solid" borderColor="gray.200" overflow="hidden">
-                {/* Table Header - Green */}
                 <Grid templateColumns="repeat(4, 1fr)">
                   <GridItem bg="brand.primary" px={4} py={3}>
                     <Text
@@ -100,7 +98,7 @@ const Confirmation = () => {
                     </Text>
                   </GridItem>
                   <GridItem
-                    bg="white"
+                    bg="brand.white"
                     px={4}
                     py={4}
                     borderTop="1px solid"
@@ -149,13 +147,13 @@ const Confirmation = () => {
         </Box>
 
         <Box pt="sectionTop">
-          <Badge label="Includes" mb={{ base: 4, lg: 6 }} />
+          <Badge label="Includes"/>
           <Flex
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"
             gap={{ base: 4, md: 10 }}
-            mb={{ base: 6, lg: 8 }}
+            mb={{ base: 4, lg: 6 }}
           >
             <Box maxW="600px" w="100%">
               <Heading as="h1" fontWeight="normal">
@@ -401,7 +399,7 @@ const Confirmation = () => {
                   </Grid>
                   <Grid templateColumns="repeat(2, 1fr)">
                     <GridItem
-                      bg="white"
+                      bg="brand.white"
                       px={4}
                       py={4}
                       borderTop="1px solid"
@@ -412,7 +410,7 @@ const Confirmation = () => {
                       </Text>
                     </GridItem>
                     <GridItem
-                      bg="white"
+                      bg="brand.white"
                       px={4}
                       py={4}
                       borderTop="1px solid"
@@ -820,7 +818,7 @@ const Confirmation = () => {
       <Box bg={"brand.white"} px="-8">
         <Container px={8} pt={4} pb={10}>
           <Flex
-            mb={{ base: 6, lg: 8 }}
+            mb={{ base: 4, lg: 6 }}
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"
