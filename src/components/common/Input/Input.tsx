@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Field, Input, InputGroup, Text } from "@chakra-ui/react";
 
@@ -9,7 +8,7 @@ export interface InputProps {
   placeholder?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void; // ✅ ADD THIS
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   isRequired?: boolean;
   errorMessage?: string;
   leftIcon?: React.ReactNode;
@@ -26,14 +25,14 @@ const InputField = React.forwardRef<HTMLInputElement, InputProps>(
       placeholder,
       value = "",
       onChange,
-      onKeyDown,   // ✅ receive prop
+      onKeyDown,
       isRequired = false,
       errorMessage,
       leftIcon,
       autoComplete,
       inputMode,
     },
-    ref
+    ref,
   ) => {
     const isInvalid = Boolean(errorMessage);
 
@@ -89,11 +88,11 @@ const InputField = React.forwardRef<HTMLInputElement, InputProps>(
           <Input
             ref={ref}
             name={name}
-            type={type}
+            // type={type}
             placeholder={placeholder}
             value={value}
             onChange={handleChange}
-            onKeyDown={onKeyDown}   // ✅ wire it up
+            onKeyDown={onKeyDown}
             autoComplete={autoComplete}
             inputMode={inputMode as any}
             outline="none"
@@ -112,7 +111,7 @@ const InputField = React.forwardRef<HTMLInputElement, InputProps>(
         )}
       </Field.Root>
     );
-  }
+  },
 );
 
 export default InputField;
