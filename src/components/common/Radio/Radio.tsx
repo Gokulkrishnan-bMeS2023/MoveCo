@@ -28,17 +28,24 @@ const RadioField = ({
 
   return (
     <Field.Root invalid={isInvalid}>
-      {label && <Field.Label fontWeight="medium" display="block">
-        <Text as="span">
-          {label}
-          {isRequired && (
-            <Text fontWeight={"500"} textStyle={16} as="span" color="brand.red" ml={1}>
-              *
-            </Text>
-          )}
-        </Text>
-      </Field.Label>
-      }
+      {label && (
+        <Field.Label fontWeight="medium" display="block">
+          <Text as="span">
+            {label}
+            {isRequired && (
+              <Text
+                fontWeight={"500"}
+                textStyle="size-md"
+                as="span"
+                color="brand.red"
+                ml={1}
+              >
+                *
+              </Text>
+            )}
+          </Text>
+        </Field.Label>
+      )}
       <RadioGroup.Root
         value={value}
         size="md"
@@ -52,10 +59,10 @@ const RadioField = ({
               <RadioGroup.Item
                 key={option.value}
                 value={option.value}
-                cursor="pointer"     
+                cursor="pointer"
               >
                 <RadioGroup.ItemHiddenInput />
-                <RadioGroup.ItemIndicator color="brand.primary"/>
+                <RadioGroup.ItemIndicator color="brand.primary" />
                 <RadioGroup.ItemText textStyle="sm" color="brand.secondary">
                   {option.label}
                 </RadioGroup.ItemText>
@@ -65,7 +72,11 @@ const RadioField = ({
         </Stack>
       </RadioGroup.Root>
 
-      {isInvalid && <Field.ErrorText color="brand.red" fontWeight="400">{errorMessage}</Field.ErrorText>}
+      {isInvalid && (
+        <Field.ErrorText color="brand.red" fontWeight="400">
+          {errorMessage}
+        </Field.ErrorText>
+      )}
     </Field.Root>
   );
 };

@@ -60,7 +60,7 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
 
     // ── Capture cursor BEFORE we touch anything ─────────────────────────────
     const cursorPos = input.selectionStart ?? input.value.length;
-    const prevFormatted = input.value;                          // current (old) formatted value
+    const prevFormatted = input.value; // current (old) formatted value
     const digitsBeforeCursor = countDigitsBeforePos(prevFormatted, cursorPos);
 
     // ── Extract new digits ──────────────────────────────────────────────────
@@ -79,7 +79,10 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
 
       // digitsBeforeCursor tells us how many digits were before the old cursor.
       // We place cursor after the same digit count in the new formatted string.
-      const newCursor = getCursorPosAfterDigit(newFormatted, digitsBeforeCursor);
+      const newCursor = getCursorPosAfterDigit(
+        newFormatted,
+        digitsBeforeCursor,
+      );
 
       inputRef.current.setSelectionRange(newCursor, newCursor);
     });
@@ -92,8 +95,15 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
 
     const currentDigits = input.value.replace(/\D/g, "");
     const isNavigationKey = [
-      "Backspace", "Delete", "ArrowLeft", "ArrowRight",
-      "ArrowUp", "ArrowDown", "Tab", "Home", "End",
+      "Backspace",
+      "Delete",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowUp",
+      "ArrowDown",
+      "Tab",
+      "Home",
+      "End",
     ].includes(e.key);
 
     if (currentDigits.length >= 10 && /^\d$/.test(e.key) && !isNavigationKey) {
@@ -110,7 +120,7 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
       placeholder="(555) 555-5555"
       value={formatUSPhone(value)}
       onChange={handleChange}
-      onKeyDown={handleKeyDown}   // ← pass this down (see note below)
+      onKeyDown={handleKeyDown} // ← pass this down (see note below)
       errorMessage={errorMessage}
       isRequired={isRequired}
       autoComplete="tel"

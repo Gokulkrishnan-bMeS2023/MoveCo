@@ -69,7 +69,10 @@ const SSNField: React.FC<SSNFieldProps> = ({
     requestAnimationFrame(() => {
       if (!inputRef.current) return;
       const newFormatted = formatSSN(rawDigits);
-      const newCursor = getCursorPosAfterDigit(newFormatted, digitsBeforeCursor);
+      const newCursor = getCursorPosAfterDigit(
+        newFormatted,
+        digitsBeforeCursor,
+      );
       inputRef.current.setSelectionRange(newCursor, newCursor);
     });
   };
@@ -81,8 +84,15 @@ const SSNField: React.FC<SSNFieldProps> = ({
 
     const currentDigits = input.value.replace(/\D/g, "");
     const isNavigationKey = [
-      "Backspace", "Delete", "ArrowLeft", "ArrowRight",
-      "ArrowUp", "ArrowDown", "Tab", "Home", "End",
+      "Backspace",
+      "Delete",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowUp",
+      "ArrowDown",
+      "Tab",
+      "Home",
+      "End",
     ].includes(e.key);
 
     if (currentDigits.length >= 9 && /^\d$/.test(e.key) && !isNavigationKey) {
@@ -97,7 +107,7 @@ const SSNField: React.FC<SSNFieldProps> = ({
       name="ssn"
       type="tel"
       placeholder="XXX-XX-XXXX"
-      value={formatSSN(value)}       // ✅ display formatted
+      value={formatSSN(value)} // ✅ display formatted
       onChange={handleChange}
       onKeyDown={handleKeyDown}
       errorMessage={errorMessage}

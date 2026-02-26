@@ -72,7 +72,7 @@ const InputField = React.forwardRef<HTMLInputElement, InputProps>(
               {isRequired && (
                 <Text
                   fontWeight="500"
-                  textStyle={16}
+                  textStyle="size-md"
                   as="span"
                   color="brand.red"
                   ml={1}

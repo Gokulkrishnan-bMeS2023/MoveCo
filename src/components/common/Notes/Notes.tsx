@@ -22,17 +22,24 @@ const Notes: React.FC<NotesProps> = ({
 
   return (
     <Field.Root invalid={isInvalid} required={isRequired}>
-      {label && <Field.Label fontWeight="medium" display="block">
-        <Text as="span">
-          {label}
-          {isRequired && (
-            <Text fontWeight={"500"} textStyle={16} as="span" color="brand.red" ml={1}>
-              *
-            </Text>
-          )}
-        </Text>
-      </Field.Label>
-      }
+      {label && (
+        <Field.Label fontWeight="medium" display="block">
+          <Text as="span">
+            {label}
+            {isRequired && (
+              <Text
+                fontWeight={"500"}
+                textStyle="size-md"
+                as="span"
+                color="brand.red"
+                ml={1}
+              >
+                *
+              </Text>
+            )}
+          </Text>
+        </Field.Label>
+      )}
 
       <Textarea
         value={value}
@@ -46,7 +53,11 @@ const Notes: React.FC<NotesProps> = ({
           borderColor: "brand.primary",
         }}
       />
-      {isInvalid && <Field.ErrorText color="brand.red" fontWeight="400">{errorMessage}</Field.ErrorText>}
+      {isInvalid && (
+        <Field.ErrorText color="brand.red" fontWeight="400">
+          {errorMessage}
+        </Field.ErrorText>
+      )}
     </Field.Root>
   );
 };
