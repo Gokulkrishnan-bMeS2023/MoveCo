@@ -47,7 +47,7 @@ const SelectField: React.FC<SelectProps> = ({
         <Text as="span">
           {label}
           {isRequired && (
-            <Text fontWeight={"500"} fontSize={16} as="span" color="brand.red" ml={1}>
+            <Text fontWeight={"500"} textStyle={16} as="span" color="brand.red" ml={1}>
               *
             </Text>
           )}

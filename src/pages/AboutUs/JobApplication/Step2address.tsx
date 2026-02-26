@@ -65,7 +65,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
           <Heading as="h3" color="brand.primary" fontWeight="normal">
             Education
           </Heading>
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }}>
             <InputField
               label="School Name"
               placeholder="School Name"
@@ -86,7 +86,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
               onChange={(e) => onEducationChange("years", e.target.value)}
             />
           </SimpleGrid>
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }}>
             <InputField
               label="Degree Received"
               placeholder="Degree Received"
@@ -108,7 +108,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
               }
             />
           </SimpleGrid>
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }}>
             <InputField
               label="List other information pertinent to the employment you are seeking:"
               placeholder="Additional Information"
@@ -146,126 +146,141 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                   />
                 )}
               </Flex>
-             <Stack gap={4}>
-              <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
-                <InputField
-                  label="Employer"
-                  placeholder="Employer"
-                  value={experience.employer}
-                  onChange={(e) =>
-                    onExperienceChange(index, "employer", e.target.value)
-                  }
-                />
-                <InputField
-                  label="Job Title"
-                  placeholder="Job Title"
-                  value={experience.jobTitle}
-                  onChange={(e) =>
-                    onExperienceChange(index, "jobTitle", e.target.value)
-                  }
-                />
-                <Field.Root>
-                  <Field.Label p={0}>Dates Employed from &amp; to</Field.Label>
-                  <Flex gap={4} align="center">
-                    <DateInput
-                      placeholder="From"
-                      value={experience.from}
-                      variant="today-and-past"
-                      onChange={(e) =>
-                        onExperienceChange(index, "from", e.target.value)
-                      }
-                    />
-                    <Text color="gray.500" fontSize="sm">
-                      to
-                    </Text>
-                    <DateInput
-                      placeholder="To"
-                      value={experience.to}
-                      variant="today-and-past"
-                      min={experience.from}
-                      onChange={(e) =>
-                        onExperienceChange(index, "to", e.target.value)
-                      }
-                    />
-                  </Flex>
-                </Field.Root>
-              </SimpleGrid>
-
-              <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} >
-                <InputField
-                  label="Prior Positions"
-                  placeholder="Prior Positions"
-                  type="alphanumeric"
-                  value={experience.priorPosition}
-                  onChange={(e) =>
-                    onExperienceChange(index, "priorPosition", e.target.value)
-                  }
-                />
-                <InputField
-                  label="Starting Salary"
-                  placeholder="Starting salary"
-                  type="alphanumeric"
-                  value={experience.startSalary}
-                  onChange={(e) =>
-                    onExperienceChange(index, "startSalary", e.target.value)
-                  }
-                />
-                <InputField
-                  label="Ending Salary"
-                  placeholder="Ending Salary"
-                  type="alphanumeric"
-                  value={experience.endSalary}
-                  onChange={(e) =>
-                    onExperienceChange(index, "endSalary", e.target.value)
-                  }
-                />
-              </SimpleGrid>
-
-              <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
-                <InputField
-                  label="Supervisor Name"
-                  placeholder="Supervisor Name"
-                  value={experience.supervisorName}
-                  onChange={(e) =>
-                    onExperienceChange(index, "supervisorName", e.target.value)
-                  }
-                />
-
-                <PhoneField
-                  label="Supervisor Phone"
-                  value={experience.supervisorPhone}
-                  errorMessage={experienceErrors?.[index]?.supervisorPhone}
-                  onChange={(digits) => {
-                    onExperienceChange(index, "supervisorPhone", digits);
-
-                    if (digits.length === 10) {
-                      onClearExperienceError(index, "supervisorPhone");
+              <Stack gap={4}>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }}>
+                  <InputField
+                    label="Employer"
+                    placeholder="Employer"
+                    value={experience.employer}
+                    onChange={(e) =>
+                      onExperienceChange(index, "employer", e.target.value)
                     }
-                  }}
-                />
+                  />
+                  <InputField
+                    label="Job Title"
+                    placeholder="Job Title"
+                    value={experience.jobTitle}
+                    onChange={(e) =>
+                      onExperienceChange(index, "jobTitle", e.target.value)
+                    }
+                  />
+                  <Field.Root>
+                    <Field.Label p={0} fontWeight="medium">
+                      Dates Employed from &amp; to
+                    </Field.Label>
+                    <Flex
+                      direction="row"
+                      align="center"
+                      gap={{ base: 1, md: 3 }}
+                      w="100%"
+                    >
+                      <Box flex="1" minW="0">
+                        <DateInput
+                          placeholder="From"
+                          value={experience.from}
+                          variant="today-and-past"
+                          onChange={(e) =>
+                            onExperienceChange(index, "from", e.target.value)
+                          }
+                        />
+                      </Box>
+                      <Text
+                        fontSize="textStyle-xs"
+                        flexShrink={0}
+                        whiteSpace="nowrap"
+                      >
+                        to
+                      </Text>
+                      <Box flex="1" minW="0">
+                        <DateInput
+                          placeholder="To"
+                          value={experience.to}
+                          variant="today-and-past"
+                          min={experience.from}
+                          onChange={(e) =>
+                            onExperienceChange(index, "to", e.target.value)
+                          }
+                        />
+                      </Box>
+                    </Flex>
+                  </Field.Root>
+                </SimpleGrid>
 
-                <InputField
-                  label="Reason for Leaving"
-                  placeholder="Reason for Leaving"
-                  type="alphanumeric"
-                  value={experience.reason}
-                  onChange={(e) =>
-                    onExperienceChange(index, "reason", e.target.value)
-                  }
-                />
-              </SimpleGrid>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} >
+                  <InputField
+                    label="Prior Positions"
+                    placeholder="Prior Positions"
+                    type="alphanumeric"
+                    value={experience.priorPosition}
+                    onChange={(e) =>
+                      onExperienceChange(index, "priorPosition", e.target.value)
+                    }
+                  />
+                  <InputField
+                    label="Starting Salary"
+                    placeholder="Starting salary"
+                    type="alphanumeric"
+                    value={experience.startSalary}
+                    onChange={(e) =>
+                      onExperienceChange(index, "startSalary", e.target.value)
+                    }
+                  />
+                  <InputField
+                    label="Ending Salary"
+                    placeholder="Ending Salary"
+                    type="alphanumeric"
+                    value={experience.endSalary}
+                    onChange={(e) =>
+                      onExperienceChange(index, "endSalary", e.target.value)
+                    }
+                  />
+                </SimpleGrid>
 
-              <SimpleGrid columns={{ base: 1, md: 1 }} gap={6}>
-                <InputField
-                  label="Duties Performed"
-                  placeholder="Duties Performed"
-                  type="alphanumeric"
-                  value={experience.duties}
-                  onChange={(e) =>
-                    onExperienceChange(index, "duties", e.target.value)
-                  }
-                />
-              </SimpleGrid>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }}>
+                  <InputField
+                    label="Supervisor Name"
+                    placeholder="Supervisor Name"
+                    value={experience.supervisorName}
+                    onChange={(e) =>
+                      onExperienceChange(index, "supervisorName", e.target.value)
+                    }
+                  />
+
+                  <PhoneField
+                    label="Supervisor Phone"
+                    value={experience.supervisorPhone}
+                    errorMessage={experienceErrors?.[index]?.supervisorPhone}
+                    onChange={(digits) => {
+                      onExperienceChange(index, "supervisorPhone", digits);
+
+                      if (digits.length === 10) {
+                        onClearExperienceError(index, "supervisorPhone");
+                      }
+                    }}
+                  />
+
+                  <InputField
+                    label="Reason for Leaving"
+                    placeholder="Reason for Leaving"
+                    type="alphanumeric"
+                    value={experience.reason}
+                    onChange={(e) =>
+                      onExperienceChange(index, "reason", e.target.value)
+                    }
+                  />
+                </SimpleGrid>
+
+                <SimpleGrid columns={{ base: 1, md: 1 }} gap={6}>
+                  <InputField
+                    label="Duties Performed"
+                    placeholder="Duties Performed"
+                    type="alphanumeric"
+                    value={experience.duties}
+                    onChange={(e) =>
+                      onExperienceChange(index, "duties", e.target.value)
+                    }
+                  />
+                </SimpleGrid>
               </Stack>
             </Box>
           ))}

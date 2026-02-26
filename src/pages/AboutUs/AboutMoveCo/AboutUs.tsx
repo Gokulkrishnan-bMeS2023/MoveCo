@@ -14,7 +14,7 @@ const AboutUs = () => {
   const navigate = useNavigate();
   const missionContent = (
     <>
-      <Badge label="Our Mission" mb={{ base: 4, lg: 6 }} />
+      <Badge label="Our Mission" />
       We aim to impress you with our service so much that you'll share our
       business cards with your friends and colleagues, post your text and video
       testimonials on our website, and choose us for your next move.
@@ -23,7 +23,7 @@ const AboutUs = () => {
 
   const testimonialContent = (
     <>
-      <Badge label="Testimonials" mb={{ base: 4, lg: 6 }} />
+      <Badge label="Testimonials" />
       Our online testimonial board goes a step further. You can post your moving
       experience for our future customers to see. You can also go to our website
       & see over 10 years of customer reviews. Our crews make the difference. We
@@ -41,9 +41,9 @@ const AboutUs = () => {
           overlayOpacity={0.1}
         />
         <Box pt="sectionTop">
-          <Badge label="About Us" mb={{ base: 4, lg: 6 }} />
+          <Badge label="About Us" />
           <Flex
-            mb={{ base: 6, lg: 8 }}
+            mb={{ base: 4, lg: 6 }}
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"
@@ -79,13 +79,13 @@ const AboutUs = () => {
           />
         </Box>
         <Box pt="sectionTop">
-          <Badge label="Features" mb={{ base: 4, lg: 6 }} />
+          <Badge label="Features" />
           <Flex
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"
             gap={{ base: 4, md: 10 }}
-            mb={{ base: 6, lg: 8 }}
+            mb={{ base: 4, lg: 6 }}
           >
             <Box maxW="600px" w="100%">
               <Heading as="h1" fontWeight="normal">
@@ -112,10 +112,10 @@ const AboutUs = () => {
           <AboutFeatureSwitcher />
         </Box>
         <Box pt="sectionTop">
-          <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
+          <Flex justify="space-between" align="center">
             <Badge label="Benefits" />
             <Button
-              fontSize="xl"
+              textStyle="xl"
               rounded="full"
               variant="outline"
               onClick={() => navigate("/our-standard")}
@@ -124,7 +124,7 @@ const AboutUs = () => {
             />
           </Flex>
           <Flex
-            mb={{ base: 6, lg: 8 }}
+            mb={{ base: 4, lg: 6 }}
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
             justify="space-between"

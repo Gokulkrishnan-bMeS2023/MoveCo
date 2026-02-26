@@ -13,30 +13,28 @@ const ImageWithListContent = ({
 }: ImageListSectionProps) => {
   return (
     <Flex
-      maxW="7xl"
-      mx="auto"
-      gap={10}
+      gap={{base: 6, lg: 14}}
       align="center"
       direction={{
         base: "column",
-        md: imagePosition === "left" ? "row" : "row-reverse",
+        lg: imagePosition === "left" ? "row" : "row-reverse",
       }}
+      justify="center"
     >
-      <Box flex="1">
+      <Box w={{ base: "100%", lg: "50%" }}>
         <Image
           src={image}
           alt="Section Image"
           borderRadius="xl"
           boxShadow="lg"
+          w="100%"  
           objectFit="cover"
-          w="100%"
-          maxH="420px"
           loading="eager"
           fetchPriority="high"
         />
       </Box>
 
-      <Box flex="1">
+      <Box w={{ base: "100%", lg: "50%" }}>
         <List.Root gap={4} listStyle="none" ps={0}>
           {points.map((item, index) => (
             <List.Item key={index}>

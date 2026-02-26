@@ -39,7 +39,7 @@ const ContactUsPage = () => {
           align={{ base: "flex-start", md: "center" }}
           justify="space-between"
           gap={{ base: 4, md: 10 }}
-          mb={{ base: 6, lg: 8 }}
+          mb={{ base: 4, lg: 6 }}
         >
           <Box maxW={{ lg: "45%" }}>
             <Heading as="h1" fontWeight="normal">
@@ -72,7 +72,7 @@ const ContactUsPage = () => {
       </Box>
 
       <Box pt="sectionTop">
-        <Box maxW={{ lg: "45%" }} mb={{ base: 6, lg: 8 }}>
+        <Box maxW={{ lg: "45%" }} mb={{ base: 4, lg: 6 }}>
           <Heading as="h1" fontWeight="normal">
             Visit Our {""}
             <Text as="span" color="brand.primary">
@@ -100,7 +100,7 @@ const ContactUsPage = () => {
           align={{ base: "flex-start", md: "center" }}
           justify="space-between"
           gap={{ base: 4, md: 10 }}
-          mb={{ base: 6, lg: 8 }}
+          mb={{ base: 4, lg: 6 }}
         >
           <Box maxW={{ lg: "45%" }}>
             <Heading as="h1" fontWeight="normal">

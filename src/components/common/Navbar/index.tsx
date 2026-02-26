@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Stack, Span } from "@chakra-ui/react";
+import { Box, Flex, Text, Stack, Span, Container } from "@chakra-ui/react";
 import { useState, useRef, useEffect } from "react";
 import { FiPhone, FiMenu, FiX, FiUsers, FiChevronDown } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
@@ -120,7 +120,7 @@ const NavItem = ({ label, items, path }: any) => {
               px={4}
               py={2.5}
               fontWeight="500"
-              fontSize="sm"
+              textStyle="sm"
               cursor="pointer"
               color="gray.700"
               transition="all 0.3s ease"
@@ -201,7 +201,7 @@ const MobileNavItem = ({
       >
         <Text
           fontWeight="600"
-          fontSize="md"
+          textStyle="md"
           color={isOpen ? "brand.primary" : "brand.secondary"}
           transition="color 0.3s ease"
         >
@@ -242,7 +242,7 @@ const MobileNavItem = ({
                 cursor="pointer"
                 py={2}
                 px={3}
-                fontSize="sm"
+                textStyle="sm"
                 fontWeight="500"
                 color="gray.600"
                 rounded="md"
@@ -335,9 +335,9 @@ export const Navbar = () => {
 
   return (
     <Box pt={6} ref={navbarRef}>
+      <Container py={0}>
       <Box
-        bg="white"
-        mx={{ base: 6, lg: 8 }}
+        bg="brand.white"
         px={{ base: 5, lg: 10 }}
         rounded="full"
         shadow="xl"
@@ -438,7 +438,7 @@ export const Navbar = () => {
             </Box>
             <Box
               onClick={toggleMenu}
-              fontSize="28px"
+              textStyle="28px"
               cursor="pointer"
               color="brand.secondary"
               transition="all 0.3s ease"
@@ -554,6 +554,7 @@ export const Navbar = () => {
           </Box>
         )}
       </Box>
+      </Container>
     </Box>
   );
 };

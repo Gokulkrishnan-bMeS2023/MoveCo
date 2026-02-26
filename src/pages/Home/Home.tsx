@@ -29,10 +29,10 @@ const Home = () => {
         </Flex>
 
         <Box pt="sectionTop">
-          <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>          
+          <Flex justify="space-between" align="center">          
             <Badge label="Client Review" />
             <Button
-              fontSize="xl"
+              textStyle="xl"
               rounded="full"
               variant="outline"
               onClick={() => navigate("/video-review")}
@@ -45,7 +45,7 @@ const Home = () => {
             direction={{ base: "column", lg: "row" }}
             justify="space-between"
             align="center"
-            mb={{ base: 6, lg: 8 }}
+            mb={{ base: 4, lg: 6 }}
             gap={{ base: 6, lg: 12 }}
           >
             <Heading
@@ -73,10 +73,10 @@ const Home = () => {
         </Box>
 
         <Box pt="sectionTop">
-          <Flex justify="space-between" align="center" mb={{ base: 6, lg: 8 }}>
+          <Flex justify="space-between" align="center">
             <Badge label="Client Speaks" />
             <Button
-              fontSize="xl"
+              textStyle="xl"
               rounded="full"
               variant="outline"
               onClick={() => navigate("/client-testimonial")}
@@ -89,7 +89,7 @@ const Home = () => {
             direction={{ base: "column", lg: "row" }}
             justify="space-between"
             align="center"
-           mb={{ base: 6, lg: 8 }}
+           mb={{ base: 4, lg: 6 }}
             gap={{ base: 6, lg: 12 }}
           >
             <Heading

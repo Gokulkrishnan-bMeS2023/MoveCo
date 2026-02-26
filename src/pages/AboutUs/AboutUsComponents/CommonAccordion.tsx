@@ -51,7 +51,7 @@ export default function CommonAccordion({ sections }: CommonAccordionProps) {
                         </AccordionItemTrigger>
 
                         <AccordionItemContent pt={4} color="gray.600">
-                            <Box as="ul" pl={6} listStyleType="none">
+                            <Box as="ul" pl={0} listStyleType="none">
                                 {section.items.map((item, i) => (
                                     <Text as="li" key={i} textStyle="size-lg" mb={2}>
                                         {section.items.length > 1 && (

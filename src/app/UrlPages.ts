@@ -158,7 +158,7 @@ export const UrlPages: AppRoute[] = [
   {
     path: "/confirmation",
     component: lazy(
-      () => import("../pages/services/InstantOnlineEstimate/Confirmation"),
+      () => import("../pages/services/InstantOnlineEstimate/Confirmation/Confirmation"),
     ),
   },
 ];
