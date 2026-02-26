@@ -15,7 +15,6 @@ import { quoteIncludesData } from "./data";
 import { quoteInfoSections } from "./data";
 import Badge from "../../../../components/common/Badge/Badge";
 
-
 const Confirmation = () => {
   return (
     <div>
@@ -46,31 +45,42 @@ const Confirmation = () => {
               </Heading>
 
               {/* Quote Summary Table */}
-              <Box
-                border="1px solid"
-                borderColor="gray.200"
-                borderRadius="lg"
-                overflow="hidden"
-              >
+              <Box border="1px solid" borderColor="gray.200" overflow="hidden">
                 {/* Table Header - Green */}
                 <Grid templateColumns="repeat(4, 1fr)">
                   <GridItem bg="brand.primary" px={4} py={3}>
-                    <Text color="white" fontWeight="medium" textStyle="size-lg">
+                    <Text
+                      color="brand.white"
+                      fontWeight="medium"
+                      textStyle="size-lg"
+                    >
                       Quote No
                     </Text>
                   </GridItem>
                   <GridItem bg="brand.primary" px={4} py={3}>
-                    <Text color="white" fontWeight="medium" textStyle="size-lg">
+                    <Text
+                      color="brand.white"
+                      fontWeight="medium"
+                      textStyle="size-lg"
+                    >
                       Moving Price
                     </Text>
                   </GridItem>
                   <GridItem bg="brand.primary" px={4} py={3}>
-                    <Text color="white" fontWeight="medium" textStyle="size-lg">
+                    <Text
+                      color="brand.white"
+                      fontWeight="medium"
+                      textStyle="size-lg"
+                    >
                       Packing Price
                     </Text>
                   </GridItem>
                   <GridItem bg="brand.primary" px={4} py={3}>
-                    <Text color="white" fontWeight="medium" textStyle="size-lg">
+                    <Text
+                      color="brand.white"
+                      fontWeight="medium"
+                      textStyle="size-lg"
+                    >
                       Total Price
                     </Text>
                   </GridItem>
@@ -185,7 +195,6 @@ const Confirmation = () => {
                 <Box
                   border="1px solid"
                   borderColor="gray.200"
-                  borderRadius="lg"
                   overflow="hidden"
                 >
                   <Grid templateColumns="repeat(2, 1fr)">
@@ -217,7 +226,7 @@ const Confirmation = () => {
                       borderColor="gray.100"
                     >
                       <Text fontWeight="normal" textStyle="size-lg">
-                        Gokul Krishnan
+                        -
                       </Text>
                     </GridItem>
                     <GridItem
@@ -252,7 +261,6 @@ const Confirmation = () => {
                 <Box
                   border="1px solid"
                   borderColor="gray.200"
-                  borderRadius="lg"
                   overflow="hidden"
                 >
                   <Grid templateColumns="repeat(4, 1fr)">
@@ -295,11 +303,11 @@ const Confirmation = () => {
                   </Grid>
                   <Grid templateColumns="repeat(4, 1fr)">
                     <GridItem
-                      bg="white"
+                      bg="brand.white"
                       px={4}
                       py={4}
                       borderTop="1px solid"
-                      borderColor="gray.100"
+                      borderColor="brand.gray"
                     >
                       <Text fontWeight="normal" textStyle="size-lg">
                         (883)-748-7384
@@ -310,29 +318,29 @@ const Confirmation = () => {
                       px={4}
                       py={4}
                       borderTop="1px solid"
-                      borderColor="gray.100"
+                      borderColor="brand.gray"
                     >
                       <Text fontWeight="normal" textStyle="size-lg">
                         -
                       </Text>
                     </GridItem>
                     <GridItem
-                      bg="white"
+                      bg="brand.white"
                       px={4}
                       py={4}
                       borderTop="1px solid"
-                      borderColor="gray.100"
+                      borderColor="brand.gray"
                     >
                       <Text fontWeight="normal" textStyle="size-lg">
                         -
                       </Text>
                     </GridItem>
                     <GridItem
-                      bg="white"
+                      bg="brand.white"
                       px={4}
                       py={4}
                       borderTop="1px solid"
-                      borderColor="gray.100"
+                      borderColor="brand.gray"
                     >
                       <Text fontWeight="normal" textStyle="size-lg">
                         -
@@ -343,7 +351,6 @@ const Confirmation = () => {
               </Stack>
             </Box>
 
-            {/* Trucks */}
             <Box
               bg="brand.white"
               p={{ base: 6, md: 8 }}
@@ -357,13 +364,19 @@ const Confirmation = () => {
                   Your moving quote is based on the following inventory and
                   conditions
                 </Heading>
-                <Heading as="h4" fontWeight="normal" textStyle="size-lg">
+                <Text
+                  textStyle="size-sm"
+                  fontWeight="semibold"
+                  color="gray.500"
+                  textTransform="uppercase"
+                  letterSpacing="wide"
+                  mb={2}
+                >
                   Trucks
-                </Heading>
+                </Text>
                 <Box
                   border="1px solid"
                   borderColor="gray.200"
-                  borderRadius="lg"
                   overflow="hidden"
                 >
                   <Grid templateColumns="repeat(2, 1fr)">
@@ -430,7 +443,6 @@ const Confirmation = () => {
                 <Box
                   border="1px solid"
                   borderColor="gray.200"
-                  borderRadius="lg"
                   overflow="hidden"
                 >
                   <Grid templateColumns="repeat(1, 1fr)">
@@ -446,11 +458,11 @@ const Confirmation = () => {
                   </Grid>
                   <Grid templateColumns="repeat(1, 1fr)">
                     <GridItem
-                      bg="white"
+                      bg="brand.white"
                       px={4}
                       py={4}
                       borderTop="1px solid"
-                      borderColor="gray.100"
+                      borderColor="brand.gray"
                     >
                       <Text fontWeight="normal" textStyle="size-lg">
                         -
@@ -463,10 +475,10 @@ const Confirmation = () => {
                     justify="space-between"
                     align="center"
                     px={4}
-                    py={4}
-                    bg="gray.50"
+                    py={3}
+                    bg="brand.gray/20"
                     borderTop="1px solid"
-                    borderColor="gray.200"
+                    borderColor="brand.gray"
                   >
                     <Text textStyle="size-lg" color="brand.gray">
                       *Any gratuities must be given directly to the movers
@@ -495,15 +507,19 @@ const Confirmation = () => {
                 <Heading as="h3" color="brand.primary" fontWeight="normal">
                   Map & Directions
                 </Heading>
-
-                {/* Start Address Table */}
-                <Heading as="h4" fontWeight="normal" textStyle="size-lg">
+                <Text
+                  textStyle="size-sm"
+                  fontWeight="semibold"
+                  color="gray.500"
+                  textTransform="uppercase"
+                  letterSpacing="wide"
+                  mb={2}
+                >
                   Start Address
-                </Heading>
+                </Text>
                 <Box
                   border="1px solid"
-                  borderColor="gray.200"
-                  borderRadius="lg"
+                  borderColor="brand.gray"
                   overflow="hidden"
                 >
                   <Grid templateColumns="repeat(5, 1fr)">
@@ -613,13 +629,19 @@ const Confirmation = () => {
                 </Box>
 
                 {/* End Address Table */}
-                <Heading as="h4" fontWeight="normal" textStyle="size-lg">
+                 <Text
+                  textStyle="size-sm"
+                  fontWeight="semibold"
+                  color="gray.500"
+                  textTransform="uppercase"
+                  letterSpacing="wide"
+                  mb={2}
+                >
                   End Address
-                </Heading>
+                </Text>
                 <Box
                   border="1px solid"
-                  borderColor="gray.200"
-                  borderRadius="lg"
+                  borderColor="brand.gray"
                   overflow="hidden"
                 >
                   <Grid templateColumns="repeat(5, 1fr)">
@@ -675,7 +697,7 @@ const Confirmation = () => {
                       px={4}
                       py={4}
                       borderTop="1px solid"
-                      borderColor="gray.100"
+                      borderColor="brand.gray"
                     >
                       <Text fontWeight="normal" textStyle="size-lg">
                         -
@@ -686,7 +708,7 @@ const Confirmation = () => {
                       px={4}
                       py={4}
                       borderTop="1px solid"
-                      borderColor="gray.100"
+                      borderColor="brand.gray"
                     >
                       <Text fontWeight="normal" textStyle="size-lg">
                         -
@@ -697,7 +719,7 @@ const Confirmation = () => {
                       px={4}
                       py={4}
                       borderTop="1px solid"
-                      borderColor="gray.100"
+                      borderColor="brand.gray"
                     >
                       <Text fontWeight="normal" textStyle="size-lg">
                         TX
@@ -708,7 +730,7 @@ const Confirmation = () => {
                       px={4}
                       py={4}
                       borderTop="1px solid"
-                      borderColor="gray.100"
+                      borderColor="brand.gray"
                     >
                       <Text fontWeight="normal" textStyle="size-lg">
                         98594
@@ -719,7 +741,7 @@ const Confirmation = () => {
                       px={4}
                       py={4}
                       borderTop="1px solid"
-                      borderColor="gray.100"
+                      borderColor="barnd.gray"
                     >
                       <Text fontWeight="normal" textStyle="size-lg">
                         Less than 100 Feets/0
@@ -755,7 +777,7 @@ const Confirmation = () => {
                     </Text>
 
                     {/* Origin */}
-                    <Box bg="gray.100" px={4} py={3} borderRadius="md" mb={2}>
+                    <Box bg="brand.gray/30" px={4} py={3} mb={2}>
                       <Text textStyle="size-lg">
                         Froste Ln, Winters, TX 79567, USA
                       </Text>
@@ -763,7 +785,7 @@ const Confirmation = () => {
 
                     {/* Steps */}
                     <Box px={2} py={3} mb={2}>
-                      <Text textStyle="size-lg" color="gray.500" mb={2}>
+                      <Text textStyle="size-lg" color="brand.gray" mb={2}>
                         1 ft. About 1 min
                       </Text>
                       <Text textStyle="size-lg">
@@ -773,19 +795,19 @@ const Confirmation = () => {
                         </Text>{" "}
                         1 ft
                       </Text>
-                      <Text textStyle="size-lg" color="gray.500" mt={1}>
+                      <Text textStyle="size-lg" color="brand.gray" mt={1}>
                         Restricted usage road
                       </Text>
                     </Box>
 
                     {/* Destination */}
-                    <Box bg="gray.100" px={4} py={3} borderRadius="md" mb={4}>
+                    <Box bg="brand.gray/30" px={4} py={3} mb={4}>
                       <Text textStyle="size-lg">
                         Froste Ln, Winters, TX 79567, USA
                       </Text>
                     </Box>
 
-                    <Text textStyle="size-lg" color="gray.400">
+                    <Text textStyle="size-lg" color="brand.gray">
                       Powered by Google, ©2026 Google
                     </Text>
                   </Box>
