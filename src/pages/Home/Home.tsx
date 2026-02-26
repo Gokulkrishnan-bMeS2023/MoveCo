@@ -32,7 +32,7 @@ const Home = () => {
           <Flex justify="space-between" align="center">          
             <Badge label="Client Review" />
             <Button
-              fontSize="xl"
+              textStyle="xl"
               rounded="full"
               variant="outline"
               onClick={() => navigate("/video-review")}
@@ -76,7 +76,7 @@ const Home = () => {
           <Flex justify="space-between" align="center">
             <Badge label="Client Speaks" />
             <Button
-              fontSize="xl"
+              textStyle="xl"
               rounded="full"
               variant="outline"
               onClick={() => navigate("/client-testimonial")}

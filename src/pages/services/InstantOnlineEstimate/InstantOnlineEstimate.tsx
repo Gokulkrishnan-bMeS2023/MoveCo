@@ -62,7 +62,7 @@ const InstantOnlineEstimate = () => {
       `/move-information?firstName=${encodeURIComponent(values.firstName)}&lastName=${encodeURIComponent(values.lastName)}&email=${encodeURIComponent(values.email)}&phone=${encodeURIComponent(values.phone)}&moveDate=${encodeURIComponent(values.date)}`,
     );
 
-    fetch("https://workinsite-test-api.onrender.com/Register", {
+    fetch("http://balas.tryasp.net/api/Auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

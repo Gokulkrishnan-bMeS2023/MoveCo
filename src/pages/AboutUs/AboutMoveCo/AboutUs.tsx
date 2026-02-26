@@ -115,7 +115,7 @@ const AboutUs = () => {
           <Flex justify="space-between" align="center">
             <Badge label="Benefits" />
             <Button
-              fontSize="xl"
+              textStyle="xl"
               rounded="full"
               variant="outline"
               onClick={() => navigate("/our-standard")}

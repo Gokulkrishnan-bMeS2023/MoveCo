@@ -72,6 +72,7 @@ const SideContentSection = ({
           )}
 
           <Button
+           textStyle="xl"
             fontSize="xl"
             label={linkText}
             variant="outline"

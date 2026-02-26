@@ -100,7 +100,7 @@ export default function StoragePage() {
 
             <Button
               mt={3}
-              fontSize="xl"
+              textStyle="xl"
               rounded="full"
               variant="outline"
               label={showAll ? "View less" : "View all"}

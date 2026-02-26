@@ -71,7 +71,7 @@ const Step3Experience = forwardRef<any, Step3ExperienceProps>(
                 }}
               />
               {photoFileName && (
-                <Text mt={2} fontSize="sm" color="brand.primary">
+                <Text mt={2} textStyle="sm" color="brand.primary">
                   Selected file: {photoFileName}
                 </Text>
               )}

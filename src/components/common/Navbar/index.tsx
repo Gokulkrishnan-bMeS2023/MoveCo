@@ -120,7 +120,7 @@ const NavItem = ({ label, items, path }: any) => {
               px={4}
               py={2.5}
               fontWeight="500"
-              fontSize="sm"
+              textStyle="sm"
               cursor="pointer"
               color="gray.700"
               transition="all 0.3s ease"
@@ -201,7 +201,7 @@ const MobileNavItem = ({
       >
         <Text
           fontWeight="600"
-          fontSize="md"
+          textStyle="md"
           color={isOpen ? "brand.primary" : "brand.secondary"}
           transition="color 0.3s ease"
         >
@@ -242,7 +242,7 @@ const MobileNavItem = ({
                 cursor="pointer"
                 py={2}
                 px={3}
-                fontSize="sm"
+                textStyle="sm"
                 fontWeight="500"
                 color="gray.600"
                 rounded="md"
@@ -438,7 +438,7 @@ export const Navbar = () => {
             </Box>
             <Box
               onClick={toggleMenu}
-              fontSize="28px"
+              textStyle="28px"
               cursor="pointer"
               color="brand.secondary"
               transition="all 0.3s ease"

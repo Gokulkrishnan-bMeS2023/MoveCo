@@ -32,7 +32,7 @@ const RadioField = ({
         <Text as="span">
           {label}
           {isRequired && (
-            <Text fontWeight={"500"} fontSize={16} as="span" color="brand.red" ml={1}>
+            <Text fontWeight={"500"} textStyle={16} as="span" color="brand.red" ml={1}>
               *
             </Text>
           )}
@@ -56,7 +56,7 @@ const RadioField = ({
               >
                 <RadioGroup.ItemHiddenInput />
                 <RadioGroup.ItemIndicator color="brand.primary"/>
-                <RadioGroup.ItemText fontSize="sm" color="brand.secondary">
+                <RadioGroup.ItemText textStyle="sm" color="brand.secondary">
                   {option.label}
                 </RadioGroup.ItemText>
               </RadioGroup.Item>

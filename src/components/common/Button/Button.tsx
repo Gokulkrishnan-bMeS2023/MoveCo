@@ -123,7 +123,7 @@ import React from "react";
 interface CommonButtonProps extends Omit<ButtonProps, "variant"> {
   label?: string;
   variant: "primary" | "outline" | "warning";
-  fontSize?: string;
+  textStyle?: string;
   rounded?: string;
   px?: number | string;
   py?: number | string;
@@ -138,7 +138,7 @@ interface CommonButtonProps extends Omit<ButtonProps, "variant"> {
 const Button = ({
   label,
   variant,
-  fontSize = "md",
+  textStyle: fontSize = "md",
   rounded = "md",
   px = 6,
   py = 5,
@@ -192,7 +192,7 @@ const Button = ({
 
   return (
     <ChakraButton
-      fontSize={fontSize}
+      textStyle={fontSize}
       rounded={rounded}
       px={px}
       py={py}
