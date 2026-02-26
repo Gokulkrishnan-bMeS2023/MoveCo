@@ -71,8 +71,6 @@ const SideContentSection = ({
             </Text>
           )}
 
-
-
           <Button
             fontSize="xl"
             label={linkText}

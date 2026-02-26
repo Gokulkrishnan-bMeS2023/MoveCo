@@ -85,8 +85,8 @@ const DateInput: React.FC<DateInputProps> = ({
             {label}
             {isRequired && (
               <Text
-                fontWeight={"500"}
-                fontSize={16}
+                fontWeight="500"
+                 textStyle="size-md"
                 as="span"
                 color="brand.red"
                 ml={1}
