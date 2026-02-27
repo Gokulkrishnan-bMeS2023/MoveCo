@@ -1,15 +1,9 @@
 import { memo } from "react";
-import {
-  Box,
-  Text,
-  Image,
-  HStack,
-  VStack,
-  Badge,
-} from "@chakra-ui/react";
+import { Box, Text, Image, HStack, VStack, Badge } from "@chakra-ui/react";
 import { FiShoppingCart, FiCheck } from "react-icons/fi";
 import Button from "../../../components/common/Button/Button";
 import type { Product } from "./DTOs";
+import { images } from "../../../assets";
 
 interface ProductCardProps {
   product: Product;
@@ -46,8 +40,8 @@ const ProductCard = memo(
           h={{ base: "200px", sm: "250px", md: "300px" }}
         >
           <Image
-            src={product.image}
-            alt={product.name}
+            src={images.product}
+            alt={product?.name || "Product"}
             w="100%"
             h="100%"
             objectFit="cover"
@@ -85,11 +79,7 @@ const ProductCard = memo(
             {product.name}
           </Text>
 
-          <Text
-            textStyle={"size-2xl"}
-            fontWeight="bold"
-            color="brand.primary"
-          >
+          <Text textStyle={"size-2xl"} fontWeight="bold" color="brand.primary">
             ${product.price.toFixed(2)}
           </Text>
 
@@ -117,7 +107,5 @@ const ProductCard = memo(
     );
   },
 );
-
-ProductCard.displayName = "ProductCard";
 
 export default ProductCard;

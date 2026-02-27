@@ -36,7 +36,6 @@ const Confirmation = () => {
           </Box>
         </Flex>
 
-        <Box>
           <Box
             bg="brand.white"
             p={{ base: 6, md: 8 }}
@@ -150,32 +149,9 @@ const Confirmation = () => {
               </Box>
             </Stack>
           </Box>
-        </Box>
-        <Box pt="sectionTop">
-          <Box
-            bg="brand.gray/10"
-            borderRadius="md"
-            p={4}
-            border="1px solid"
-            borderColor="brand.gray/20"
-          >
-            <Flex align="center" gap={6} flexWrap="wrap">
-              <ReCAPTCHA
-                sitekey="6LclVXksAAAAAHhsQjdcn_3LMqjWWJOK0qO_1yg-"
-                onChange={(val) => console.log(val)}
-              />
-              <Text textStyle="size-md" color="gray.700">
-                You can reserve your move date by{" "}
-                <Text color="brand.primary" fontWeight="medium">
-                  clicking here
-                </Text>
-              </Text>
-            </Flex>
-          </Box>
-        </Box>
 
         <Box pt="sectionTop">
-          <Badge label="Includes" />
+          <Badge label="Includes" mb={4}/>
           <Flex
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
@@ -203,8 +179,9 @@ const Confirmation = () => {
           </Flex>
           <CardTemplate data={quoteIncludesData} />
         </Box>
+        
         <Box pt="sectionTop">
-          <Stack gap={4}>
+          <Stack gap="sectionTop">
             {/* Customer Information */}
             <Box
               bg="brand.white"
@@ -855,6 +832,7 @@ const Confirmation = () => {
           </Stack>
         </Box>
       </Container>
+      <Box  pt="sectionTop">
       <Box bg={"brand.white"} px="-8">
         <Container px={8} pt={4} pb={10}>
           <Flex
@@ -884,6 +862,7 @@ const Confirmation = () => {
           </Flex>
           <CommonAccordion sections={quoteInfoSections} />
         </Container>
+      </Box>
       </Box>
     </div>
   );

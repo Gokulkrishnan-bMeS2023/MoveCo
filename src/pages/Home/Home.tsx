@@ -23,16 +23,16 @@ const Home = () => {
             <MainBanner />
           </Box>
 
-          <Box flex="3" py={{ base: 6, lg: 0 }}>
+          <Box flex="3">
             <QuoteForm />
           </Box>
         </Flex>
 
         <Box pt="sectionTop">
-          <Flex justify="space-between" align="center">          
+          <Flex justify="space-between" align="center" mb={4}>          
             <Badge label="Client Review" />
             <Button
-              textStyle="xl"
+             textStyle="size-xl"
               rounded="full"
               variant="outline"
               onClick={() => navigate("/video-review")}
@@ -73,10 +73,10 @@ const Home = () => {
         </Box>
 
         <Box pt="sectionTop">
-          <Flex justify="space-between" align="center">
+          <Flex justify="space-between" align="center" mb={4}>
             <Badge label="Client Speaks" />
             <Button
-              textStyle="xl"
+             textStyle="size-xl"
               rounded="full"
               variant="outline"
               onClick={() => navigate("/client-testimonial")}

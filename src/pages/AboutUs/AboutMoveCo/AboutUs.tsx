@@ -14,7 +14,7 @@ const AboutUs = () => {
   const navigate = useNavigate();
   const missionContent = (
     <>
-      <Badge label="Our Mission" />
+      <Badge label="Our Mission" mb={4}/>
       We aim to impress you with our service so much that you'll share our
       business cards with your friends and colleagues, post your text and video
       testimonials on our website, and choose us for your next move.
@@ -23,7 +23,7 @@ const AboutUs = () => {
 
   const testimonialContent = (
     <>
-      <Badge label="Testimonials" />
+      <Badge label="Testimonials" mb={4} />
       Our online testimonial board goes a step further. You can post your moving
       experience for our future customers to see. You can also go to our website
       & see over 10 years of customer reviews. Our crews make the difference. We
@@ -41,7 +41,7 @@ const AboutUs = () => {
           overlayOpacity={0.1}
         />
         <Box pt="sectionTop">
-          <Badge label="About Us" />
+          <Badge label="About Us" mb={4}/>
           <Flex
             mb={{ base: 4, lg: 6 }}
             direction={{ base: "column", md: "row" }}
@@ -79,7 +79,7 @@ const AboutUs = () => {
           />
         </Box>
         <Box pt="sectionTop">
-          <Badge label="Features" />
+          <Badge label="Features" mb={4}/>
           <Flex
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
@@ -112,10 +112,10 @@ const AboutUs = () => {
           <AboutFeatureSwitcher />
         </Box>
         <Box pt="sectionTop">
-          <Flex justify="space-between" align="center">
+          <Flex justify="space-between" align="center" mb={4}>
             <Badge label="Benefits" />
             <Button
-              textStyle="xl"
+              textStyle="size-xl"
               rounded="full"
               variant="outline"
               onClick={() => navigate("/our-standard")}

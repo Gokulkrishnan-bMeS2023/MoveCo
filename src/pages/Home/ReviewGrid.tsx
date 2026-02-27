@@ -56,7 +56,7 @@ const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
   if (testimonials.length === 0) {
     return (
       <Center p={10}>
-        <Text color="gray.500">No testimonials to display yet.</Text>
+        <Text>No testimonials to display yet.</Text>
       </Center>
     );
   }

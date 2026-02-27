@@ -108,7 +108,7 @@ const MainBanner = () => {
         backgroundPosition="center"
         borderRadius="xl"
         px={6}
-        py={10}
+        py={6}
         color="brand.white"
       >
         <Stack gap={4}>
