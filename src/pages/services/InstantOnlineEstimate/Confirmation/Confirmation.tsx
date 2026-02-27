@@ -30,7 +30,6 @@ const Confirmation = () => {
           </Box>
         </Flex>
 
-        <Box>
           <Box
             bg="brand.white"
             p={{ base: 6, md: 8 }}
@@ -144,10 +143,9 @@ const Confirmation = () => {
               </Box>
             </Stack>
           </Box>
-        </Box>
 
         <Box pt="sectionTop">
-          <Badge label="Includes"/>
+          <Badge label="Includes" mb={4}/>
           <Flex
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
@@ -175,8 +173,9 @@ const Confirmation = () => {
           </Flex>
           <CardTemplate data={quoteIncludesData} />
         </Box>
+        
         <Box pt="sectionTop">
-          <Stack gap={4}>
+          <Stack gap="sectionTop">
             {/* Customer Information */}
             <Box
               bg="brand.white"
@@ -815,6 +814,7 @@ const Confirmation = () => {
           </Stack>
         </Box>
       </Container>
+      <Box  pt="sectionTop">
       <Box bg={"brand.white"} px="-8">
         <Container px={8} pt={4} pb={10}>
           <Flex
@@ -844,6 +844,7 @@ const Confirmation = () => {
           </Flex>
           <CommonAccordion sections={quoteInfoSections} />
         </Container>
+      </Box>
       </Box>
     </div>
   );

@@ -15,7 +15,7 @@ const OurInsurance = () => {
         <Box pt="sectionTop">
           <Box>
             <Badge
-              label="Our Insurance"
+              label="Our Insurance" mb={4}
             />
             <Flex
               direction={{ base: "column", md: "row" }}
@@ -64,6 +64,7 @@ const OurInsurance = () => {
           <Box>
             <Badge
               label="Our Coverage"
+              mb={4}
             />
             <Flex
               direction={{ base: "column", md: "row" }}

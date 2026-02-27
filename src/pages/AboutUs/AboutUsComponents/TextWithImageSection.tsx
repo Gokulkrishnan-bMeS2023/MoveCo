@@ -39,7 +39,7 @@ const TextWithImageSection = ({
       </Box>
       <Box order={{ base: 2, md: reverse ? 1 : 2 }}>
         {buttonLabel && (
-            <Badge label={buttonLabel} />
+            <Badge label={buttonLabel} mb={4}/>
         )}
 
         <Text textStyle="size-3xl">{content}</Text>

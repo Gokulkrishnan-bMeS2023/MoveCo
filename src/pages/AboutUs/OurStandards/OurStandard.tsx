@@ -14,7 +14,7 @@ const OurStandard = () => {
         <HeroBanner title="Our Standard" bgImage={images.insuranceBanner} />
         <Box pt="sectionTop">
           <Badge
-            label="Benefits"
+            label="Benefits" mb={4}
           />
           <Flex
             direction={{ base: "column", md: "row" }}

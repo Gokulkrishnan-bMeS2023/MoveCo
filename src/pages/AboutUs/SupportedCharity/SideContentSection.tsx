@@ -43,7 +43,7 @@ const SideContentSection = ({
           base: "column",
           lg: reverse ? "row-reverse" : "row",
         }}
-        gap={{ base: "4", lg: "14" }}
+        gap={{ base: "6", lg: "14" }}
         align="center"
         justify="center"
       >

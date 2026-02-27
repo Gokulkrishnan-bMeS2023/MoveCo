@@ -454,7 +454,7 @@ export const Navbar = () => {
                   transform: "scale(0.9)",
                 }}
               >
-                {menuOpen ? <FiX /> : <FiMenu />}
+                {menuOpen ? <FiX size={30}/> : <FiMenu size={30} />}
               </Box>
             </Flex>
           </Flex>

@@ -63,7 +63,7 @@ const ProductPage = () => {
       </Grid>
 
       {totalItems > 0 && (
-        <Box mt={{ base: 8, md: 12 }} textAlign="center">
+        <Box mt={{ base: 8, md: 10 }} textAlign="center">
           <Button
             label={`View Cart (${totalItems} ${totalItems === 1 ? "item" : "items"})`}
             variant="primary"

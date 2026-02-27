@@ -22,7 +22,7 @@ const PolicySection = memo<PolicySectionProps>(
       <Box pt={pt}>
         <Grid
           templateColumns={{ base: "1fr", lg: "1fr 1fr" }}
-          gap={16}
+          gap={{ base: "6", lg: "14" }}
           alignItems="center"
         >
           {/* Image Side */}
