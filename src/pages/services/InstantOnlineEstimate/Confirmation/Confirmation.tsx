@@ -149,6 +149,22 @@ const Confirmation = () => {
               </Box>
             </Stack>
           </Box>
+          <Box pt="sectionTop">
+             <Box bg="brand.gray/20" borderRadius="md" p={4} border="1px solid" borderColor="gray.200">
+      <Flex align="center" gap={6} flexWrap="wrap">
+        <ReCAPTCHA
+          sitekey="6LclVXksAAAAAHhsQjdcn_3LMqjWWJOK0qO_1yg-"
+          onChange={(val) => console.log(val)}
+        />
+        <Text textStyle="size-lg" flexWrap="nowrap" >
+          You can reserve your move date by{" "}
+          <Text color="brand.primary" fontWeight="medium">
+            clicking here
+          </Text>
+        </Text>
+      </Flex>
+    </Box>
+          </Box>
 
         <Box pt="sectionTop">
           <Badge label="Includes" mb={4}/>
