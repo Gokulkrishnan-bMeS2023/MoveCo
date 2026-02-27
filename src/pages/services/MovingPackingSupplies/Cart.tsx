@@ -23,6 +23,7 @@ import SelectField from "../../../components/common/Select/Select";
 import { useNavigate } from "react-router-dom";
 import { useShoppingCart } from "./Useshoppingcart";
 import type { CartItem } from "./DTOs";
+import { images } from "../../../assets";
 
 const toaster = createToaster({
   placement: "top-end",
@@ -220,7 +221,7 @@ const CartItemCard = memo(
             {/* Product Image */}
             <Box position="relative" flexShrink={0}>
               <Image
-                src={item.image}
+                src={images.product}
                 alt={item.name}
                 boxSize={{ base: "80px", md: "100px" }}
                 objectFit="cover"

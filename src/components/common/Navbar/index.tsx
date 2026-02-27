@@ -348,7 +348,7 @@ export const Navbar = () => {
           <Flex h="70px" align="center" justify="space-between">
             {/* LOGO */}
             <Text
-              textStyle={"size-xl"}
+              textStyle={"size-2xl"}
               fontWeight="500"
               cursor="pointer"
               transition="all 0.3s ease"
@@ -442,7 +442,6 @@ export const Navbar = () => {
               </Box>
               <Box
                 onClick={toggleMenu}
-                textStyle="28px"
                 cursor="pointer"
                 color="brand.secondary"
                 transition="all 0.3s ease"

@@ -14,12 +14,15 @@ import {
 } from "@chakra-ui/react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Button from "../../../components/common/Button/Button";
-import type { InventoryDTO, InventorySection, MoveInformationDTO } from "./DTOs";
+import type {
+  InventoryDTO,
+  InventorySection,
+  MoveInformationDTO,
+} from "./DTOs";
 import { validateInventory } from "./validation";
 import { useEffect } from "react";
-
 
 const inventorySections: InventorySection[] = [
   {
@@ -264,15 +267,39 @@ const inventorySections: InventorySection[] = [
 
 // All MoveInformationDTO keys to read from URL params
 const MOVE_INFO_KEYS: Array<keyof MoveInformationDTO> = [
-  "firstName", "lastName", "email", "phone", "homePhone", "workPhone", "faxPhone",
-  "moveDate", "moveTime", "dropDate", "dropTime",
-  "moveType", "hearAbout", "notes",
-  "fromAddress", "fromApt", "fromCity", "fromState", "fromZipCode", "fromStairs", "fromDistance",
-  "toAddress", "toApt", "toCity", "toState", "toZipCode", "toStairs", "toDistance",
+  "firstName",
+  "lastName",
+  "email",
+  "phone",
+  "homePhone",
+  "workPhone",
+  "faxPhone",
+  "moveDate",
+  "moveTime",
+  "dropDate",
+  "dropTime",
+  "moveType",
+  "hearAbout",
+  "notes",
+  "fromAddress",
+  "fromApt",
+  "fromCity",
+  "fromState",
+  "fromZipCode",
+  "fromStairs",
+  "fromDistance",
+  "toAddress",
+  "toApt",
+  "toCity",
+  "toState",
+  "toZipCode",
+  "toStairs",
+  "toDistance",
 ];
 
 const Inventory = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   // Read all move information from URL params (no localStorage needed)
   const moveInfo = MOVE_INFO_KEYS.reduce((acc, key) => {
@@ -286,30 +313,29 @@ const Inventory = () => {
   const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
-  const saved = sessionStorage.getItem("inventory");
-  if (saved) {
-    setQuantities(JSON.parse(saved));
-  }
-}, []);
-
+    const saved = sessionStorage.getItem("inventory");
+    if (saved) {
+      setQuantities(JSON.parse(saved));
+    }
+  }, []);
 
   const increase = (item: string) => {
-  const updated = {
-    ...quantities,
-    [item]: (quantities[item] || 0) + 1,
+    const updated = {
+      ...quantities,
+      [item]: (quantities[item] || 0) + 1,
+    };
+    setQuantities(updated);
+    sessionStorage.setItem("inventory", JSON.stringify(updated));
   };
-  setQuantities(updated);
-  sessionStorage.setItem("inventory", JSON.stringify(updated));
-};
 
-const decrease = (item: string) => {
-  const updated = {
-    ...quantities,
-    [item]: Math.max((quantities[item] || 0) - 1, 0),
+  const decrease = (item: string) => {
+    const updated = {
+      ...quantities,
+      [item]: Math.max((quantities[item] || 0) - 1, 0),
+    };
+    setQuantities(updated);
+    sessionStorage.setItem("inventory", JSON.stringify(updated));
   };
-  setQuantities(updated);
-  sessionStorage.setItem("inventory", JSON.stringify(updated));
-};
 
   const handleCollapseAll = () => {
     setOpenItems([]);
@@ -321,30 +347,30 @@ const decrease = (item: string) => {
   };
 
   const handleSubmit = () => {
-  const inventoryData = { quantities };
-  const validationErrors = validateInventory(inventoryData);
+    const inventoryData = { quantities };
+    const validationErrors = validateInventory(inventoryData);
 
-  if (Object.keys(validationErrors).length > 0) {
-    setErrors(validationErrors);
-    setSuccessMessage("");
-    return;
-  }
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setSuccessMessage("");
+      return;
+    }
 
- sessionStorage.clear(); 
+    sessionStorage.clear();
 
-  setQuantities({});
-  setOpenItems([]);
-  setErrors({});
-  setSuccessMessage("Inventory successfully submitted!");
+    setQuantities({});
+    setOpenItems([]);
+    setErrors({});
+    setSuccessMessage("Inventory successfully submitted!");
 
-  const finalPayload = {
-    ...moveInfo,
-    inventory: quantities,
+    const finalPayload = {
+      ...moveInfo,
+      inventory: quantities,
+    };
+
+    console.log("Final Submitted Data:", finalPayload);
+    navigate("/confirmation");
   };
-
-  console.log("Final Submitted Data:", finalPayload);
-};
-
 
   return (
     <Container>
