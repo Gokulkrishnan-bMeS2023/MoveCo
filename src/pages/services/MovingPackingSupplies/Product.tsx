@@ -172,10 +172,10 @@ import { useProducts } from "./Useproduct";
 
 const PageHeader = () => (
   <VStack mb={{ base: 4, lg: 6 }} gap={{ base: 4, md: 6 }} align="start">
-    <Heading as="h1" fontWeight="normal">
+    <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md: "left"}}>
       Moving & <Span color="brand.primary">Packing Supplies</Span>
     </Heading>
-    <Text textStyle="size-lg">
+    <Text textStyle="size-lg" textAlign={{base: "center",md: "left"}}>
       When you plan a move, you certainly want to keep your possessions safe and
       organized. Boxes, packing material, moving safety material, and all the
       other rest of moving supplies are also sold here in our online shop. With
@@ -261,7 +261,7 @@ const ProductPage = () => {
             lg: "repeat(3, 1fr)",
             xl: "repeat(4, 1fr)",
           }}
-          gap={{ base: 4, sm: 6, md: 8 }}
+          gap={{ base: 6, md: 8 }}
         >
           {products.map((product) => (
             <GridItem key={product.id}>

@@ -107,7 +107,6 @@ import {
   HStack,
   VStack,
   Flex,
-  Separator,
   Card,
   Icon,
 } from "@chakra-ui/react";
@@ -150,7 +149,6 @@ const FriendForm = () => {
             <Text textStyle="size-lg">
             To email a friend about MoveCo, fill out the information below
           </Text>
-          <Separator />
             <InputField
               label="Your Name"
               placeholder="Your Name"

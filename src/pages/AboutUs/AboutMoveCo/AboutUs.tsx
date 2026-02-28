@@ -14,20 +14,20 @@ const AboutUs = () => {
   const navigate = useNavigate();
   const missionContent = (
     <>
-     <Flex justify={{ base: "center", md: "flex-start" }}>
-      <Badge label="Our Mission" mb={4}/>
+      <Flex justify={{ base: "center", md: "flex-start" }}>
+        <Badge label="Our Mission" mb={4} />
       </Flex>
       We aim to impress you with our service so much that you'll share our
       business cards with your friends and colleagues, post your text and video
       testimonials on our website, and choose us for your next move.
     </>
-    
+
   );
 
   const testimonialContent = (
     <>
       <Flex justify={{ base: "center", md: "flex-start" }}>
-      <Badge label="Testimonials" mb={4} />
+        <Badge label="Testimonials" mb={4} />
       </Flex>
       Our online testimonial board goes a step further. You can post your moving
       experience for our future customers to see. You can also go to our website
@@ -47,8 +47,8 @@ const AboutUs = () => {
         />
         <Box pt="sectionTop">
           <Flex justify={{ base: "center", md: "flex-start" }}>
-  <Badge label="About Us" mb={4} />
-</Flex>
+            <Badge label="About Us" mb={4} />
+          </Flex>
           <Flex
             mb={{ base: 4, lg: 6 }}
             direction={{ base: "column", md: "row" }}
@@ -57,7 +57,7 @@ const AboutUs = () => {
             gap={{ base: 4, md: 10 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal">
+              <Heading as="h1" fontWeight="normal" textAlign={{ base: "center", md: "left" }}>
                 What Do We Do <br />
                 In{" "}
                 <Text as="span" color="brand.primary">
@@ -86,7 +86,7 @@ const AboutUs = () => {
         </Box>
         <Box pt="sectionTop">
           <Flex justify={{ base: "center", md: "flex-start" }}>
-          <Badge label="Features" mb={4}/>
+            <Badge label="Features" mb={4} />
           </Flex>
           <Flex
             direction={{ base: "column", md: "row" }}
@@ -96,8 +96,8 @@ const AboutUs = () => {
             mb={{ base: 4, lg: 6 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
-                What Do You Get 
+              <Heading as="h1" fontWeight="normal" textAlign={{ base: "center", md: "left" }}>
+                What Do You Get
                 When you In{" "}
                 <Text as="span" color="brand.primary">
                   Choose  Us?
@@ -139,7 +139,7 @@ const AboutUs = () => {
             gap={{ base: 4, md: 10 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
+              <Heading as="h1" fontWeight="normal" textAlign={{ base: "center", md: "left" }}>
                 Our {" "}
                 <Text as="span" color="brand.primary">
                   Standards

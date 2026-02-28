@@ -106,7 +106,7 @@ const handleSubmit = async () => {
       </Flex>
       <Box
         bg="brand.white"
-        p={{ base: 6, md: 10 }}
+        p={{ base: 6, md: 8 }}
         borderRadius="3xl"
         boxShadow="xl"
         border="1px solid"

@@ -37,7 +37,7 @@ export const validateReferralForm = (
   const errors: FormErrors<ReferralFormValues> = {};
 
   if (!values.yourName.trim()) {
-    errors.yourName = "Your name is required";
+    errors.yourName = "Name is required";
   }
 
   if (!values.friendEmail.trim()) {

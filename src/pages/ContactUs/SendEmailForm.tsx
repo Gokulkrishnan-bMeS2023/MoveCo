@@ -5,7 +5,6 @@ import {
   HStack,
   VStack,
   Flex,
-  Separator,
   Card,
   Icon,
 } from "@chakra-ui/react";
@@ -54,7 +53,6 @@ const SendEmailForm = () => {
             Just fill out the form, and a representative will get back to you as
             soon as possible
           </Text>
-          <Separator />
             <InputField
               label="Your Name"
               value={contactValues.name}

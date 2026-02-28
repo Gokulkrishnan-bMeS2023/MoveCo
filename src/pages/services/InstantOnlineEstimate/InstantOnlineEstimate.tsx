@@ -105,7 +105,7 @@ const InstantOnlineEstimate = () => {
       <Flex gap={10} align="center" direction={{ base: "column", md: "row" }}>
         <Box
           bg="brand.white"
-          p={8}
+          p={{ base: 6, md: 8 }}
           borderRadius="xl"
           boxShadow="lg"
           w={{ base: "100%", md: "420px" }}

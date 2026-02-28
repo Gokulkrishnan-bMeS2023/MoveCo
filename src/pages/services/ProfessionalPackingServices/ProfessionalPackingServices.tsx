@@ -5,35 +5,14 @@ import {
   Heading,
   Text,
   Grid,
-  HStack,
   For,
   VStack,
 } from "@chakra-ui/react";
 import { Table } from "@chakra-ui/react";
 import { PACKING_OPTIONS, PACKING_RATES } from "./data";
-import type { PackingOption } from "./DTOs";
 import { images } from "../../../assets";
+import OptionCard from "./OptionCard";
 
-const OptionCard = ({ icon: Icon, title, description }: PackingOption) => (
-  <Box
-    bg="brand.white"
-    p={8}
-    borderRadius="xl"
-    boxShadow="sm"
-    border="1px solid"
-    borderColor="gray.100"
-  >
-    <HStack gap={3} mb={4}>
-      <Box color="brand.primary">
-        <Icon size={28} />
-      </Box>
-      <Heading as="h3" fontWeight="normal">
-        {title}
-      </Heading>
-    </HStack>
-    <Text textStyle="size-lg">{description}</Text>
-  </Box>
-);
 
 const PackingServicesPage = () => {
   return (
@@ -126,7 +105,7 @@ const PackingServicesPage = () => {
               display={{ base: "none", lg: "block" }}
               borderRadius="lg"
               overflow="hidden"
-              height="400px"
+              height="450px"
             >
               <img
                 src={images.pricing}

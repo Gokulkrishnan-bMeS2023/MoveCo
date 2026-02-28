@@ -54,7 +54,7 @@ const ContactUsPage = () => {
               textStyle="size-2xl"
               textAlign={{ base: "center", md: "right" }}
             >
-              Visit us at any of our convenient locations across Texas
+              Visit us at any of our convenient locations across Texas.
             </Text>
           </Box>
         </Flex>

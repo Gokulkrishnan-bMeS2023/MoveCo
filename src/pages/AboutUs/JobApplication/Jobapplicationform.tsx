@@ -29,7 +29,7 @@ const JobApplicationForm = () => {
   return (
     <>
       {/* ── Progress Bar ── */}
-      <Box py={12}>
+      <Box py={10}>
         <Box position="relative">
           {/* Base gray line */}
           <Box
@@ -72,7 +72,7 @@ const JobApplicationForm = () => {
               const isActive = index === page;
 
               return (
-                <Stack key={index} align="center" gap={2} zIndex={1}>
+                <Stack key={index} align="flex-start" gap={2} zIndex={1}>
                   {/* Circle */}
                   <Box
                     w="40px"

@@ -208,7 +208,7 @@ const CartItemCard = memo(
     return (
       <>
         <Box
-          bg="white"
+          bg="brand.white"
           borderRadius="lg"
           p={{ base: 4, md: 5 }}
           boxShadow="sm"
@@ -288,12 +288,24 @@ const CartItemCard = memo(
                 </HStack>
 
                 {/* Subtotal */}
-                <VStack align="end" gap={0} flexShrink={0}>
-                  <Text textStyle={"size-lg"}>Total</Text>
-                  <Text textStyle={"size-xl"} fontWeight="bold">
+                <Stack
+                  direction={{ base: "row", md: "column" }}
+                  align={{ base: "center", md: "end" }}
+                  gap={{ base: 1, md: 0 }}
+                  flexShrink={0}
+                >
+                  <Text textStyle="size-lg">
+                    <Text as="span" display={{ base: "inline", md: "none" }} fontWeight="medium">
+                      Total:
+                    </Text>
+                    <Text as="span" display={{ base: "none", md: "inline" }} >
+                      Total
+                    </Text>
+                  </Text>
+                  <Text textStyle="size-xl" fontWeight="bold">
                     ${(item.price * item.quantity).toFixed(2)}
                   </Text>
-                </VStack>
+                </Stack>
               </HStack>
             </VStack>
           </HStack>
@@ -327,7 +339,7 @@ const CartTotals = memo(
   ({ subtotal, tax, total, onCheckout, isFixed = false }: CartTotalsProps) => {
     return (
       <Box
-        bg="white"
+        bg="brand.white"
         p={{ base: 5, md: 6 }}
         borderRadius="xl"
         boxShadow="md"
@@ -351,7 +363,7 @@ const CartTotals = memo(
 
           <HStack justify="space-between" flexWrap="wrap">
             <Text textStyle="size-lg">Shipping</Text>
-            <Badge textStyle="sm" px={3} py={1}>
+            <Badge textStyle="sm" px={3} py={1} color="brand.primary">
               FREE Shipping
             </Badge>
           </HStack>
@@ -429,11 +441,11 @@ const CartPage = () => {
       <Stack
         direction={{ base: "column", sm: "row" }}
         justify="space-between"
-        align={{ base: "start", sm: "center" }}
+        align={{ base: "center", sm: "center" }}
         gap={{ base: 4, md: 10 }}
         mb={{ base: 4, lg: 6 }}
       >
-        <Heading as="h1" fontWeight="normal">
+        <Heading as="h1" fontWeight="normal" textAlign={{ base: "center", md: "left" }}>
           Shopping <Span color="brand.primary">Cart</Span>
           {cartItems.length > 0 && (
             <Span textStyle="xl" fontWeight="normal" ml={2}>

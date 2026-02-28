@@ -1,9 +1,10 @@
 import { Box, Heading, Text, HStack } from "@chakra-ui/react";
+import type { PackingOption } from "./DTOs";
 
-const OptionCard = ({ icon: Icon, title, description }: any) => (
+const OptionCard = ({ icon: Icon, title, description }: PackingOption) => (
   <Box
     bg="brand.white"
-    p={8}
+    p={{ base: 6, md: 8 }}
     borderRadius="xl"
     boxShadow="sm"
     border="1px solid"
@@ -13,7 +14,7 @@ const OptionCard = ({ icon: Icon, title, description }: any) => (
       <Box color="brand.primary">
         <Icon size={28} />
       </Box>
-      <Heading as="h3" fontWeight="normal">
+      <Heading as="h3" fontWeight="normal" color="brand.primary">
         {title}
       </Heading>
     </HStack>

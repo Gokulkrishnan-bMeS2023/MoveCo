@@ -33,32 +33,24 @@ export default function StoragePage() {
         justify="space-between"
         gap={{ base: 4, md: 10 }}
       >
-        <Box maxW="600px" w="100%" textAlign={{base: "center",md: "left"}}>
+        <Box maxW="600px" w="100%" textAlign={{ base: "center", md: "left" }}>
           <Heading as="h1" fontWeight="normal" color={"brand.primary"}>
             Storages
           </Heading>
         </Box>
-        <Box width={{base: "100%", md: "430px"}}>
+        <Box width={{ base: "100%", md: "430px" }}>
           <Text textStyle="size-2xl" textAlign={{ base: "center", md: "right" }}>
-            Professional storage service for your possessions during the move
+            Professional storage service for your possessions during the move.
           </Text>
         </Box>
       </Flex>
-      <SimpleGrid
+      {/* <SimpleGrid
         columns={{ base: 1, md: 2 }}
         alignItems="flex-start"
         gap={{ base: 4, md: 10 }}
       >
-        <Box w="100%" maxW={{ base: "100%", md: "550px" }}>
-          {/* <Image
-            src={storageImage}
-            alt="storageimg"
-            w="100%"
-            h="auto"
-            borderRadius="2xl"
-          /> */}
-
-          <Image
+        <Box w="100%" maxW={{ base: "100%", md: "550px" }} mx={{ base: "auto", md: "0" }}>
+        <Image
             src={images.storage}
             alt="Storage service facility"
             w="100%"
@@ -109,7 +101,67 @@ export default function StoragePage() {
           </Box>
         </Stack>
       </SimpleGrid>
+       */}
+      <SimpleGrid
+        columns={{ base: 1, md: 2 }}
+        alignItems="flex-start"
+        gap={{ base: 4, md: 10 }}
+      >
+        {/* ⭐ Image Box (Centered on Mobile) */}
+        <Box
+          w="100%"
+          maxW={{ base: "100%", md: "550px" }}
+          mx={{ base: "auto", md: "0" }}
+        >
+          <Image
+            src={images.storage}
+            alt="Storage service facility"
+            w="100%"
+            h="auto"
+            borderRadius="2xl"
+            loading="eager"
+          />
+        </Box>
 
+        {/* Text Content */}
+        <Stack gap={4}>
+          <Text textStyle="size-xl" textAlign={{ base: "center", md: "left" }}>
+            MoveCo.net offers climate controlled storage service with 24-hour
+            security cameras at our Lewisville facility. One of the major
+            advantage of using our storage service is the convenience that it
+            brings to you. Once we have loaded up your belongings, you do not
+            need to worry about a thing until you’re ready to have your items
+            redelivered to your new house. Once you have realized how this
+            services soothes your overall moving / transition experience from
+            one house to another, you will not only use this service again but
+            recommend it to friends and family.
+          </Text>
+
+          <Box textAlign={{ base: "center", md: "left" }}>
+            <Text
+              textStyle="size-xl"
+              lineClamp={showAll ? undefined : 2}
+              transition="all 0.3s ease"
+            >
+              Free safety Packing included: We operate full-service storag facility where we take
+              extra care of your possessions. We use our commercial-grade blankets and shrink wrapping
+              material when we load your items into our storage facility. Please note that you will not
+              have access to your items till the redelivery date, unless you schedule an appointment
+              which has a fixed cost of $50.00. As of now we do not offer storage service in our Austin
+              or Houston facility.
+            </Text>
+
+            <Button
+              mt={3}
+              textStyle="size-xl"
+              rounded="full"
+              variant="outline"
+              label={showAll ? "View less" : "View all"}
+              onClick={() => setShowAll(!showAll)}
+            />
+          </Box>
+        </Stack>
+      </SimpleGrid>
       <Box pt="sectionTop">
         <Grid
           templateColumns={{ base: "1fr", lg: "1fr 2fr" }}
@@ -130,7 +182,7 @@ export default function StoragePage() {
             alignItems="center"
             justifyContent="center"
           >
-            <Stack gap={4} textAlign="center">
+            <Stack gap={2} textAlign="center">
               <Heading as="h3" fontWeight="normal" textAlign="center">
                 Storage <Span color="brand.primary">Pricing</Span>
               </Heading>
