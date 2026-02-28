@@ -14,12 +14,18 @@ import CardTemplate from "../../../AboutUs/AboutUsComponents/CardTemplate";
 import { quoteIncludesData } from "./data";
 import { quoteInfoSections } from "./data";
 import Badge from "../../../../components/common/Badge/Badge";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Confirmation = () => {
   return (
     <div>
       <Container>
-        <Flex direction="column" align="flex-start" mb={{ base: 4, lg: 6 }} gap={{ base: 4, md: 10 }}>
+        <Flex
+          direction="column"
+          align="flex-start"
+          mb={{ base: 4, lg: 6 }}
+          gap={{ base: 4, md: 10 }}
+        >
           <Box maxW="800px" w="100%">
             <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md: "left"}}>
               Quote for your{" "}
@@ -142,6 +148,22 @@ const Confirmation = () => {
                 </Text>
               </Box>
             </Stack>
+          </Box>
+          <Box pt="sectionTop">
+             <Box bg="brand.gray/20" borderRadius="md" p={4} border="1px solid" borderColor="gray.200">
+      <Flex align="center" gap={6} flexWrap="wrap">
+        <ReCAPTCHA
+          sitekey="6LclVXksAAAAAHhsQjdcn_3LMqjWWJOK0qO_1yg-"
+          onChange={(val) => console.log(val)}
+        />
+        <Text textStyle="size-lg" flexWrap="nowrap" >
+          You can reserve your move date by{" "}
+          <Text color="brand.primary" fontWeight="medium">
+            clicking here
+          </Text>
+        </Text>
+      </Flex>
+    </Box>
           </Box>
 
         <Box pt="sectionTop">
@@ -516,119 +538,127 @@ const Confirmation = () => {
                 >
                   Start Address
                 </Text>
+                {/* Start Address Table */}
                 <Box
                   border="1px solid"
                   borderColor="brand.gray"
                   overflow="hidden"
                 >
-                  <Grid templateColumns="repeat(5, 1fr)">
-                    <GridItem bg="brand.primary" px={4} py={3}>
-                      <Text
-                        color="brand.white"
-                        fontWeight="medium"
-                        textStyle="size-lg"
-                      >
-                        Address
-                      </Text>
-                    </GridItem>
-                    <GridItem bg="brand.primary" px={4} py={3}>
-                      <Text
-                        color="white"
-                        fontWeight="medium"
-                        textStyle="size-lg"
-                      >
-                        City
-                      </Text>
-                    </GridItem>
-                    <GridItem bg="brand.primary" px={4} py={3}>
-                      <Text
-                        color="brand.white"
-                        fontWeight="medium"
-                        textStyle="size-lg"
-                      >
-                        State
-                      </Text>
-                    </GridItem>
-                    <GridItem bg="brand.primary" px={4} py={3}>
-                      <Text
-                        color="brand.white"
-                        fontWeight="medium"
-                        textStyle="size-lg"
-                      >
-                        Zipcode
-                      </Text>
-                    </GridItem>
-                    <GridItem bg="brand.primary" px={4} py={3}>
-                      <Text
-                        color="brand.white"
-                        fontWeight="medium"
-                        textStyle="size-lg"
-                      >
-                        Door Distance / Stairs
-                      </Text>
-                    </GridItem>
-                  </Grid>
-                  <Grid templateColumns="repeat(5, 1fr)">
-                    <GridItem
-                      bg="brand.white"
-                      px={4}
-                      py={4}
-                      borderTop="1px solid"
-                      borderColor="gray.100"
-                    >
-                      <Text fontWeight="normal" textStyle="size-lg">
-                        -
-                      </Text>
-                    </GridItem>
-                    <GridItem
-                      bg="brand.white"
-                      px={4}
-                      py={4}
-                      borderTop="1px solid"
-                      borderColor="gray.100"
-                    >
-                      <Text fontWeight="normal" textStyle="size-lg">
-                        -
-                      </Text>
-                    </GridItem>
-                    <GridItem
-                      bg="brand.white"
-                      px={4}
-                      py={4}
-                      borderTop="1px solid"
-                      borderColor="gray.100"
-                    >
-                      <Text fontWeight="normal" textStyle="size-lg">
-                        TX
-                      </Text>
-                    </GridItem>
-                    <GridItem
-                      bg="brand.white"
-                      px={4}
-                      py={4}
-                      borderTop="1px solid"
-                      borderColor="gray.100"
-                    >
-                      <Text fontWeight="normal" textStyle="size-lg">
-                        49839
-                      </Text>
-                    </GridItem>
-                    <GridItem
-                      bg="brand.white"
-                      px={4}
-                      py={4}
-                      borderTop="1px solid"
-                      borderColor="gray.100"
-                    >
-                      <Text fontWeight="normal" textStyle="size-lg">
-                        Less than 100 Feets/0
-                      </Text>
-                    </GridItem>
-                  </Grid>
+                  {/* ✅ Wrap both grids in a horizontally scrollable box on mobile */}
+                  <Box overflowX="auto">
+                    <Box minW="600px">
+                      {" "}
+                      {/* ✅ Prevents columns from collapsing */}
+                      <Grid templateColumns="repeat(5, 1fr)">
+                        <GridItem bg="brand.primary" px={4} py={3}>
+                          <Text
+                            color="brand.white"
+                            fontWeight="medium"
+                            textStyle="size-lg"
+                          >
+                            Address
+                          </Text>
+                        </GridItem>
+                        <GridItem bg="brand.primary" px={4} py={3}>
+                          <Text
+                            color="white"
+                            fontWeight="medium"
+                            textStyle="size-lg"
+                          >
+                            City
+                          </Text>
+                        </GridItem>
+                        <GridItem bg="brand.primary" px={4} py={3}>
+                          <Text
+                            color="brand.white"
+                            fontWeight="medium"
+                            textStyle="size-lg"
+                          >
+                            State
+                          </Text>
+                        </GridItem>
+                        <GridItem bg="brand.primary" px={4} py={3}>
+                          <Text
+                            color="brand.white"
+                            fontWeight="medium"
+                            textStyle="size-lg"
+                          >
+                            Zipcode
+                          </Text>
+                        </GridItem>
+                        <GridItem bg="brand.primary" px={4} py={3}>
+                          <Text
+                            color="brand.white"
+                            fontWeight="medium"
+                            textStyle="size-lg"
+                          >
+                            Door Distance / Stairs
+                          </Text>
+                        </GridItem>
+                      </Grid>
+                      <Grid templateColumns="repeat(5, 1fr)">
+                        <GridItem
+                          bg="brand.white"
+                          px={4}
+                          py={4}
+                          borderTop="1px solid"
+                          borderColor="gray.100"
+                        >
+                          <Text fontWeight="normal" textStyle="size-lg">
+                            -
+                          </Text>
+                        </GridItem>
+                        <GridItem
+                          bg="brand.white"
+                          px={4}
+                          py={4}
+                          borderTop="1px solid"
+                          borderColor="gray.100"
+                        >
+                          <Text fontWeight="normal" textStyle="size-lg">
+                            -
+                          </Text>
+                        </GridItem>
+                        <GridItem
+                          bg="brand.white"
+                          px={4}
+                          py={4}
+                          borderTop="1px solid"
+                          borderColor="gray.100"
+                        >
+                          <Text fontWeight="normal" textStyle="size-lg">
+                            TX
+                          </Text>
+                        </GridItem>
+                        <GridItem
+                          bg="brand.white"
+                          px={4}
+                          py={4}
+                          borderTop="1px solid"
+                          borderColor="gray.100"
+                        >
+                          <Text fontWeight="normal" textStyle="size-lg">
+                            49839
+                          </Text>
+                        </GridItem>
+                        <GridItem
+                          bg="brand.white"
+                          px={4}
+                          py={4}
+                          borderTop="1px solid"
+                          borderColor="gray.100"
+                        >
+                          <Text fontWeight="normal" textStyle="size-lg">
+                            Less than 100 Feets/0
+                          </Text>
+                        </GridItem>
+                      </Grid>
+                    </Box>
+                  </Box>
                 </Box>
 
                 {/* End Address Table */}
-                 <Text
+                <Text
                   textStyle="size-sm"
                   fontWeight="semibold"
                   color="gray.500"
@@ -643,110 +673,114 @@ const Confirmation = () => {
                   borderColor="brand.gray"
                   overflow="hidden"
                 >
-                  <Grid templateColumns="repeat(5, 1fr)">
-                    <GridItem bg="brand.primary" px={4} py={3}>
-                      <Text
-                        color="brand.white"
-                        fontWeight="medium"
-                        textStyle="size-lg"
-                      >
-                        Address
-                      </Text>
-                    </GridItem>
-                    <GridItem bg="brand.primary" px={4} py={3}>
-                      <Text
-                        color="brand.white"
-                        fontWeight="medium"
-                        textStyle="size-lg"
-                      >
-                        City
-                      </Text>
-                    </GridItem>
-                    <GridItem bg="brand.primary" px={4} py={3}>
-                      <Text
-                        color="brand.white"
-                        fontWeight="medium"
-                        textStyle="size-lg"
-                      >
-                        State
-                      </Text>
-                    </GridItem>
-                    <GridItem bg="brand.primary" px={4} py={3}>
-                      <Text
-                        color="brand.white"
-                        fontWeight="medium"
-                        textStyle="size-lg"
-                      >
-                        Zipcode
-                      </Text>
-                    </GridItem>
-                    <GridItem bg="brand.primary" px={4} py={3}>
-                      <Text
-                        color="brand.white"
-                        fontWeight="medium"
-                        textStyle="size-lg"
-                      >
-                        Door Distance / Stairs
-                      </Text>
-                    </GridItem>
-                  </Grid>
-                  <Grid templateColumns="repeat(5, 1fr)">
-                    <GridItem
-                      bg="brand.white"
-                      px={4}
-                      py={4}
-                      borderTop="1px solid"
-                      borderColor="brand.gray"
-                    >
-                      <Text fontWeight="normal" textStyle="size-lg">
-                        -
-                      </Text>
-                    </GridItem>
-                    <GridItem
-                      bg="brand.white"
-                      px={4}
-                      py={4}
-                      borderTop="1px solid"
-                      borderColor="brand.gray"
-                    >
-                      <Text fontWeight="normal" textStyle="size-lg">
-                        -
-                      </Text>
-                    </GridItem>
-                    <GridItem
-                      bg="brand.white"
-                      px={4}
-                      py={4}
-                      borderTop="1px solid"
-                      borderColor="brand.gray"
-                    >
-                      <Text fontWeight="normal" textStyle="size-lg">
-                        TX
-                      </Text>
-                    </GridItem>
-                    <GridItem
-                      bg="brand.white"
-                      px={4}
-                      py={4}
-                      borderTop="1px solid"
-                      borderColor="brand.gray"
-                    >
-                      <Text fontWeight="normal" textStyle="size-lg">
-                        98594
-                      </Text>
-                    </GridItem>
-                    <GridItem
-                      bg="brand.white"
-                      px={4}
-                      py={4}
-                      borderTop="1px solid"
-                      borderColor="barnd.gray"
-                    >
-                      <Text fontWeight="normal" textStyle="size-lg">
-                        Less than 100 Feets/0
-                      </Text>
-                    </GridItem>
-                  </Grid>
+                  <Box overflowX="auto">
+                    <Box minW="600px">
+                      <Grid templateColumns="repeat(5, 1fr)">
+                        <GridItem bg="brand.primary" px={4} py={3}>
+                          <Text
+                            color="brand.white"
+                            fontWeight="medium"
+                            textStyle="size-lg"
+                          >
+                            Address
+                          </Text>
+                        </GridItem>
+                        <GridItem bg="brand.primary" px={4} py={3}>
+                          <Text
+                            color="brand.white"
+                            fontWeight="medium"
+                            textStyle="size-lg"
+                          >
+                            City
+                          </Text>
+                        </GridItem>
+                        <GridItem bg="brand.primary" px={4} py={3}>
+                          <Text
+                            color="brand.white"
+                            fontWeight="medium"
+                            textStyle="size-lg"
+                          >
+                            State
+                          </Text>
+                        </GridItem>
+                        <GridItem bg="brand.primary" px={4} py={3}>
+                          <Text
+                            color="brand.white"
+                            fontWeight="medium"
+                            textStyle="size-lg"
+                          >
+                            Zipcode
+                          </Text>
+                        </GridItem>
+                        <GridItem bg="brand.primary" px={4} py={3}>
+                          <Text
+                            color="brand.white"
+                            fontWeight="medium"
+                            textStyle="size-lg"
+                          >
+                            Door Distance / Stairs
+                          </Text>
+                        </GridItem>
+                      </Grid>
+                      <Grid templateColumns="repeat(5, 1fr)">
+                        <GridItem
+                          bg="brand.white"
+                          px={4}
+                          py={4}
+                          borderTop="1px solid"
+                          borderColor="brand.gray"
+                        >
+                          <Text fontWeight="normal" textStyle="size-lg">
+                            -
+                          </Text>
+                        </GridItem>
+                        <GridItem
+                          bg="brand.white"
+                          px={4}
+                          py={4}
+                          borderTop="1px solid"
+                          borderColor="brand.gray"
+                        >
+                          <Text fontWeight="normal" textStyle="size-lg">
+                            -
+                          </Text>
+                        </GridItem>
+                        <GridItem
+                          bg="brand.white"
+                          px={4}
+                          py={4}
+                          borderTop="1px solid"
+                          borderColor="brand.gray"
+                        >
+                          <Text fontWeight="normal" textStyle="size-lg">
+                            TX
+                          </Text>
+                        </GridItem>
+                        <GridItem
+                          bg="brand.white"
+                          px={4}
+                          py={4}
+                          borderTop="1px solid"
+                          borderColor="brand.gray"
+                        >
+                          <Text fontWeight="normal" textStyle="size-lg">
+                            98594
+                          </Text>
+                        </GridItem>
+                        <GridItem
+                          bg="brand.white"
+                          px={4}
+                          py={4}
+                          borderTop="1px solid"
+                          borderColor="barnd.gray"
+                        >
+                          <Text fontWeight="normal" textStyle="size-lg">
+                            Less than 100 Feets/0
+                          </Text>
+                        </GridItem>
+                      </Grid>
+                    </Box>
+                  </Box>
                 </Box>
 
                 {/* Map + Directions Panel */}

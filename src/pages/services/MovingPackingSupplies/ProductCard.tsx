@@ -84,22 +84,15 @@ const ProductCard = memo(
           </Text>
 
           {/* Action Buttons */}
-          <HStack gap={2} justify="flex-end">
-            {isInCart && (
-              <Button
-                label="View Cart"
-                variant="outline"
-                onClick={onViewCart}
-                aria-label="View shopping cart"
-              />
-            )}
-
+          <HStack justify="flex-end">
             <Button
-              label={isInCart ? "Added" : "Add To Cart"}
+              label={isInCart ? "View Cart" : "Add To Cart"}
               variant={isInCart ? "outline" : "primary"}
               leftIcon={isInCart ? <FiCheck /> : <FiShoppingCart />}
-              onClick={() => onAddToCart(product)}
-              disabled={isInCart}
+              onClick={isInCart ? onViewCart : () => onAddToCart(product)}
+              aria-label={
+                isInCart ? "View shopping cart" : "Add product to cart"
+              }
             />
           </HStack>
         </VStack>
