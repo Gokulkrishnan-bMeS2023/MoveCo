@@ -5,7 +5,7 @@ import { POLICY_DATA } from "./data";
 const PrivacyPolicyPage = () => {
   return (
     <Container>
-      <Heading as="h1" fontWeight="normal" mb={{ base: 4, lg: 6 }}>
+      <Heading as="h1" fontWeight="normal" mb={{ base: 4, lg: 6 }} textAlign={{ base: "center", lg: "left" }}>
         Privacy &{" "}
         <Text as="span" color="brand.primary">
           Security Policy

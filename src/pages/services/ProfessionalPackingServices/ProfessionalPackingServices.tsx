@@ -46,7 +46,7 @@ const PackingServicesPage = () => {
         mb={{ base: 4, lg: 6 }}
       >
         <Box maxW="600px" w="100%">
-          <Heading as="h1" fontWeight="normal">
+          <Heading as="h1" fontWeight="normal" textAlign={{base: "center", lg: "left"}}>
             Professional{" "}
             <Text as="span" color="brand.primary">
               Packing Services
@@ -54,15 +54,15 @@ const PackingServicesPage = () => {
           </Heading>
         </Box>
         <Box maxW="430px" w="100%">
-          <Text textStyle="size-2xl" textAlign={{ base: "left", md: "right" }}>
+          <Text textStyle="size-2xl" textAlign={{ base: "center", md: "right" }}>
             Transparent pricing • Professional packing • No hidden costs
           </Text>
         </Box>
       </Flex>
 
-      <VStack gap={8}>
+      <VStack gap={{base: 6, lg: 8}}>
         <Box >
-          <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={8}>
+          <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={{base: 6,md: 8}}>
             <For each={PACKING_OPTIONS}>
               {(option) => <OptionCard key={option.id} {...option} />}
             </For>

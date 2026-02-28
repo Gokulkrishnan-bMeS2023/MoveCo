@@ -46,7 +46,7 @@ const Home = () => {
             justify="space-between"
             align="center"
             mb={{ base: 4, lg: 6 }}
-            gap={{ base: 6, lg: 12 }}
+            gap={{ base: 4, lg: 12 }}
           >
             <Heading
               as="h1" fontWeight="normal"
@@ -90,7 +90,7 @@ const Home = () => {
             justify="space-between"
             align="center"
            mb={{ base: 4, lg: 6 }}
-            gap={{ base: 6, lg: 12 }}
+            gap={{ base: 4, lg: 12 }}
           >
             <Heading
               as="h1" fontWeight="normal"

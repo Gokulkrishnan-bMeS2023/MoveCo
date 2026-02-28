@@ -33,51 +33,6 @@ const AddTestimonial = () => {
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-// const handleSubmit = () => {
-//   const newErrors = validateTestimonial(values);
-//   if (Object.keys(newErrors).length > 0) {
-//     setErrors(newErrors);
-//     return;
-//   }
-//   setErrors({});
-//   alert("Testimonial Submitted Successfully!");
-// };
-
-// const handleSubmit = async () => {
-//     const newErrors = validateTestimonial(values);
-//     if (Object.keys(newErrors).length > 0) {
-//       setErrors(newErrors);
-//       return;
-//     }
-
-//     const payload = {
-//       firstName: values.firstName,
-//       lastName: values.lastName,
-//       moveDate: new Date(values.moveDate).toISOString(),
-//       email: values.email,
-//       comments: values.comments,
-//       isActive: true,
-//     };
-// console.log(payload);
-//     try {
-//       await postTestimonial(payload);
-//       alert("Testimonial submitted successfully!");
-//       navigate("/");
-//     } catch (error: any) {
-//   if (error.response) {
-//     console.error("Status:", error.response.status);
-//     console.error("Data:", error.response.data);
-//     alert(error.response.data?.message || "Server error");
-//   } else if (error.request) {
-//     console.error("No response from server:", error.request);
-//     alert("No response from server");
-//   } else {
-//     console.error("Error:", error.message);
-//     alert(error.message);
-//   }
-// }
-//   };
-
 const handleSubmit = async () => {
     const newErrors = validateTestimonial(values);
     if (Object.keys(newErrors).length > 0) {
@@ -123,7 +78,7 @@ const handleSubmit = async () => {
          gap={{ base: 4, md: 10 }}
       >
         <Box maxW={{ lg: "45%" }}>
-          <Heading as="h1" fontWeight="normal">
+          <Heading as="h1" fontWeight="normal" textAlign={{base: "center", md: "left"}}>
             Add
             <Text as="span" color="brand.primary">
               {" "}
@@ -131,7 +86,7 @@ const handleSubmit = async () => {
             </Text>
           </Heading>
         </Box>
-        <Box maxW={{ lg: "46%" }}>
+        <Box maxW={{ lg: "46%" }} textAlign={{base: "center", md: "left"}}>
           <Text textStyle={"size-2xl"}>
             You are about to post a comment on our “testimonial board”.If you
             need to contact customer service please {" "}

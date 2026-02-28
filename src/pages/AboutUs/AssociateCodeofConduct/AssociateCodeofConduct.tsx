@@ -19,7 +19,7 @@ const AssociateCodeOfConduct = () => {
         bgImage={images.insuranceBanner}
       />
       <Box pt="sectionTop">
-        <Heading mb={{ base: 4, lg: 6 }} as="h1" fontWeight="normal">
+        <Heading mb={{ base: 4, lg: 6 }} as="h1" fontWeight="normal" textAlign={{base: "center", lg: "left"}}>
           Dress{" "}
           <Text as="span" color="brand.primary">
             Code
@@ -33,6 +33,7 @@ const AssociateCodeOfConduct = () => {
           w={{ base: "100%", lg: "50%" }}
           as="h1"
           fontWeight="normal"
+          textAlign={{base: "center", lg: "left"}}
         >
           Customer{" "}
           <Text as="span" color="brand.primary">
@@ -51,6 +52,7 @@ const AssociateCodeOfConduct = () => {
           as="h1"
           fontWeight="normal"
           w={{ base: "100%", lg: "50%" }}
+          textAlign={{base: "center", lg: "left"}}
         >
           Dealing with{" "}
           <Text as="span" color="brand.primary">

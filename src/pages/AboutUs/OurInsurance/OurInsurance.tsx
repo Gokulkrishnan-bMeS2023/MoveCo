@@ -14,9 +14,11 @@ const OurInsurance = () => {
         <HeroBanner title="Our Insurance" bgImage={images.insuranceBanner} />
         <Box pt="sectionTop">
           <Box>
+            <Flex justify={{ base: "center", md: "flex-start" }}>
             <Badge
               label="Our Insurance" mb={4}
             />
+            </Flex>
             <Flex
               direction={{ base: "column", md: "row" }}
               align={{ base: "flex-start", md: "center" }}
@@ -25,7 +27,7 @@ const OurInsurance = () => {
               mb={{ base: 4, lg: 6 }}
             >
               <Box maxW="600px" w="100%">
-                <Heading as="h1" fontWeight="normal">
+                <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
                   Why Insurance Matters <br />
                   In{" "}
                   <Text as="span" color="brand.primary">
@@ -36,7 +38,7 @@ const OurInsurance = () => {
               <Box maxW="430px" w="100%">
                 <Text
                   textStyle="size-2xl"
-                  textAlign={{ base: "left", md: "right" }}
+                  textAlign={{ base: "center", md: "right" }}
                 >
                   For more than 100 years experience, We move coast to coast
                   under our own authority.
@@ -62,10 +64,12 @@ const OurInsurance = () => {
         </Box>
         <Box pt="sectionTop">
           <Box>
+            <Flex justify={{ base: "center", md: "flex-start" }}>
             <Badge
               label="Our Coverage"
               mb={4}
             />
+            </Flex>
             <Flex
               direction={{ base: "column", md: "row" }}
               align={{ base: "flex-start", md: "center" }}
@@ -74,7 +78,7 @@ const OurInsurance = () => {
               mb={{ base: 4, lg: 6 }}
             >
               <Box maxW="600px" w="100%">
-                <Heading as="h1" fontWeight="normal">
+                <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
                   <Text as="span" color="brand.primary">
                     With MoveCo, <br />
                   </Text>
@@ -84,7 +88,7 @@ const OurInsurance = () => {
               <Box maxW="430px" w="100%">
                 <Text
                   textStyle="size-2xl"
-                  textAlign={{ base: "left", md: "right" }}
+                  textAlign={{ base: "center", md: "right" }}
                 >
                   Our coverage options are designed to protect your belongings
                   and give you peace of mind.
@@ -105,7 +109,7 @@ const OurInsurance = () => {
             mb={{ base: 4, lg: 6 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal">
+              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
                 <Text as="span" color="brand.primary">
                   MoveCo <br />
                 </Text>
@@ -115,7 +119,7 @@ const OurInsurance = () => {
             <Box maxW="430px" w="100%">
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "left", md: "right" }}
+                textAlign={{ base: "center", md: "right" }}
               >
                 Our movers are experienced and very careful, and we back this up
                 with an in-house policy.

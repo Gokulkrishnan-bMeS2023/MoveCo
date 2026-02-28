@@ -23,7 +23,7 @@ const ProductCard = memo(
   }: ProductCardProps) => {
     return (
       <Box
-        bg="white"
+        bg="brand.white"
         borderRadius={{ base: "lg", md: "xl" }}
         overflow="hidden"
         boxShadow="lg"

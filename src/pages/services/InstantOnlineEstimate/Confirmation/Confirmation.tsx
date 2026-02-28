@@ -21,7 +21,7 @@ const Confirmation = () => {
       <Container>
         <Flex direction="column" align="flex-start" mb={{ base: 4, lg: 6 }} gap={{ base: 4, md: 10 }}>
           <Box maxW="800px" w="100%">
-            <Heading as="h1" fontWeight="normal">
+            <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md: "left"}}>
               Quote for your{" "}
               <Text as="span" color="brand.primary">
                 Move
@@ -86,7 +86,7 @@ const Confirmation = () => {
                 {/* Table Data Row - White */}
                 <Grid templateColumns="repeat(4, 1fr)">
                   <GridItem
-                    bg="white"
+                    bg="brand.white"
                     px={4}
                     py={4}
                     borderTop="1px solid"
@@ -145,7 +145,9 @@ const Confirmation = () => {
           </Box>
 
         <Box pt="sectionTop">
+          <Flex justify={{ base: "center", md: "flex-start" }}>
           <Badge label="Includes" mb={4}/>
+          </Flex>
           <Flex
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
@@ -154,8 +156,8 @@ const Confirmation = () => {
             mb={{ base: 4, lg: 6 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal">
-                Your Quote <br />{" "}
+              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
+                Your Quote {" "}
                 <Text as="span" color="brand.primary">
                   Includes
                 </Text>
@@ -164,7 +166,7 @@ const Confirmation = () => {
             <Box maxW="430px" w="100%">
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "left", md: "right" }}
+                textAlign={{ base: "center", md: "right" }}
               >
                 Every quote covers insurance, protection, and full-service care
                 — no hidden costs, no surprises.
@@ -825,7 +827,7 @@ const Confirmation = () => {
             gap={{ base: 4, md: 10 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal">
+              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
                 <Text as="span" color="brand.primary">
                   MoveCo <br />
                 </Text>
@@ -835,7 +837,7 @@ const Confirmation = () => {
             <Box maxW="430px" w="100%">
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "left", md: "right" }}
+                textAlign={{ base: "center", md: "right" }}
               >
                 Everything you need to know about your move — pricing, crew,
                 equipment, and customer protection

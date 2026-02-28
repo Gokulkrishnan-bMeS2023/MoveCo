@@ -88,7 +88,7 @@ const InstantOnlineEstimate = () => {
         mb={{ base: 4, lg: 6 }}
       >
         <Box maxW="600px" w="100%">
-          <Heading as="h1" fontWeight="normal">
+          <Heading as="h1" fontWeight="normal"  textAlign={{base: "center", lg: "left"}}>
             Instant{" "}
             <Text as="span" color="brand.primary">
               Online Estimate
@@ -96,7 +96,7 @@ const InstantOnlineEstimate = () => {
           </Heading>
         </Box>
         <Box maxW="500px" w="100%">
-          <Text textStyle="size-2xl" textAlign={{ base: "left", md: "right" }}>
+          <Text textStyle="size-2xl" textAlign={{ base: "center", md: "right" }}>
             Already have an inventory list? Avoid surprises and get an
             immediate, guaranteed fixed-price moving quote right now.
           </Text>

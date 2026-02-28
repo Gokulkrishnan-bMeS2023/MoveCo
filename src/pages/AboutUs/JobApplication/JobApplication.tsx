@@ -8,7 +8,7 @@ const JobApplication = () => {
     <Container>
       <Flex direction="column" align="flex-start" gap={4}>
         <Box maxW="800px" w="100%">
-          <Heading as="h1" fontWeight="normal">
+          <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
             Join the {""}
             <Text as="span" color="brand.primary">
               MoveCo
@@ -17,7 +17,7 @@ const JobApplication = () => {
           </Heading>
         </Box>
         <Box w="100%">
-          <Text textStyle="size-lg">
+          <Text textStyle="size-lg" textAlign={{base: "center",md:"left"}}>
             All potential employees are evaluated without regard to race, color,
             religion, gender, national origin, age, marital or veteran status,
             the presence of a non-job related handicap or any other legally

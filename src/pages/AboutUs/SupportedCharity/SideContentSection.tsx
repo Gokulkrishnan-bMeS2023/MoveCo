@@ -30,7 +30,7 @@ const SideContentSection = ({
   return (
     <>
       <Box w={{ base: "100%", lg: "50%" }}>
-        <Heading mb={{ base: 4, lg: 6 }} as="h2" fontWeight="normal">
+        <Heading mb={{ base: 4, lg: 6 }} as="h2" fontWeight="normal" textAlign={{base: "center", lg: "left"}}>
           {normalText}{" "}
           <Text as="span" color="brand.primary">
             {coloredText}
@@ -60,11 +60,10 @@ const SideContentSection = ({
           </AspectRatio>
         </Box>
 
-        <Box w={{ base: "100%", lg: "50%" }}>
+        <Box w={{ base: "100%", lg: "50%" }} textAlign={{base: "center", lg: "left"}}>
           <Text textStyle="size-xl" mb={3}>
             {description}
           </Text>
-
           {description2 && (
             <Text textStyle="size-xl" mb={3}>
               {description2}
@@ -72,8 +71,7 @@ const SideContentSection = ({
           )}
 
           <Button
-           textStyle="xl"
-            fontSize="xl"
+           textStyle="size-xl"
             label={linkText}
             variant="outline"
             as="a"

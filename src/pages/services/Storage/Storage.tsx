@@ -33,13 +33,13 @@ export default function StoragePage() {
         justify="space-between"
         gap={{ base: 4, md: 10 }}
       >
-        <Box maxW="600px" w="100%">
+        <Box maxW="600px" w="100%" textAlign={{base: "center",md: "left"}}>
           <Heading as="h1" fontWeight="normal" color={"brand.primary"}>
             Storages
           </Heading>
         </Box>
-        <Box maxW="430px" w="100%">
-          <Text textStyle="size-2xl" textAlign={{ base: "left", md: "right" }}>
+        <Box width={{base: "100%", md: "430px"}}>
+          <Text textStyle="size-2xl" textAlign={{ base: "center", md: "right" }}>
             Professional storage service for your possessions during the move
           </Text>
         </Box>
@@ -47,7 +47,7 @@ export default function StoragePage() {
       <SimpleGrid
         columns={{ base: 1, md: 2 }}
         alignItems="flex-start"
-        gap={{ base: 8, md: 12 }}
+        gap={{ base: 4, md: 10 }}
       >
         <Box w="100%" maxW={{ base: "100%", md: "550px" }}>
           {/* <Image
@@ -70,8 +70,8 @@ export default function StoragePage() {
             height={350}
           />
         </Box>
-        <Stack gap={6}>
-          <Text textStyle="size-xl">
+        <Stack gap={4}>
+          <Text textStyle="size-xl" textAlign={{base: "center", md: "left"}}>
             MoveCo.net offers climate controlled storage service with 24-hour
             security cameras at our Lewisville facility. One of the major
             advantage of using our storage service is the convenience that it
@@ -82,7 +82,7 @@ export default function StoragePage() {
             one house to another, you will not only use this service again but
             recommend it to friends and family.
           </Text>
-          <Box>
+          <Box textAlign={{base: "center", md: "left"}}>
             <Text
               textStyle="size-xl"
               lineClamp={showAll ? undefined : 2}
@@ -100,7 +100,7 @@ export default function StoragePage() {
 
             <Button
               mt={3}
-              textStyle="xl"
+              textStyle="size-xl"
               rounded="full"
               variant="outline"
               label={showAll ? "View less" : "View all"}

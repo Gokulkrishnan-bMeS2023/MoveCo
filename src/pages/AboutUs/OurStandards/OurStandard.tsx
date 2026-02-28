@@ -13,9 +13,11 @@ const OurStandard = () => {
       <Container>
         <HeroBanner title="Our Standard" bgImage={images.insuranceBanner} />
         <Box pt="sectionTop">
+          <Flex justify={{ base: "center", md: "flex-start" }}>
           <Badge
             label="Benefits" mb={4}
           />
+          </Flex>
           <Flex
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
@@ -24,8 +26,8 @@ const OurStandard = () => {
             mb={{ base: 4, lg: 6 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal">
-                Our <br />{" "}
+              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
+                Our {" "}
                 <Text as="span" color="brand.primary">
                   Standards
                 </Text>
@@ -34,7 +36,7 @@ const OurStandard = () => {
             <Box maxW="430px" w="100%">
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "left", md: "right" }}
+                textAlign={{ base: "center", md: "right" }}
               >
                 For more than 100 years experience, We move coast to coast under
                 our own authority.
@@ -54,7 +56,7 @@ const OurStandard = () => {
             gap={{ base: 4, md: 10 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal">
+              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
                 <Text as="span" color="brand.primary">
                   MoveCo <br />
                 </Text>
@@ -64,7 +66,7 @@ const OurStandard = () => {
             <Box maxW="430px" w="100%">
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "left", md: "right" }}
+                textAlign={{ base: "center", md: "right" }}
               >
                 Our professional standards ensure safety, compliance, and
                 transparency on every move.

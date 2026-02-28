@@ -34,7 +34,7 @@ const PageHeader = () => (
 
 const ProductSkeleton = () => (
   <Box
-    bg="white"
+    bg="brand.white"
     borderRadius={{ base: "lg", md: "xl" }}
     overflow="hidden"
     boxShadow="lg"

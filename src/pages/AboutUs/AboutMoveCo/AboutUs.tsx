@@ -14,16 +14,21 @@ const AboutUs = () => {
   const navigate = useNavigate();
   const missionContent = (
     <>
+     <Flex justify={{ base: "center", md: "flex-start" }}>
       <Badge label="Our Mission" mb={4}/>
+      </Flex>
       We aim to impress you with our service so much that you'll share our
       business cards with your friends and colleagues, post your text and video
       testimonials on our website, and choose us for your next move.
     </>
+    
   );
 
   const testimonialContent = (
     <>
+      <Flex justify={{ base: "center", md: "flex-start" }}>
       <Badge label="Testimonials" mb={4} />
+      </Flex>
       Our online testimonial board goes a step further. You can post your moving
       experience for our future customers to see. You can also go to our website
       & see over 10 years of customer reviews. Our crews make the difference. We
@@ -41,7 +46,9 @@ const AboutUs = () => {
           overlayOpacity={0.1}
         />
         <Box pt="sectionTop">
-          <Badge label="About Us" mb={4}/>
+          <Flex justify={{ base: "center", md: "flex-start" }}>
+  <Badge label="About Us" mb={4} />
+</Flex>
           <Flex
             mb={{ base: 4, lg: 6 }}
             direction={{ base: "column", md: "row" }}
@@ -58,10 +65,9 @@ const AboutUs = () => {
                 </Text>
               </Heading>
             </Box>
-            <Box maxW="430px" w="100%">
+            <Box width={{ base: "100%", lg: "45%" }} textAlign={{ base: "center", md: "right" }}>
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "left", md: "right" }}
               >
                 For more than 100 years experience, We move coast to coast under
                 our own authority.
@@ -79,7 +85,9 @@ const AboutUs = () => {
           />
         </Box>
         <Box pt="sectionTop">
+          <Flex justify={{ base: "center", md: "flex-start" }}>
           <Badge label="Features" mb={4}/>
+          </Flex>
           <Flex
             direction={{ base: "column", md: "row" }}
             align={{ base: "flex-start", md: "center" }}
@@ -88,18 +96,18 @@ const AboutUs = () => {
             mb={{ base: 4, lg: 6 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal">
-                What Do You Get <br />
+              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
+                What Do You Get 
                 When you In{" "}
                 <Text as="span" color="brand.primary">
-                  Choose <br /> Us?
+                  Choose  Us?
                 </Text>
               </Heading>
             </Box>
             <Box maxW="430px" w="100%">
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "left", md: "right" }}
+                textAlign={{ base: "center", md: "right" }}
               >
                 For more than 100 years experience, We move coast to coast under
                 our own authority.
@@ -131,8 +139,8 @@ const AboutUs = () => {
             gap={{ base: 4, md: 10 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal">
-                Our <br />{" "}
+              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
+                Our {" "}
                 <Text as="span" color="brand.primary">
                   Standards
                 </Text>
@@ -141,7 +149,7 @@ const AboutUs = () => {
             <Box maxW="430px" w="100%">
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "left", md: "right" }}
+                textAlign={{ base: "center", md: "right" }}
               >
                 For more than 100 years experience, We move coast to coast under
                 our own authority.

@@ -160,15 +160,15 @@ const InHomeMoveEstimate = () => {
         gap={{ base: 4, md: 10 }}
         mb={{ base: 4, lg: 6 }}
       >
-        <Heading as="h1" fontWeight="normal" w={{ base: "100%", lg: "50%" }}>
+        <Heading as="h1" fontWeight="normal" w={{ base: "100%", lg: "50%" }}  textAlign={{base: "center", lg: "left"}}>
           In-Home <br />
           <Text as="span" color="brand.primary">
             Move Estimate
           </Text>
         </Heading>
 
-        <Box maxW={{ lg: "45%" }}>
-          <Text textStyle="size-xl" textAlign={{ base: "left", md: "right" }}>
+        <Box maxW={{ lg: "45%" }} >
+          <Text textStyle="size-xl" textAlign={{ base: "center", md: "right" }}>
             All information will not be released to any other person or company,
             please read our{" "}
             <Text

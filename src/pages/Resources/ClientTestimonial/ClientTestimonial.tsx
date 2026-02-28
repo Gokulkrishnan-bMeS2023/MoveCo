@@ -8,7 +8,7 @@ const ClientTestimonial = () => {
 
   return (
    <Container>
-      <Heading  mb={{base:6, lg:8}} as="h2" fontWeight="normal" color="brand.primary">
+      <Heading  mb={{base:4, lg:6}} as="h2" fontWeight="normal" color="brand.primary" textAlign={{base: "center", md: "left"}}>
         Client Speaks
       </Heading>
 
