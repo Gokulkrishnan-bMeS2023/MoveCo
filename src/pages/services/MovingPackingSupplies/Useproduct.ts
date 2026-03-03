@@ -25,7 +25,7 @@ export const useProducts = (): UseProductsReturn => {
       try {
         const res = await getProducts();
         if (!cancelled) {
-          setProducts(res?.data?.data || []);
+          setProducts(res?.data || []);
         }
       } catch (err) {
         if (!cancelled) {

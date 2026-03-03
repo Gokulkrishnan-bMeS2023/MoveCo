@@ -9,9 +9,9 @@ export interface TestimonialPayload {
 }
 
 export const postTestimonial = (data: TestimonialPayload) => {
-  return api.post("/Testimonial", data);
+  return api.post("/testimonials", data);
 };
 
 export const getTestimonial = () => {
-  return api.get("/Testimonial");
+  return api.get("/testimonials");
 };
