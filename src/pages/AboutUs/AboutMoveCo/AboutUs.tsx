@@ -74,28 +74,26 @@ const AboutUs = () => {
           </Flex>
           <Flex
             mb={{ base: 4, lg: 6 }}
-            direction={{ base: "column", md: "row" }}
-            align={{ base: "flex-start", md: "center" }}
+            direction={{ base: "column", lg: "row" }}
+            align="center"
             justify="space-between"
-            gap={{ base: 4, md: 10 }}
+            gap={{ base: 4, lg: 10 }}
           >
-            <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" textAlign={{ base: "center", md: "left" }}>
-                What Do We Do <br />
+              <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "left" }}>
+                What Do We Do 
                 In{" "}
                 <Text as="span" color="brand.primary">
                   MoveCo?
                 </Text>
               </Heading>
-            </Box>
-            <Box width={{ base: "100%", lg: "45%" }} textAlign={{ base: "center", md: "right" }}>
               <Text
                 textStyle="size-2xl"
+                maxW={{ lg: "45%" }}
+                textAlign={{ base: "center", lg: "right" }}
               >
                 For more than 100 years experience, We move coast to coast under
                 our own authority.
               </Text>
-            </Box>
           </Flex>
 
           <ImageTextSection image={images.service1} content={missionContent} />
@@ -108,34 +106,31 @@ const AboutUs = () => {
           />
         </Box>
         <Box pt="sectionTop">
-          <Flex justify={{ base: "center", md: "flex-start" }}>
+          <Flex justify={{ base: "center", lg: "flex-start" }}>
             <Badge label="Features" mb={4} />
           </Flex>
           <Flex
-            direction={{ base: "column", md: "row" }}
-            align={{ base: "flex-start", md: "center" }}
+            direction={{ base: "column", lg: "row" }}
             justify="space-between"
-            gap={{ base: 4, md: 10 }}
+            align="center"
+            gap={{ base: 4, lg: 10 }}
             mb={{ base: 4, lg: 6 }}
           >
-            <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" textAlign={{ base: "center", md: "left" }}>
+              <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "left" }}>
                 What Do You Get
                 When you In{" "}
                 <Text as="span" color="brand.primary">
                   Choose  Us?
                 </Text>
               </Heading>
-            </Box>
-            <Box maxW="430px" w="100%">
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "center", md: "right" }}
+                maxW={{ lg: "45%" }}
+                textAlign={{ base: "center", lg: "right" }}
               >
                 For more than 100 years experience, We move coast to coast under
                 our own authority.
               </Text>
-            </Box>
           </Flex>
           <CardTemplate data={features} />
         </Box>
@@ -156,28 +151,25 @@ const AboutUs = () => {
           </Flex>
           <Flex
             mb={{ base: 4, lg: 6 }}
-            direction={{ base: "column", md: "row" }}
-            align={{ base: "flex-start", md: "center" }}
+            direction={{ base: "column", lg: "row" }}
+            align="center"
             justify="space-between"
-            gap={{ base: 4, md: 10 }}
+            gap={{ base: 4, lg: 10 }}
           >
-            <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" textAlign={{ base: "center", md: "left" }}>
+              <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "left" }}>
                 Our {" "}
                 <Text as="span" color="brand.primary">
                   Standards
                 </Text>
               </Heading>
-            </Box>
-            <Box maxW="430px" w="100%">
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "center", md: "right" }}
+                maxW={{ lg: "45%" }}
+                textAlign={{ base: "center", lg: "right" }}
               >
                 For more than 100 years experience, We move coast to coast under
                 our own authority.
               </Text>
-            </Box>
           </Flex>
           <CardTemplate data={benefits} />
         </Box>

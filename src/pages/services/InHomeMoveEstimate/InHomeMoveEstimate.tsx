@@ -154,21 +154,19 @@ const InHomeMoveEstimate = () => {
   return (
     <Container>
       <Flex
-        direction={{ base: "column", md: "row" }}
-        align={{ base: "flex-start", md: "center" }}
+        direction={{ base: "column", lg: "row" }}
+        align="center"
         justify="space-between"
-        gap={{ base: 4, md: 10 }}
+        gap={{ base: 4, lg: 10 }}
         mb={{ base: 4, lg: 6 }}
       >
-        <Heading as="h1" fontWeight="normal" w={{ base: "100%", lg: "50%" }}  textAlign={{base: "center", lg: "left"}}>
-          In-Home <br />
+        <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{base: "center", lg: "left"}}>
+          In-Home
           <Text as="span" color="brand.primary">
             Move Estimate
           </Text>
         </Heading>
-
-        <Box maxW={{ lg: "45%" }} >
-          <Text textStyle="size-xl" textAlign={{ base: "center", md: "right" }}>
+          <Text textStyle="size-xl" maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "right" }}>
             All information will not be released to any other person or company,
             please read our{" "}
             <Text
@@ -186,11 +184,13 @@ const InHomeMoveEstimate = () => {
               Be sure to ask about our packing services!
             </Text>
           </Text>
-        </Box>
       </Flex>
       
-      <SimpleGrid columns={{ base: 1, md: 2 }} alignItems="center">
-        <Box w="100%" maxW={{ base: "100%", md: "550px" }}>
+      <SimpleGrid 
+      columns={{ base: 1, lg: 2 }}
+      alignItems="center"
+      gap={{ base: 4, lg: 16 }}>
+        <Box w="100%">
           <Image
             src={images.inHomeMove}
             alt="footprint"
@@ -202,7 +202,7 @@ const InHomeMoveEstimate = () => {
           />
         </Box>
 
-          <Text mt={{ base: "4", md: "6" }} textStyle="size-3xl">
+          <Text textStyle="size-3xl" textAlign={{base: "center",lg:"left"}} >
             After filling out this form, an appointment will be made to have a
             real, live person come out and estimate your move costs. This is a
             free service, and is perfect for individuals who are unsure as to

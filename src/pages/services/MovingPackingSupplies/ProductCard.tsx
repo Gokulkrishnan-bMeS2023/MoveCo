@@ -65,7 +65,7 @@ const ProductCard = memo(
 
         {/* Product Details */}
         <VStack
-          gap={{ base: 2, md: 4 }}
+          gap={{ base: 2, md: 3 }}
           p={{ base: 4, md: 6 }}
           align="stretch"
           flex="1"

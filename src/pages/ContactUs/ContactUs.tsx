@@ -35,14 +35,14 @@ const ContactUsPage = () => {
       <HeroBanner bgImage={images.contact} title="Contact Us" />
       <Box pt="sectionTop">
         <Flex
-          direction={{ base: "column", md: "row" }}
-          align={{ base: "flex-start", md: "center" }}
+          direction={{ base: "column", lg: "row" }}
+          align="center"
           justify="space-between"
-          gap={{ base: 4, md: 10 }}
+          gap={{ base: 4, lg: 10 }}
           mb={{ base: 4, lg: 6 }}
         >
           <Box width={{ base: "100%", lg: "45%" }} >
-            <Heading as="h1" fontWeight="normal" textAlign={{base: "center", md: "left"}}>
+            <Heading as="h1" fontWeight="normal" textAlign={{base: "center", lg: "left"}}>
               Our {""}
               <Text as="span" color="brand.primary" >
                 Offices
@@ -52,7 +52,7 @@ const ContactUsPage = () => {
           <Box maxW={{ lg: "45%" }}>
             <Text
               textStyle="size-2xl"
-              textAlign={{ base: "center", md: "right" }}
+              textAlign={{ base: "center", lg: "right" }}
             >
               Visit us at any of our convenient locations across Texas.
             </Text>

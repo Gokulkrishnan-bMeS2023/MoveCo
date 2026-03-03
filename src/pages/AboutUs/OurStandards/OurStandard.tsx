@@ -13,35 +13,32 @@ const OurStandard = () => {
       <Container>
         <HeroBanner title="Our Standard" bgImage={images.insuranceBanner} />
         <Box pt="sectionTop">
-          <Flex justify={{ base: "center", md: "flex-start" }}>
+          <Flex justify={{ base: "center", lg: "flex-start" }}>
           <Badge
             label="Benefits" mb={4}
           />
           </Flex>
           <Flex
-            direction={{ base: "column", md: "row" }}
-            align={{ base: "flex-start", md: "center" }}
+            direction={{ base: "column", lg: "row" }}
+            align="center"
             justify="space-between"
-            gap={{ base: 4, md: 10 }}
+            gap={{ base: 4, lg: 10 }}
             mb={{ base: 4, lg: 6 }}
           >
-            <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
+              <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{base: "center",lg:"left"}}>
                 Our {" "}
                 <Text as="span" color="brand.primary">
                   Standards
                 </Text>
               </Heading>
-            </Box>
-            <Box maxW="430px" w="100%">
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "center", md: "right" }}
+                maxW={{ lg: "45%" }}
+                textAlign={{ base: "center", lg: "right" }}
               >
                 For more than 100 years experience, We move coast to coast under
                 our own authority.
               </Text>
-            </Box>
           </Flex>
           <CardTemplate data={standardFeature} />
         </Box>
@@ -50,28 +47,25 @@ const OurStandard = () => {
         <Container px={8} pt={4} pb={10}>
           <Flex
             mb={{ base: 4, lg: 6 }}
-            direction={{ base: "column", md: "row" }}
-            align={{ base: "flex-start", md: "center" }}
+            direction={{ base: "column", lg: "row" }}
+            align="center"
             justify="space-between"
-            gap={{ base: 4, md: 10 }}
+            gap={{ base: 4, lg: 10 }}
           >
-            <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
+              <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{base: "center",lg:"left"}}>
                 <Text as="span" color="brand.primary">
-                  MoveCo <br />
+                  MoveCo
                 </Text>
                 Professional Standards
               </Heading>
-            </Box>
-            <Box maxW="430px" w="100%">
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "center", md: "right" }}
+                maxW={{ lg: "45%" }}
+                textAlign={{ base: "center", lg: "right" }}
               >
                 Our professional standards ensure safety, compliance, and
                 transparency on every move.
               </Text>
-            </Box>
           </Flex>
           <CommonAccordion sections={professionalStandards} />
         </Container>

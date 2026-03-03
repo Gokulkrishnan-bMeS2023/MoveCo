@@ -28,21 +28,17 @@ export default function StoragePage() {
     <Container>
       <Flex
         mb={{ base: 4, lg: 6 }}
-        direction={{ base: "column", md: "row" }}
-        align={{ base: "flex-start", md: "center" }}
+        direction={{ base: "column", lg: "row" }}
+        align="center"
         justify="space-between"
-        gap={{ base: 4, md: 10 }}
+        gap={{ base: 4, lg: 10 }}
       >
-        <Box maxW="600px" w="100%" textAlign={{ base: "center", md: "left" }}>
-          <Heading as="h1" fontWeight="normal" color={"brand.primary"}>
+          <Heading as="h1" fontWeight="normal" color={"brand.primary"} maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "left" }}>
             Storages
           </Heading>
-        </Box>
-        <Box width={{ base: "100%", md: "430px" }}>
-          <Text textStyle="size-2xl" textAlign={{ base: "center", md: "right" }}>
+          <Text textStyle="size-2xl" maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "right" }}>
             Professional storage service for your possessions during the move.
           </Text>
-        </Box>
       </Flex>
       <SimpleGrid
         columns={{ base: 1, md: 2 }}

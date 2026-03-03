@@ -77,17 +77,14 @@ const handleSubmit = async () => {
         mb={{ base: 4, lg: 6 }}
          gap={{ base: 4, md: 10 }}
       >
-        <Box maxW={{ lg: "45%" }}>
-          <Heading as="h1" fontWeight="normal" textAlign={{base: "center", md: "left"}}>
+          <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{base: "center", md: "left"}}>
             Add
             <Text as="span" color="brand.primary">
               {" "}
               Testimonial
             </Text>
           </Heading>
-        </Box>
-        <Box maxW={{ lg: "46%" }} textAlign={{base: "center", md: "left"}}>
-          <Text textStyle={"size-2xl"}>
+          <Text textStyle={"size-2xl"} maxW={{ lg: "46%" }} textAlign={{base: "center", md: "left"}}>
             You are about to post a comment on our “testimonial board”.If you
             need to contact customer service please {" "}
             <Text
@@ -102,7 +99,6 @@ const handleSubmit = async () => {
             </Text>
             . This board is for actual customers only.
           </Text>
-        </Box>
       </Flex>
       <Box
         bg="brand.white"

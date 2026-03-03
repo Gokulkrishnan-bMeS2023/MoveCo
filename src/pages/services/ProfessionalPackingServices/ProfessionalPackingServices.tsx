@@ -18,25 +18,21 @@ const PackingServicesPage = () => {
   return (
     <Container>
       <Flex
-        direction={{ base: "column", md: "row" }}
-        align={{ base: "flex-start", md: "center" }}
+        direction={{ base: "column", lg: "row" }}
+        align="center"
         justify="space-between"
-        gap={{ base: 4, md: 10 }}
+        gap={{ base: 4, lg: 10 }}
         mb={{ base: 4, lg: 6 }}
       >
-        <Box maxW="600px" w="100%">
-          <Heading as="h1" fontWeight="normal" textAlign={{base: "center", lg: "left"}}>
+          <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{base: "center", lg: "left"}}>
             Professional{" "}
             <Text as="span" color="brand.primary">
               Packing Services
             </Text>
           </Heading>
-        </Box>
-        <Box maxW="430px" w="100%">
-          <Text textStyle="size-2xl" textAlign={{ base: "center", md: "right" }}>
+          <Text textStyle="size-2xl" maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "right" }}>
             Transparent pricing • Professional packing • No hidden costs
           </Text>
-        </Box>
       </Flex>
 
       <VStack gap={{base: 6, lg: 8}}>

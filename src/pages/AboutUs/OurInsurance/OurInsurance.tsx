@@ -14,36 +14,33 @@ const OurInsurance = () => {
         <HeroBanner title="Our Insurance" bgImage={images.insuranceBanner} />
         <Box pt="sectionTop">
           <Box>
-            <Flex justify={{ base: "center", md: "flex-start" }}>
+            <Flex justify={{ base: "center", lg: "flex-start" }}>
             <Badge
               label="Our Insurance" mb={4}
             />
             </Flex>
             <Flex
-              direction={{ base: "column", md: "row" }}
-              align={{ base: "flex-start", md: "center" }}
+              direction={{ base: "column", lg: "row" }}
+              align="center"
               justify="space-between"
-              gap={{ base: 4, md: 10 }}
+              gap={{ base: 4, lg: 10 }}
               mb={{ base: 4, lg: 6 }}
             >
-              <Box maxW="600px" w="100%">
-                <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
-                  Why Insurance Matters <br />
+                <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{base: "center",lg:"left"}}>
+                  Why Insurance Matters 
                   In{" "}
                   <Text as="span" color="brand.primary">
                     MoveCo?
                   </Text>
                 </Heading>
-              </Box>
-              <Box maxW="430px" w="100%">
                 <Text
                   textStyle="size-2xl"
-                  textAlign={{ base: "center", md: "right" }}
+                  maxW={{ lg: "45%" }}
+                  textAlign={{ base: "center", lg: "right" }}
                 >
                   For more than 100 years experience, We move coast to coast
                   under our own authority.
                 </Text>
-              </Box>
             </Flex>
             <ImageTextSection
               image={images.packer}
@@ -64,36 +61,33 @@ const OurInsurance = () => {
         </Box>
         <Box pt="sectionTop">
           <Box>
-            <Flex justify={{ base: "center", md: "flex-start" }}>
+            <Flex justify={{ base: "center", lg: "flex-start" }}>
             <Badge
               label="Our Coverage"
               mb={4}
             />
             </Flex>
             <Flex
-              direction={{ base: "column", md: "row" }}
-              align={{ base: "flex-start", md: "center" }}
+              direction={{ base: "column", lg: "row" }}
+              align="center"
               justify="space-between"
-              gap={{ base: 4, md: 10 }}
+              gap={{ base: 4, lg: 10 }}
               mb={{ base: 4, lg: 6 }}
             >
-              <Box maxW="600px" w="100%">
-                <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
+                <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{base: "center",lg:"left"}}>
                   <Text as="span" color="brand.primary">
-                    With MoveCo, <br />
+                    With MoveCo, 
                   </Text>
                   You’re Covered in Every Way
                 </Heading>
-              </Box>
-              <Box maxW="430px" w="100%">
                 <Text
                   textStyle="size-2xl"
-                  textAlign={{ base: "center", md: "right" }}
+                  maxW={{ lg: "45%" }}
+                  textAlign={{ base: "center", lg: "right" }}
                 >
                   Our coverage options are designed to protect your belongings
                   and give you peace of mind.
                 </Text>
-              </Box>
             </Flex>
             <CardTemplate data={coveredWays} />
           </Box>
@@ -102,29 +96,26 @@ const OurInsurance = () => {
       <Box bg={"brand.white"} px="-8">
         <Container px={8} pt={4} pb={10}>
           <Flex
-            direction={{ base: "column", md: "row" }}
-            align={{ base: "flex-start", md: "center" }}
+            direction={{ base: "column", lg: "row" }}
+            align="center"
             justify="space-between"
-            gap={{ base: 4, md: 10 }}
+            gap={{ base: 4, lg: 10 }}
             mb={{ base: 4, lg: 6 }}
           >
-            <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
+              <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{base: "center",lg:"left"}}>
                 <Text as="span" color="brand.primary">
-                  MoveCo <br />
+                  MoveCo 
                 </Text>
                 In-House Policy
               </Heading>
-            </Box>
-            <Box maxW="430px" w="100%">
               <Text
                 textStyle="size-2xl"
-                textAlign={{ base: "center", md: "right" }}
+                maxW={{ lg: "45%" }}
+                textAlign={{ base: "center", lg: "right" }}
               >
                 Our movers are experienced and very careful, and we back this up
                 with an in-house policy.
               </Text>
-            </Box>
           </Flex>
           <CommonAccordion sections={inHomePolicy} />
         </Container>

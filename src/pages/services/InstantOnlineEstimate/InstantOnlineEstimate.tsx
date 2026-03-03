@@ -81,26 +81,22 @@ const InstantOnlineEstimate = () => {
   return (
     <Container>
       <Flex
-        direction={{ base: "column", md: "row" }}
-        align={{ base: "flex-start", md: "center" }}
+        direction={{ base: "column", lg: "row" }}
+        align="center"
         justify="space-between"
-        gap={{ base: 4, md: 10 }}
+        gap={{ base: 4, lg: 10 }}
         mb={{ base: 4, lg: 6 }}
       >
-        <Box maxW="600px" w="100%">
-          <Heading as="h1" fontWeight="normal"  textAlign={{base: "center", lg: "left"}}>
+          <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{base: "center", lg: "left"}}>
             Instant{" "}
             <Text as="span" color="brand.primary">
               Online Estimate
             </Text>
           </Heading>
-        </Box>
-        <Box maxW="500px" w="100%">
-          <Text textStyle="size-2xl" textAlign={{ base: "center", md: "right" }}>
+          <Text textStyle="size-2xl"  maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "right" }}>
             Already have an inventory list? Avoid surprises and get an
             immediate, guaranteed fixed-price moving quote right now.
           </Text>
-        </Box>
       </Flex>
       <Flex gap={10} align="center" direction={{ base: "column", md: "row" }}>
         <Box
