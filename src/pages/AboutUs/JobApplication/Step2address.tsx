@@ -10,15 +10,14 @@ import {
 import React from "react";
 import InputField from "../../../components/common/Input/Input";
 import DateInput from "../../../components/common/DateInput/DateInput";
-import PhoneField from "../../../components/common/PhoneInput/PhoneInput"; // ✅ import PhoneField
-
+import PhoneField from "../../../components/common/PhoneInput/PhoneInput"; 
+import Button from "../../../components/common/Button/Button";
 import type {
   EducationDTO,
   EmploymentExperienceDTO,
   EmploymentExperienceErrors,
 } from "./DTOs";
 
-import Button from "../../../components/common/Button/Button";
 
 interface Step2AddressProps {
   education: EducationDTO;
@@ -100,7 +99,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
               onChange={(e) => onEducationChange("major", e.target.value)}
             />
             <InputField
-              label="Other training, certifications, or licenses held"
+              label="Other training, certifications, or licenses held:"
               placeholder="Other training, certifications, or licenses held"
               value={education.otherTraining}
               onChange={(e) =>

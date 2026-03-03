@@ -17,11 +17,22 @@ const AboutUs = () => {
       <Flex justify={{ base: "center", md: "flex-start" }}>
         <Badge label="Our Mission" mb={4} />
       </Flex>
-      We aim to impress you with our service so much that you'll share our
-      business cards with your friends and colleagues, post your text and video
-      testimonials on our website, and choose us for your next move.
+      <Text>
+        We aim to impress you with our service so much that you'll share our
+        business cards with your friends and colleagues, post your text and
+        <Text
+          as="span"
+          color="brand.primary"
+          // textDecoration="underline"
+          cursor="pointer"
+          _hover={{ opacity: 0.8 }}
+          onClick={() => navigate("/video-review")}
+        >
+          {" "}video testimonials{" "}
+        </Text>
+        on our website, and choose us for your next move.
+      </Text>
     </>
-
   );
 
   const testimonialContent = (
@@ -29,10 +40,22 @@ const AboutUs = () => {
       <Flex justify={{ base: "center", md: "flex-start" }}>
         <Badge label="Testimonials" mb={4} />
       </Flex>
-      Our online testimonial board goes a step further. You can post your moving
+      <Text>
+      Our online <Text
+          as="span"
+          color="brand.primary"
+          // textDecoration="underline"
+          cursor="pointer"
+          _hover={{ opacity: 0.8 }}
+          onClick={() => navigate("/client-testimonial")}
+        >
+          {" "}testimonial board{" "}
+        </Text>
+       goes a step further. You can post your moving
       experience for our future customers to see. You can also go to our website
       & see over 10 years of customer reviews. Our crews make the difference. We
       conduct background checks and random drug tests.
+      </Text>
     </>
   );
 

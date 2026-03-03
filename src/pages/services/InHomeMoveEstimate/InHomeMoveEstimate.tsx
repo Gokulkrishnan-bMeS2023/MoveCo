@@ -265,7 +265,6 @@ const InHomeMoveEstimate = () => {
                   label="How did you hear about MoveCo.net?"
                   value={values.hearAbout}
                   onValueChange={(e) => handleChange("hearAbout", e.value[0])}
-                  isRequired
                   options={hearAboutOptions}
                   errorMessage={errors.hearAbout}
                 />

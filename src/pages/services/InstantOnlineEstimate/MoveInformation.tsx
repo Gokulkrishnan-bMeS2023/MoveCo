@@ -30,7 +30,7 @@ const InHomeMoveEstimate = () => {
     phone: searchParams.get("phone") || "",
     homePhone: "",
     workPhone: "",
-    faxPhone: "",
+    cellPhone: "",
     moveDate: searchParams.get("moveDate") || "",
     moveTime: "",
     dropDate: "",
@@ -70,6 +70,61 @@ const InHomeMoveEstimate = () => {
       setErrors((prev) => ({ ...prev, [field]: "" }));
     }
   };
+  const stateOptions = [
+  { label: "Texas", value: "TX" },
+  { label: "Alaska", value: "AK" },
+  { label: "Alabama", value: "AL" },
+  { label: "Arkansas", value: "AR" },
+  { label: "Arizona", value: "AZ" },
+  { label: "California", value: "CA" },
+  { label: "Colorado", value: "CO" },
+  { label: "Connecticut", value: "CT" },
+  { label: "District of Columbia", value: "DC" },
+  { label: "Delaware", value: "DE" },
+  { label: "Florida", value: "FL" },
+  { label: "Georgia", value: "GA" },
+  { label: "Hawaii", value: "HI" },
+  { label: "Iowa", value: "IA" },
+  { label: "Idaho", value: "ID" },
+  { label: "Illinois", value: "IL" },
+  { label: "Indiana", value: "IN" },
+  { label: "Kansas", value: "KS" },
+  { label: "Kentucky", value: "KY" },
+  { label: "Louisiana", value: "LA" },
+  { label: "Massachusetts", value: "MA" },
+  { label: "Maryland", value: "MD" },
+  { label: "Maine", value: "ME" },
+  { label: "Michigan", value: "MI" },
+  { label: "Minnesota", value: "MN" },
+  { label: "Missouri", value: "MO" },
+  { label: "Mississippi", value: "MS" },
+  { label: "Montana", value: "MT" },
+  { label: "North Carolina", value: "NC" },
+  { label: "North Dakota", value: "ND" },
+  { label: "Nebraska", value: "NE" },
+  { label: "New Hampshire", value: "NH" },
+  { label: "New Jersey", value: "NJ" },
+  { label: "New Mexico", value: "NM" },
+  { label: "Nevada", value: "NV" },
+  { label: "New York", value: "NY" },
+  { label: "Ohio", value: "OH" },
+  { label: "Oklahoma", value: "OK" },
+  { label: "Oregon", value: "OR" },
+  { label: "Pennsylvania", value: "PA" },
+  { label: "Puerto Rico", value: "PR" },
+  { label: "Rhode Island", value: "RI" },
+  { label: "South Carolina", value: "SC" },
+  { label: "South Dakota", value: "SD" },
+  { label: "Tennessee", value: "TN" },
+  { label: "Utah", value: "UT" },
+  { label: "Virginia", value: "VA" },
+  { label: "Virgin Islands", value: "VI" },
+  { label: "Vermont", value: "VT" },
+  { label: "Washington", value: "WA" },
+  { label: "Wisconsin", value: "WI" },
+  { label: "West Virginia", value: "WV" },
+  { label: "Wyoming", value: "WY" },
+];
   const moveTimeOptions = [
     { label: "8AM - 10AM", value: "8-10" },
     { label: "10AM - 12PM", value: "10-12" },
@@ -200,6 +255,7 @@ const InHomeMoveEstimate = () => {
               <InputField
                 label="Email"
                 placeholder="Email"
+                type="email"
                 value={values.email}
                 onChange={(e) => handleChange("email", e.target.value)}
                 isRequired
@@ -231,10 +287,10 @@ const InHomeMoveEstimate = () => {
               />
 
               <PhoneField
-                label="Fax Phone"
-                value={values.faxPhone}
-                onChange={(v) => handleChange("faxPhone", v)}
-                errorMessage={errors.faxPhone}
+                label="Cell Phone"
+                value={values.cellPhone}
+                onChange={(v) => handleChange("cellPhone", v)}
+                errorMessage={errors.cellPhone}
               />
             </SimpleGrid>
           </VStack>
@@ -331,7 +387,7 @@ const InHomeMoveEstimate = () => {
 
         {/* ================= MOVE LOCATION ================= */}
         <Box
-          bg="white"
+          bg="brand.white"
           p={{ base: 6, md: 8 }}
           borderRadius="2xl"
           boxShadow="lg"
@@ -365,14 +421,15 @@ const InHomeMoveEstimate = () => {
               </SimpleGrid>
             </SimpleGrid>
             <SimpleGrid columns={{ base: 1, md: 4 }} gap={{base: 4,md: 6}}>
-              <InputField
+              <SelectField
                 label="State"
                 placeholder="State"
                 value={values.fromState}
-                onChange={(e) => handleChange("fromState", e.target.value)}
-              />
+                onValueChange={(e) => handleChange("fromState", e.value[0])} 
+                options={stateOptions}             
+                 />
               <InputField
-                label="From Zip Code"
+                label="Zip Code"
                 placeholder="Zip Code"
                 type="number"
                 value={values.fromZipCode}
@@ -385,7 +442,7 @@ const InHomeMoveEstimate = () => {
               />
 
               <SelectField
-                label="Flights of stairs at this address?"
+                label="How many flights of stairs at this address?"
                 options={stairsOptions}
                 value={values.fromStairs}
                 onValueChange={(d) => handleChange("fromStairs", d.value[0])}
@@ -437,14 +494,15 @@ const InHomeMoveEstimate = () => {
             </SimpleGrid>
 
             <SimpleGrid columns={{ base: 1, md: 4 }} gap={{base: 4,md: 6}}>
-              <InputField
+              <SelectField
                 label="State"
                 placeholder="State"
                 value={values.toState}
-                onChange={(e) => handleChange("toState", e.target.value)}
+                onValueChange={(e) => handleChange("toState", e.value[0])}
+                options={stateOptions}
               />
               <InputField
-                label="To Zip Code"
+                label="Zip Code"
                 placeholder="Zip Code"
                 type="number"
                 value={values.toZipCode}
@@ -457,13 +515,13 @@ const InHomeMoveEstimate = () => {
               />
 
               <SelectField
-                label="Flights of stairs at this address?"
+                label="How many flights of stairs at this address?"
                 options={stairsOptions}
                 value={values.toStairs}
                 onValueChange={(d) => handleChange("toStairs", d.value[0])}
               />
               <SelectField
-                label="Door to truck at this address?"
+                label="Truck to Door at this address?"
                 options={distanceOptions}
                 value={values.toDistance}
                 onValueChange={(d) => handleChange("toDistance", d.value[0])}

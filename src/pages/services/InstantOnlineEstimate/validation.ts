@@ -16,7 +16,7 @@ export const validateInstantEstimate = (
   const errors: InstantEstimateErrors = {};
 
   if (!data.firstName.trim()) {
-    errors.firstName = "Name is required";
+    errors.firstName = " First name is required";
   }
 
   if (!data.lastName.trim()) {
@@ -86,11 +86,11 @@ export const validateMoveInformation = (
     }
   }
 
-  // Fax Phone (optional, 10-digit check if provided)
-  if (data.faxPhone) {
-    const cleaned = data.faxPhone.replace(/\D/g, "");
+  // Cell Phone (optional, 10-digit check if provided)
+  if (data.cellPhone) {
+    const cleaned = data.cellPhone.replace(/\D/g, "");
     if (!PHONE_REGEX.test(cleaned)) {
-      errors.faxPhone = "Phone number must be 10 digits";
+      errors.cellPhone = "Phone number must be 10 digits";
     }
   }
 

@@ -32,6 +32,7 @@ const JobApplication = () => {
             >
               Associate Code of Conduct
             </Text>
+            .
           </Text>
         </Box>
       </Flex>

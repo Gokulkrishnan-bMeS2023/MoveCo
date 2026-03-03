@@ -16,7 +16,7 @@ export interface MoveInformationDTO {
   homePhone: string;
   phone: string;
   workPhone: string;
-  faxPhone: string;
+  cellPhone: string;
 
   // Move Dates & Times
   moveDate: string;

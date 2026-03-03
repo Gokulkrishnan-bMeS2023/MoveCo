@@ -79,18 +79,11 @@ const LICENSING_INFO = [
   },
 ];
 
-// Subcomponents
 const SocialMediaIcons = memo(() => (
-  <Box pt="4">
-    <Text
-      textStyle="size-lg"
-      fontWeight="600"
-      color="brand.warning"
-      mb="3"
-      textAlign={RESPONSIVE_TEXT_ALIGN}
-    >
+  <Box pt={{base:1, md: 4}}>
+    <Heading as="h5" color="brand.warning" mb="4" textAlign={{base: "center",md: "left"}}>
       Follow Us
-    </Text>
+    </Heading>
     <Flex gap="3" justifyContent={RESPONSIVE_ALIGN}>
       {SOCIAL_LINKS.map(({ icon: Icon, link, label }) => (
         <IconButton
@@ -139,9 +132,8 @@ const ContactNumber = memo(
     >
       <Text
         textStyle="size-lg"
-        color="brand.warning"
+        color="brand.gray"
         mb="1"
-        fontWeight="600"
         textTransform="uppercase"
         letterSpacing="wide"
       >
@@ -153,7 +145,7 @@ const ContactNumber = memo(
         w={"fit-content"}
         fontWeight="700"
         color="brand.white"
-        _hover={{ color: "brand.warning", textDecoration: "none" }}
+        _hover={{ textDecoration: "none" }}
         transition="all 0.2s"
         display="block"
       >
@@ -170,7 +162,7 @@ const TollFreeBox = memo(() => (
     direction={{ base: "column", md: "row" }}
     alignItems="center"
     justifyContent="center"
-    gap={4}
+    gap={{ base: 2, md: 4 }}
     py={2}
   >
     <Image
@@ -180,7 +172,7 @@ const TollFreeBox = memo(() => (
       width="auto"
       objectFit="contain"
     />
-    <Flex alignItems="center" gap="2" direction={"row"} justify={"center"}>
+    <Flex alignItems="center" gap="2" direction={"row"} justify={"center"} mt={{base: 0,md: 2}}>
       <Text
         textStyle="size-md"
         color="brand.black"
@@ -188,13 +180,13 @@ const TollFreeBox = memo(() => (
         letterSpacing="wider"
         textAlign={RESPONSIVE_TEXT_ALIGN}
       >
-        24/7 Toll Free
+        Toll Free
       </Text>
       <Link
         href="tel:8005900928"
         textStyle="size-3xl"
         color="brand.black"
-        _hover={{ color: "brand.warning" }}
+        _hover={{  textDecoration: "none" }}
         display="block"
         textAlign="center"
         letterSpacing="tight"
@@ -221,7 +213,6 @@ const LicensingItem = memo(
         textStyle="size-lg"
         textDecoration="none"
         _hover={{
-          color: "brand.warning",
           textDecoration: "none",
         }}
         _focus={{ boxShadow: "none" }}
@@ -243,7 +234,7 @@ const CertificationGrid = memo(() => (
         display="flex"
         alignItems="center"
         justifyContent="center"
-        bg="white"
+        bg="brand.white"
         borderRadius="md"
         p="3"
         borderWidth="1px"
@@ -306,7 +297,6 @@ const Footer = () => {
       w="100%"
       position="relative"
     >
-      {/* Decorative Top Border */}
       <Box
         position="absolute"
         top="0"
@@ -318,16 +308,15 @@ const Footer = () => {
         gradientTo="brand.warning"
       />
 
-      {/* Main Footer Content */}
       <Container>
-        <Box >
+        <Box>
           <Grid
             gridTemplateColumns={{
               base: "1fr",
               md: "repeat(2, 1fr)",
               lg: "repeat(4, 1fr)",
             }}
-            gap={{ base: "10", md: "8", lg: "10" }}
+            gap={{ base: "6", md: "8", lg: "10" }}
           >
             {/* Company Info Section */}
             <Stack gap="5" alignItems={RESPONSIVE_ALIGN}>
@@ -342,10 +331,10 @@ const Footer = () => {
                 <Text textStyle="size-xl" fontWeight="700" color="brand.white">
                   MoveCo.Net
                 </Text>
-                <Text textStyle="size-lg" color="whiteAlpha.800">
+                <Text textStyle="size-lg" color="brand.gray">
                   21439 Crescent Ave
                 </Text>
-                <Text textStyle="size-lg" color="whiteAlpha.800">
+                <Text textStyle="size-lg" color="brand.gray">
                   Lewisville, TX 75057
                 </Text>
               </Stack>

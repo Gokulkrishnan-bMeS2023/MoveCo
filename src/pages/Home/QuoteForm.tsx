@@ -49,7 +49,7 @@ const QuoteForm = () => {
     if (formData.estimate === "Instant Online Estimate") {
       navigate("/move-information", { state: formData });
     } else if (formData.estimate === "In-Home Move Estimate") {
-      navigate("/InHomeMoveEstimate", { state: formData });
+      navigate("/in-home-move-estimate", { state: formData });
     } else if (formData.estimate === "Request a call back") {
       navigate("/contact-us", { state: formData });
     }

@@ -273,7 +273,7 @@ const MOVE_INFO_KEYS: Array<keyof MoveInformationDTO> = [
   "phone",
   "homePhone",
   "workPhone",
-  "faxPhone",
+  "cellPhone",
   "moveDate",
   "moveTime",
   "dropDate",
@@ -414,7 +414,7 @@ const Inventory = () => {
           <AccordionItem
             key={index}
             value={`section-${index}`}
-            bg="white"
+            bg="brand.white"
             borderRadius="lg"
             boxShadow="sm"
             mb={4}
@@ -423,9 +423,9 @@ const Inventory = () => {
           >
             <AccordionItemTrigger px={0}>
               <Flex flex="1" justify="space-between" align="center">
-                <Text textStyle="size-xl" fontWeight="600">
+                <Heading as="h4" fontWeight="500">
                   {section.title}
-                </Text>
+                </Heading>
                 <AccordionItemIndicator>
                   <Icon
                     as={FaPlus}

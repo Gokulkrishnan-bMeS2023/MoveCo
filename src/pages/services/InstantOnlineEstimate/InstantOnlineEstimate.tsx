@@ -118,8 +118,8 @@ const InstantOnlineEstimate = () => {
         </Heading>
           <Stack gap={4}>
             <InputField
-              label="Name"
-              placeholder="Name"
+              label="First Name"
+              placeholder="First Name"
               value={values.firstName}
               onChange={(e) => handleChange("firstName", e.target.value)}
               isRequired

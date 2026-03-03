@@ -181,7 +181,6 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
               placeholder="State"
               value={formData.State}
               onValueChange={(d) => handleChange("State", d.value[0])}
-              isRequired
               errorMessage={errors.State}
             />
             <InputField
@@ -222,7 +221,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
 
           <Stack gap={4}>
             <RadioField
-              label="Are you legally authorized to work in the U.S.?"
+              label="Are you a U.S. citizen, or are you otherwise authorized to work in the U.S. without any restriction?"
               options={yesNoOptions}
               value={formData.citizen}
               onValueChange={(val) => handleChange("citizen", val)}
@@ -240,7 +239,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
               direction="row"
             />
             <RadioField
-              label="Have you ever been involuntarily terminated?"
+              label="Have you ever been involuntarily terminated or asked to resign from any position of employment?"
               options={yesNoOptions}
               value={formData.terminated}
               onValueChange={(val) => handleChange("terminated", val)}
@@ -249,7 +248,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
               direction="row"
             />
             <RadioField
-              label="Are you willing to submit to a drug test?"
+              label="If selected for employment, are you willing to submit to a pre-employment drug screening test?"
               options={yesNoOptions}
               value={formData.drugTest}
               onValueChange={(val) => handleChange("drugTest", val)}
