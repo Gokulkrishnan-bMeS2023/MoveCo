@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Image, Text, Flex } from "@chakra-ui/react";
+import { Box, SimpleGrid, Image, Flex } from "@chakra-ui/react";
 import type { ReactNode } from "react";
 import Badge from "../../../components/common/Badge/Badge";
 
