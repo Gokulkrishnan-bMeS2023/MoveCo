@@ -1,6 +1,6 @@
 import { images } from "../../../assets";
 
-export const SUPPORTED_CHARITY_DATA = [
+export const PRODUCT_AND_SERVICES_DATA = [
   {
     title: "Scottish Rite Hospital",
     description: `Every day world-renowned experts provide care, guidance and innovation to help kids run, jump and play.
