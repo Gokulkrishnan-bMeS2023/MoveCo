@@ -1,4 +1,13 @@
-import { Grid, Box, Text, Heading, Flex, Image, Spinner, Center } from "@chakra-ui/react";
+import {
+  Grid,
+  Box,
+  Text,
+  Heading,
+  Flex,
+  Image,
+  Spinner,
+  Center,
+} from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { images } from "../../assets";
 import { getTestimonial } from "../../api/testimonialService";
@@ -23,16 +32,7 @@ const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
     const fetchTestimonials = async () => {
       try {
         const response = await getTestimonial();
-        const rawData = Array.isArray(response.data) ? response.data : response.data?.data || [];
-        const normalized = rawData.map((item: any) => ({
-          id: item.id || item.Id,
-          firstName: item.firstName || item.FirstName || "Guest",
-          lastName: item.lastName || item.LastName || "",
-          comments: item.comments || item.Comments || "",
-          image: item.image || item.Image || null,
-        }));
-
-        setTestimonials(normalized);
+        setTestimonials(response.data || []);
       } catch (error) {
         console.error("Failed to fetch testimonials:", error);
       } finally {
@@ -71,8 +71,8 @@ const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
       gap={6}
       alignItems="start"
     >
-      {speaksToShow.map((client) => (
-        <ReviewCard key={client.id} client={client} />
+      {speaksToShow?.map((client, index) => (
+        <ReviewCard key={index} client={client} />
       ))}
     </Grid>
   );
@@ -100,15 +100,14 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
       >
         <Flex align="center" gap={4} mb={4}>
           <Image
-            src={client.image || images.profile}
+            src={client?.image || images?.profile}
             boxSize="50px"
             alt="profile"
             borderRadius="full"
             objectFit="cover"
-            
           />
           <Heading as="h5">
-            {client.firstName} {client.lastName}
+            {client?.firstName} {client?.lastName}
           </Heading>
         </Flex>
 
@@ -117,11 +116,8 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
           overflow="hidden"
           position="relative"
         >
-          <Text
-            color="brand.secondary"
-            lineHeight="1.6"
-          >
-            {client.comments}
+          <Text color="brand.secondary" lineHeight="1.6">
+            {client?.comments}
           </Text>
 
           {!isHovered && (

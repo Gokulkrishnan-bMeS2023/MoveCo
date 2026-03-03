@@ -6,7 +6,7 @@ export default defineConfig({
  server: {
   proxy: {
     '/api': {
-      target: 'http://balas.tryasp.net',
+      target: 'http://moveco.runasp.net/',
       changeOrigin: true,
     },
   },

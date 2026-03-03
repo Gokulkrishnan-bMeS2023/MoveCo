@@ -11,9 +11,9 @@ export interface Product {
 }
 
 export const postProducts= (data: Product) => {
-  return api.post("/Product", data);
+  return api.post("/products", data);
 };
 
 export const getProducts = () => {
-  return api.get("/Product");
+  return api.get("/products");
 };

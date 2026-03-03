@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Image, Text, Flex } from "@chakra-ui/react";
+import { Box, SimpleGrid, Image, Flex } from "@chakra-ui/react";
 import type { ReactNode } from "react";
 import Badge from "../../../components/common/Badge/Badge";
 
@@ -44,7 +44,9 @@ const TextWithImageSection = ({
             </Flex>
         )}
 
-        <Text textStyle="size-3xl" textAlign={{base: "center",md:"left"}}>{content}</Text>
+   <Box textAlign={{ base: "center", md: "left" }}>
+  {content}
+</Box>
       </Box>
     </SimpleGrid>
   );

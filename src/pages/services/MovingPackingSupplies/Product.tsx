@@ -214,8 +214,6 @@ const ProductPage = () => {
     navigate("/cart");
   }, [navigate]);
 
-  console.log(products);
-
   return (
     <Container>
       <PageHeader />
