@@ -8,6 +8,22 @@ import { images } from "../../../assets";
 import Badge from "../../../components/common/Badge/Badge";
 
 const OurInsurance = () => {
+  const missionContent = (
+    <>
+      <Flex justify={{ base: "center", md: "flex-start" }}>
+        <Badge label="Our Mission" mb={4} />
+      </Flex>
+      <Text textStyle="size-3xl">
+        No one expects anything to get damaged during a move. But life does
+        happen, no matter how careful you are. That’s why we’ve built one of the
+        most efficient and streamlined damage claim processes in the industry.
+        Our philosophy is simple—if something gets broken or damaged, we make it
+        right. There’s no reason we can’t fix the issue and keep you as a happy
+        customer.
+      </Text>
+    </>
+  );
+
   return (
     <div>
       <Container>
@@ -15,9 +31,7 @@ const OurInsurance = () => {
         <Box pt="sectionTop">
           <Box>
             <Flex justify={{ base: "center", md: "flex-start" }}>
-            <Badge
-              label="Our Insurance" mb={4}
-            />
+              <Badge label="Our Insurance" mb={4} />
             </Flex>
             <Flex
               direction={{ base: "column", md: "row" }}
@@ -27,7 +41,11 @@ const OurInsurance = () => {
               mb={{ base: 4, lg: 6 }}
             >
               <Box maxW="600px" w="100%">
-                <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
+                <Heading
+                  as="h1"
+                  fontWeight="normal"
+                  textAlign={{ base: "center", md: "left" }}
+                >
                   Why Insurance Matters <br />
                   In{" "}
                   <Text as="span" color="brand.primary">
@@ -45,30 +63,13 @@ const OurInsurance = () => {
                 </Text>
               </Box>
             </Flex>
-            <ImageTextSection
-              image={images.packer}
-              buttonLabel="Our Mission"
-              content={
-                <>
-                  No one expects anything to get damaged during a move. But life
-                  does happen, no matter how careful you are. That’s why we’ve
-                  built one of the most efficient and streamlined damage claim
-                  processes in the industry. Our philosophy is simple—if
-                  something gets broken or damaged, we make it right. There’s no
-                  reason we can’t fix the issue and keep you as a happy
-                  customer.
-                </>
-              }
-            />
+            <ImageTextSection image={images.packer} content={missionContent} />
           </Box>
         </Box>
         <Box pt="sectionTop">
           <Box>
             <Flex justify={{ base: "center", md: "flex-start" }}>
-            <Badge
-              label="Our Coverage"
-              mb={4}
-            />
+              <Badge label="Our Coverage" mb={4} />
             </Flex>
             <Flex
               direction={{ base: "column", md: "row" }}
@@ -78,7 +79,11 @@ const OurInsurance = () => {
               mb={{ base: 4, lg: 6 }}
             >
               <Box maxW="600px" w="100%">
-                <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
+                <Heading
+                  as="h1"
+                  fontWeight="normal"
+                  textAlign={{ base: "center", md: "left" }}
+                >
                   <Text as="span" color="brand.primary">
                     With MoveCo, <br />
                   </Text>
@@ -109,7 +114,11 @@ const OurInsurance = () => {
             mb={{ base: 4, lg: 6 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
+              <Heading
+                as="h1"
+                fontWeight="normal"
+                textAlign={{ base: "center", md: "left" }}
+              >
                 <Text as="span" color="brand.primary">
                   MoveCo <br />
                 </Text>

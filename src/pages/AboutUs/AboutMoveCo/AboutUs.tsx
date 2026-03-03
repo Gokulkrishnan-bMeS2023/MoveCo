@@ -17,19 +17,18 @@ const AboutUs = () => {
       <Flex justify={{ base: "center", md: "flex-start" }}>
         <Badge label="Our Mission" mb={4} />
       </Flex>
-      <Text>
+      <Text textStyle="size-3xl">
         We aim to impress you with our service so much that you'll share our
         business cards with your friends and colleagues, post your text and
-        <Text
+        <Box
           as="span"
           color="brand.primary"
-          // textDecoration="underline"
           cursor="pointer"
           _hover={{ opacity: 0.8 }}
           onClick={() => navigate("/video-review")}
         >
           {" "}video testimonials{" "}
-        </Text>
+        </Box>
         on our website, and choose us for your next move.
       </Text>
     </>
@@ -40,17 +39,17 @@ const AboutUs = () => {
       <Flex justify={{ base: "center", md: "flex-start" }}>
         <Badge label="Testimonials" mb={4} />
       </Flex>
-      <Text>
-      Our online <Text
+     <Text textStyle="size-3xl">
+        Our online 
+      <Box
           as="span"
           color="brand.primary"
-          // textDecoration="underline"
           cursor="pointer"
           _hover={{ opacity: 0.8 }}
           onClick={() => navigate("/client-testimonial")}
         >
           {" "}testimonial board{" "}
-        </Text>
+        </Box>
        goes a step further. You can post your moving
       experience for our future customers to see. You can also go to our website
       & see over 10 years of customer reviews. Our crews make the difference. We

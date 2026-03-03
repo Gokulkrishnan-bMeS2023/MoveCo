@@ -167,9 +167,9 @@ const InstantOnlineEstimate = () => {
             />
             <Text textStyle="size-sm">
               Prefer to speak with us directly?{" "}
-              <Text as="span" textStyle="size-sm" color="brand.primary">
+              <Box as="span" textStyle="size-sm" color="brand.primary">
                 Call us at (800) 890-0928
-              </Text>
+              </Box>
             </Text>
           </Stack>
         </Box>

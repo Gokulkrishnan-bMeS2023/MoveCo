@@ -44,7 +44,9 @@ const TextWithImageSection = ({
             </Flex>
         )}
 
-        <Text textStyle="size-3xl" textAlign={{base: "center",md:"left"}}>{content}</Text>
+   <Box textAlign={{ base: "center", md: "left" }}>
+  {content}
+</Box>
       </Box>
     </SimpleGrid>
   );

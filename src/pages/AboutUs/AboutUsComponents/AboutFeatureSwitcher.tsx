@@ -13,8 +13,7 @@ const MotionBox = motion(Box);
 export default function AnimatedFeatureSwitcher() {
   const [activeIndex, setActiveIndex] = useState(0);
   const descriptionRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate(); // ✅ MUST be inside component
-
+  const navigate = useNavigate(); 
   const features = [
     {
       title: "Online real-time quote",
