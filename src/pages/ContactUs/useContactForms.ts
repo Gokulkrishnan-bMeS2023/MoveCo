@@ -2,6 +2,7 @@ import { useState } from "react";
 import { validateContactForm, validateReferralForm } from "./contactValidation";
 import type { ContactFormValues, FormErrors, ReferralFormValues } from "./DTOs";
 import { postContact, postReferral } from "../../api/contactServices";
+import { toaster } from "../../components/ui/toaster";
 
 const initialContactState: ContactFormValues = {
   name: "",
@@ -49,7 +50,13 @@ export const useContactForms = () => {
     const errors = validateContactForm(contactValues);
     setContactErrors(errors);
 
-    if (Object.keys(errors).length > 0) return;
+    if (Object.keys(errors).length > 0) {
+      toaster.create({
+        title: "Please fix the errors before submitting.",
+        type: "error",
+      });
+      return;
+    }
 
     try {
       const payload = {
@@ -63,9 +70,19 @@ export const useContactForms = () => {
 
       await postContact(payload);
       setContactValues(initialContactState);
-      console.log("Contact form submitted successfully");
+
+      toaster.create({
+        title: "Message sent successfully!",
+        description: "We'll get back to you as soon as possible.",
+        type: "success",
+      });
     } catch (error) {
       console.error("Error submitting contact form", error);
+      toaster.create({
+        title: "Failed to send message.",
+        description: "Something went wrong. Please try again later.",
+        type: "error",
+      });
     }
   };
 
@@ -73,7 +90,13 @@ export const useContactForms = () => {
     const errors = validateReferralForm(referralValues);
     setReferralErrors(errors);
 
-    if (Object.keys(errors).length > 0) return;
+    if (Object.keys(errors).length > 0) {
+      toaster.create({
+        title: "Please fix the errors before submitting.",
+        type: "error",
+      });
+      return;
+    }
 
     try {
       const payload = {
@@ -84,9 +107,19 @@ export const useContactForms = () => {
 
       await postReferral(payload);
       setReferralValues(initialReferralState);
-      console.log("Referral form submitted successfully");
+
+      toaster.create({
+        title: "Referral sent successfully!",
+        description: "Your friend will receive an invitation shortly.",
+        type: "success",
+      });
     } catch (error) {
       console.error("Error submitting referral", error);
+      toaster.create({
+        title: "Failed to send referral.",
+        description: "Something went wrong. Please try again later.",
+        type: "error",
+      });
     }
   };
 

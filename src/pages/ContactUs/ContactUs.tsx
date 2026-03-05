@@ -13,6 +13,8 @@ import ContactCard from "./ContactCard";
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Toaster } from "../../components/ui/toaster";
+
 const SendEmailForm = React.lazy(() => import("./SendEmailForm"));
 const FriendForm = React.lazy(() => import("./FriendForm"));
 
@@ -32,6 +34,7 @@ const ContactUsPage = () => {
 
   return (
     <Container>
+      <Toaster />
       <HeroBanner bgImage={images.contact} title="Contact Us" />
       <Box pt="sectionTop">
         <Flex
@@ -47,7 +50,7 @@ const ContactUsPage = () => {
               fontWeight="normal"
               textAlign={{ base: "center", lg: "left" }}
             >
-              Our {""}
+              Our{" "}
               <Text as="span" color="brand.primary">
                 Offices
               </Text>
@@ -74,7 +77,6 @@ const ContactUsPage = () => {
           <ContactCard city="Austin" office="512-366-7901" />
         </SimpleGrid>
       </Box>
-
       <Box pt="sectionTop">
         <Box maxW={{ lg: "45%" }} mb={{ base: 4, lg: 6 }}>
           <Heading
@@ -82,7 +84,7 @@ const ContactUsPage = () => {
             fontWeight="normal"
             textAlign={{ base: "center", md: "left" }}
           >
-            Visit Our {""}
+            Visit Our{" "}
             <Text as="span" color="brand.primary">
               Main Office
             </Text>
@@ -103,7 +105,6 @@ const ContactUsPage = () => {
           />
         </Card.Root>
       </Box>
-
       <Box pt="sectionTop">
         <Flex
           direction={{ base: "column", md: "row" }}
@@ -117,7 +118,7 @@ const ContactUsPage = () => {
             textAlign={{ base: "center", md: "left" }}
           >
             <Heading as="h1" fontWeight="normal">
-              Send Us a {""}
+              Send Us a{" "}
               <Text as="span" color="brand.primary">
                 Message
               </Text>
@@ -128,7 +129,7 @@ const ContactUsPage = () => {
               textStyle="size-2xl"
               textAlign={{ base: "center", md: "right" }}
             >
-              Fill out the form below and We will get back to you as soon as
+              Fill out the form below and we will get back to you as soon as
               possible.
             </Text>
           </Box>

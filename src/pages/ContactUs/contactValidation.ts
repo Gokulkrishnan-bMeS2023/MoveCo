@@ -1,7 +1,6 @@
 import type { ContactFormValues, ReferralFormValues, FormErrors } from "./DTOs";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-// const PHONE_REGEX = /^\d{10}$/;
 
 export const validateContactForm = (
   values: ContactFormValues,
@@ -21,9 +20,6 @@ export const validateContactForm = (
   if (!values.phone) {
     errors.phone = "Phone number is required";
   }
-  //  else if (!PHONE_REGEX.test(values.phone)) {
-  //   errors.phone = "Phone number must be 10 digits";
-  // }
 
   return errors;
 };
@@ -46,9 +42,6 @@ export const validateReferralForm = (
   if (!values.friendPhone) {
     errors.friendPhone = "Friend's phone number is required";
   }
-  // else if (!PHONE_REGEX.test(values.friendPhone)) {
-  //   errors.friendPhone = "Phone number must be 10 digits";
-  // }
 
   return errors;
 };
