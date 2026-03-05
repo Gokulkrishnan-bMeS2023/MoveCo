@@ -4,7 +4,7 @@ import { Field, Input, InputGroup, Text } from "@chakra-ui/react";
 export interface InputProps {
   label: string;
   name?: string;
-  type?: string;
+  type?: "text" | "number" | "email" | "tel" | "alphanumeric";
   placeholder?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;

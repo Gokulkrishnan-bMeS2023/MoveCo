@@ -20,7 +20,7 @@ const SendEmailForm = () => {
     contactValues,
     contactErrors,
     handleContactChange,
-    submitContactForm,
+    handleSubmitContact,
   } = useContactForms();
 
   return (
@@ -47,12 +47,12 @@ const SendEmailForm = () => {
           </HStack>
           <VStack gap={4} align="stretch">
             <Text textStyle="size-lg">
-            Send us an email, we would love to hear from you!
-          </Text>
-          <Text textStyle="size-lg">
-            Just fill out the form, and a representative will get back to you as
-            soon as possible
-          </Text>
+              Send us an email, we would love to hear from you!
+            </Text>
+            <Text textStyle="size-lg">
+              Just fill out the form, and a representative will get back to you
+              as soon as possible
+            </Text>
             <InputField
               label="Your Name"
               value={contactValues.name}
@@ -88,12 +88,7 @@ const SendEmailForm = () => {
                 px="16"
                 variant="primary"
                 label="Send"
-                onClick={() => {
-                  if (submitContactForm()) {
-                    console.log("CONTACT DATA", contactValues);
-                    alert("Your message has been submitted successfully!");
-                  }
-                }}
+                onClick={handleSubmitContact}
               />
             </Box>
           </VStack>

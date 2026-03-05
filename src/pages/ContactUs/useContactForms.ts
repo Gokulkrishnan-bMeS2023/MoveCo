@@ -1,9 +1,7 @@
 import { useState } from "react";
-import {
-  validateContactForm,
-  validateReferralForm,
-} from "./contactValidation";
+import { validateContactForm, validateReferralForm } from "./contactValidation";
 import type { ContactFormValues, FormErrors, ReferralFormValues } from "./DTOs";
+import { postContact, postReferral } from "../../api/contactServices";
 
 const initialContactState: ContactFormValues = {
   name: "",
@@ -47,18 +45,49 @@ export const useContactForms = () => {
     setReferralErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-  const submitContactForm = () => {
+  const handleSubmitContact = async () => {
     const errors = validateContactForm(contactValues);
     setContactErrors(errors);
 
-    return Object.keys(errors).length === 0;
+    if (Object.keys(errors).length > 0) return;
+
+    try {
+      const payload = {
+        name: contactValues.name,
+        customerEmail: contactValues.email,
+        telePhone: contactValues.phone,
+        comments: contactValues.message,
+        referralUrl:
+          window.location.href || "https://www.moveco.com/contact-us",
+      };
+
+      await postContact(payload);
+      setContactValues(initialContactState);
+      console.log("Contact form submitted successfully");
+    } catch (error) {
+      console.error("Error submitting contact form", error);
+    }
   };
 
-  const submitReferralForm = () => {
+  const handleSubmitReferral = async () => {
     const errors = validateReferralForm(referralValues);
     setReferralErrors(errors);
 
-    return Object.keys(errors).length === 0;
+    if (Object.keys(errors).length > 0) return;
+
+    try {
+      const payload = {
+        customerEmail: referralValues.friendEmail,
+        name: referralValues.yourName,
+        customerPhoneNo: referralValues.friendPhone,
+      };
+
+      await postReferral(payload);
+      setReferralValues(initialReferralState);
+      console.log("Referral submitted successfully");
+    } catch (error) {
+      console.error("Error submitting referral", error);
+    }
   };
 
   return {
@@ -68,7 +97,7 @@ export const useContactForms = () => {
     referralErrors,
     handleContactChange,
     handleReferralChange,
-    submitContactForm,
-    submitReferralForm,
+    handleSubmitContact,
+    handleSubmitReferral,
   };
 };
