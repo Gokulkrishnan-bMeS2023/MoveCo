@@ -8,7 +8,11 @@ import {
   getHearAbout,
   getStateInstant,
 } from "../../../api/statciDataService";
-import { toOptions, toStateOptions, type SelectOption } from "./selectOptionUtils";
+import {
+  toOptions,
+  toStateOptions,
+  type SelectOption,
+} from "./selectOptionUtils";
 
 const initialState: MoveEstimateFormValues = {
   visitDate: "",
@@ -59,17 +63,14 @@ export const useInHomeEstimateForm = () => {
         setTimeOptions(toOptions(timeSlotsResponse.data || []));
         setHearAboutOptions(toOptions(hearAboutResponse.data || []));
         setStateOptions(toStateOptions(statesResponse.data || []));
-      } catch (error:any) {
+      } catch (error: any) {
         console.error("Failed to fetch static data:", error);
       }
     };
     fetchStaticData();
   }, []);
 
-  const handleChange = (
-    field: keyof MoveEstimateFormValues,
-    value: string
-  ) => {
+  const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
     setValues((prev) => ({ ...prev, [field]: value }));
 
     if (errors[field]) {
@@ -88,9 +89,7 @@ export const useInHomeEstimateForm = () => {
         ? new Date(values.visitDate).toISOString()
         : "",
       inHomeEstimateTimeRange: values.visitTime,
-      moveDate: values.moveDate
-        ? new Date(values.moveDate).toISOString()
-        : "",
+      moveDate: values.moveDate ? new Date(values.moveDate).toISOString() : "",
       moveSize: values.moveSize,
       referredBy: values.hearAbout,
       firstName: values.firstName,
