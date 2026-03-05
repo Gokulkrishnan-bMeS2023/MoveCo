@@ -9,6 +9,7 @@ import type {
   EducationDTO,
 } from "./DTOs";
 import { validateStepOne, validateStepTwo } from "./validation";
+import { postJobApplication } from "../../../api/jobApplicationService";
 
 export const useJobApplicationForm = () => {
   const [page, setPage] = useState(0);
@@ -158,40 +159,109 @@ export const useJobApplicationForm = () => {
     });
   };
 
-  const nextPage = () => {
-    if (page === 0) {
-      const validationErrors = validateStepOne(formData);
-      if (Object.keys(validationErrors).length > 0) {
-        setErrors(validationErrors);
-        return;
-      }
-      setErrors({});
-    }
-
-    if (page === 1) {
-      const stepTwoValidationErrors = validateStepTwo(stepTwoData);
-      if (Object.keys(stepTwoValidationErrors).length > 0) {
-        setStepTwoErrors(stepTwoValidationErrors);
-        return;
-      }
-      setStepTwoErrors({});
-    }
-
-    if (page === 2) {
-      if (!step3Ref.current?.validate()) return;
-      const completeFormData = {
-        stepOne: formData,
-        stepTwo: stepTwoData,
-        stepThree: stepThreeData,
-      };
-      alert("FORM SUBMITTED");
-      console.log("Complete Form Data:", completeFormData);
+  const nextPage = async () => {
+  // STEP 1 VALIDATION
+  if (page === 0) {
+    const validationErrors = validateStepOne(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
+    setErrors({});
+  }
 
-    setPage((p) => p + 1);
-  };
+  // STEP 2 VALIDATION
+  if (page === 1) {
+    const stepTwoValidationErrors = validateStepTwo(stepTwoData);
+    if (Object.keys(stepTwoValidationErrors).length > 0) {
+      setStepTwoErrors(stepTwoValidationErrors);
+      return;
+    }
+    setStepTwoErrors({});
+  }
 
+  // FINAL SUBMIT
+  if (page === 2) {
+    if (!step3Ref.current?.validate()) return;
+
+    const payload = {
+      // Step 1
+      positionSought: formData.PositionSought,
+      learnPosition: formData.Howdidyoulearnabouttheposition,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      emailAddress: formData.email,
+      homePhone: formData.HomePhone,
+      cellPhone: formData.CellPhone,
+      address: formData.Address,
+      city: formData.City,
+      state: formData.State,
+      zipCode: formData.ZipCode,
+      socialSecurityNumber: formData.SocialSecurityNumber,
+      availableforWork:
+        formData.Onwhatdatewouldyoubeavailableforwork,
+      isUSCitizen: formData.citizen,
+      convictedofaFelony: formData.felony,
+      involuntarilyTerminated: formData.terminated,
+      willSubmitPreEmploymentDrugScrnTest:
+        formData.drugTest,
+
+      // Education
+      schoolname: stepTwoData.education.schoolName,
+      location: stepTwoData.education.location,
+      years: stepTwoData.education.years,
+      degreeReceived: stepTwoData.education.degree,
+      major: stepTwoData.education.major,
+
+      // Experience 1
+      employer: stepTwoData.experiences[0]?.employer || "",
+      jobTitle: stepTwoData.experiences[0]?.jobTitle || "",
+      datesEmployedFrom: stepTwoData.experiences[0]?.from || "",
+      datesEmployedTo: stepTwoData.experiences[0]?.to || "",
+      priorPositions: stepTwoData.experiences[0]?.priorPosition || "",
+      startingSalary: stepTwoData.experiences[0]?.startSalary || "",
+      endingSalary: stepTwoData.experiences[0]?.endSalary || "",
+      supervisorName: stepTwoData.experiences[0]?.supervisorName || "",
+      supervisorPhone: stepTwoData.experiences[0]?.supervisorPhone || "",
+      reasonforLeaving: stepTwoData.experiences[0]?.reason || "",
+      dutiesPerformed: stepTwoData.experiences[0]?.duties || "",
+
+      // Experience 2 (optional)
+      secondEmployer: stepTwoData.experiences[1]?.employer || "",
+      secondJobTitle: stepTwoData.experiences[1]?.jobTitle || "",
+      secondDatesEmployedFrom:
+        stepTwoData.experiences[1]?.from || "",
+      secondDatesEmployedTo:
+        stepTwoData.experiences[1]?.to || "",
+      secondPriorPositions:
+        stepTwoData.experiences[1]?.priorPosition || "",
+      secondStartingSalary:
+        stepTwoData.experiences[1]?.startSalary || "",
+      secondEndingSalary:
+        stepTwoData.experiences[1]?.endSalary || "",
+      secondSupervisorName:
+        stepTwoData.experiences[1]?.supervisorName || "",
+      secondSupervisorPhone:
+        stepTwoData.experiences[1]?.supervisorPhone || "",
+      secondReasonforLeaving:
+        stepTwoData.experiences[1]?.reason || "",
+      secondDutiesPerformed:
+        stepTwoData.experiences[1]?.duties || "",
+    };
+
+    try {
+      await postJobApplication(payload);
+      alert("Application Submitted Successfully!");
+    } catch (error: any) {
+      console.error(error.response?.data || error.message);
+      alert("Submission Failed");
+    }
+
+    return;
+  }
+
+  setPage((p) => p + 1);
+};
   const prevPage = () => setPage((p) => Math.max(p - 1, 0));
 
   return {

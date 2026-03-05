@@ -4,7 +4,6 @@ export interface MoveEstimateFormValues {
   moveDate: string;
   moveSize: string;
   hearAbout: string;
-
   firstName: string;
   lastName: string;
   email: string;
@@ -12,14 +11,13 @@ export interface MoveEstimateFormValues {
   cellPhone: string;
   workPhone: string;
   faxPhone: string;
-
   fromAddress: string;
   apt: string;
   city: string;
   state: string;
   zipCode: string;
-
   notes: string;
+  quoteID: number;
 }
 
 export type MoveEstimateErrors =

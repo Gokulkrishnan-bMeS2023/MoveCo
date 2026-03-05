@@ -93,10 +93,12 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
               label="Position Sought"
               value={formData.PositionSought}
               onChange={(e) => handleChange("PositionSought", e.target.value)}
+              type="alphanumeric"
             />
             <InputField
               label="How did you learn about the position?"
               value={formData.Howdidyoulearnabouttheposition}
+              type="alphanumeric"
               onChange={(e) =>
                 handleChange("Howdidyoulearnabouttheposition", e.target.value)
               }
