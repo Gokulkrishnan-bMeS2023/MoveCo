@@ -4,6 +4,7 @@ import Step1PersonalInfo from "./Step1personalInfo";
 import Step2Address from "./Step2address";
 import Step3Experience from "./Step3experience";
 
+
 const steps = ["Personal Info", "Education", "Review"];
 
 const JobApplicationForm = () => {

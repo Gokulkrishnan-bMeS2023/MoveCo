@@ -40,7 +40,7 @@ const InputField = React.forwardRef<HTMLInputElement, InputProps>(
       number: /^[0-9]*$/,
       email: /^[a-zA-Z0-9@._%+\-]*$/,
       text: /^[A-Za-z\s]*$/,
-      alphanumeric: /^[A-Za-z0-9\s$,./]*$/,
+      alphanumeric: /^[A-Za-z0-9\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?`~]*$/,
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

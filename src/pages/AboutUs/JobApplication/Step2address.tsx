@@ -67,12 +67,14 @@ const Step2Address: React.FC<Step2AddressProps> = ({
           <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }}>
             <InputField
               label="School Name"
+              type="alphanumeric"
               placeholder="School Name"
               value={education.schoolName}
               onChange={(e) => onEducationChange("schoolName", e.target.value)}
             />
             <InputField
               label="Location"
+              type="alphanumeric"
               placeholder="Location"
               value={education.location}
               onChange={(e) => onEducationChange("location", e.target.value)}
@@ -89,17 +91,20 @@ const Step2Address: React.FC<Step2AddressProps> = ({
             <InputField
               label="Degree Received"
               placeholder="Degree Received"
+              type="alphanumeric"
               value={education.degree}
               onChange={(e) => onEducationChange("degree", e.target.value)}
             />
             <InputField
               label="Major"
               placeholder="Major"
+              type="alphanumeric"
               value={education.major}
               onChange={(e) => onEducationChange("major", e.target.value)}
             />
             <InputField
               label="Other training, certifications, or licenses held:"
+              type="alphanumeric"
               placeholder="Other training, certifications, or licenses held"
               value={education.otherTraining}
               onChange={(e) =>
@@ -111,6 +116,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
             <InputField
               label="List other information pertinent to the employment you are seeking:"
               placeholder="Additional Information"
+              type="alphanumeric"
               value={education.additionalInfo}
               onChange={(e) =>
                 onEducationChange("additionalInfo", e.target.value)
@@ -150,6 +156,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                   <InputField
                     label="Employer"
                     placeholder="Employer"
+                    type="alphanumeric"
                     value={experience.employer}
                     onChange={(e) =>
                       onExperienceChange(index, "employer", e.target.value)
@@ -158,6 +165,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                   <InputField
                     label="Job Title"
                     placeholder="Job Title"
+                    type="alphanumeric"
                     value={experience.jobTitle}
                     onChange={(e) =>
                       onExperienceChange(index, "jobTitle", e.target.value)
@@ -184,7 +192,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                         />
                       </Box>
                       <Text
-                        fontSize="textStyle-xs"
+                        textStyle="textStyle-xs"
                         flexShrink={0}
                         whiteSpace="nowrap"
                       >
@@ -239,6 +247,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                   <InputField
                     label="Supervisor Name"
                     placeholder="Supervisor Name"
+                    type="alphanumeric"
                     value={experience.supervisorName}
                     onChange={(e) =>
                       onExperienceChange(index, "supervisorName", e.target.value)
