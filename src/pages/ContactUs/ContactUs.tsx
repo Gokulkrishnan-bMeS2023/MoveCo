@@ -41,10 +41,14 @@ const ContactUsPage = () => {
           gap={{ base: 4, lg: 10 }}
           mb={{ base: 4, lg: 6 }}
         >
-          <Box width={{ base: "100%", lg: "45%" }} >
-            <Heading as="h1" fontWeight="normal" textAlign={{base: "center", lg: "left"}}>
+          <Box width={{ base: "100%", lg: "45%" }}>
+            <Heading
+              as="h1"
+              fontWeight="normal"
+              textAlign={{ base: "center", lg: "left" }}
+            >
               Our {""}
-              <Text as="span" color="brand.primary" >
+              <Text as="span" color="brand.primary">
                 Offices
               </Text>
             </Heading>
@@ -73,13 +77,19 @@ const ContactUsPage = () => {
 
       <Box pt="sectionTop">
         <Box maxW={{ lg: "45%" }} mb={{ base: 4, lg: 6 }}>
-          <Heading as="h1" fontWeight="normal" textAlign={{base: "center", md: "left"}}>
+          <Heading
+            as="h1"
+            fontWeight="normal"
+            textAlign={{ base: "center", md: "left" }}
+          >
             Visit Our {""}
             <Text as="span" color="brand.primary">
               Main Office
             </Text>
           </Heading>
-          <Text textStyle="size-2xl" textAlign={{base: "center", md: "left"}}>Located in Lewisville, Texas</Text>
+          <Text textStyle="size-2xl" textAlign={{ base: "center", md: "left" }}>
+            Located in Lewisville, Texas
+          </Text>
         </Box>
 
         <Card.Root variant="elevated" overflow="hidden">
@@ -102,7 +112,10 @@ const ContactUsPage = () => {
           gap={{ base: 4, md: 10 }}
           mb={{ base: 4, lg: 6 }}
         >
-          <Box width={{ base: "100%", lg: "45%" }} textAlign={{base: "center", md: "left"}}>
+          <Box
+            width={{ base: "100%", lg: "45%" }}
+            textAlign={{ base: "center", md: "left" }}
+          >
             <Heading as="h1" fontWeight="normal">
               Send Us a {""}
               <Text as="span" color="brand.primary">

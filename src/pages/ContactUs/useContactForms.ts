@@ -84,7 +84,7 @@ export const useContactForms = () => {
 
       await postReferral(payload);
       setReferralValues(initialReferralState);
-      console.log("Referral submitted successfully");
+      console.log("Referral form submitted successfully");
     } catch (error) {
       console.error("Error submitting referral", error);
     }

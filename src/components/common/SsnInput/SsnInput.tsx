@@ -3,13 +3,12 @@ import InputField from "../Input/Input";
 
 interface SSNFieldProps {
   label: string;
-  value: string; // raw digits only (e.g. "123456789")
+  value: string;
   onChange: (digits: string) => void;
   errorMessage?: string;
   isRequired?: boolean;
 }
 
-// Format: XXX-XX-XXXX
 const formatSSN = (digits: string) => {
   if (!digits) return "";
   if (digits.length <= 3) return digits;
@@ -45,27 +44,23 @@ const SSNField: React.FC<SSNFieldProps> = ({
     const input = e.target;
     const nativeEvent = e.nativeEvent as InputEvent;
 
-    // ── Autofill ────────────────────────────────────────────────────────────
     const isAutofill =
       nativeEvent.inputType === "insertReplacementText" ||
       (nativeEvent.inputType === undefined && nativeEvent.data === null);
 
     if (isAutofill) {
       const digits = input.value.replace(/\D/g, "").slice(0, 9);
-      onChange(digits); // ✅ raw digits to parent
+      onChange(digits);
       return;
     }
 
-    // ── Capture cursor before change ────────────────────────────────────────
     const cursorPos = input.selectionStart ?? input.value.length;
     const digitsBeforeCursor = countDigitsBeforePos(input.value, cursorPos);
 
-    // ── Raw digits, max 9 ───────────────────────────────────────────────────
     const rawDigits = input.value.replace(/\D/g, "").slice(0, 9);
 
-    onChange(rawDigits); // ✅ always send raw digits to parent
+    onChange(rawDigits);
 
-    // ── Restore cursor ──────────────────────────────────────────────────────
     requestAnimationFrame(() => {
       if (!inputRef.current) return;
       const newFormatted = formatSSN(rawDigits);
@@ -77,7 +72,6 @@ const SSNField: React.FC<SSNFieldProps> = ({
     });
   };
 
-  // ── Block beyond 9 digits ───────────────────────────────────────────────
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const input = inputRef.current;
     if (!input) return;
@@ -107,7 +101,7 @@ const SSNField: React.FC<SSNFieldProps> = ({
       name="ssn"
       type="tel"
       placeholder="XXX-XX-XXXX"
-      value={formatSSN(value)} // ✅ display formatted
+      value={formatSSN(value)}
       onChange={handleChange}
       onKeyDown={handleKeyDown}
       errorMessage={errorMessage}
