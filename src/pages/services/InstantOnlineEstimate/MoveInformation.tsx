@@ -401,6 +401,7 @@ const InHomeMoveEstimate = () => {
            <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
               <InputField
                 label="From Address"
+                type="alphanumeric"
                 placeholder="From Address"
                 value={values.fromAddress}
                 onChange={(e) => handleChange("fromAddress", e.target.value)}
@@ -409,12 +410,14 @@ const InHomeMoveEstimate = () => {
                 <InputField
                   label="Apt / Suite / Other"
                   placeholder="Apt / Suite / Other"
+                  type="alphanumeric"
                   value={values.fromApt}
                   onChange={(e) => handleChange("fromApt", e.target.value)}
                 />
                 <InputField
                   label="City"
                   placeholder="City"
+                  type="alphanumeric"
                   value={values.fromCity}
                   onChange={(e) => handleChange("fromCity", e.target.value)}
                 />
@@ -474,6 +477,7 @@ const InHomeMoveEstimate = () => {
               <InputField
                 label="To Address"
                 placeholder="To Address"
+                type="alphanumeric"
                 value={values.toAddress}
                 onChange={(e) => handleChange("toAddress", e.target.value)}
               />
@@ -481,12 +485,14 @@ const InHomeMoveEstimate = () => {
                 <InputField
                   label="Apt / Suite / Other"
                   placeholder="Apt / Suite / Other"
+                  type="alphanumeric"
                   value={values.toApt}
                   onChange={(e) => handleChange("toApt", e.target.value)}
                 />
                 <InputField
                   label="City"
                   placeholder="City"
+                  type="alphanumeric"
                   value={values.toCity}
                   onChange={(e) => handleChange("toCity", e.target.value)}
                 />

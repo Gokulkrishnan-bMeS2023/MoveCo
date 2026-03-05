@@ -361,6 +361,7 @@ const InHomeMoveEstimate = () => {
                 <InputField
                   label="From Address"
                   placeholder="From Address"
+                  type="alphanumeric"
                   value={values.fromAddress}
                   onChange={(e) => handleChange("fromAddress", e.target.value)}
                   isRequired
@@ -370,6 +371,7 @@ const InHomeMoveEstimate = () => {
                 <InputField
                   label="Apt / Suite / Other"
                   placeholder="Apt / Suite / Other"
+                  type="alphanumeric"
                   value={values.apt}
                   onChange={(e) => handleChange("apt", e.target.value)}
                 />
@@ -378,6 +380,7 @@ const InHomeMoveEstimate = () => {
                   <InputField
                     label="City"
                     placeholder="City"
+                    type="alphanumeric"
                     value={values.city}
                     onChange={(e) => handleChange("city", e.target.value)}
                     isRequired
