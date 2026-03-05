@@ -39,7 +39,6 @@ const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
         setIsLoading(false);
       }
     };
-
     fetchTestimonials();
   }, []);
 

@@ -13,305 +13,46 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../../components/common/Button/Button";
-import type {
-  InventoryDTO,
-  InventorySection,
-  MoveInformationDTO,
-} from "./DTOs";
 import { validateInventory } from "./validation";
-import { useEffect } from "react";
+import { getQuote } from "../../../api/quotesServices";
+import type { InventorySection } from "./DTOs";
 
-const inventorySections: InventorySection[] = [
-  {
-    title: "Appliances",
-    items: [
-      "AC / Window",
-      "Cooler",
-      "Ironing board",
-      "Microwave",
-      "Mob/Broom",
-      "Refrigerator Large three door",
-      "Refrigerator Stainless Steel",
-      "Refrigerator/Freezer Reg.",
-      "Refrigerator/Freezer Sm.",
-      "Stove/Dishwasher",
-      "Trash Can",
-      "Trash Can Large",
-      "Vacuum",
-      "Washer/Dryer (if set, list 2)",
-      "Washer/Dryer Front Load (if set, list 2)",
-      "Washer/Dryer Front Load Over size (if set, list 2)",
-    ],
-  },
-  {
-    title: "Baby Nursery",
-    items: [
-      "Bassinette",
-      "Bed, Youth",
-      "Changing Table",
-      "Child Chair",
-      "Child Table",
-      "Child Toy, Under 25 Lbs",
-      "Crib",
-      "Stroller/Car Seat",
-    ],
-  },
-  {
-    title: "Bedrooms",
-    items: [
-      "Armoire Oversize",
-      "Armoire Reg.",
-      "Armoire Sm.",
-      "Bed, Full",
-      "Bed, King",
-      "Bed, Queen",
-      "Bed, Twin",
-      "Bridge Bed",
-      "Bunk Bed",
-      "Cedar Chest/Trunk",
-      "Chest of Drawers",
-      "Daybed",
-      "Dresser",
-      "Dresser Oversize",
-      "Footboard",
-      "Footboard Oversize",
-      "Headboard Oversize",
-      "Headboard Reg.",
-      "Mirror Oversize",
-      "Mirror Reg.",
-      "Mirror Sm.",
-      "Nightstand",
-      "Vanity",
-      "Waterbed, (must be drained)",
-    ],
-  },
-  {
-    title: "Boxes moved by MoveCo (Moving ONLY)",
-    items: [
-      "Dish Pack, Less Than 5.2 Cubic FT and Under 60 LBS",
-      "Large Box, Less Than 4.2 Cubic FT and Under 40 LBS",
-      "Medium Box, Less Than 3.1 Cubic FT and Under 40 LBS",
-      "Mirror/Picture Box, 2FT",
-      "Mirror/Picture Box, 4FT",
-      "Small Box , Less Than 1.5 Cubic FT",
-      "TV/over size picture box",
-      "Wardrobe Box, Less Than 10 Cubic FT and Under 50 LBS",
-    ],
-  },
-  {
-    title: "Boxes moved by MoveCo (Packaging ONLY)",
-    items: [
-      "Dish Pack, Less Than 5.2 Cubic FT and Under 60 LBS",
-      "Large Box, Less Than 4.2 Cubic FT and Under 40 LBS",
-      "Medium Box, Less Than 3.1 Cubic FT and Under 40 LBS",
-      "Pictures Under 2 FT",
-      "Pictures Under 4 FT",
-      "Small Box , Less Than 1.5 Cubic FT",
-      "TV/over size picture box",
-      "Wardrobe Box, Less Than 10 Cubic FT and Under 50 LBS",
-    ],
-  },
-  {
-    title: "Garage and Outdoor",
-    items: [
-      "BBQ/Grill",
-      "Bench",
-      "Bicycle",
-      "Garage Shelves/Cab. , Under 60 LBS",
-      "Golf Clubs",
-      "Ladder, Step",
-      "Ladder, Under 10 FT (when closed)",
-      "Mower, Push",
-      "Mower, Ride-On",
-      "Outside Arm Chair",
-      "Outside chase lounge",
-      "Outside Loveseat",
-      "Outside Sofa",
-      "Patio Chairs",
-      "Patio End Tables",
-      "Patio Table",
-      "Patio Table Glass",
-      "Patio Umbrella",
-      "Toolbox Lg., Under 120LBS",
-      "Toolbox Sm.",
-      "Tools Lg. (e.g. saw table)",
-      "Tools Sm.",
-      "Weed Eater, Trimmer, Edger, Spreader, Ect.",
-      "Work Bench, Under 6FT",
-    ],
-  },
-  {
-    title: "Kitchen and Dining",
-    items: [
-      "Baker's Rack",
-      "Bar Stool",
-      "Bar, Portable",
-      "Buffet",
-      "China Cabinet",
-      "China Cabinet, 2 Pc.",
-      "Curio Cabinet",
-      "Dining Chairs",
-      "Dining Table",
-      "Dining Table Glass, Less Than 4FT",
-      "Dining Table Glass, Less Than 6FT",
-      "Dining Table Lg.",
-      "Glass Shelves",
-      "Kitchen Table",
-      "Tea Cart",
-      "Wine Rack",
-    ],
-  },
-  {
-    title: "Living Room",
-    items: [
-      "Area Rug",
-      "Area Rug, Over 8 FT",
-      "Bookcase",
-      "Bookcase Oversize",
-      "Chair Occasional/Straight",
-      "Chair Overstuffed/Recliner",
-      "Chair Wingback/Rocker",
-      "Chaise Lounge",
-      "Coffee/Sofa Table",
-      "Coffee/Sofa Table, Glass Top",
-      "DVD/CD Rack",
-      "End/ Occasional Table",
-      "End/Occasional Table, Glass Top",
-      "Entertainment Center 1 Pc. Lg.",
-      "Entertainment Center 1 Pc. Sm.",
-      "Entertainment Center 3 Pc.",
-      "Fan/Lamps, (shade must be boxed)",
-      "Hall Tree",
-      "Ottoman/Footstool",
-      "Pictures Under 2 FT",
-      "Pictures Under 4 FT",
-      "Sofa Loveseat",
-      "Sofa Recliner",
-      "Sofa Reg.",
-      "Sofa Sleeper/Hide-a-bed",
-      "Stereo Components/Speakers Reg.",
-      'TV 13"-19"',
-      'TV 20"-29"',
-      'TV 30"-36"',
-      'TV 41"-59"',
-      'TV 60"-70"',
-      "TV Stand",
-    ],
-  },
-  {
-    title: "Miscellaneous Other Items",
-    items: [
-      "Assembly, Complex",
-      "Assembly, Fridge Doors",
-      "Assembly, Simple",
-      "Exercise Equipment Standard, Elliptical",
-      "Exercise Equipment Standard, Bike",
-      "Exercise Equipment Standard, Bowflex",
-      "Exercise Equipment Standard, Treadmill",
-      "Exercise Equipment Standard; W/O D/R",
-      "Exercise Equipment; Small",
-      "Exercise Weights/Dumbbells (enter number of LBS)",
-      "Fire Pit",
-      "Folding Chairs",
-      "Folding Table",
-      "Glass Shelves",
-      "Glass Top Less Than 2 FT",
-      "Glass Top Less Than 4 FT",
-      "Glass Top Less Than 6 FT",
-      "Glass Top Less Than 8 Ft",
-      "Glass Top, Less Than 10 FT",
-      "Grandfather Clock",
-      "Marble Top Less Than 2 FT",
-      "Marble Top Less Than 4FT",
-      "Marble Top Less Than 6 FT",
-      "Marble Top Less Than 8 FT",
-      "Piano Bench",
-      "Piano Upright (downstairs)",
-      "Piano, Baby Grand (downstairs)",
-      "Plants Fake Less Than 6 FT",
-      "Plants Less Than 60 LBS",
-      "Plants Small",
-      "Statue, Less Than 40LBS",
-      "Vase",
-    ],
-  },
-  {
-    title: "Office",
-    items: [
-      "Computer Components",
-      "Conference Table Reg.",
-      "Copier/Printer Sm.",
-      "Credenza",
-      "Desk Chair",
-      "Desk Computer",
-      "Desk Extension",
-      "Desk Hutch",
-      "Desk Mat",
-      "Desk Reg.",
-      "Desk Roll Top",
-      "Desk Secretary",
-      "Desk Sm.",
-      "Desk, Office",
-      "Drafting Table",
-      "File Cab. 2 Drawer",
-      "File Cab. 2 Drawer, Lateral",
-      "File Cab. 4 Drawer",
-      "File Cab. 4 Drawer, Lateral",
-      "Printer/Fax Stand",
-    ],
-  },
-];
+// quantities keyed by inventoryID (as string for sessionStorage compatibility)
+type Quantities = Record<string, number>;
 
-// All MoveInformationDTO keys to read from URL params
-const MOVE_INFO_KEYS: Array<keyof MoveInformationDTO> = [
-  "firstName",
-  "lastName",
-  "email",
-  "phone",
-  "homePhone",
-  "workPhone",
-  "cellPhone",
-  "moveDate",
-  "moveTime",
-  "dropDate",
-  "dropTime",
-  "moveType",
-  "hearAbout",
-  "notes",
-  "fromAddress",
-  "fromApt",
-  "fromCity",
-  "fromState",
-  "fromZipCode",
-  "fromStairs",
-  "fromDistance",
-  "toAddress",
-  "toApt",
-  "toCity",
-  "toState",
-  "toZipCode",
-  "toStairs",
-  "toDistance",
-];
+// ─── Component ────────────────────────────────────────────────────────────────
 
 const Inventory = () => {
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  // Read all move information from URL params (no localStorage needed)
-  const moveInfo = MOVE_INFO_KEYS.reduce((acc, key) => {
-    acc[key] = searchParams.get(key) || "";
-    return acc;
-  }, {} as MoveInformationDTO);
-
-  const [quantities, setQuantities] = useState<InventoryDTO["quantities"]>({});
+  const [quantities, setQuantities] = useState<Quantities>({});
   const [openItems, setOpenItems] = useState<string[]>([]);
   const [errors, setErrors] = useState<{ quantities?: string }>({});
   const [successMessage, setSuccessMessage] = useState("");
+  const [inventorySections, setInventorySections] = useState<
+    InventorySection[]
+  >([]);
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Fetch inventory sections from API
+  useEffect(() => {
+    const fetchInventory = async () => {
+      try {
+        const response = await getQuote();
+        setInventorySections(response.data || []);
+      } catch (error) {
+        console.error("Failed to fetch inventory sections:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchInventory();
+  }, []);
+
+  // Restore quantities from sessionStorage on mount
   useEffect(() => {
     const saved = sessionStorage.getItem("inventory");
     if (saved) {
@@ -319,32 +60,32 @@ const Inventory = () => {
     }
   }, []);
 
-  const increase = (item: string) => {
-    const updated = {
-      ...quantities,
-      [item]: (quantities[item] || 0) + 1,
-    };
+  // ─── Helpers ──────────────────────────────────────────────────────────────
+
+  const saveQuantities = (updated: Quantities) => {
     setQuantities(updated);
     sessionStorage.setItem("inventory", JSON.stringify(updated));
   };
 
-  const decrease = (item: string) => {
-    const updated = {
+  const increase = (inventoryID: number) => {
+    const key = String(inventoryID);
+    saveQuantities({ ...quantities, [key]: (quantities[key] || 0) + 1 });
+  };
+
+  const decrease = (inventoryID: number) => {
+    const key = String(inventoryID);
+    saveQuantities({
       ...quantities,
-      [item]: Math.max((quantities[item] || 0) - 1, 0),
-    };
-    setQuantities(updated);
-    sessionStorage.setItem("inventory", JSON.stringify(updated));
+      [key]: Math.max((quantities[key] || 0) - 1, 0),
+    });
   };
 
-  const handleCollapseAll = () => {
-    setOpenItems([]);
-  };
+  const handleCollapseAll = () => setOpenItems([]);
 
-  const handleExpandAll = () => {
-    const allSections = inventorySections.map((_, index) => `section-${index}`);
-    setOpenItems(allSections);
-  };
+  const handleExpandAll = () =>
+    setOpenItems(inventorySections.map((_, index) => `section-${index}`));
+
+  // ─── Submit ───────────────────────────────────────────────────────────────
 
   const handleSubmit = () => {
     const inventoryData = { quantities };
@@ -356,24 +97,44 @@ const Inventory = () => {
       return;
     }
 
-    sessionStorage.clear();
+    // Build a human-readable payload that maps inventoryID → count
+    // and also includes full item details for downstream use
+    const selectedItems = inventorySections.flatMap((section) =>
+      section.items
+        .filter((item) => (quantities[String(item.inventoryID)] || 0) > 0)
+        .map((item) => ({
+          inventoryID: item.inventoryID,
+          inventory: item.inventory,
+          category: section.category,
+          categoryID: section.categoryID,
+          quantity: quantities[String(item.inventoryID)],
+          weight: item.weight,
+          cubicFeet: item.cubicFeet,
+          price: item.price,
+        })),
+    );
 
+    const finalPayload = {
+      inventory: quantities, // raw { inventoryID: count } map
+      selectedItems, // enriched array for display / API submission
+    };
+
+    console.log("Final Submitted Data:", finalPayload);
+
+    sessionStorage.clear();
     setQuantities({});
     setOpenItems([]);
     setErrors({});
     setSuccessMessage("Inventory successfully submitted!");
 
-    const finalPayload = {
-      ...moveInfo,
-      inventory: quantities,
-    };
-
-    console.log("Final Submitted Data:", finalPayload);
     navigate("/confirmation");
   };
 
+  // ─── Render ───────────────────────────────────────────────────────────────
+
   return (
     <Container>
+      {/* Header */}
       <Flex
         justify="space-between"
         align={{ base: "flex-start", md: "center" }}
@@ -405,92 +166,102 @@ const Inventory = () => {
         </Flex>
       </Flex>
 
-      <AccordionRoot
-        value={openItems}
-        onValueChange={(e) => setOpenItems(e.value)}
-        collapsible
-      >
-        {inventorySections.map((section, index) => (
-          <AccordionItem
-            key={index}
-            value={`section-${index}`}
-            bg="brand.white"
-            borderRadius="lg"
-            boxShadow="sm"
-            mb={4}
-            px={4}
-            py={4}
-          >
-            <AccordionItemTrigger px={0}>
-              <Flex flex="1" justify="space-between" align="center">
-                <Heading as="h4" fontWeight="500">
-                  {section.title}
-                </Heading>
-                <AccordionItemIndicator>
-                  <Icon
-                    as={FaPlus}
-                    boxSize={4}
-                    _groupExpanded={{ transform: "rotate(45deg)" }}
-                  />
-                </AccordionItemIndicator>
-              </Flex>
-            </AccordionItemTrigger>
+      {/* Loading state */}
+      {isLoading && (
+        <Text color="gray.500" textAlign="center" py={8}>
+          Loading inventory…
+        </Text>
+      )}
 
-            <AccordionItemContent py={2}>
-              <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
-                {section.items.map((item) => {
-                  const count = quantities[item] || 0;
+      {/* Accordion */}
+      {!isLoading && (
+        <AccordionRoot
+          value={openItems}
+          onValueChange={(e) => setOpenItems(e.value)}
+          collapsible
+        >
+          {inventorySections.map((section, index) => (
+            <AccordionItem
+              key={section.categoryID}
+              value={`section-${index}`}
+              bg="brand.white"
+              borderRadius="lg"
+              boxShadow="sm"
+              mb={4}
+              px={4}
+              py={4}
+            >
+              <AccordionItemTrigger px={0}>
+                <Flex flex="1" justify="space-between" align="center">
+                  <Heading as="h4" fontWeight="500">
+                    {section.category}
+                  </Heading>
+                  <AccordionItemIndicator>
+                    <Icon
+                      as={FaPlus}
+                      boxSize={4}
+                      _groupExpanded={{ transform: "rotate(45deg)" }}
+                    />
+                  </AccordionItemIndicator>
+                </Flex>
+              </AccordionItemTrigger>
 
-                  return (
-                    <Flex
-                      key={item}
-                      justify="space-between"
-                      align="center"
-                      p={3}
-                      border="1px solid"
-                      borderColor="gray.200"
-                      borderRadius="md"
-                    >
-                      <Text textStyle="sm" fontWeight="500">
-                        {item}
-                      </Text>
+              <AccordionItemContent py={2}>
+                <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4}>
+                  {section.items.map((item) => {
+                    const count = quantities[String(item.inventoryID)] || 0;
 
-                      <Flex align="center" gap={2}>
-                        <Button
-                          variant="outline"
-                          minW="32px"
-                          h="32px"
-                          p="0"
-                          rounded="md"
-                          onClick={() => decrease(item)}
-                          disabled={count === 0}
-                        >
-                          <FaMinus size={4} fontWeight="normal" />
-                        </Button>
-
-                        <Text w="20px" textAlign="center" textStyle="sm">
-                          {count}
+                    return (
+                      <Flex
+                        key={item.inventoryID}
+                        justify="space-between"
+                        align="center"
+                        p={3}
+                        border="1px solid"
+                        borderColor="gray.200"
+                        borderRadius="md"
+                      >
+                        <Text textStyle="sm" fontWeight="500" flex="1" mr={2}>
+                          {item.inventory}
                         </Text>
 
-                        <Button
-                          variant="primary"
-                          minW="32px"
-                          h="32px"
-                          p="0"
-                          rounded="md"
-                          onClick={() => increase(item)}
-                        >
-                          <FaPlus size={4} fontWeight="normal" />
-                        </Button>
+                        <Flex align="center" gap={2} flexShrink={0}>
+                          <Button
+                            variant="outline"
+                            minW="32px"
+                            h="32px"
+                            p="0"
+                            rounded="md"
+                            onClick={() => decrease(item.inventoryID)}
+                            disabled={count === 0}
+                          >
+                            <FaMinus size={10} />
+                          </Button>
+
+                          <Text w="20px" textAlign="center" textStyle="sm">
+                            {count}
+                          </Text>
+
+                          <Button
+                            variant="primary"
+                            minW="32px"
+                            h="32px"
+                            p="0"
+                            rounded="md"
+                            onClick={() => increase(item.inventoryID)}
+                          >
+                            <FaPlus size={10} />
+                          </Button>
+                        </Flex>
                       </Flex>
-                    </Flex>
-                  );
-                })}
-              </SimpleGrid>
-            </AccordionItemContent>
-          </AccordionItem>
-        ))}
-      </AccordionRoot>
+                    );
+                  })}
+                </SimpleGrid>
+              </AccordionItemContent>
+            </AccordionItem>
+          ))}
+        </AccordionRoot>
+      )}
 
       {/* Submit Section */}
       <Box mt={8} textAlign={{ base: "center", md: "right" }}>

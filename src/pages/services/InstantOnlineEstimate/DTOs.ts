@@ -50,11 +50,16 @@ export interface MoveInformationDTO {
 
 export type MoveInformationErrors = Partial<Record<keyof MoveInformationDTO, string>>;
 
-export interface InventoryDTO {
-  quantities: Record<string, number>;
+export interface InventoryItem {
+  inventoryID: number;
+  inventory: string;
+  weight: number;
+  cubicFeet: number;
+  price: number;
 }
 
 export interface InventorySection {
-  title: string;
-  items: string[];
+  categoryID: number;
+  category: string;
+  items: InventoryItem[];
 }
