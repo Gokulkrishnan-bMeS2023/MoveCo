@@ -20,7 +20,15 @@ import { useInHomeEstimateForm } from "./useInHomeMoveEstimate";
 
 const InHomeMoveEstimate = () => {
   const navigate = useNavigate();
-  const { values, errors, handleChange, handleSubmit, moveSizeOptions, timeOptions, hearAboutOptions, stateOptions, } = useInHomeEstimateForm();
+  const { 
+    values, 
+    errors, 
+    handleChange, 
+    handleSubmit, 
+    moveSizeOptions, 
+    timeOptions, 
+    hearAboutOptions, 
+    stateOptions } = useInHomeEstimateForm();
 
   return (
     <Container>
