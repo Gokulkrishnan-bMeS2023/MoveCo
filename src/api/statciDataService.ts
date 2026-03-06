@@ -19,3 +19,11 @@ export const getStates = () => {
 export const getStateInstant = () => {
   return api.get("/staticdata/states-instant");
 };
+
+export const getFlightsOfStairs = () => {
+  return api.get("/staticdata/flights-of-stairs");
+};
+
+export const getDoorToTruck = () => {
+  return api.get("/staticdata/door-to-truck");
+};
