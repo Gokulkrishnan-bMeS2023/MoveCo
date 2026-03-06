@@ -90,7 +90,7 @@ export const useJobApplicationForm = () => {
 
   const handleEducationChange = <K extends keyof EducationDTO>(
     field: K,
-    value: EducationDTO[K]
+    value: EducationDTO[K],
   ) => {
     setStepTwoData((prev) => ({
       ...prev,
@@ -101,12 +101,12 @@ export const useJobApplicationForm = () => {
   const handleExperienceChange = <K extends keyof EmploymentExperienceDTO>(
     index: number,
     field: K,
-    value: EmploymentExperienceDTO[K]
+    value: EmploymentExperienceDTO[K],
   ) => {
     setStepTwoData((prev) => ({
       ...prev,
       experiences: prev.experiences.map((exp, i) =>
-        i === index ? { ...exp, [field]: value } : exp
+        i === index ? { ...exp, [field]: value } : exp,
       ),
     }));
   };
@@ -142,14 +142,14 @@ export const useJobApplicationForm = () => {
 
   const handleStepThreeChange = <K extends keyof StepThreeDTO>(
     field: K,
-    value: StepThreeDTO[K]
+    value: StepThreeDTO[K],
   ) => {
     setStepThreeData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleClearExperienceError = (
     index: number,
-    field: keyof EmploymentExperienceDTO
+    field: keyof EmploymentExperienceDTO,
   ) => {
     setStepTwoErrors((prev) => {
       const updatedExperiences = [...(prev.experiences || [])];
@@ -263,7 +263,8 @@ export const useJobApplicationForm = () => {
         const response = await postJobApplication(formDataPayload);
 
         toaster.create({
-          title: response?.data?.message || "Application submitted successfully!",
+          title:
+            response?.data?.message || "Application submitted successfully!",
           type: "success",
         });
 
@@ -277,8 +278,6 @@ export const useJobApplicationForm = () => {
             "Submission failed. Please try again.",
           type: "error",
         });
-
-        console.error(error.response?.data || error.message);
       }
 
       return;

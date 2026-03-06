@@ -19,6 +19,19 @@ import type { MoveInformationDTO, MoveInformationErrors } from "./DTOs";
 import { validateMoveInformation } from "./validation";
 import { useEffect } from "react";
 import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
+import {
+  toOptions,
+  toStateOptions,
+  type SelectOption,
+} from "../InHomeMoveEstimate/selectOptionUtils";
+import {
+  getMoveSizes,
+  getTimeSlots,
+  getHearAbout,
+  getStateInstant,
+  getDoorToTruck,
+  getFlightsOfStairs,
+} from "../../../api/statciDataService";
 
 const InHomeMoveEstimate = () => {
   const [searchParams] = useSearchParams();
@@ -70,106 +83,15 @@ const InHomeMoveEstimate = () => {
       setErrors((prev) => ({ ...prev, [field]: "" }));
     }
   };
-  const stateOptions = [
-  { label: "Texas", value: "TX" },
-  { label: "Alaska", value: "AK" },
-  { label: "Alabama", value: "AL" },
-  { label: "Arkansas", value: "AR" },
-  { label: "Arizona", value: "AZ" },
-  { label: "California", value: "CA" },
-  { label: "Colorado", value: "CO" },
-  { label: "Connecticut", value: "CT" },
-  { label: "District of Columbia", value: "DC" },
-  { label: "Delaware", value: "DE" },
-  { label: "Florida", value: "FL" },
-  { label: "Georgia", value: "GA" },
-  { label: "Hawaii", value: "HI" },
-  { label: "Iowa", value: "IA" },
-  { label: "Idaho", value: "ID" },
-  { label: "Illinois", value: "IL" },
-  { label: "Indiana", value: "IN" },
-  { label: "Kansas", value: "KS" },
-  { label: "Kentucky", value: "KY" },
-  { label: "Louisiana", value: "LA" },
-  { label: "Massachusetts", value: "MA" },
-  { label: "Maryland", value: "MD" },
-  { label: "Maine", value: "ME" },
-  { label: "Michigan", value: "MI" },
-  { label: "Minnesota", value: "MN" },
-  { label: "Missouri", value: "MO" },
-  { label: "Mississippi", value: "MS" },
-  { label: "Montana", value: "MT" },
-  { label: "North Carolina", value: "NC" },
-  { label: "North Dakota", value: "ND" },
-  { label: "Nebraska", value: "NE" },
-  { label: "New Hampshire", value: "NH" },
-  { label: "New Jersey", value: "NJ" },
-  { label: "New Mexico", value: "NM" },
-  { label: "Nevada", value: "NV" },
-  { label: "New York", value: "NY" },
-  { label: "Ohio", value: "OH" },
-  { label: "Oklahoma", value: "OK" },
-  { label: "Oregon", value: "OR" },
-  { label: "Pennsylvania", value: "PA" },
-  { label: "Puerto Rico", value: "PR" },
-  { label: "Rhode Island", value: "RI" },
-  { label: "South Carolina", value: "SC" },
-  { label: "South Dakota", value: "SD" },
-  { label: "Tennessee", value: "TN" },
-  { label: "Utah", value: "UT" },
-  { label: "Virginia", value: "VA" },
-  { label: "Virgin Islands", value: "VI" },
-  { label: "Vermont", value: "VT" },
-  { label: "Washington", value: "WA" },
-  { label: "Wisconsin", value: "WI" },
-  { label: "West Virginia", value: "WV" },
-  { label: "Wyoming", value: "WY" },
-];
-  const moveTimeOptions = [
-    { label: "8AM - 10AM", value: "8-10" },
-    { label: "10AM - 12PM", value: "10-12" },
-    { label: "12PM - 2PM", value: "12-2" },
-    { label: "2PM - 4PM", value: "2-4" },
-  ];
 
-  const moveTypeOptions = [
-    { label: "Home", value: "home" },
-    { label: "Apartment", value: "apartment" },
-    { label: "Office", value: "office" },
-  ];
-
-  const hearAboutOptions = [
-    { label: "Other", value: "Other" },
-    { label: "Yellow Pages", value: "Yellow Pages" },
-    { label: "Better Business Bureau", value: "Better Business Bureau" },
-    { label: "HMS", value: "HMS" },
-    { label: "MoveCo Truck", value: "MoveCo Truck" },
-    { label: "Referred By Someone", value: "Referred By Someone" },
-    { label: "Repeat Customer", value: "Repeat Customer" },
-    { label: "Received Mail", value: "Received Mail" },
-    { label: "Online Methods", value: "Online Methods" },
-    { label: "Online Yellow Pages", value: "Online Yellow Pages" },
-    { label: "Yahoo", value: "Yahoo" },
-    { label: "Google", value: "Google" },
-    { label: "MSN", value: "MSN" },
-    { label: "Ask.com", value: "Ask.com" },
-    { label: "Other Search Engine", value: "Other Search Engine" },
-    { label: "Other Internet", value: "Other Internet" },
-  ];
-
-  const stairsOptions = [
-    { label: "0", value: "0" },
-    { label: "1", value: "1" },
-    { label: "2+", value: "2+" },
-    { label: "Elevator", value: "Elevator" },
-  ];
-
-  const distanceOptions = [
-    { label: "Less than 100 feet", value: "<100" },
-    { label: "100–200 feet", value: "100-200" },
-    { label: "200–300 feet", value: "200-300" },
-    { label: "300–400 feet", value: "300-400" },
-  ];
+  const [moveSizeOptions, setMoveSizeOptions] = useState<SelectOption[]>([]);
+  const [timeOptions, setTimeOptions] = useState<SelectOption[]>([]);
+  const [hearAboutOptions, setHearAboutOptions] = useState<SelectOption[]>([]);
+  const [stateOptions, setStateOptions] = useState<SelectOption[]>([]);
+  const [stairsOptions, setStairsOptions] = useState<SelectOption[]>([]);
+  const [doortoTruckOptions, setDoortoTruckOptions] = useState<SelectOption[]>(
+    [],
+  );
 
   const handleSubmit = () => {
     const newErrors = validateMoveInformation(values);
@@ -188,6 +110,38 @@ const InHomeMoveEstimate = () => {
 
     navigate(`/inventory?${params.toString()}`);
   };
+
+  useEffect(() => {
+    const fetchStaticData = async () => {
+      try {
+        const [
+          moveSizesResponse,
+          timeSlotsResponse,
+          hearAboutResponse,
+          statesResponse,
+          stairsResponse,
+          doortoTruckResponse,
+        ] = await Promise.all([
+          getMoveSizes(),
+          getTimeSlots(),
+          getHearAbout(),
+          getStateInstant(),
+          getFlightsOfStairs(),
+          getDoorToTruck(),
+        ]);
+
+        setMoveSizeOptions(toOptions(moveSizesResponse.data || []));
+        setTimeOptions(toOptions(timeSlotsResponse.data || []));
+        setHearAboutOptions(toOptions(hearAboutResponse.data || []));
+        setStateOptions(toStateOptions(statesResponse.data || []));
+        setStairsOptions(toOptions(stairsResponse.data || []));
+        setDoortoTruckOptions(toOptions(doortoTruckResponse.data || []));
+      } catch (error: any) {
+        console.error("Failed to fetch static data:", error);
+      }
+    };
+    fetchStaticData();
+  }, []);
 
   return (
     <Container>
@@ -228,13 +182,12 @@ const InHomeMoveEstimate = () => {
           border="1px solid"
           borderColor="gray.100"
         >
-
           <VStack align="stretch" gap={4}>
             <Heading as="h3" color="brand.primary" fontWeight="normal">
-            Contact Information
-          </Heading>
-           <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
-             <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+              Contact Information
+            </Heading>
+            <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
                 <InputField
                   label="First Name"
                   placeholder="First Name"
@@ -263,7 +216,7 @@ const InHomeMoveEstimate = () => {
               />
             </SimpleGrid>
 
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{base: 4,md: 6}}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 4, md: 6 }}>
               <PhoneField
                 label="Phone"
                 value={values.phone}
@@ -305,12 +258,11 @@ const InHomeMoveEstimate = () => {
             border="1px solid"
             borderColor="gray.100"
           >
-
             <VStack align="stretch" gap={4}>
               <Heading as="h3" color="brand.primary" fontWeight="normal">
-              Move - Drop date and time
-            </Heading>
-             <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+                Move - Drop date and time
+              </Heading>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
                 <DateInput
                   label="Move Date"
                   variant="future-only"
@@ -323,13 +275,13 @@ const InHomeMoveEstimate = () => {
                 <SelectField
                   label="Move Time"
                   placeholder="Select time"
-                  options={moveTimeOptions}
+                  options={timeOptions}
                   value={values.moveTime}
                   onValueChange={(d) => handleChange("moveTime", d.value[0])}
                 />
               </SimpleGrid>
 
-             <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
                 <DateInput
                   label="Drop Date"
                   variant="future-only"
@@ -340,7 +292,7 @@ const InHomeMoveEstimate = () => {
                 <SelectField
                   label="Drop Time"
                   placeholder="Select time"
-                  options={moveTimeOptions}
+                  options={timeOptions}
                   value={values.dropTime}
                   onValueChange={(d) => handleChange("dropTime", d.value[0])}
                 />
@@ -358,14 +310,14 @@ const InHomeMoveEstimate = () => {
             borderColor="gray.200"
           >
             <VStack align="stretch" gap={4}>
-               <Heading as="h3" color="brand.primary" fontWeight="normal" >
-              Move Type
-            </Heading>
+              <Heading as="h3" color="brand.primary" fontWeight="normal">
+                Move Type
+              </Heading>
 
-             <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
                 <SelectField
                   label="Move Type"
-                  options={moveTypeOptions}
+                  options={moveSizeOptions}
                   value={values.moveType}
                   onValueChange={(d) => handleChange("moveType", d.value[0])}
                 />
@@ -395,10 +347,10 @@ const InHomeMoveEstimate = () => {
           borderColor="gray.100"
         >
           <VStack align="stretch" gap={4}>
-             <Heading as="h3" color="brand.primary" fontWeight="normal">
-            Move Location
-          </Heading>
-           <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+            <Heading as="h3" color="brand.primary" fontWeight="normal">
+              Move Location
+            </Heading>
+            <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
               <InputField
                 label="From Address"
                 type="alphanumeric"
@@ -406,7 +358,7 @@ const InHomeMoveEstimate = () => {
                 value={values.fromAddress}
                 onChange={(e) => handleChange("fromAddress", e.target.value)}
               />
-             <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
                 <InputField
                   label="Apt / Suite / Other"
                   placeholder="Apt / Suite / Other"
@@ -423,14 +375,14 @@ const InHomeMoveEstimate = () => {
                 />
               </SimpleGrid>
             </SimpleGrid>
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{base: 4,md: 6}}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 4, md: 6 }}>
               <SelectField
                 label="State"
                 placeholder="State"
                 value={values.fromState}
-                onValueChange={(e) => handleChange("fromState", e.value[0])} 
-                options={stateOptions}             
-                 />
+                onValueChange={(e) => handleChange("fromState", e.value[0])}
+                options={stateOptions}
+              />
               <InputField
                 label="Zip Code"
                 placeholder="Zip Code"
@@ -452,7 +404,7 @@ const InHomeMoveEstimate = () => {
               />
               <SelectField
                 label="Door to truck at this address?"
-                options={distanceOptions}
+                options={doortoTruckOptions}
                 value={values.fromDistance}
                 onValueChange={(d) => handleChange("fromDistance", d.value[0])}
               />
@@ -471,9 +423,9 @@ const InHomeMoveEstimate = () => {
         >
           <VStack align="stretch" gap={4}>
             <Heading as="h3" color="brand.primary" fontWeight="normal">
-            Drop Location
-          </Heading>
-           <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+              Drop Location
+            </Heading>
+            <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
               <InputField
                 label="To Address"
                 placeholder="To Address"
@@ -481,7 +433,7 @@ const InHomeMoveEstimate = () => {
                 value={values.toAddress}
                 onChange={(e) => handleChange("toAddress", e.target.value)}
               />
-             <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
                 <InputField
                   label="Apt / Suite / Other"
                   placeholder="Apt / Suite / Other"
@@ -499,7 +451,7 @@ const InHomeMoveEstimate = () => {
               </SimpleGrid>
             </SimpleGrid>
 
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{base: 4,md: 6}}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 4, md: 6 }}>
               <SelectField
                 label="State"
                 placeholder="State"
@@ -528,7 +480,7 @@ const InHomeMoveEstimate = () => {
               />
               <SelectField
                 label="Truck to Door at this address?"
-                options={distanceOptions}
+                options={doortoTruckOptions}
                 value={values.toDistance}
                 onValueChange={(d) => handleChange("toDistance", d.value[0])}
               />

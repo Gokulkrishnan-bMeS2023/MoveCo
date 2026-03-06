@@ -12,24 +12,39 @@ import PhoneField from "../../components/common/PhoneInput/PhoneInput";
 
 const QuoteForm = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [formData, setFormData] = useState<QuoteFormDTO>({
-    firstName: "",
-    lastName: "",
-    date: "",
-    phoneNumber: "",
-    email: "",
-    estimate: "Instant Online Estimate",
+  const location = useLocation() as any;
+  const [errors, setErrors] = useState<Partial<Record<keyof QuoteFormDTO, string>>>({});
+  const [formData, setFormData] = useState<QuoteFormDTO>(() => {
+    const saved = sessionStorage.getItem("quoteForm");
+    return saved ? JSON.parse(saved) : {
+      firstName: "",
+      lastName: "",
+      date: "",
+      phoneNumber: "",
+      email: "",
+      estimate: "Instant Online Estimate",
+    };
   });
 
-  const [errors, setErrors] = useState<
-    Partial<Record<keyof QuoteFormDTO, string>>
-  >({});
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      sessionStorage.removeItem("quoteForm");
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("quoteForm", JSON.stringify(formData));
+  }, [formData]);
+
   useEffect(() => {
     if (location.state) {
-      setFormData(location.state as QuoteFormDTO);
+      navigate(location.pathname, { replace: true, state: null });
     }
-  }, [location.state]);
+  }, [location.pathname, navigate, location.state]);
 
   const handleChange = (field: keyof QuoteFormDTO, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -40,12 +55,12 @@ const QuoteForm = () => {
 
   const handleSubmit = () => {
     const validationErrors = validateQuoteForm(formData);
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
     setErrors({});
+
     if (formData.estimate === "Instant Online Estimate") {
       navigate("/move-information", { state: formData });
     } else if (formData.estimate === "In-Home Move Estimate") {
@@ -60,63 +75,52 @@ const QuoteForm = () => {
       <Image src={QuoteFormImage} alt="Quote Form" w="100%" rounded="2xl" />
       <Box bg="brand.white" p={6} mt={4} rounded="2xl">
         <Heading as="h3" textAlign="center" fontWeight="normal" mb={4}>
-          Get a Moving{" "}
-          <Text as="span" color="brand.primary">
-            Quote
-          </Text>
+          Get a Moving <Text as="span" color="brand.primary">Quote</Text>
         </Heading>
 
         <Stack gap={2}>
           <InputField
-            label="First Name"
-            value={formData.firstName}
-            onChange={(e) => handleChange("firstName", e.target.value)}
-            placeholder="First Name"
-            isRequired
-            errorMessage={errors.firstName}
+            label="First Name" 
+            value={formData.firstName} 
+            onChange={(e) => handleChange("firstName", e.target.value)} 
+            placeholder="First Name" 
+            isRequired 
+            errorMessage={errors.firstName} 
           />
-          <InputField
-            label="Last Name"
-            value={formData.lastName}
-            onChange={(e) => handleChange("lastName", e.target.value)}
-            placeholder="Last Name"
-            isRequired
-            errorMessage={errors.lastName}
+          <InputField 
+            label="Last Name" 
+            value={formData.lastName} 
+            onChange={(e) => handleChange("lastName", e.target.value)} 
+            placeholder="Last Name" 
+            isRequired 
+            errorMessage={errors.lastName} 
           />
-          <DateInput
-            label="Date"
-            value={formData.date}
-            variant="future-only"
-            onChange={(e) => handleChange("date", e.target.value)}
-            isRequired
-            errorMessage={errors.date}
+          <DateInput 
+            label="Date" 
+            value={formData.date} 
+            variant="future-only" 
+            onChange={(e) => handleChange("date", e.target.value)} 
+            isRequired 
+            errorMessage={errors.date} 
           />
-          <PhoneField
-            label="Phone Number"
-            value={formData.phoneNumber}
-            onChange={(digits) => handleChange("phoneNumber", digits)}
-            isRequired
-            errorMessage={errors.phoneNumber}
-          />
-          <InputField
-            label="Email"
-            type="email"
-            value={formData.email}
-            onChange={(e) => handleChange("email", e.target.value)}
-            placeholder="Email"
-            isRequired
-            errorMessage={errors.email}
-          />
+          <PhoneField 
+            label="Phone Number" 
+            value={formData.phoneNumber} 
+            onChange={(digits) => handleChange("phoneNumber", digits)} 
+            isRequired 
+            errorMessage={errors.phoneNumber} />
+          <InputField 
+            label="Email" 
+            type="email" 
+            value={formData.email} 
+            onChange={(e) => handleChange("email", e.target.value)} 
+            placeholder="Email" 
+            isRequired 
+            errorMessage={errors.email} />
           <RadioField
             options={[
-              {
-                label: "Instant Online Estimate",
-                value: "Instant Online Estimate",
-              },
-              {
-                label: "In-Home Move Estimate",
-                value: "In-Home Move Estimate",
-              },
+              { label: "Instant Online Estimate", value: "Instant Online Estimate" },
+              { label: "In-Home Move Estimate", value: "In-Home Move Estimate" },
               { label: "Request a call back", value: "Request a call back" },
             ]}
             value={formData.estimate}
@@ -124,8 +128,7 @@ const QuoteForm = () => {
             isRequired
             errorMessage={errors.estimate}
           />
-
-          <Button variant="primary" label="Next" onClick={handleSubmit} mt={2}/>
+          <Button variant="primary" label="Next" onClick={handleSubmit} mt={2} />
         </Stack>
       </Box>
     </Box>

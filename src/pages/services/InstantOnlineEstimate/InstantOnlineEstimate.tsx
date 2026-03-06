@@ -14,7 +14,6 @@ import Button from "../../../components/common/Button/Button";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import type { InstantEstimateDTO, InstantEstimateErrors } from "./DTOs";
 import { validateInstantEstimate } from "./validation";
-import { useEffect } from "react";
 import { images } from "../../../assets";
 import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
 
@@ -31,13 +30,6 @@ const InstantOnlineEstimate = () => {
 
   const [errors, setErrors] = useState<InstantEstimateErrors>({});
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const saved = sessionStorage.getItem("instantEstimate");
-    if (saved) {
-      setValues(JSON.parse(saved));
-    }
-  }, []);
 
   const handleChange = (field: keyof InstantEstimateDTO, value: string) => {
     const updated = { ...values, [field]: value };
@@ -61,21 +53,6 @@ const InstantOnlineEstimate = () => {
     navigate(
       `/move-information?firstName=${encodeURIComponent(values.firstName)}&lastName=${encodeURIComponent(values.lastName)}&email=${encodeURIComponent(values.email)}&phone=${encodeURIComponent(values.phone)}&moveDate=${encodeURIComponent(values.date)}`,
     );
-
-    fetch("http://balas.tryasp.net/api/Auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        phone: values.phone,
-        movingDate: values.date,
-        estimateType: "Instant Online Estimate",
-      }),
-    }).catch((err) => console.error("Background API error:", err));
   };
 
   return (

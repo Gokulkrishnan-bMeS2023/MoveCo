@@ -9,9 +9,7 @@ export const toOptions = (data: string[]): SelectOption[] =>
     value: item,
   }));
 
-export const toStateOptions = (
-  data: Record<string, string>
- ): SelectOption[] =>
+export const toStateOptions = (data: Record<string, string>): SelectOption[] =>
   Object.entries(data).map(([key, value]) => ({
     label: value,
     value: key,
