@@ -129,13 +129,12 @@ const InHomeMoveEstimate = () => {
           getFlightsOfStairs(),
           getDoorToTruck(),
         ]);
-
         setMoveSizeOptions(toOptions(moveSizesResponse.data || []));
         setTimeOptions(toOptions(timeSlotsResponse.data || []));
         setHearAboutOptions(toOptions(hearAboutResponse.data || []));
         setStateOptions(toStateOptions(statesResponse.data || []));
-        setStairsOptions(toOptions(stairsResponse.data || []));
-        setDoortoTruckOptions(toOptions(doortoTruckResponse.data || []));
+        setStairsOptions(stairsResponse.data || []);
+        setDoortoTruckOptions(doortoTruckResponse.data || []);
       } catch (error: any) {
         console.error("Failed to fetch static data:", error);
       }
