@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Stack, SimpleGrid, Heading, Box } from "@chakra-ui/react";
 import InputField from "../../../components/common/Input/Input";
 import SelectField from "../../../components/common/Select/Select";
@@ -5,62 +6,9 @@ import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import RadioField from "../../../components/common/Radio/Radio";
 import SSNField from "../../../components/common/SsnInput/SsnInput";
+import { getStateInstant } from "../../../api/statciDataService"; 
+import { toStateOptions, type SelectOption } from "./selectOptionUtils";
 
-const stateOptions = [
-  { label: "Texas", value: "TX" },
-  { label: "Alaska", value: "AK" },
-  { label: "Alabama", value: "AL" },
-  { label: "Arkansas", value: "AR" },
-  { label: "Arizona", value: "AZ" },
-  { label: "California", value: "CA" },
-  { label: "Colorado", value: "CO" },
-  { label: "Connecticut", value: "CT" },
-  { label: "District of Columbia", value: "DC" },
-  { label: "Delaware", value: "DE" },
-  { label: "Florida", value: "FL" },
-  { label: "Georgia", value: "GA" },
-  { label: "Hawaii", value: "HI" },
-  { label: "Iowa", value: "IA" },
-  { label: "Idaho", value: "ID" },
-  { label: "Illinois", value: "IL" },
-  { label: "Indiana", value: "IN" },
-  { label: "Kansas", value: "KS" },
-  { label: "Kentucky", value: "KY" },
-  { label: "Louisiana", value: "LA" },
-  { label: "Massachusetts", value: "MA" },
-  { label: "Maryland", value: "MD" },
-  { label: "Maine", value: "ME" },
-  { label: "Michigan", value: "MI" },
-  { label: "Minnesota", value: "MN" },
-  { label: "Missouri", value: "MO" },
-  { label: "Mississippi", value: "MS" },
-  { label: "Montana", value: "MT" },
-  { label: "North Carolina", value: "NC" },
-  { label: "North Dakota", value: "ND" },
-  { label: "Nebraska", value: "NE" },
-  { label: "New Hampshire", value: "NH" },
-  { label: "New Jersey", value: "NJ" },
-  { label: "New Mexico", value: "NM" },
-  { label: "Nevada", value: "NV" },
-  { label: "New York", value: "NY" },
-  { label: "Ohio", value: "OH" },
-  { label: "Oklahoma", value: "OK" },
-  { label: "Oregon", value: "OR" },
-  { label: "Pennsylvania", value: "PA" },
-  { label: "Puerto Rico", value: "PR" },
-  { label: "Rhode Island", value: "RI" },
-  { label: "South Carolina", value: "SC" },
-  { label: "South Dakota", value: "SD" },
-  { label: "Tennessee", value: "TN" },
-  { label: "Utah", value: "UT" },
-  { label: "Virginia", value: "VA" },
-  { label: "Virgin Islands", value: "VI" },
-  { label: "Vermont", value: "VT" },
-  { label: "Washington", value: "WA" },
-  { label: "Wisconsin", value: "WI" },
-  { label: "West Virginia", value: "WV" },
-  { label: "Wyoming", value: "WY" },
-];
 
 const yesNoOptions = [
   { label: "Yes", value: "yes" },
@@ -74,21 +22,35 @@ interface Props {
 }
 
 const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
+  const [stateOptions, setStateOptions] = useState<SelectOption[]>([]);
+
+  useEffect(() => {
+    const fetchStates = async () => {
+      try {
+        const response = await getStateInstant();
+        setStateOptions(toStateOptions(response.data || []));
+      } catch (error) {
+        console.error("Failed to fetch states:", error);
+      }
+    };
+    fetchStates();
+  }, []);
+
   return (
     <Stack gap={8}>
-        <Box
-          bg="brand.white"
-          p={{ base: 6, md: 8 }}
-          borderRadius="2xl"
-          boxShadow="lg"
-          border="1px solid"
-          borderColor="gray.100"
-        >
-          <Stack gap={4}>
+      <Box
+        bg="brand.white"
+        p={{ base: 6, md: 8 }}
+        borderRadius="2xl"
+        boxShadow="lg"
+        border="1px solid"
+        borderColor="gray.100"
+      >
+        <Stack gap={4}>
           <Heading as="h3" color="brand.primary" fontWeight="normal">
             Position Details
           </Heading>
-         <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
             <InputField
               label="Position Sought"
               value={formData.PositionSought}
@@ -104,9 +66,9 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
               }
             />
           </SimpleGrid>
-          </Stack>
-        </Box>
-      
+        </Stack>
+      </Box>
+
       {/* Personal Information */}
       <Box
         bg="brand.white"
@@ -121,7 +83,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             Your Information
           </Heading>
 
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }}>
             <InputField
               label="First Name"
               placeholder="First Name"
@@ -149,7 +111,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             />
           </SimpleGrid>
 
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }}>
             <PhoneField
               label="Home Phone"
               value={formData.HomePhone}
@@ -171,7 +133,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             />
           </SimpleGrid>
 
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{base: 4,md: 6}}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }}>
             <InputField
               label="City"
               placeholder="City"
@@ -180,7 +142,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             />
             <SelectField
               label="State"
-              options={stateOptions}
+              options={stateOptions} 
               placeholder="State"
               value={formData.State}
               onValueChange={(d) => handleChange("State", d.value[0])}
@@ -200,13 +162,11 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             />
           </SimpleGrid>
 
-         <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
             <SSNField
               label="Social Security Number"
               value={formData.SocialSecurityNumber}
-              onChange={(digits) =>
-                handleChange("SocialSecurityNumber", digits)
-              }
+              onChange={(digits) => handleChange("SocialSecurityNumber", digits)}
               errorMessage={errors.SocialSecurityNumber}
             />
             <DateInput

@@ -11,8 +11,7 @@ import type {
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 const PHONE_REGEX = /^\d{10}$/;
-const SSN_REGEX = /^\d{9}$/; // ✅ just 9 digits, no format check
-
+const SSN_REGEX = /^\d{9}$/; 
 
 // Step 1 Validation
 export const validateStepOne = (data: StepOneDTO): StepOneErrors => {
@@ -117,4 +116,21 @@ export const validateStepTwo = (data: StepTwoDTO): StepTwoErrors => {
   }
 
   return errors;
+};
+// Photo Validation (Step 3)
+export const validatePhoto = (file: File | null): string => {
+  if (!file) return "";
+
+  const allowedTypes = ["image/jpeg", "image/jpg"];
+  const maxSize = 10 * 1024 * 1024; // 10MB
+
+  if (!allowedTypes.includes(file.type)) {
+    return "Only JPG/JPEG format is allowed";
+  }
+
+  if (file.size > maxSize) {
+    return "Photo must be less than 10MB";
+  }
+
+  return "";
 };
