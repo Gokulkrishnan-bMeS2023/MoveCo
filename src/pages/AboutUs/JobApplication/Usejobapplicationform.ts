@@ -10,6 +10,7 @@ import type {
 } from "./DTOs";
 import { validateStepOne, validateStepTwo } from "./validation";
 import { postJobApplication } from "../../../api/jobApplicationService";
+import { toaster } from "../../../components/ui/toaster";
 
 export const useJobApplicationForm = () => {
   const [page, setPage] = useState(0);
@@ -76,7 +77,6 @@ export const useJobApplicationForm = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
 
-  // Fixed: accepts string so Step1PersonalInfo props match cleanly
   const handleChange = (field: string, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field as keyof StepOneErrors]) {
@@ -86,7 +86,7 @@ export const useJobApplicationForm = () => {
 
   const handleEducationChange = <K extends keyof EducationDTO>(
     field: K,
-    value: EducationDTO[K],
+    value: EducationDTO[K]
   ) => {
     setStepTwoData((prev) => ({
       ...prev,
@@ -97,12 +97,12 @@ export const useJobApplicationForm = () => {
   const handleExperienceChange = <K extends keyof EmploymentExperienceDTO>(
     index: number,
     field: K,
-    value: EmploymentExperienceDTO[K],
+    value: EmploymentExperienceDTO[K]
   ) => {
     setStepTwoData((prev) => ({
       ...prev,
       experiences: prev.experiences.map((exp, i) =>
-        i === index ? { ...exp, [field]: value } : exp,
+        i === index ? { ...exp, [field]: value } : exp
       ),
     }));
   };
@@ -138,14 +138,14 @@ export const useJobApplicationForm = () => {
 
   const handleStepThreeChange = <K extends keyof StepThreeDTO>(
     field: K,
-    value: StepThreeDTO[K],
+    value: StepThreeDTO[K]
   ) => {
     setStepThreeData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleClearExperienceError = (
     index: number,
-    field: keyof EmploymentExperienceDTO,
+    field: keyof EmploymentExperienceDTO
   ) => {
     setStepTwoErrors((prev) => {
       const updatedExperiences = [...(prev.experiences || [])];
@@ -160,108 +160,128 @@ export const useJobApplicationForm = () => {
   };
 
   const nextPage = async () => {
-  // STEP 1 VALIDATION
-  if (page === 0) {
-    const validationErrors = validateStepOne(formData);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
+    if (page === 0) {
+      const validationErrors = validateStepOne(formData);
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
+      setErrors({});
     }
-    setErrors({});
-  }
 
-  // STEP 2 VALIDATION
-  if (page === 1) {
-    const stepTwoValidationErrors = validateStepTwo(stepTwoData);
-    if (Object.keys(stepTwoValidationErrors).length > 0) {
-      setStepTwoErrors(stepTwoValidationErrors);
-      return;
+    if (page === 1) {
+      const stepTwoValidationErrors = validateStepTwo(stepTwoData);
+      if (Object.keys(stepTwoValidationErrors).length > 0) {
+        setStepTwoErrors(stepTwoValidationErrors);
+        return;
+      }
+      setStepTwoErrors({});
     }
-    setStepTwoErrors({});
-  }
 
-  // FINAL SUBMIT
-  if (page === 2) {
-    if (!step3Ref.current?.validate()) return;
+    if (page === 2) {
+      if (!step3Ref.current?.validate()) return;
 
-    const payload = {
+      const formDataPayload = new FormData();
+
       // Step 1
-      positionSought: formData.PositionSought,
-      learnPosition: formData.Howdidyoulearnabouttheposition,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      emailAddress: formData.email,
-      homePhone: formData.HomePhone,
-      cellPhone: formData.CellPhone,
-      address: formData.Address,
-      city: formData.City,
-      state: formData.State,
-      zipCode: formData.ZipCode,
-      socialSecurityNumber: formData.SocialSecurityNumber,
-      availableforWork:
-        formData.Onwhatdatewouldyoubeavailableforwork,
-      isUSCitizen: formData.citizen,
-      convictedofaFelony: formData.felony,
-      involuntarilyTerminated: formData.terminated,
-      willSubmitPreEmploymentDrugScrnTest:
-        formData.drugTest,
+      formDataPayload.append("positionSought", formData.PositionSought);
+      formDataPayload.append(
+        "learnPosition",
+        formData.Howdidyoulearnabouttheposition
+      );
+      formDataPayload.append("firstName", formData.firstName);
+      formDataPayload.append("lastName", formData.lastName);
+      formDataPayload.append("emailAddress", formData.email);
+      formDataPayload.append("homePhone", formData.HomePhone);
+      formDataPayload.append("cellPhone", formData.CellPhone);
+      formDataPayload.append("address", formData.Address);
+      formDataPayload.append("city", formData.City);
+      formDataPayload.append("state", formData.State);
+      formDataPayload.append("zipCode", formData.ZipCode);
+      formDataPayload.append(
+        "socialSecurityNumber",
+        formData.SocialSecurityNumber
+      );
+      formDataPayload.append(
+        "availableforWork",
+        formData.Onwhatdatewouldyoubeavailableforwork
+      );
+      formDataPayload.append("isUSCitizen", formData.citizen);
+      formDataPayload.append("convictedofaFelony", formData.felony);
+      formDataPayload.append("involuntarilyTerminated", formData.terminated);
+      formDataPayload.append(
+        "willSubmitPreEmploymentDrugScrnTest",
+        formData.drugTest
+      );
 
       // Education
-      schoolname: stepTwoData.education.schoolName,
-      location: stepTwoData.education.location,
-      years: stepTwoData.education.years,
-      degreeReceived: stepTwoData.education.degree,
-      major: stepTwoData.education.major,
+      formDataPayload.append("schoolname", stepTwoData.education.schoolName);
+      formDataPayload.append("location", stepTwoData.education.location);
+      formDataPayload.append("years", stepTwoData.education.years);
+      formDataPayload.append("degreeReceived", stepTwoData.education.degree);
+      formDataPayload.append("major", stepTwoData.education.major);
 
       // Experience 1
-      employer: stepTwoData.experiences[0]?.employer || "",
-      jobTitle: stepTwoData.experiences[0]?.jobTitle || "",
-      datesEmployedFrom: stepTwoData.experiences[0]?.from || "",
-      datesEmployedTo: stepTwoData.experiences[0]?.to || "",
-      priorPositions: stepTwoData.experiences[0]?.priorPosition || "",
-      startingSalary: stepTwoData.experiences[0]?.startSalary || "",
-      endingSalary: stepTwoData.experiences[0]?.endSalary || "",
-      supervisorName: stepTwoData.experiences[0]?.supervisorName || "",
-      supervisorPhone: stepTwoData.experiences[0]?.supervisorPhone || "",
-      reasonforLeaving: stepTwoData.experiences[0]?.reason || "",
-      dutiesPerformed: stepTwoData.experiences[0]?.duties || "",
+      const exp1 = stepTwoData.experiences[0];
+      if (exp1) {
+        formDataPayload.append("employer", exp1.employer);
+        formDataPayload.append("jobTitle", exp1.jobTitle);
+        formDataPayload.append("datesEmployedFrom", exp1.from);
+        formDataPayload.append("datesEmployedTo", exp1.to);
+        formDataPayload.append("priorPositions", exp1.priorPosition);
+        formDataPayload.append("startingSalary", exp1.startSalary);
+        formDataPayload.append("endingSalary", exp1.endSalary);
+        formDataPayload.append("supervisorName", exp1.supervisorName);
+        formDataPayload.append("supervisorPhone", exp1.supervisorPhone);
+        formDataPayload.append("reasonforLeaving", exp1.reason);
+        formDataPayload.append("dutiesPerformed", exp1.duties);
+      }
 
-      // Experience 2 (optional)
-      secondEmployer: stepTwoData.experiences[1]?.employer || "",
-      secondJobTitle: stepTwoData.experiences[1]?.jobTitle || "",
-      secondDatesEmployedFrom:
-        stepTwoData.experiences[1]?.from || "",
-      secondDatesEmployedTo:
-        stepTwoData.experiences[1]?.to || "",
-      secondPriorPositions:
-        stepTwoData.experiences[1]?.priorPosition || "",
-      secondStartingSalary:
-        stepTwoData.experiences[1]?.startSalary || "",
-      secondEndingSalary:
-        stepTwoData.experiences[1]?.endSalary || "",
-      secondSupervisorName:
-        stepTwoData.experiences[1]?.supervisorName || "",
-      secondSupervisorPhone:
-        stepTwoData.experiences[1]?.supervisorPhone || "",
-      secondReasonforLeaving:
-        stepTwoData.experiences[1]?.reason || "",
-      secondDutiesPerformed:
-        stepTwoData.experiences[1]?.duties || "",
-    };
+      // Experience 2
+      const exp2 = stepTwoData.experiences[1];
+      if (exp2) {
+        formDataPayload.append("secondEmployer", exp2.employer);
+        formDataPayload.append("secondJobTitle", exp2.jobTitle);
+        formDataPayload.append("secondDatesEmployedFrom", exp2.from);
+        formDataPayload.append("secondDatesEmployedTo", exp2.to);
+        formDataPayload.append("secondPriorPositions", exp2.priorPosition);
+        formDataPayload.append("secondStartingSalary", exp2.startSalary);
+        formDataPayload.append("secondEndingSalary", exp2.endSalary);
+        formDataPayload.append("secondSupervisorName", exp2.supervisorName);
+        formDataPayload.append("secondSupervisorPhone", exp2.supervisorPhone);
+        formDataPayload.append("secondReasonforLeaving", exp2.reason);
+        formDataPayload.append("secondDutiesPerformed", exp2.duties);
+      }
 
-    try {
-      await postJobApplication(payload);
-      alert("Application Submitted Successfully!");
-    } catch (error: any) {
-      console.error(error.response?.data || error.message);
-      alert("Submission Failed");
+      if (stepThreeData.photoFile) {
+        formDataPayload.append("photoFile", stepThreeData.photoFile);
+      }
+
+      try {
+        const response = await postJobApplication(formDataPayload);
+
+        toaster.create({
+          title: response?.data?.message || "Application submitted successfully!",
+          type: "success",
+        });
+
+      } catch (error: any) {
+        toaster.create({
+          title:
+            error?.response?.data?.message ||
+            "Submission failed. Please try again.",
+          type: "error",
+        });
+
+        console.error(error.response?.data || error.message);
+      }
+
+      return;
     }
 
-    return;
-  }
+    setPage((p) => p + 1);
+  };
 
-  setPage((p) => p + 1);
-};
   const prevPage = () => setPage((p) => Math.max(p - 1, 0));
 
   return {

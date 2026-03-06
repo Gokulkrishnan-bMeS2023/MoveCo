@@ -50,8 +50,12 @@ export interface JobApplicationPayload {
   secondDutiesPerformed: string;
 }
 
-export const postJobApplication = (
-  data: JobApplicationPayload
-) => {
-  return api.post("/aboutus/job-application", data);
+
+
+export const postJobApplication = (data: FormData) => {
+  return api.post("/aboutus/job-application", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };

@@ -165,6 +165,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             <InputField
               label="Address"
               placeholder="Address"
+              type="alphanumeric"
               value={formData.Address}
               onChange={(e) => handleChange("Address", e.target.value)}
             />
