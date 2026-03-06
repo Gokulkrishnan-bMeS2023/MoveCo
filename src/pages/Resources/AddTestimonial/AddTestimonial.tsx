@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import type { TestimonialFormValues, TestimonialErrors } from "./DTOs";
 import { validateTestimonial } from "./validation";
 import { postTestimonial } from "../../../api/testimonialService";
+import { toaster } from "../../../components/ui/toaster";
 
 const AddTestimonial = () => {
   const navigate = useNavigate();
@@ -33,72 +34,69 @@ const AddTestimonial = () => {
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-const handleSubmit = async () => {
+  const handleSubmit = async () => {
     const newErrors = validateTestimonial(values);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-   const payload = {
-  FirstName: values.firstName,
-  LastName: values.lastName,
-  MoveDate: values.moveDate, 
-  Email: values.email,
-  Comments: values.comments,
-  IsActive: true,
-} as any; // Type error-a avoid panna 'as any' use pannunga
-    console.log("Sending payload:", payload);
-
+    const payload = {
+      FirstName: values.firstName,
+      LastName: values.lastName,
+      MoveDate: values.moveDate,
+      Email: values.email,
+      Comments: values.comments,
+      IsActive: true,
+    } as any;
     try {
-      await postTestimonial(payload);
-      alert("Testimonial submitted successfully!");
+      const response = await postTestimonial(payload);
+      toaster.create({
+        title: response?.data?.message || "Thank you for your message.It has been sent.",
+        type: "success",
+      });
       navigate("/");
     } catch (error: any) {
-      if (error.response) {
-        // Console-la intha array-va click panni '0' index-la enna irukunu paarunga
-        console.error("Exact Error:", error.response.data);
-        
-        // Error details-a screen-la kaata
-        const errorDetails = error.response.data[0]?.errorMessage || "Validation failed";
-        alert(`Server Error: ${errorDetails}`);
-      } else {
-        alert("Something went wrong");
-      }
+      toaster.create({
+        title:
+          error?.response?.data?.message ||
+          "Submission failed. Please try again.",
+        type: "error",
+      });
     }
-};
+  };
 
   return (
     <Container>
       <Flex
         direction={{ base: "column", lg: "row" }}
         justify="space-between"
-        align={{base:"left",md:"center"}}
+        align={{ base: "left", md: "center" }}
         mb={{ base: 4, lg: 6 }}
-         gap={{ base: 4, md: 10 }}
+        gap={{ base: 4, md: 10 }}
       >
-          <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{base: "center", md: "left"}}>
-            Add
-            <Text as="span" color="brand.primary">
-              {" "}
-              Testimonial
-            </Text>
-          </Heading>
-          <Text textStyle={"size-2xl"} maxW={{ lg: "46%" }} textAlign={{base: "center", md: "left"}}>
-            You are about to post a comment on our “testimonial board”.If you
-            need to contact customer service please {" "}
-            <Text
-             as="span"
-             color="brand.primary"
-              textDecoration="underline"
-              cursor="pointer"
-              _hover={{ opacity: 0.8 }}
-              onClick={() => navigate("/contact-us")}
-            >
-              email us 
-            </Text>
-            . This board is for actual customers only.
+        <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{ base: "center", md: "left" }}>
+          Add
+          <Text as="span" color="brand.primary">
+            {" "}
+            Testimonial
           </Text>
+        </Heading>
+        <Text textStyle={"size-2xl"} maxW={{ lg: "46%" }} textAlign={{ base: "center", md: "left" }}>
+          You are about to post a comment on our “testimonial board”.If you
+          need to contact customer service please {" "}
+          <Text
+            as="span"
+            color="brand.primary"
+            textDecoration="underline"
+            cursor="pointer"
+            _hover={{ opacity: 0.8 }}
+            onClick={() => navigate("/contact-us")}
+          >
+            email us
+          </Text>
+          . This board is for actual customers only.
+        </Text>
       </Flex>
       <Box
         bg="brand.white"
@@ -110,9 +108,9 @@ const handleSubmit = async () => {
       >
         <Stack gap={4}>
           <Heading as="h3" fontWeight="normal" color="brand.primary">
-              Add Testimonial
-            </Heading>
-         <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+            Add Testimonial
+          </Heading>
+          <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
             <InputField
               label="First Name"
               placeholder="First Name"
@@ -131,7 +129,7 @@ const handleSubmit = async () => {
             />
           </SimpleGrid>
 
-         <SimpleGrid columns={{ base: 1, md: 2 }} gap={{base: 4,md: 6}}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
             <DateInput
               label="Move Date"
               variant="future-only"
