@@ -63,24 +63,22 @@ export const useContactForms = () => {
         name: contactValues.name,
         customerEmail: contactValues.email,
         telePhone: contactValues.phone,
-        comments: contactValues.message,
+        comments: contactValues?.message || "",
         referralUrl:
           window.location.href || "https://www.moveco.com/contact-us",
       };
 
-      await postContact(payload);
+      const response = await postContact(payload);
       setContactValues(initialContactState);
-
       toaster.create({
-        title: "Message sent successfully!",
-        description: "We'll get back to you as soon as possible.",
+        title: response?.data?.message || "Application submitted successfully!",
         type: "success",
       });
-    } catch (error) {
-      console.error("Error submitting contact form", error);
+    } catch (error: any) {
       toaster.create({
-        title: "Failed to send message.",
-        description: "Something went wrong. Please try again later.",
+        title:
+          error?.response?.data?.message ||
+          "Submission failed. Please try again.",
         type: "error",
       });
     }
@@ -105,19 +103,17 @@ export const useContactForms = () => {
         customerPhoneNo: referralValues.friendPhone,
       };
 
-      await postReferral(payload);
+      const response = await postReferral(payload);
       setReferralValues(initialReferralState);
-
       toaster.create({
-        title: "Referral sent successfully!",
-        description: "Your friend will receive an invitation shortly.",
+        title: response?.data?.message || "Application submitted successfully!",
         type: "success",
       });
-    } catch (error) {
-      console.error("Error submitting referral", error);
+    } catch (error: any) {
       toaster.create({
-        title: "Failed to send referral.",
-        description: "Something went wrong. Please try again later.",
+        title:
+          error?.response?.data?.message ||
+          "Submission failed. Please try again.",
         type: "error",
       });
     }

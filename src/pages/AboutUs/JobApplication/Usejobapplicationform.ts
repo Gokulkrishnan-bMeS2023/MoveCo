@@ -86,7 +86,7 @@ export const useJobApplicationForm = () => {
 
   const handleEducationChange = <K extends keyof EducationDTO>(
     field: K,
-    value: EducationDTO[K]
+    value: EducationDTO[K],
   ) => {
     setStepTwoData((prev) => ({
       ...prev,
@@ -97,12 +97,12 @@ export const useJobApplicationForm = () => {
   const handleExperienceChange = <K extends keyof EmploymentExperienceDTO>(
     index: number,
     field: K,
-    value: EmploymentExperienceDTO[K]
+    value: EmploymentExperienceDTO[K],
   ) => {
     setStepTwoData((prev) => ({
       ...prev,
       experiences: prev.experiences.map((exp, i) =>
-        i === index ? { ...exp, [field]: value } : exp
+        i === index ? { ...exp, [field]: value } : exp,
       ),
     }));
   };
@@ -138,14 +138,14 @@ export const useJobApplicationForm = () => {
 
   const handleStepThreeChange = <K extends keyof StepThreeDTO>(
     field: K,
-    value: StepThreeDTO[K]
+    value: StepThreeDTO[K],
   ) => {
     setStepThreeData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleClearExperienceError = (
     index: number,
-    field: keyof EmploymentExperienceDTO
+    field: keyof EmploymentExperienceDTO,
   ) => {
     setStepTwoErrors((prev) => {
       const updatedExperiences = [...(prev.experiences || [])];
@@ -187,7 +187,7 @@ export const useJobApplicationForm = () => {
       formDataPayload.append("positionSought", formData.PositionSought);
       formDataPayload.append(
         "learnPosition",
-        formData.Howdidyoulearnabouttheposition
+        formData.Howdidyoulearnabouttheposition,
       );
       formDataPayload.append("firstName", formData.firstName);
       formDataPayload.append("lastName", formData.lastName);
@@ -200,18 +200,18 @@ export const useJobApplicationForm = () => {
       formDataPayload.append("zipCode", formData.ZipCode);
       formDataPayload.append(
         "socialSecurityNumber",
-        formData.SocialSecurityNumber
+        formData.SocialSecurityNumber,
       );
       formDataPayload.append(
         "availableforWork",
-        formData.Onwhatdatewouldyoubeavailableforwork
+        formData.Onwhatdatewouldyoubeavailableforwork,
       );
       formDataPayload.append("isUSCitizen", formData.citizen);
       formDataPayload.append("convictedofaFelony", formData.felony);
       formDataPayload.append("involuntarilyTerminated", formData.terminated);
       formDataPayload.append(
         "willSubmitPreEmploymentDrugScrnTest",
-        formData.drugTest
+        formData.drugTest,
       );
 
       // Education
@@ -261,10 +261,10 @@ export const useJobApplicationForm = () => {
         const response = await postJobApplication(formDataPayload);
 
         toaster.create({
-          title: response?.data?.message || "Application submitted successfully!",
+          title:
+            response?.data?.message || "Application submitted successfully!",
           type: "success",
         });
-
       } catch (error: any) {
         toaster.create({
           title:
@@ -272,8 +272,6 @@ export const useJobApplicationForm = () => {
             "Submission failed. Please try again.",
           type: "error",
         });
-
-        console.error(error.response?.data || error.message);
       }
 
       return;
