@@ -15,7 +15,7 @@ import { toaster } from "../../../components/ui/toaster";
 export const useJobApplicationForm = () => {
   const [page, setPage] = useState(0);
 
-  const [formData, setFormData] = useState<StepOneDTO>({
+  const initialFormData: StepOneDTO = {
     PositionSought: "",
     Howdidyoulearnabouttheposition: "",
     firstName: "",
@@ -33,9 +33,9 @@ export const useJobApplicationForm = () => {
     felony: "",
     terminated: "",
     drugTest: "",
-  });
+  };
 
-  const [stepTwoData, setStepTwoData] = useState<StepTwoDTO>({
+  const initialStepTwoData: StepTwoDTO = {
     education: {
       schoolName: "",
       location: "",
@@ -60,13 +60,17 @@ export const useJobApplicationForm = () => {
         duties: "",
       },
     ],
-  });
+  };
 
-  const [stepThreeData, setStepThreeData] = useState<StepThreeDTO>({
+  const initialStepThreeData: StepThreeDTO = {
     photoFile: null,
     photoFileName: "",
     agreed: false,
-  });
+  };
+
+  const [formData, setFormData] = useState<StepOneDTO>(initialFormData);
+  const [stepTwoData, setStepTwoData] = useState<StepTwoDTO>(initialStepTwoData);
+  const [stepThreeData, setStepThreeData] = useState<StepThreeDTO>(initialStepThreeData);
 
   const [errors, setErrors] = useState<StepOneErrors>({});
   const [stepTwoErrors, setStepTwoErrors] = useState<StepTwoErrors>({});
@@ -159,6 +163,16 @@ export const useJobApplicationForm = () => {
     });
   };
 
+  // ✅ Reset all form data to initial state
+  const resetForm = () => {
+    setFormData(initialFormData);
+    setStepTwoData(initialStepTwoData);
+    setStepThreeData(initialStepThreeData);
+    setErrors({});
+    setStepTwoErrors({});
+    setPage(0);
+  };
+
   const nextPage = async () => {
     if (page === 0) {
       const validationErrors = validateStepOne(formData);
@@ -185,10 +199,7 @@ export const useJobApplicationForm = () => {
 
       // Step 1
       formDataPayload.append("positionSought", formData.PositionSought);
-      formDataPayload.append(
-        "learnPosition",
-        formData.Howdidyoulearnabouttheposition,
-      );
+      formDataPayload.append("learnPosition", formData.Howdidyoulearnabouttheposition);
       formDataPayload.append("firstName", formData.firstName);
       formDataPayload.append("lastName", formData.lastName);
       formDataPayload.append("emailAddress", formData.email);
@@ -198,21 +209,12 @@ export const useJobApplicationForm = () => {
       formDataPayload.append("city", formData.City);
       formDataPayload.append("state", formData.State);
       formDataPayload.append("zipCode", formData.ZipCode);
-      formDataPayload.append(
-        "socialSecurityNumber",
-        formData.SocialSecurityNumber,
-      );
-      formDataPayload.append(
-        "availableforWork",
-        formData.Onwhatdatewouldyoubeavailableforwork,
-      );
+      formDataPayload.append("socialSecurityNumber", formData.SocialSecurityNumber);
+      formDataPayload.append("availableforWork", formData.Onwhatdatewouldyoubeavailableforwork);
       formDataPayload.append("isUSCitizen", formData.citizen);
       formDataPayload.append("convictedofaFelony", formData.felony);
       formDataPayload.append("involuntarilyTerminated", formData.terminated);
-      formDataPayload.append(
-        "willSubmitPreEmploymentDrugScrnTest",
-        formData.drugTest,
-      );
+      formDataPayload.append("willSubmitPreEmploymentDrugScrnTest", formData.drugTest);
 
       // Education
       formDataPayload.append("schoolname", stepTwoData.education.schoolName);
@@ -265,6 +267,10 @@ export const useJobApplicationForm = () => {
             response?.data?.message || "Application submitted successfully!",
           type: "success",
         });
+
+        // ✅ Reset everything after successful submission
+        resetForm();
+
       } catch (error: any) {
         toaster.create({
           title:

@@ -52,8 +52,10 @@ const CheckboxField: React.FC<CheckboxProps> = ({
       </Checkbox.Root>
 
       {isInvalid && (
-        <Field.ErrorText color="brand.red">{errorMessage}</Field.ErrorText>
-      )}
+  <Field.ErrorText color="brand.red" fontWeight="400">
+    {errorMessage}
+  </Field.ErrorText>
+)}
     </Field.Root>
   );
 };

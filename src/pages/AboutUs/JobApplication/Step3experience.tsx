@@ -1,6 +1,7 @@
 import { Stack, Input, Field, Heading, Text, Box } from "@chakra-ui/react";
 import { forwardRef, useImperativeHandle, useState, useRef } from "react";
 import CheckboxField from "../../../components/common/CheckBox/Checkbox";
+import { validatePhoto } from "./validation";
 
 interface Step3ExperienceProps {
   photoFile: File | null;
@@ -13,6 +14,7 @@ interface Step3ExperienceProps {
 const Step3Experience = forwardRef<any, Step3ExperienceProps>(
   ({ photoFileName, agreed, onPhotoChange, onAgreedChange }, ref) => {
     const [showError, setShowError] = useState(false);
+    const [photoError, setPhotoError] = useState("");
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     useImperativeHandle(ref, () => ({
@@ -26,11 +28,25 @@ const Step3Experience = forwardRef<any, Step3ExperienceProps>(
     }));
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
+      const file = e.target.files?.[0] || null;
+
+      const error = validatePhoto(file);
+
+      if (error) {
+        setPhotoError(error);
+
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
+
+        onPhotoChange(null, "");
+        return;
+      }
+
+      setPhotoError("");
+
       if (file) {
         onPhotoChange(file, file.name);
-      } else {
-        onPhotoChange(null, "");
       }
     };
 
@@ -46,8 +62,8 @@ const Step3Experience = forwardRef<any, Step3ExperienceProps>(
         >
           <Stack gap={4}>
             <Heading as="h3" color="brand.primary" fontWeight="normal">
-            Attach a photo of yourself (JPEG format)
-          </Heading>
+              Attach a photo of yourself (JPEG format)
+            </Heading>
 
             <Field.Root>
               <Field.Label>Upload Photo</Field.Label>
@@ -75,6 +91,9 @@ const Step3Experience = forwardRef<any, Step3ExperienceProps>(
                   Selected file: {photoFileName}
                 </Text>
               )}
+              <Text mt={1} color="brand.red" fontWeight="400" textStyle="size-xs">
+                {photoError}
+              </Text>
             </Field.Root>
           </Stack>
         </Box>
@@ -87,11 +106,10 @@ const Step3Experience = forwardRef<any, Step3ExperienceProps>(
           border="1px solid"
           borderColor="gray.100"
         >
-
           <Stack gap={4}>
             <Heading as="h3" color="brand.primary" fontWeight="normal">
-            Acknowledgments & Authorization
-          </Heading>
+              Acknowledgments & Authorization
+            </Heading>
             <Text textStyle="size-sm">
               1. I certify that answers given herein are true and complete to
               the best of my knowledge.

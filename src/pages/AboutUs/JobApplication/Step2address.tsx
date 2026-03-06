@@ -10,14 +10,13 @@ import {
 import React from "react";
 import InputField from "../../../components/common/Input/Input";
 import DateInput from "../../../components/common/DateInput/DateInput";
-import PhoneField from "../../../components/common/PhoneInput/PhoneInput"; 
+import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
 import Button from "../../../components/common/Button/Button";
 import type {
   EducationDTO,
   EmploymentExperienceDTO,
   EmploymentExperienceErrors,
 } from "./DTOs";
-
 
 interface Step2AddressProps {
   education: EducationDTO;
@@ -152,7 +151,10 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                 )}
               </Flex>
               <Stack gap={4}>
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }}>
+                <SimpleGrid
+                  columns={{ base: 1, md: 3 }}
+                  gap={{ base: 4, md: 6 }}
+                >
                   <InputField
                     label="Employer"
                     placeholder="Employer"
@@ -213,7 +215,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                   </Field.Root>
                 </SimpleGrid>
 
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} >
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
                   <InputField
                     label="Prior Positions"
                     placeholder="Prior Positions"
@@ -243,14 +245,21 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                   />
                 </SimpleGrid>
 
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }}>
+                <SimpleGrid
+                  columns={{ base: 1, md: 3 }}
+                  gap={{ base: 4, md: 6 }}
+                >
                   <InputField
                     label="Supervisor Name"
                     placeholder="Supervisor Name"
                     type="alphanumeric"
                     value={experience.supervisorName}
                     onChange={(e) =>
-                      onExperienceChange(index, "supervisorName", e.target.value)
+                      onExperienceChange(
+                        index,
+                        "supervisorName",
+                        e.target.value,
+                      )
                     }
                   />
 
@@ -296,6 +305,7 @@ const Step2Address: React.FC<Step2AddressProps> = ({
             onClick={onAddExperience}
             label={"+ Add Another Experience"}
             variant={"primary"}
+            disabled={experiences.length >= 2}
           />
         </Stack>
       </Box>
