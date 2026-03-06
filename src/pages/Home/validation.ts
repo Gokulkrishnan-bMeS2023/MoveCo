@@ -20,8 +20,8 @@ export const validateQuoteForm = (
 
    if (!data.phoneNumber) {
     errors.phoneNumber = "Phone number is required";
-  } else if (!PHONE_REGEX.test(data.phoneNumber)) {
-    errors.phoneNumber = "Phone number must be 10 digits";
+  } else if (!PHONE_REGEX.test(data.phoneNumber.replace(/\D/g, ""))) {
+    errors.phoneNumber = "Enter valid 10 digit phone number";
   }
 
   if (!data.email) {
