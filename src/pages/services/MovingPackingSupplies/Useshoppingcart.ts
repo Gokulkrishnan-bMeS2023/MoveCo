@@ -1,18 +1,13 @@
 // hooks/useShoppingCart.ts
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { createToaster } from "@chakra-ui/react";
 import type { CartItem, Product } from "./DTOs";
+import { toaster } from "../../../components/ui/toaster";
 
 // CONSTANTS
 
 const STORAGE_KEY = "shopping_cart";
 export const TAX_RATE = 0.0823; // 8.23% tax
-
-const toaster = createToaster({
-  placement: "top-end",
-  duration: 2000,
-});
 
 // STORAGE UTILITIES
 
@@ -149,7 +144,7 @@ export const useShoppingCart = () => {
       toaster.create({
         title: "Item removed",
         description: "Product has been removed from your cart",
-        type: "info",
+        type: "success",
       });
     },
     [syncCart],
