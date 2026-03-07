@@ -18,7 +18,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 const Confirmation = () => {
   return (
-    <div>
+    <>
       <Container>
         <Flex
           direction="column"
@@ -27,7 +27,11 @@ const Confirmation = () => {
           gap={{ base: 4, md: 10 }}
         >
           <Box maxW="800px" w="100%">
-            <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md: "left"}}>
+            <Heading
+              as="h1"
+              fontWeight="normal"
+              textAlign={{ base: "center", md: "left" }}
+            >
               Quote for your{" "}
               <Text as="span" color="brand.primary">
                 Move
@@ -36,139 +40,145 @@ const Confirmation = () => {
           </Box>
         </Flex>
 
+        <Box
+          bg="brand.white"
+          p={{ base: 6, md: 8 }}
+          borderRadius="2xl"
+          boxShadow="lg"
+          border="1px solid"
+          borderColor="gray.100"
+        >
+          <Stack gap={4}>
+            <Heading as="h3" color="brand.primary" fontWeight="normal">
+              Quote Confirmation
+            </Heading>
+
+            <Box border="1px solid" borderColor="gray.200" overflow="hidden">
+              <Grid templateColumns="repeat(4, 1fr)">
+                <GridItem bg="brand.primary" px={4} py={3}>
+                  <Text
+                    color="brand.white"
+                    fontWeight="medium"
+                    textStyle="size-lg"
+                  >
+                    Quote No
+                  </Text>
+                </GridItem>
+                <GridItem bg="brand.primary" px={4} py={3}>
+                  <Text
+                    color="brand.white"
+                    fontWeight="medium"
+                    textStyle="size-lg"
+                  >
+                    Moving Price
+                  </Text>
+                </GridItem>
+                <GridItem bg="brand.primary" px={4} py={3}>
+                  <Text
+                    color="brand.white"
+                    fontWeight="medium"
+                    textStyle="size-lg"
+                  >
+                    Packing Price
+                  </Text>
+                </GridItem>
+                <GridItem bg="brand.primary" px={4} py={3}>
+                  <Text
+                    color="brand.white"
+                    fontWeight="medium"
+                    textStyle="size-lg"
+                  >
+                    Total Price
+                  </Text>
+                </GridItem>
+              </Grid>
+
+              {/* Table Data Row - White */}
+              <Grid templateColumns="repeat(4, 1fr)">
+                <GridItem
+                  bg="brand.white"
+                  px={4}
+                  py={4}
+                  borderTop="1px solid"
+                  borderColor="gray.100"
+                >
+                  <Text fontWeight="normal" textStyle="size-lg">
+                    80160
+                  </Text>
+                </GridItem>
+                <GridItem
+                  bg="brand.white"
+                  px={4}
+                  py={4}
+                  borderTop="1px solid"
+                  borderColor="gray.100"
+                >
+                  <Text fontWeight="normal" textStyle="size-lg">
+                    $0.00
+                  </Text>
+                </GridItem>
+                <GridItem
+                  bg="white"
+                  px={4}
+                  py={4}
+                  borderTop="1px solid"
+                  borderColor="gray.100"
+                >
+                  <Text fontWeight="normal" textStyle="size-lg">
+                    $0.00
+                  </Text>
+                </GridItem>
+                <GridItem
+                  bg="white"
+                  px={4}
+                  py={4}
+                  borderTop="1px solid"
+                  borderColor="gray.100"
+                >
+                  <Text
+                    color="brand.primary"
+                    fontWeight="normal"
+                    textStyle="size-lg"
+                  >
+                    $0.00
+                  </Text>
+                </GridItem>
+              </Grid>
+            </Box>
+            <Box>
+              <Text fontWeight="normal" textStyle="size-lg">
+                Thank you for receiving a quote with MoveCo.net. Please take a
+                moment to read what your quote includes.
+              </Text>
+            </Box>
+          </Stack>
+        </Box>
+        <Box pt="sectionTop">
           <Box
-            bg="brand.white"
-            p={{ base: 6, md: 8 }}
-            borderRadius="2xl"
-            boxShadow="lg"
+            bg="brand.gray/20"
+            borderRadius="md"
+            p={4}
             border="1px solid"
-            borderColor="gray.100"
+            borderColor="gray.200"
           >
-            <Stack gap={4}>
-              <Heading as="h3" color="brand.primary" fontWeight="normal">
-                Quote Confirmation
-              </Heading>
-
-              <Box border="1px solid" borderColor="gray.200" overflow="hidden">
-                <Grid templateColumns="repeat(4, 1fr)">
-                  <GridItem bg="brand.primary" px={4} py={3}>
-                    <Text
-                      color="brand.white"
-                      fontWeight="medium"
-                      textStyle="size-lg"
-                    >
-                      Quote No
-                    </Text>
-                  </GridItem>
-                  <GridItem bg="brand.primary" px={4} py={3}>
-                    <Text
-                      color="brand.white"
-                      fontWeight="medium"
-                      textStyle="size-lg"
-                    >
-                      Moving Price
-                    </Text>
-                  </GridItem>
-                  <GridItem bg="brand.primary" px={4} py={3}>
-                    <Text
-                      color="brand.white"
-                      fontWeight="medium"
-                      textStyle="size-lg"
-                    >
-                      Packing Price
-                    </Text>
-                  </GridItem>
-                  <GridItem bg="brand.primary" px={4} py={3}>
-                    <Text
-                      color="brand.white"
-                      fontWeight="medium"
-                      textStyle="size-lg"
-                    >
-                      Total Price
-                    </Text>
-                  </GridItem>
-                </Grid>
-
-                {/* Table Data Row - White */}
-                <Grid templateColumns="repeat(4, 1fr)">
-                  <GridItem
-                    bg="brand.white"
-                    px={4}
-                    py={4}
-                    borderTop="1px solid"
-                    borderColor="gray.100"
-                  >
-                    <Text fontWeight="normal" textStyle="size-lg">
-                      80160
-                    </Text>
-                  </GridItem>
-                  <GridItem
-                    bg="brand.white"
-                    px={4}
-                    py={4}
-                    borderTop="1px solid"
-                    borderColor="gray.100"
-                  >
-                    <Text fontWeight="normal" textStyle="size-lg">
-                      $0.00
-                    </Text>
-                  </GridItem>
-                  <GridItem
-                    bg="white"
-                    px={4}
-                    py={4}
-                    borderTop="1px solid"
-                    borderColor="gray.100"
-                  >
-                    <Text fontWeight="normal" textStyle="size-lg">
-                      $0.00
-                    </Text>
-                  </GridItem>
-                  <GridItem
-                    bg="white"
-                    px={4}
-                    py={4}
-                    borderTop="1px solid"
-                    borderColor="gray.100"
-                  >
-                    <Text
-                      color="brand.primary"
-                      fontWeight="normal"
-                      textStyle="size-lg"
-                    >
-                      $0.00
-                    </Text>
-                  </GridItem>
-                </Grid>
-              </Box>
-              <Box>
-                <Text fontWeight="normal" textStyle="size-lg">
-                  Thank you for receiving a quote with MoveCo.net. Please take a
-                  moment to read what your quote includes.
+            <Flex align="center" gap={6} flexWrap="wrap">
+              <ReCAPTCHA
+                sitekey="6LclVXksAAAAAHhsQjdcn_3LMqjWWJOK0qO_1yg-"
+                onChange={(val) => console.log(val)}
+              />
+              <Text textStyle="size-lg" flexWrap="nowrap">
+                You can reserve your move date by{" "}
+                <Text as={"span"} color="brand.primary" fontWeight="medium">
+                  clicking here
                 </Text>
-              </Box>
-            </Stack>
+              </Text>
+            </Flex>
           </Box>
-          <Box pt="sectionTop">
-             <Box bg="brand.gray/20" borderRadius="md" p={4} border="1px solid" borderColor="gray.200">
-      <Flex align="center" gap={6} flexWrap="wrap">
-        <ReCAPTCHA
-          sitekey="6LclVXksAAAAAHhsQjdcn_3LMqjWWJOK0qO_1yg-"
-          onChange={(val) => console.log(val)}
-        />
-        <Text textStyle="size-lg" flexWrap="nowrap" >
-          You can reserve your move date by{" "}
-          <Text color="brand.primary" fontWeight="medium">
-            clicking here
-          </Text>
-        </Text>
-      </Flex>
-    </Box>
-          </Box>
+        </Box>
 
         <Box pt="sectionTop">
           <Flex justify={{ base: "center", md: "flex-start" }}>
-          <Badge label="Includes" mb={4}/>
+            <Badge label="Includes" mb={4} />
           </Flex>
           <Flex
             direction={{ base: "column", md: "row" }}
@@ -178,8 +188,12 @@ const Confirmation = () => {
             mb={{ base: 4, lg: 6 }}
           >
             <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
-                Your Quote {" "}
+              <Heading
+                as="h1"
+                fontWeight="normal"
+                textAlign={{ base: "center", md: "left" }}
+              >
+                Your Quote{" "}
                 <Text as="span" color="brand.primary">
                   Includes
                 </Text>
@@ -197,7 +211,7 @@ const Confirmation = () => {
           </Flex>
           <CardTemplate data={quoteIncludesData} />
         </Box>
-        
+
         <Box pt="sectionTop">
           <Stack gap="sectionTop">
             {/* Customer Information */}
@@ -850,39 +864,43 @@ const Confirmation = () => {
           </Stack>
         </Box>
       </Container>
-      <Box  pt="sectionTop">
-      <Box bg={"brand.white"} px="-8">
-        <Container px={8} pt={4} pb={10}>
-          <Flex
-            mb={{ base: 4, lg: 6 }}
-            direction={{ base: "column", md: "row" }}
-            align={{ base: "flex-start", md: "center" }}
-            justify="space-between"
-            gap={{ base: 4, md: 10 }}
-          >
-            <Box maxW="600px" w="100%">
-              <Heading as="h1" fontWeight="normal" textAlign={{base: "center",md:"left"}}>
-                <Text as="span" color="brand.primary">
-                  MoveCo <br />
+      <Box pt="sectionTop">
+        <Box bg={"brand.white"} px="-8">
+          <Container px={8} pt={4} pb={10}>
+            <Flex
+              mb={{ base: 4, lg: 6 }}
+              direction={{ base: "column", md: "row" }}
+              align={{ base: "flex-start", md: "center" }}
+              justify="space-between"
+              gap={{ base: 4, md: 10 }}
+            >
+              <Box maxW="600px" w="100%">
+                <Heading
+                  as="h1"
+                  fontWeight="normal"
+                  textAlign={{ base: "center", md: "left" }}
+                >
+                  <Text as="span" color="brand.primary">
+                    MoveCo <br />
+                  </Text>
+                  What Your Quote Includes
+                </Heading>
+              </Box>
+              <Box maxW="430px" w="100%">
+                <Text
+                  textStyle="size-2xl"
+                  textAlign={{ base: "center", md: "right" }}
+                >
+                  Everything you need to know about your move — pricing, crew,
+                  equipment, and customer protection
                 </Text>
-                What Your Quote Includes
-              </Heading>
-            </Box>
-            <Box maxW="430px" w="100%">
-              <Text
-                textStyle="size-2xl"
-                textAlign={{ base: "center", md: "right" }}
-              >
-                Everything you need to know about your move — pricing, crew,
-                equipment, and customer protection
-              </Text>
-            </Box>
-          </Flex>
-          <CommonAccordion sections={quoteInfoSections} />
-        </Container>
+              </Box>
+            </Flex>
+            <CommonAccordion sections={quoteInfoSections} />
+          </Container>
+        </Box>
       </Box>
-      </Box>
-    </div>
+    </>
   );
 };
 

@@ -64,16 +64,25 @@ const InstantOnlineEstimate = () => {
         gap={{ base: 4, lg: 10 }}
         mb={{ base: 4, lg: 6 }}
       >
-          <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{base: "center", lg: "left"}}>
-            Instant{" "}
-            <Text as="span" color="brand.primary">
-              Online Estimate
-            </Text>
-          </Heading>
-          <Text textStyle="size-2xl"  maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "right" }}>
-            Already have an inventory list? Avoid surprises and get an
-            immediate, guaranteed fixed-price moving quote right now.
+        <Heading
+          as="h1"
+          fontWeight="normal"
+          maxW={{ lg: "45%" }}
+          textAlign={{ base: "center", lg: "left" }}
+        >
+          Instant{" "}
+          <Text as="span" color="brand.primary">
+            Online Estimate
           </Text>
+        </Heading>
+        <Text
+          textStyle="size-2xl"
+          maxW={{ lg: "45%" }}
+          textAlign={{ base: "center", lg: "right" }}
+        >
+          Already have an inventory list? Avoid surprises and get an immediate,
+          guaranteed fixed-price moving quote right now.
+        </Text>
       </Flex>
       <Flex gap={10} align="center" direction={{ base: "column", md: "row" }}>
         <Box
@@ -84,11 +93,11 @@ const InstantOnlineEstimate = () => {
           w={{ base: "100%", md: "420px" }}
         >
           <Heading as="h3" textAlign="center" fontWeight="normal" mb={4}>
-          Get a Moving{" "}
-          <Text as="span" color="brand.primary">
-            Quote
-          </Text>
-        </Heading>
+            Get a Moving{" "}
+            <Text as="span" color="brand.primary">
+              Quote
+            </Text>
+          </Heading>
           <Stack gap={4}>
             <InputField
               label="First Name"
@@ -114,14 +123,12 @@ const InstantOnlineEstimate = () => {
               isRequired
               errorMessage={errors.date}
             />
-
             <PhoneField
               label="Phone Number"
               value={values.phone}
               onChange={(digits) => handleChange("phone", digits)}
               isRequired
               errorMessage={errors.phone}
-
             />
             <InputField
               label="Email"

@@ -13,7 +13,6 @@ import ContactCard from "./ContactCard";
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { Toaster } from "../../components/ui/toaster";
 
 const SendEmailForm = React.lazy(() => import("./SendEmailForm"));
 const FriendForm = React.lazy(() => import("./FriendForm"));
@@ -34,7 +33,6 @@ const ContactUsPage = () => {
 
   return (
     <Container>
-      <Toaster />
       <HeroBanner bgImage={images.contact} title="Contact Us" />
       <Box pt="sectionTop">
         <Flex

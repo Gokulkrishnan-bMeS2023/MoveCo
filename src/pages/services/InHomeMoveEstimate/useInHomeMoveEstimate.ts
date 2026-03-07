@@ -56,6 +56,7 @@ export const useInHomeEstimateForm = () => {
       moveDate: data.date || "",
     };
   });
+
   const [errors, setErrors] = useState<MoveEstimateErrors>({});
   const [moveSizeOptions, setMoveSizeOptions] = useState<SelectOption[]>([]);
   const [timeOptions, setTimeOptions] = useState<SelectOption[]>([]);

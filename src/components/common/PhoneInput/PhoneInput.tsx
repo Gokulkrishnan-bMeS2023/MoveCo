@@ -34,23 +34,15 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-
-    // Extract digits only
     const digits = inputValue.replace(/\D/g, "").slice(0, 10);
-
-    // Format phone number
     const formatted = formatUSPhone(digits);
-
-    // Return formatted value
     onChange(formatted);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const input = inputRef.current;
     if (!input) return;
-
     const digits = input.value.replace(/\D/g, "");
-
     const allowedKeys = [
       "Backspace",
       "Delete",
@@ -76,7 +68,7 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
       label={label}
       name="phone"
       type="tel"
-      placeholder="(736)-437-4637"
+      placeholder="(999)-999-9999"
       value={value}
       onChange={handleChange}
       onKeyDown={handleKeyDown}

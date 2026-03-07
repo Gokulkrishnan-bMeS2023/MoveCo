@@ -18,7 +18,11 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../components/common/Button/Button";
 import { validateInventory } from "./validation";
 import { getQuote } from "../../../api/quotesServices";
-import type { InventorySection } from "./DTOs";
+import type { InventorySection, MoveInformationDTO } from "./DTOs";
+import {
+  postOnlineEstimate,
+  type QuoteRequestDTO,
+} from "../../../api/onlineEstimateService";
 
 // quantities keyed by inventoryID (as string for sessionStorage compatibility)
 type Quantities = Record<string, number>;
@@ -36,6 +40,43 @@ const Inventory = () => {
     InventorySection[]
   >([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [values, setValues] = useState<MoveInformationDTO>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    homePhone: "",
+    workPhone: "",
+    cellPhone: "",
+    moveDate: "",
+    moveTime: "",
+    dropDate: "",
+    dropTime: "",
+    moveType: "",
+    hearAbout: "",
+    notes: "",
+    fromAddress: "",
+    fromApt: "",
+    fromCity: "",
+    fromState: "",
+    fromZipCode: "",
+    fromStairs: "",
+    fromDistance: "",
+    toAddress: "",
+    toApt: "",
+    toCity: "",
+    toState: "",
+    toZipCode: "",
+    toStairs: "",
+    toDistance: "",
+  });
+
+  useEffect(() => {
+    const saved = sessionStorage.getItem("moveInfo");
+    if (saved) setValues(JSON.parse(saved));
+  }, []);
+  console.log(values);
+  
 
   // Fetch inventory sections from API
   useEffect(() => {
@@ -87,7 +128,7 @@ const Inventory = () => {
 
   // ─── Submit ───────────────────────────────────────────────────────────────
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const inventoryData = { quantities };
     const validationErrors = validateInventory(inventoryData);
 
@@ -97,44 +138,71 @@ const Inventory = () => {
       return;
     }
 
-    // Build a human-readable payload that maps inventoryID → count
-    // and also includes full item details for downstream use
-    const selectedItems = inventorySections.flatMap((section) =>
-      section.items
-        .filter((item) => (quantities[String(item.inventoryID)] || 0) > 0)
-        .map((item) => ({
-          inventoryID: item.inventoryID,
-          inventory: item.inventory,
-          category: section.category,
-          categoryID: section.categoryID,
-          quantity: quantities[String(item.inventoryID)],
-          weight: item.weight,
-          cubicFeet: item.cubicFeet,
-          price: item.price,
-        })),
-    );
+    if (!values) return;
 
-    const finalPayload = {
-      inventory: quantities, // raw { inventoryID: count } map
-      selectedItems, // enriched array for display / API submission
+    const finalPayload: QuoteRequestDTO = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+
+      phoneNo: values.phone,
+      mobilePhone: values.cellPhone,
+      workPhone: values.workPhone,
+      homePhone: values.homePhone,
+
+      moveDate: values.moveDate,
+      moveTime: values.moveTime,
+
+      dropDate: values.dropDate,
+      dropTime: values.dropTime,
+
+      fromAddress: values.fromAddress,
+      address2: values.fromApt,
+      city: values.fromCity,
+      state: values.fromState,
+      zipCode: values.fromZipCode,
+
+      flightOfStairs: values.fromStairs,
+      doorToTruck: values.fromDistance,
+
+      dropAddress: values.toAddress,
+      dropAddress2: values.toApt,
+      dropCity: values.toCity,
+      dropState: values.toState,
+      dropZipCode: values.toZipCode,
+
+      dropFlightOfStairs: values.toStairs,
+      dropDoorToTruck: values.toDistance,
+
+      moveSize: values.moveType,
+      heardBy: values.hearAbout,
+      additionalInfo: values.notes,
+
+      quoteId: 0,
+
+      inventories: Object.entries(quantities).map(([id, qty]) => ({
+        inventoryID: Number(id),
+        qty,
+      })),
     };
 
-    console.log("Final Submitted Data:", finalPayload);
+    try {
+      await postOnlineEstimate(finalPayload);
 
-    sessionStorage.clear();
-    setQuantities({});
-    setOpenItems([]);
-    setErrors({});
-    setSuccessMessage("Inventory successfully submitted!");
+      sessionStorage.clear();
+      setQuantities({});
+      setOpenItems([]);
+      setErrors({});
+      setSuccessMessage("Inventory successfully submitted!");
 
-    navigate("/confirmation");
+      navigate("/confirmation");
+    } catch (error) {
+      console.error("Failed to submit inventory:", error);
+    }
   };
-
-  // ─── Render ───────────────────────────────────────────────────────────────
 
   return (
     <Container>
-      {/* Header */}
       <Flex
         justify="space-between"
         align={{ base: "flex-start", md: "center" }}
@@ -166,14 +234,12 @@ const Inventory = () => {
         </Flex>
       </Flex>
 
-      {/* Loading state */}
       {isLoading && (
         <Text color="gray.500" textAlign="center" py={8}>
           Loading inventory…
         </Text>
       )}
 
-      {/* Accordion */}
       {!isLoading && (
         <AccordionRoot
           value={openItems}
@@ -263,7 +329,6 @@ const Inventory = () => {
         </AccordionRoot>
       )}
 
-      {/* Submit Section */}
       <Box mt={8} textAlign={{ base: "center", md: "right" }}>
         <Button
           label="Submit Inventory"
