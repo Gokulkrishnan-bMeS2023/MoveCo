@@ -38,7 +38,7 @@ const InputField = React.forwardRef<HTMLInputElement, InputProps>(
 
     const regexRules: Record<string, RegExp> = {
       number: /^[0-9]*$/,
-      email: /^[a-zA-Z0-9@._%+\-]*$/,
+      email: /^[a-zA-Z0-9._%+\-]*@?[a-zA-Z0-9.\-]*\.?[a-zA-Z]{0,}$/,
       text: /^[A-Za-z\s]*$/,
       alphanumeric: /^[A-Za-z0-9\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?`~]*$/,
     };
