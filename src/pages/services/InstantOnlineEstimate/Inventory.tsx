@@ -127,8 +127,7 @@ const Inventory = () => {
   // ─── Submit ───────────────────────────────────────────────────────────────
 
   const handleSubmit = async () => {
-    const inventoryData = { quantities };
-    const validationErrors = validateInventory(inventoryData);
+    const validationErrors = validateInventory(quantities);
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -178,10 +177,12 @@ const Inventory = () => {
 
       quoteId: 0,
 
-      inventories: Object.entries(quantities).map(([id, qty]) => ({
-        inventoryID: Number(id),
-        qty,
-      })),
+      inventories: Object.entries(quantities)
+        .filter(([, qty]) => qty >= 1)
+        .map(([id, qty]) => ({
+          inventoryID: Number(id),
+          qty,
+        })),
     };
 
     try {
