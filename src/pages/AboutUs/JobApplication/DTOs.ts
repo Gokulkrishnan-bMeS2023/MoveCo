@@ -19,6 +19,11 @@ export interface StepOneDTO {
   terminated: string;
   drugTest: string;
 }
+export interface Step1Props {
+  formData: any;
+  errors: any;
+  handleChange: (field: string, value: any) => void;
+}
 
 // Step 2 - Education
 export interface EducationDTO {

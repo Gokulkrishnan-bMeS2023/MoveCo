@@ -143,7 +143,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             <SelectField
               label="State"
               options={stateOptions} 
-              placeholder="State"
+              placeholder={stateOptions?.[0]?.label}
               value={formData.State}
               onValueChange={(d) => handleChange("State", d.value[0])}
               errorMessage={errors.State}

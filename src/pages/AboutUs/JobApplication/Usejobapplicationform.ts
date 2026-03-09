@@ -163,7 +163,6 @@ export const useJobApplicationForm = () => {
     });
   };
 
-  // ✅ Reset all form data to initial state
   const resetForm = () => {
     setFormData(initialFormData);
     setStepTwoData(initialStepTwoData);
@@ -239,7 +238,6 @@ export const useJobApplicationForm = () => {
         formDataPayload.append("dutiesPerformed", exp1.duties);
       }
 
-      // Experience 2
       const exp2 = stepTwoData.experiences[1];
       if (exp2) {
         formDataPayload.append("secondEmployer", exp2.employer);
@@ -268,7 +266,6 @@ export const useJobApplicationForm = () => {
           type: "success",
         });
 
-        // ✅ Reset everything after successful submission
         resetForm();
 
       } catch (error: any) {

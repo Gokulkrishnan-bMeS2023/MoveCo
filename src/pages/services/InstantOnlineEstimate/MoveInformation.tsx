@@ -275,7 +275,7 @@ const InHomeMoveEstimate = () => {
                 />
                 <SelectField
                   label="Move Time"
-                  placeholder="Select time"
+                  placeholder={timeOptions?.[0]?.label}
                   options={timeOptions}
                   value={values.moveTime}
                   onValueChange={(d) => handleChange("moveTime", d.value[0])}
@@ -292,7 +292,7 @@ const InHomeMoveEstimate = () => {
                 />
                 <SelectField
                   label="Drop Time"
-                  placeholder="Select time"
+                  placeholder={timeOptions?.[0]?.label}
                   options={timeOptions}
                   value={values.dropTime}
                   onValueChange={(d) => handleChange("dropTime", d.value[0])}
@@ -319,12 +319,14 @@ const InHomeMoveEstimate = () => {
                 <SelectField
                   label="Move Type"
                   options={moveSizeOptions}
+                  placeholder={moveSizeOptions?.[0]?.label}
                   value={values.moveType}
                   onValueChange={(d) => handleChange("moveType", d.value[0])}
                 />
                 <SelectField
                   label="How did you hear about MoveCo.Net?"
                   options={hearAboutOptions}
+                  placeholder={hearAboutOptions?.[0]?.label}
                   value={values.hearAbout}
                   onValueChange={(d) => handleChange("hearAbout", d.value[0])}
                 />
@@ -376,10 +378,10 @@ const InHomeMoveEstimate = () => {
                 />
               </SimpleGrid>
             </SimpleGrid>
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 4, md: 6 }}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 4, md: 6 }} alignItems="end">
               <SelectField
                 label="State"
-                placeholder="State"
+                placeholder={stateOptions?.[0]?.label}
                 value={values.fromState}
                 onValueChange={(e) => handleChange("fromState", e.value[0])}
                 options={stateOptions}
@@ -399,12 +401,14 @@ const InHomeMoveEstimate = () => {
 
               <SelectField
                 label="How many flights of stairs at this address?"
+                placeholder={stairsOptions?.[0]?.label}
                 options={stairsOptions}
                 value={values.fromStairs}
                 onValueChange={(d) => handleChange("fromStairs", d.value[0])}
               />
               <SelectField
                 label="Door to truck at this address?"
+                placeholder={doortoTruckOptions?.[0]?.label}
                 options={doortoTruckOptions}
                 value={values.fromDistance}
                 onValueChange={(d) => handleChange("fromDistance", d.value[0])}
@@ -452,10 +456,10 @@ const InHomeMoveEstimate = () => {
               </SimpleGrid>
             </SimpleGrid>
 
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 4, md: 6 }}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 4, md: 6 }} alignItems="end">
               <SelectField
                 label="State"
-                placeholder="State"
+                placeholder={stateOptions?.[0]?.label}
                 value={values.toState}
                 onValueChange={(e) => handleChange("toState", e.value[0])}
                 options={stateOptions}
@@ -475,12 +479,14 @@ const InHomeMoveEstimate = () => {
 
               <SelectField
                 label="How many flights of stairs at this address?"
+                placeholder={stairsOptions?.[0]?.label}
                 options={stairsOptions}
                 value={values.toStairs}
                 onValueChange={(d) => handleChange("toStairs", d.value[0])}
               />
               <SelectField
                 label="Truck to Door at this address?"
+                placeholder={doortoTruckOptions?.[0]?.label}
                 options={doortoTruckOptions}
                 value={values.toDistance}
                 onValueChange={(d) => handleChange("toDistance", d.value[0])}
