@@ -108,7 +108,9 @@ const InHomeMoveEstimate = () => {
       }
     });
 
-    navigate(`/inventory?${params.toString()}`);
+    navigate(`/inventory?${params.toString()}`, {
+      state: { fromApp: true },
+    });
   };
 
   useEffect(() => {

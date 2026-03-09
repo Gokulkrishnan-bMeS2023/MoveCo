@@ -358,7 +358,7 @@ export const Navbar = () => {
               _active={{
                 transform: "scale(0.95)",
               }}
-              onClick={() => (window.location.href = "/")}
+              onClick={() => navigate("/")}
             >
               Move<Span color="brand.primary">Co</Span>
             </Text>
@@ -453,7 +453,7 @@ export const Navbar = () => {
                   transform: "scale(0.9)",
                 }}
               >
-                {menuOpen ? <FiX size={30}/> : <FiMenu size={30} />}
+                {menuOpen ? <FiX size={30} /> : <FiMenu size={30} />}
               </Box>
             </Flex>
           </Flex>

@@ -33,12 +33,22 @@ export default function StoragePage() {
         justify="space-between"
         gap={{ base: 4, lg: 10 }}
       >
-          <Heading as="h1" fontWeight="normal" color={"brand.primary"} maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "left" }}>
-            Storages
-          </Heading>
-          <Text textStyle="size-2xl" maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "right" }}>
-            Professional storage service for your possessions during the move.
-          </Text>
+        <Heading
+          as="h1"
+          fontWeight="normal"
+          color={"brand.primary"}
+          maxW={{ lg: "45%" }}
+          textAlign={{ base: "center", lg: "left" }}
+        >
+          Storages
+        </Heading>
+        <Text
+          textStyle="size-2xl"
+          maxW={{ lg: "45%" }}
+          textAlign={{ base: "center", lg: "right" }}
+        >
+          Professional storage service for your possessions during the move.
+        </Text>
       </Flex>
       <SimpleGrid
         columns={{ base: 1, md: 2 }}
@@ -78,12 +88,14 @@ export default function StoragePage() {
               lineClamp={showAll ? undefined : 2}
               transition="all 0.3s ease"
             >
-              Free safety Packing included: We operate full-service storage facility where we take
-              extra care of your possessions. We use our commercial-grade blankets and shrink wrapping
-              material when we load your items into our storage facility. Please note that you will not
-              have access to your items till the redelivery date, unless you schedule an appointment
-              which has a fixed cost of $50.00. As of now we do not offer storage service in our Austin
-              or Houston facility.
+              Free safety Packing included: We operate full-service storage
+              facility where we take extra care of your possessions. We use our
+              commercial-grade blankets and shrink wrapping material when we
+              load your items into our storage facility. Please note that you
+              will not have access to your items till the redelivery date,
+              unless you schedule an appointment which has a fixed cost of
+              $50.00. As of now we do not offer storage service in our Austin or
+              Houston facility.
             </Text>
 
             <Button

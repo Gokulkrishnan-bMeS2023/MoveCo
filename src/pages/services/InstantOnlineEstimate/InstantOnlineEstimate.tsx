@@ -50,9 +50,17 @@ const InstantOnlineEstimate = () => {
       return;
     }
 
-    navigate(
-      `/move-information?firstName=${encodeURIComponent(values.firstName)}&lastName=${encodeURIComponent(values.lastName)}&email=${encodeURIComponent(values.email)}&phone=${encodeURIComponent(values.phone)}&moveDate=${encodeURIComponent(values.date)}`,
-    );
+    const params = new URLSearchParams({
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      phone: values.phone,
+      moveDate: values.date,
+    });
+
+    navigate(`/move-information?${params.toString()}`, {
+      state: { fromApp: true },
+    });
   };
 
   return (

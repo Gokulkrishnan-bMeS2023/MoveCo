@@ -75,8 +75,6 @@ const Inventory = () => {
     const saved = sessionStorage.getItem("moveInfo");
     if (saved) setValues(JSON.parse(saved));
   }, []);
-  console.log(values);
-  
 
   // Fetch inventory sections from API
   useEffect(() => {
@@ -194,8 +192,9 @@ const Inventory = () => {
       setOpenItems([]);
       setErrors({});
       setSuccessMessage("Inventory successfully submitted!");
-
-      navigate("/confirmation");
+      navigate("/confirmation", {
+        state: { fromApp: true },
+      });
     } catch (error) {
       console.error("Failed to submit inventory:", error);
     }
