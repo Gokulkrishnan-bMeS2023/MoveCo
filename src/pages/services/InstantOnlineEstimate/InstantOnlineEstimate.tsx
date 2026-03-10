@@ -12,8 +12,8 @@ import { useState } from "react";
 import InputField from "../../../components/common/Input/Input";
 import Button from "../../../components/common/Button/Button";
 import DateInput from "../../../components/common/DateInput/DateInput";
-import type { InstantEstimateDTO, InstantEstimateErrors } from "./DTOs";
-import { validateInstantEstimate } from "./validation";
+import type { InstantEstimateDTO, InstantEstimateErrors } from "./types/DTOs";
+import { validateInstantEstimate } from "./validation/validation";
 import { images } from "../../../assets";
 import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
 

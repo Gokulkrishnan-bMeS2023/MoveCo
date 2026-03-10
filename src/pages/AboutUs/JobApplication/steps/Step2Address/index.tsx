@@ -8,36 +8,14 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import InputField from "../../../components/common/Input/Input";
-import DateInput from "../../../components/common/DateInput/DateInput";
-import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
-import Button from "../../../components/common/Button/Button";
-import type {
-  EducationDTO,
-  EmploymentExperienceDTO,
-  EmploymentExperienceErrors,
-} from "./DTOs";
+import InputField from "../../../../../components/common/Input/Input";
+import DateInput from "../../../../../components/common/DateInput/DateInput";
+import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
+import Button from "../../../../../components/common/Button/Button";
 
-interface Step2AddressProps {
-  education: EducationDTO;
-  experiences: EmploymentExperienceDTO[];
-  onEducationChange: <K extends keyof EducationDTO>(
-    field: K,
-    value: EducationDTO[K],
-  ) => void;
-  onExperienceChange: <K extends keyof EmploymentExperienceDTO>(
-    index: number,
-    field: K,
-    value: EmploymentExperienceDTO[K],
-  ) => void;
-  onAddExperience: () => void;
-  onRemoveExperience: (index: number) => void;
-  experienceErrors?: EmploymentExperienceErrors[];
-  onClearExperienceError: (
-    index: number,
-    field: keyof EmploymentExperienceDTO,
-  ) => void;
-}
+import type { Step2AddressProps } from "./types";
+
+
 
 const Step2Address: React.FC<Step2AddressProps> = ({
   education,
@@ -270,7 +248,8 @@ const Step2Address: React.FC<Step2AddressProps> = ({
                     onChange={(digits) => {
                       onExperienceChange(index, "supervisorPhone", digits);
 
-                      if (digits.length === 10) {
+                      // Clear error immediately when user types
+                      if (digits.length > 0) {
                         onClearExperienceError(index, "supervisorPhone");
                       }
                     }}

@@ -1,27 +1,21 @@
 import { useState, useEffect } from "react";
 import { Stack, SimpleGrid, Heading, Box } from "@chakra-ui/react";
-import InputField from "../../../components/common/Input/Input";
-import SelectField from "../../../components/common/Select/Select";
-import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
-import DateInput from "../../../components/common/DateInput/DateInput";
-import RadioField from "../../../components/common/Radio/Radio";
-import SSNField from "../../../components/common/SsnInput/SsnInput";
-import { getStateInstant } from "../../../api/statciDataService"; 
-import { toStateOptions, type SelectOption } from "./selectOptionUtils";
+import InputField from "../../../../../components/common/Input/Input";
+import SelectField from "../../../../../components/common/Select/Select";
+import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
+import DateInput from "../../../../../components/common/DateInput/DateInput";
+import RadioField from "../../../../../components/common/Radio/Radio";
+import SSNField from "../../../../../components/common/SsnInput/SsnInput";
+import { getStateInstant } from "../../../../../api/statciDataService"; 
+import { toStateOptions, type SelectOption } from "../../utils/selectOptionUtils";
+import { YES_NO_OPTIONS } from "./constants";
+import type { Step1PersonalInfoProps } from "./types";
 
-
-const yesNoOptions = [
-  { label: "Yes", value: "yes" },
-  { label: "No", value: "no" },
-];
-
-interface Props {
-  formData: any;
-  errors: any;
-  handleChange: (field: string, value: any) => void;
-}
-
-const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
+const Step1PersonalInfo = ({
+  formData,
+  errors,
+  handleChange,
+}: Step1PersonalInfoProps) => {
   const [stateOptions, setStateOptions] = useState<SelectOption[]>([]);
 
   useEffect(() => {
@@ -185,7 +179,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
           <Stack gap={4}>
             <RadioField
               label="Are you a U.S. citizen, or are you otherwise authorized to work in the U.S. without any restriction?"
-              options={yesNoOptions}
+              options={YES_NO_OPTIONS}
               value={formData.citizen}
               onValueChange={(val) => handleChange("citizen", val)}
               isRequired
@@ -194,7 +188,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             />
             <RadioField
               label="Have you ever been convicted of a felony?"
-              options={yesNoOptions}
+              options={YES_NO_OPTIONS}
               value={formData.felony}
               onValueChange={(val) => handleChange("felony", val)}
               isRequired
@@ -203,7 +197,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             />
             <RadioField
               label="Have you ever been involuntarily terminated or asked to resign from any position of employment?"
-              options={yesNoOptions}
+              options={YES_NO_OPTIONS}
               value={formData.terminated}
               onValueChange={(val) => handleChange("terminated", val)}
               isRequired
@@ -212,7 +206,7 @@ const Step1PersonalInfo = ({ formData, errors, handleChange }: Props) => {
             />
             <RadioField
               label="If selected for employment, are you willing to submit to a pre-employment drug screening test?"
-              options={yesNoOptions}
+              options={YES_NO_OPTIONS}
               value={formData.drugTest}
               onValueChange={(val) => handleChange("drugTest", val)}
               isRequired

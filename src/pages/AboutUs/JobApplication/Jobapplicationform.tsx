@@ -1,8 +1,8 @@
 import { Stack, Box, Button } from "@chakra-ui/react";
-import { useJobApplicationForm } from "./Usejobapplicationform";
-import Step1PersonalInfo from "./Step1personalInfo";
-import Step2Address from "./Step2address";
-import Step3Experience from "./Step3experience";
+import { useJobApplicationForm } from "./hooks/Usejobapplicationform";
+import Step1PersonalInfo from "./steps/Step1PersonalInfo";
+import Step2Address from "./steps/Step2Address";
+import Step3Experience from "./steps/Step3Experience";
 
 
 const steps = ["Personal Info", "Education", "Review"];

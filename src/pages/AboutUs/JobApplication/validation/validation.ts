@@ -7,7 +7,7 @@ import type {
   EmploymentExperienceErrors,
   StepTwoDTO,
   StepTwoErrors,
-} from "./DTOs";
+} from "../types/DTOs";
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 const PHONE_REGEX = /^\d{10}$/;
@@ -45,7 +45,6 @@ export const validateStepOne = (data: StepOneDTO): StepOneErrors => {
     }
   }
 
-  // ✅ Strip formatting, just check 9 digits
   if (data.SocialSecurityNumber) {
     const cleaned = data.SocialSecurityNumber.replace(/\D/g, "");
     if (!SSN_REGEX.test(cleaned)) {
@@ -78,7 +77,6 @@ export const validateEducation = (_data: EducationDTO): EducationErrors => {
   return errors;
 };
 
-// Employment Experience Validation
 export const validateEmploymentExperience = (
   data: EmploymentExperienceDTO
 ): EmploymentExperienceErrors => {

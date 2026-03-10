@@ -9,21 +9,21 @@ import {
   VStack,
   Flex,
 } from "@chakra-ui/react";
-import InputField from "../../../components/common/Input/Input";
-import Notes from "../../../components/common/Notes/Notes";
-import DateInput from "../../../components/common/DateInput/DateInput";
-import Button from "../../../components/common/Button/Button";
-import SelectField from "../../../components/common/Select/Select";
+import InputField from "../../../../../components/common/Input/Input";
+import Notes from "../../../../../components/common/Notes/Notes";
+import DateInput from "../../../../../components/common/DateInput/DateInput";
+import Button from "../../../../../components/common/Button/Button";
+import SelectField from "../../../../../components/common/Select/Select";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import type { MoveInformationDTO, MoveInformationErrors } from "./DTOs";
-import { validateMoveInformation } from "./validation";
-import { useEffect } from "react";
-import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
 import {
   toOptions,
   toStateOptions,
-  type SelectOption,
-} from "../InHomeMoveEstimate/selectOptionUtils";
+} from "../../../InHomeMoveEstimate/selectOptionUtils";
+
+import { validateMoveInformation } from "../../validation/validation";
+import { useEffect } from "react";
+import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
+
 import {
   getMoveSizes,
   getTimeSlots,
@@ -31,7 +31,9 @@ import {
   getStateInstant,
   getDoorToTruck,
   getFlightsOfStairs,
-} from "../../../api/statciDataService";
+} from "../../../../../api/statciDataService";
+import type { MoveInformationDTO, MoveInformationErrors, SelectOption } from "./types";
+
 
 const InHomeMoveEstimate = () => {
   const [searchParams] = useSearchParams();

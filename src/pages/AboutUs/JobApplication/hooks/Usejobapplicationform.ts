@@ -7,10 +7,10 @@ import type {
   StepThreeDTO,
   EmploymentExperienceDTO,
   EducationDTO,
-} from "./DTOs";
-import { validateStepOne, validateStepTwo } from "./validation";
-import { postJobApplication } from "../../../api/jobApplicationService";
-import { toaster } from "../../../components/ui/toaster";
+} from "../types/DTOs";
+import { validateStepOne, validateStepTwo } from "../validation/validation";
+import { postJobApplication } from "../../../../api/jobApplicationService";
+import { toaster } from "../../../../components/ui/toaster";
 
 export const useJobApplicationForm = () => {
   const [page, setPage] = useState(0);
