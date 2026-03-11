@@ -3,7 +3,7 @@ import type {
   InstantEstimateErrors,
   MoveInformationDTO,
   MoveInformationErrors,
-} from "./types/DTOs";
+} from "../types/DTOs";
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 const PHONE_REGEX = /^\d{10}$/;

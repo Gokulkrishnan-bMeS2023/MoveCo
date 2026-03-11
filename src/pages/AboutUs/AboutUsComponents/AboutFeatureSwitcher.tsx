@@ -228,7 +228,6 @@ export default function AnimatedFeatureSwitcher() {
               {features[activeIndex].title}
             </Text>
 
-            {/* ✅ Render JSX directly (no wrapping Text) */}
             {features[activeIndex].description}
           </MotionBox>
         </AnimatePresence>

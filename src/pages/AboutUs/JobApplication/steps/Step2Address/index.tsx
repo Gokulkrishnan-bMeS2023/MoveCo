@@ -12,10 +12,7 @@ import InputField from "../../../../../components/common/Input/Input";
 import DateInput from "../../../../../components/common/DateInput/DateInput";
 import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
 import Button from "../../../../../components/common/Button/Button";
-
 import type { Step2AddressProps } from "./types";
-
-
 
 const Step2Address: React.FC<Step2AddressProps> = ({
   education,

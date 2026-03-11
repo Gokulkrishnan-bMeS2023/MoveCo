@@ -1,11 +1,3 @@
-// sections/Inventory/index.tsx
-// ✅ YOUR ORIGINAL WORKING CODE
-// Changes:
-//   1. Type imports       → "./types"
-//   2. components import  → "../../../../components/..."
-//   3. validation import  → "../../validation/validation"
-//   4. api imports        → "../../../../api/..."
-
 import {
   AccordionRoot,
   AccordionItem,
@@ -106,7 +98,7 @@ const Inventory = () => {
     }
   }, []);
 
-  // ─── Helpers ──────────────────────────────────────────────────────────────
+  
 
   const saveQuantities = (updated: Quantities) => {
     setQuantities(updated);
@@ -131,7 +123,6 @@ const Inventory = () => {
   const handleExpandAll = () =>
     setOpenItems(inventorySections.map((_, index) => `section-${index}`));
 
-  // ─── Submit ───────────────────────────────────────────────────────────────
 
   const handleSubmit = async () => {
     const validationErrors = validateInventory(quantities);

@@ -1,9 +1,9 @@
 import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
 
 interface TableSectionProps {
-  columns: string[];           // header column labels
-  rows: string[][];            // each row is an array of cell values
-  templateColumns?: string;    // e.g. "repeat(4, 1fr)" — auto-generated if not provided
+  columns: string[];           
+  rows: string[][];           
+  templateColumns?: string;    
 }
 
 const TableSection = ({

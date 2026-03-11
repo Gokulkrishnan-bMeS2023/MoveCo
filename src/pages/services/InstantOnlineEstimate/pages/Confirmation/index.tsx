@@ -1,5 +1,3 @@
-
-
 import {
   Box,
   Heading,
@@ -14,7 +12,7 @@ import CommonAccordion from "../../../../AboutUs/AboutUsComponents/CommonAccordi
 import { quoteIncludesData, quoteInfoSections } from "./data";
 import Badge from "../../../../../components/common/Badge/Badge";
 import ReCAPTCHA from "react-google-recaptcha";
-import TableSection from "./TableSection"; 
+import TableSection from "./components/TableSection"; 
 
 const Confirmation = () => {
   return (
@@ -97,7 +95,6 @@ const Confirmation = () => {
               </Stack>
             </Box>
 
-            {/* ── Contact Information ── */}
             <Box bg="brand.white" p={{ base: 6, md: 8 }} borderRadius="2xl" boxShadow="lg" border="1px solid" borderColor="gray.100">
               <Stack gap={4}>
                 <Heading as="h3" color="brand.primary" fontWeight="normal">Contact Information</Heading>
@@ -136,7 +133,6 @@ const Confirmation = () => {
               </Stack>
             </Box>
 
-            {/* ── Map & Directions ── */}
             <Box bg="brand.white" p={{ base: 6, md: 8 }} borderRadius="2xl" boxShadow="lg" border="1px solid" borderColor="gray.100">
               <Stack gap={4}>
                 <Heading as="h3" color="brand.primary" fontWeight="normal">Map & Directions</Heading>
