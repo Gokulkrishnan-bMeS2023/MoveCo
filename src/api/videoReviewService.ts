@@ -1,9 +1,7 @@
-import axios from 'axios';
+import { api } from "./api";
 
 export const getYouTubeVideos = (limit: number) => {
-  return axios.get('/api/youtube/videos', {
-    params: {
-      maxResults: limit 
-    }
+  return api.get("/youtube/videos", {
+    params: { maxResults: limit },
   });
 };
