@@ -15,10 +15,6 @@ import Notes from "../../../../../components/common/Notes/Notes";
 import Button from "../../../../../components/common/Button/Button";
 import InputField from "../../../../../components/common/Input/Input";
 import SelectField from "../../../../../components/common/Select/Select";
-import {
-  toOptions,
-  toStateOptions,
-} from "../../../InHomeMoveEstimate/selectOptionUtils";
 import { validateMoveInformation } from "../../validation/validation";
 import { useEffect } from "react";
 import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
@@ -30,6 +26,10 @@ import {
   getDoorToTruck,
   getFlightsOfStairs,
 } from "../../../../../api/statciDataService";
+import {
+  toOptions,
+  toStateOptions,
+} from "../../../InHomeMoveEstimate/selectOptionUtils";
 import type { MoveInformationDTO, MoveInformationErrors, SelectOption } from "./types";
 
 
