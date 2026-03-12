@@ -16,7 +16,7 @@ const VideoHome = () => {
           label="Load More"
           variant="primary"
           rounded="full"
-          onClick={() => setVisibleCount((prev) => prev + 4)} // +4 each click
+          onClick={() => setVisibleCount((prev) => prev + 4)} 
         />
       </Flex>
     </Container>

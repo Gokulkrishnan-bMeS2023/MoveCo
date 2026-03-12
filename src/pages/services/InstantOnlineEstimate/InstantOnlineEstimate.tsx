@@ -4,65 +4,13 @@ import {
   Flex,
   Heading,
   Text,
-  Stack,
   Image,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import InputField from "../../../components/common/Input/Input";
-import Button from "../../../components/common/Button/Button";
-import DateInput from "../../../components/common/DateInput/DateInput";
-import type { InstantEstimateDTO, InstantEstimateErrors } from "./DTOs";
-import { validateInstantEstimate } from "./validation";
 import { images } from "../../../assets";
-import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
+import { GetQuote } from "../../Home/QuoteForm/Quote";
 
 const InstantOnlineEstimate = () => {
-  const navigate = useNavigate();
-
-  const [values, setValues] = useState<InstantEstimateDTO>({
-    firstName: "",
-    lastName: "",
-    date: "",
-    phone: "",
-    email: "",
-  });
-
-  const [errors, setErrors] = useState<InstantEstimateErrors>({});
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleChange = (field: keyof InstantEstimateDTO, value: string) => {
-    const updated = { ...values, [field]: value };
-    setValues(updated);
-    sessionStorage.setItem("instantEstimate", JSON.stringify(updated));
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: "" }));
-    }
-  };
-
-  const handleSubmit = () => {
-    const newErrors = validateInstantEstimate(values);
-    setIsLoading(true);
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      setIsLoading(false);
-      return;
-    }
-
-    const params = new URLSearchParams({
-      firstName: values.firstName,
-      lastName: values.lastName,
-      email: values.email,
-      phone: values.phone,
-      moveDate: values.date,
-    });
-
-    navigate(`/move-information?${params.toString()}`, {
-      state: { fromApp: true },
-    });
-  };
-
+  
   return (
     <Container>
       <Flex
@@ -100,66 +48,7 @@ const InstantOnlineEstimate = () => {
           boxShadow="lg"
           w={{ base: "100%", md: "420px" }}
         >
-          <Heading as="h3" textAlign="center" fontWeight="normal" mb={4}>
-            Get a Moving{" "}
-            <Text as="span" color="brand.primary">
-              Quote
-            </Text>
-          </Heading>
-          <Stack gap={4}>
-            <InputField
-              label="First Name"
-              placeholder="First Name"
-              value={values.firstName}
-              onChange={(e) => handleChange("firstName", e.target.value)}
-              isRequired
-              errorMessage={errors.firstName}
-            />
-            <InputField
-              label="Last Name"
-              placeholder="Last Name"
-              value={values.lastName}
-              onChange={(e) => handleChange("lastName", e.target.value)}
-              isRequired
-              errorMessage={errors.lastName}
-            />
-            <DateInput
-              label="Date"
-              variant="future-only"
-              value={values.date}
-              onChange={(e) => handleChange("date", e.target.value)}
-              isRequired
-              errorMessage={errors.date}
-            />
-            <PhoneField
-              label="Phone Number"
-              value={values.phone}
-              onChange={(digits) => handleChange("phone", digits)}
-              isRequired
-              errorMessage={errors.phone}
-            />
-            <InputField
-              label="Email"
-              placeholder="Email"
-              type="email"
-              value={values.email}
-              onChange={(e) => handleChange("email", e.target.value)}
-              isRequired
-              errorMessage={errors.email}
-            />
-            <Button
-              onClick={handleSubmit}
-              label={isLoading ? "Submitting..." : "Get Your Quote"}
-              variant="primary"
-              disabled={isLoading}
-            />
-            <Text textStyle="size-sm">
-              Prefer to speak with us directly?{" "}
-              <Box as="span" textStyle="size-sm" color="brand.primary">
-                Call us at (800) 890-0928
-              </Box>
-            </Text>
-          </Stack>
+        <GetQuote showEstimate={false} />
         </Box>
         <Box w={{ base: "100%", md: "50%" }} textAlign="start">
           <Image

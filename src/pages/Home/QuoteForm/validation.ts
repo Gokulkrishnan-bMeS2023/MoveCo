@@ -18,10 +18,10 @@ export const validateQuoteForm = (
     errors.date = "Date is required";
   }
 
-   if (!data.phoneNumber) {
-    errors.phoneNumber = "Phone number is required";
-  } else if (!PHONE_REGEX.test(data.phoneNumber.replace(/\D/g, ""))) {
-    errors.phoneNumber = "Enter valid 10 digit phone number";
+   if (!data.phone) {
+    errors.phone = "Phone number is required";
+  } else if (!PHONE_REGEX.test(data.phone.replace(/\D/g, ""))) {
+    errors.phone = "Enter valid 10 digit phone number";
   }
 
   if (!data.email) {
