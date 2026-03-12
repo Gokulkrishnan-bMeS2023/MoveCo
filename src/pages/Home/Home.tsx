@@ -6,15 +6,15 @@ import {
   Container,
   Image,
 } from "@chakra-ui/react";
-import VideoGrid from "./VideoGrid";
 import { useNavigate } from "react-router-dom";
-import ClientSpeaks from "./ReviewGrid";
 import Button from "../../components/common/Button/Button";
 import { MainBanner } from "./HomeBanner";
 import QuoteFormImage from "../../assets/quote-form-image.webp";
 import Badge from "../../components/common/Badge/Badge";
 import { LuArrowUpRight } from "react-icons/lu";
 import { GetQuote } from "./QuoteForm/Quote";
+import ClientSpeaks from "./ReviewGrid/ClientSpeaks";
+import VideoGrid from "./VideoGrid/ClientReview";
 
 const Home = () => {
   const navigate = useNavigate();
