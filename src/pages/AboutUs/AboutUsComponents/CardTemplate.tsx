@@ -31,9 +31,9 @@ const IconGridCard = memo(function IconGridCard({
         boxShadow: "2xl",
         borderColor: "brand.primary",
       }}
-      flexDirection={{ base: "row", md: "column" }}   // ✅ SAME layout
+      flexDirection={{ base: "row", md: "column" }}   
       alignItems="center"
-      p={{ base: 6, md: 8 }}                          // ✅ Bigger padding like old UI
+      p={{ base: 6, md: 8 }}                          
       minH={{ base: "unset", md: "320px" }}
       gap={{ base: 4, md: 0 }}
     >

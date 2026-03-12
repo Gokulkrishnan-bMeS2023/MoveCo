@@ -1,17 +1,14 @@
 import { Stack, Input, Field, Heading, Text, Box } from "@chakra-ui/react";
 import { forwardRef, useImperativeHandle, useState, useRef } from "react";
-import CheckboxField from "../../../components/common/CheckBox/Checkbox";
-import { validatePhoto } from "./validation";
+import CheckboxField from "../../../../../components/common/CheckBox/Checkbox";
+import { validatePhoto } from "../../validation/validation";
+import type {
+  Step3ExperienceProps,
+  Step3ExperienceRef,
+} from "./types";
 
-interface Step3ExperienceProps {
-  photoFile: File | null;
-  photoFileName: string;
-  agreed: boolean;
-  onPhotoChange: (file: File | null, fileName: string) => void;
-  onAgreedChange: (agreed: boolean) => void;
-}
 
-const Step3Experience = forwardRef<any, Step3ExperienceProps>(
+const Step3Experience = forwardRef<Step3ExperienceRef, Step3ExperienceProps>(
   ({ photoFileName, agreed, onPhotoChange, onAgreedChange }, ref) => {
     const [showError, setShowError] = useState(false);
     const [photoError, setPhotoError] = useState("");

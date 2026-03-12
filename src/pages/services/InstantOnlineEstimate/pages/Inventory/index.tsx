@@ -15,26 +15,27 @@ import {
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../../components/common/Button/Button";
-import { validateInventory } from "./validation";
-import { getQuote } from "../../../api/quotesServices";
-import type { InventorySection, MoveInformationDTO } from "./DTOs";
+import Button from "../../../../../components/common/Button/Button";
+import { validateInventory } from "../../validation/validation";
+import { getQuote } from "../../../../../api/quotesServices";
 import {
   postOnlineEstimate,
   type QuoteRequestDTO,
-} from "../../../api/onlineEstimateService";
+} from "../../../../../api/onlineEstimateService";
 
-// quantities keyed by inventoryID (as string for sessionStorage compatibility)
-type Quantities = Record<string, number>;
-
-// ─── Component ────────────────────────────────────────────────────────────────
+import type {
+  Quantities,
+  InventoryErrors,
+  MoveInformationDTO,
+  InventorySection,
+} from "./types";
 
 const Inventory = () => {
   const navigate = useNavigate();
 
   const [quantities, setQuantities] = useState<Quantities>({});
   const [openItems, setOpenItems] = useState<string[]>([]);
-  const [errors, setErrors] = useState<{ quantities?: string }>({});
+  const [errors, setErrors] = useState<InventoryErrors>({});
   const [successMessage, setSuccessMessage] = useState("");
   const [inventorySections, setInventorySections] = useState<
     InventorySection[]
@@ -76,7 +77,6 @@ const Inventory = () => {
     if (saved) setValues(JSON.parse(saved));
   }, []);
 
-  // Fetch inventory sections from API
   useEffect(() => {
     const fetchInventory = async () => {
       try {
@@ -91,7 +91,6 @@ const Inventory = () => {
     fetchInventory();
   }, []);
 
-  // Restore quantities from sessionStorage on mount
   useEffect(() => {
     const saved = sessionStorage.getItem("inventory");
     if (saved) {
@@ -99,7 +98,7 @@ const Inventory = () => {
     }
   }, []);
 
-  // ─── Helpers ──────────────────────────────────────────────────────────────
+  
 
   const saveQuantities = (updated: Quantities) => {
     setQuantities(updated);
@@ -124,11 +123,9 @@ const Inventory = () => {
   const handleExpandAll = () =>
     setOpenItems(inventorySections.map((_, index) => `section-${index}`));
 
-  // ─── Submit ───────────────────────────────────────────────────────────────
 
   const handleSubmit = async () => {
-    const inventoryData = { quantities };
-    const validationErrors = validateInventory(inventoryData);
+    const validationErrors = validateInventory(quantities);
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -178,10 +175,12 @@ const Inventory = () => {
 
       quoteId: 0,
 
-      inventories: Object.entries(quantities).map(([id, qty]) => ({
-        inventoryID: Number(id),
-        qty,
-      })),
+      inventories: Object.entries(quantities)
+        .filter(([, qty]) => qty >= 1)
+        .map(([id, qty]) => ({
+          inventoryID: Number(id),
+          qty,
+        })),
     };
 
     try {

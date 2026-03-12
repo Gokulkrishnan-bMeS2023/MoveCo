@@ -134,14 +134,14 @@ export const UrlPages: AppRoute[] = [
   {
     path: "/move-information",
     component: lazy(
-      () => import("../pages/services/InstantOnlineEstimate/MoveInformation"),
+      () => import("../pages/services/InstantOnlineEstimate/pages/MoveInformation"),
     ),
   },
 
   {
     path: "/inventory",
     component: lazy(
-      () => import("../pages/services/InstantOnlineEstimate/Inventory"),
+      () => import("../pages/services/InstantOnlineEstimate/pages/Inventory"),
     ),
   },
 
@@ -158,7 +158,7 @@ export const UrlPages: AppRoute[] = [
   {
     path: "/confirmation",
     component: lazy(
-      () => import("../pages/services/InstantOnlineEstimate/Confirmation/Confirmation"),
+      () => import("../pages/services/InstantOnlineEstimate/pages/Confirmation/index"),
     ),
   },
 ];

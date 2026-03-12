@@ -3,15 +3,14 @@ import type {
   InstantEstimateErrors,
   MoveInformationDTO,
   MoveInformationErrors,
-} from "./DTOs";
-import type { InventoryDTO } from "./DTOs";
+} from "../types/DTOs";
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 const PHONE_REGEX = /^\d{10}$/;
 const ZIP_REGEX = /^\d{5}$/;
 
 export const validateInstantEstimate = (
-  data: InstantEstimateDTO
+  data: InstantEstimateDTO,
 ): InstantEstimateErrors => {
   const errors: InstantEstimateErrors = {};
 
@@ -44,7 +43,7 @@ export const validateInstantEstimate = (
 };
 
 export const validateMoveInformation = (
-  data: MoveInformationDTO
+  data: MoveInformationDTO,
 ): MoveInformationErrors => {
   const errors: MoveInformationErrors = {};
 
@@ -99,19 +98,19 @@ export const validateMoveInformation = (
   }
 
   // From Zip Code (required + 5 digits)
-// From Zip
-if (!data.fromZipCode.trim()) {
-  errors.fromZipCode = "Zip code is required";
-} else if (!ZIP_REGEX.test(data.fromZipCode)) {
-  errors.fromZipCode = "Zip code must be 5 digits";
-}
+  // From Zip
+  if (!data.fromZipCode.trim()) {
+    errors.fromZipCode = "Zip code is required";
+  } else if (!ZIP_REGEX.test(data.fromZipCode)) {
+    errors.fromZipCode = "Zip code must be 5 digits";
+  }
 
-// To Zip
-if (!data.toZipCode.trim()) {
-  errors.toZipCode = "Zip code is required";
-} else if (!ZIP_REGEX.test(data.toZipCode)) {
-  errors.toZipCode = "Zip code must be 5 digits";
-}
+  // To Zip
+  if (!data.toZipCode.trim()) {
+    errors.toZipCode = "Zip code is required";
+  } else if (!ZIP_REGEX.test(data.toZipCode)) {
+    errors.toZipCode = "Zip code must be 5 digits";
+  }
 
   return errors;
 };
@@ -120,13 +119,19 @@ export interface InventoryErrors {
   quantities?: string;
 }
 
-export const validateInventory = (data: InventoryDTO): InventoryErrors => {
+type Quantities = Record<string, number>;
+
+export interface InventoryErrors {
+  quantities?: string;
+}
+
+export const validateInventory = (data: Quantities): InventoryErrors => {
   const errors: InventoryErrors = {};
 
-  const hasItems = Object.values(data.quantities).some((qty) => qty > 0);
+  const totalQty = Object.values(data).reduce((sum, qty) => sum + qty, 0);
 
-  if (!hasItems) {
-    errors.quantities = "Please select at least one item.";
+  if (totalQty === 0) {
+    errors.quantities = "Please select at least one inventory item.";
   }
 
   return errors;
