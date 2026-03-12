@@ -125,6 +125,7 @@ const InHomeMoveEstimate = () => {
                   isRequired
                   errorMessage={errors.visitTime}
                 />
+
               </SimpleGrid>
               <DateInput
                 label="On which date are you planning on moving?"
