@@ -1,5 +1,3 @@
-// src/components/ClientSpeaks/ClientSpeaks.tsx
-
 import {
   Grid,
   Box,

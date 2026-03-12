@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { Video } from "../VideoGrid";
 import { getYouTubeVideos } from "../../../api/videoReviewService";
+import type { Video } from "./DTOs";
 
 export const useVideoGrid = (limit?: number) => {
   const [videos, setVideos] = useState<Video[]>([]);

@@ -3,57 +3,20 @@ import { useState, useRef, useEffect } from "react";
 import { FiPhone, FiMenu, FiX, FiUsers, FiChevronDown } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
+import { RouteName } from "../../../app/routeNames";
+import { isNavLink, isNavGroup, type NavItem } from "./nav";
+import { NAV_ITEMS } from "./navItems";
 
-export const NAV_ITEMS = [
-  { label: "Home", path: "/" },
+interface NavItemProps {
+  item: NavItem;
+}
 
-  {
-    label: "About Us",
-    items: [
-      { label: "About MoveCo", path: "/about-us" },
-      { label: "Our Insurance", path: "/our-insurance" },
-      { label: "Our Standards", path: "/our-standard" },
-      { label: "Job Application", path: "/job-application" },
-      {
-        label: "Associate Code of Conduct",
-        path: "/associate-code-of-conduct",
-      },
-      { label: "Supported Charity", path: "/supported-charity" },
-    ],
-  },
-
-  {
-    label: "Product & Services",
-    items: [
-      { label: "Instant Online Estimate", path: "/online-estimate" },
-      { label: "In-Home Move Estimate", path: "/in-home-move-estimate" },
-      { label: "Moving & Packing Supplies", path: "/product" },
-      {
-        label: "Professional Packing Services",
-        path: "/professional-packing-services",
-      },
-      { label: "Storage", path: "/storage" },
-    ],
-  },
-
-  {
-    label: "Resources",
-    items: [
-      { label: "Add Testimonial", path: "/add-testimonial" },
-      { label: "Client Testimonial", path: "/client-testimonial" },
-      { label: "Video Review", path: "/video-review" },
-    ],
-  },
-];
-
-/* ================= DESKTOP NAV ITEM ================= */
-
-const NavItem = ({ label, items, path }: any) => {
+const DesktopNavItem = ({ item }: NavItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleNavigation = (navPath: string) => {
-    navigate(navPath);
+  const handleNavigation = (path: string) => {
+    navigate(path);
     setIsOpen(false);
   };
 
@@ -69,7 +32,7 @@ const NavItem = ({ label, items, path }: any) => {
         fontWeight="600"
         cursor="pointer"
         color={isOpen ? "brand.primary" : "brand.secondary"}
-        onClick={() => handleNavigation(path)}
+        onClick={() => isNavLink(item) && handleNavigation(item.path)}
         transition="color 0.3s ease"
         _after={{
           content: '""',
@@ -84,10 +47,10 @@ const NavItem = ({ label, items, path }: any) => {
           transition: "width 0.3s ease",
         }}
       >
-        {label}
+        {item.label}
       </Text>
 
-      {items && isOpen && (
+      {isNavGroup(item) && isOpen && (
         <Box
           position="absolute"
           top="100%"
@@ -103,20 +66,14 @@ const NavItem = ({ label, items, path }: any) => {
           animation="slideDown 0.3s ease"
           css={{
             "@keyframes slideDown": {
-              from: {
-                opacity: 0,
-                transform: "translateY(-10px)",
-              },
-              to: {
-                opacity: 1,
-                transform: "translateY(0)",
-              },
+              from: { opacity: 0, transform: "translateY(-10px)" },
+              to: { opacity: 1, transform: "translateY(0)" },
             },
           }}
         >
-          {items.map((item: any, index: number) => (
+          {item.items.map((child, index) => (
             <Box
-              key={item.label}
+              key={child.label}
               px={4}
               py={2.5}
               fontWeight="500"
@@ -127,14 +84,8 @@ const NavItem = ({ label, items, path }: any) => {
               animation={`fadeInLeft 0.3s ease ${index * 0.05}s both`}
               css={{
                 "@keyframes fadeInLeft": {
-                  from: {
-                    opacity: 0,
-                    transform: "translateX(-10px)",
-                  },
-                  to: {
-                    opacity: 1,
-                    transform: "translateX(0)",
-                  },
+                  from: { opacity: 0, transform: "translateX(-10px)" },
+                  to: { opacity: 1, transform: "translateX(0)" },
                 },
               }}
               _hover={{
@@ -142,9 +93,9 @@ const NavItem = ({ label, items, path }: any) => {
                 color: "white",
                 transform: "translateX(4px)",
               }}
-              onClick={() => handleNavigation(item.path)}
+              onClick={() => handleNavigation(child.path)}
             >
-              {item.label}
+              {child.label}
             </Box>
           ))}
         </Box>
@@ -153,29 +104,32 @@ const NavItem = ({ label, items, path }: any) => {
   );
 };
 
-/* ================= MOBILE NAV ITEM ================= */
+interface MobileNavItemProps {
+  item: NavItem;
+  isOpen: boolean;
+  onToggle: () => void;
+  onNavigate: () => void;
+}
 
 const MobileNavItem = ({
-  label,
-  items,
-  path,
+  item,
   isOpen,
   onToggle,
   onNavigate,
-}: any) => {
+}: MobileNavItemProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if (items) {
+    if (isNavGroup(item)) {
       onToggle();
     } else {
-      navigate(path);
+      navigate(item.path);
       onNavigate();
     }
   };
 
-  const handleItemClick = (itemPath: string) => {
-    navigate(itemPath);
+  const handleChildClick = (path: string) => {
+    navigate(path);
     onNavigate();
   };
 
@@ -195,9 +149,7 @@ const MobileNavItem = ({
           bg: isOpen ? "brand.primary/15" : "gray.50",
           transform: "translateX(2px)",
         }}
-        _active={{
-          transform: "scale(0.98)",
-        }}
+        _active={{ transform: "scale(0.98)" }}
       >
         <Text
           fontWeight="600"
@@ -205,10 +157,10 @@ const MobileNavItem = ({
           color={isOpen ? "brand.primary" : "brand.secondary"}
           transition="color 0.3s ease"
         >
-          {label}
+          {item.label}
         </Text>
 
-        {items && (
+        {isNavGroup(item) && (
           <Box
             transform={isOpen ? "rotate(180deg)" : "rotate(0deg)"}
             transition="transform 0.4s ease"
@@ -219,14 +171,13 @@ const MobileNavItem = ({
         )}
       </Flex>
 
-      {/* Submenu with animation */}
-      <Box
-        overflow="hidden"
-        maxH={isOpen ? "500px" : "0"}
-        opacity={isOpen ? 1 : 0}
-        transition="all 0.4s ease"
-      >
-        {items && (
+      {isNavGroup(item) && (
+        <Box
+          overflow="hidden"
+          maxH={isOpen ? "500px" : "0"}
+          opacity={isOpen ? 1 : 0}
+          transition="all 0.4s ease"
+        >
           <Stack
             mt={2}
             mb={2}
@@ -236,9 +187,9 @@ const MobileNavItem = ({
             borderColor="brand.primary"
             ml={4}
           >
-            {items.map((item: any, index: number) => (
+            {item.items.map((child, index) => (
               <Text
-                key={item.label}
+                key={child.label}
                 cursor="pointer"
                 py={2}
                 px={3}
@@ -252,14 +203,8 @@ const MobileNavItem = ({
                 }
                 css={{
                   "@keyframes slideIn": {
-                    from: {
-                      opacity: 0,
-                      transform: "translateX(-20px)",
-                    },
-                    to: {
-                      opacity: 1,
-                      transform: "translateX(0)",
-                    },
+                    from: { opacity: 0, transform: "translateX(-20px)" },
+                    to: { opacity: 1, transform: "translateX(0)" },
                   },
                 }}
                 _hover={{
@@ -268,69 +213,48 @@ const MobileNavItem = ({
                   transform: "translateX(4px)",
                   shadow: "sm",
                 }}
-                _active={{
-                  transform: "translateX(2px) scale(0.98)",
-                }}
+                _active={{ transform: "translateX(2px) scale(0.98)" }}
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleItemClick(item.path);
+                  handleChildClick(child.path);
                 }}
               >
-                {item.label}
+                {child.label}
               </Text>
             ))}
           </Stack>
-        )}
-      </Box>
+        </Box>
+      )}
     </Box>
   );
 };
-
-/* ================= NAVBAR ================= */
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const navigate = useNavigate();
-
-  // Ref to the entire navbar wrapper for outside-click detection
   const navbarRef = useRef<HTMLDivElement>(null);
 
-  // Close mobile menu when clicking outside the navbar
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        navbarRef.current &&
-        !navbarRef.current.contains(event.target as Node)
-      ) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (navbarRef.current && !navbarRef.current.contains(e.target as Node)) {
         setMenuOpen(false);
         setOpenSubmenu(null);
       }
     };
-
-    if (menuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    if (menuOpen) document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [menuOpen]);
 
-  const handleSubmenuToggle = (label: string) => {
+  const toggleSubmenu = (label: string) =>
     setOpenSubmenu(openSubmenu === label ? null : label);
-  };
-
   const closeMobileMenu = () => {
     setMenuOpen(false);
     setOpenSubmenu(null);
   };
-
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-    if (menuOpen) {
-      setOpenSubmenu(null);
-    }
+    setMenuOpen((prev) => !prev);
+    if (menuOpen) setOpenSubmenu(null);
   };
 
   return (
@@ -346,47 +270,38 @@ export const Navbar = () => {
           transition="all 0.3s ease"
         >
           <Flex h="70px" align="center" justify="space-between">
-            {/* LOGO */}
+            {/* Logo */}
             <Text
-              textStyle={"size-2xl"}
+              textStyle="size-2xl"
               fontWeight="500"
               cursor="pointer"
               transition="all 0.3s ease"
-              _hover={{
-                transform: "scale(1.05)",
-              }}
-              _active={{
-                transform: "scale(0.95)",
-              }}
-              onClick={() => navigate("/")}
+              _hover={{ transform: "scale(1.05)" }}
+              _active={{ transform: "scale(0.95)" }}
+              onClick={() => navigate(RouteName.HOME)}
             >
               Move<Span color="brand.primary">Co</Span>
             </Text>
 
-            {/* DESKTOP NAV */}
+            {/* Desktop Nav */}
             <Flex display={{ base: "none", lg: "flex" }} align="center">
-              {NAV_ITEMS.map((nav) => (
-                <NavItem
-                  key={nav.label}
-                  label={nav.label}
-                  items={nav.items}
-                  path={nav.path}
-                />
+              {NAV_ITEMS.map((item) => (
+                <DesktopNavItem key={item.label} item={item} />
               ))}
             </Flex>
 
-            {/* DESKTOP ACTIONS */}
+            {/* Desktop Actions */}
             <Flex
               display={{ base: "none", lg: "flex" }}
               gap={4}
-              alignItems={"center"}
+              alignItems="center"
             >
               <Button
                 label="Contact Us"
                 variant="outline"
                 leftIcon={<FiPhone />}
                 rounded="full"
-                onClick={() => navigate("/contact-us")}
+                onClick={() => navigate(RouteName.CONTACT_US)}
               />
               <Box
                 bg="brand.primary"
@@ -400,21 +315,20 @@ export const Navbar = () => {
                 _hover={{
                   bg: "white",
                   color: "brand.primary",
-                  borderColor: "brand.primary",
                   transform: "rotate(15deg) scale(1.1)",
                 }}
-                _active={{
-                  transform: "rotate(0deg) scale(0.95)",
-                }}
+                _active={{ transform: "rotate(0deg) scale(0.95)" }}
                 onClick={() =>
-                  navigate("/contact-us", { state: { focus: "friend-form" } })
+                  navigate(RouteName.CONTACT_US, {
+                    state: { focus: "friend-form" },
+                  })
                 }
               >
                 <FiUsers size={20} />
               </Box>
             </Flex>
 
-            {/* MOBILE ICONS */}
+            {/* Mobile Icons */}
             <Flex display={{ base: "flex", lg: "none" }} gap={3} align="center">
               <Box
                 bg="brand.primary"
@@ -428,14 +342,13 @@ export const Navbar = () => {
                 _hover={{
                   bg: "white",
                   color: "brand.primary",
-                  borderColor: "brand.primary",
                   transform: "scale(1.1)",
                 }}
-                _active={{
-                  transform: "scale(0.9)",
-                }}
+                _active={{ transform: "scale(0.9)" }}
                 onClick={() =>
-                  navigate("/contact-us", { state: { focus: "friend-form" } })
+                  navigate(RouteName.CONTACT_US, {
+                    state: { focus: "friend-form" },
+                  })
                 }
               >
                 <FiUsers />
@@ -445,20 +358,15 @@ export const Navbar = () => {
                 cursor="pointer"
                 color="brand.secondary"
                 transition="all 0.3s ease"
-                _hover={{
-                  color: "brand.primary",
-                  transform: "scale(1.1)",
-                }}
-                _active={{
-                  transform: "scale(0.9)",
-                }}
+                _hover={{ color: "brand.primary", transform: "scale(1.1)" }}
+                _active={{ transform: "scale(0.9)" }}
               >
                 {menuOpen ? <FiX size={30} /> : <FiMenu size={30} />}
               </Box>
             </Flex>
           </Flex>
 
-          {/* MOBILE MENU */}
+          {/* Mobile Menu */}
           {menuOpen && (
             <Box
               position="absolute"
@@ -478,21 +386,11 @@ export const Navbar = () => {
               animation="fadeInDown 0.4s ease"
               css={{
                 "@keyframes fadeInDown": {
-                  from: {
-                    opacity: 0,
-                    transform: "translateY(-20px)",
-                  },
-                  to: {
-                    opacity: 1,
-                    transform: "translateY(0)",
-                  },
+                  from: { opacity: 0, transform: "translateY(-20px)" },
+                  to: { opacity: 1, transform: "translateY(0)" },
                 },
-                "&::-webkit-scrollbar": {
-                  width: "6px",
-                },
-                "&::-webkit-scrollbar-track": {
-                  background: "transparent",
-                },
+                "&::-webkit-scrollbar": { width: "6px" },
+                "&::-webkit-scrollbar-track": { background: "transparent" },
                 "&::-webkit-scrollbar-thumb": {
                   background: "var(--chakra-colors-brand-primary)",
                   borderRadius: "3px",
@@ -500,29 +398,21 @@ export const Navbar = () => {
               }}
             >
               <Stack gap={2}>
-                {NAV_ITEMS.map((nav, index) => (
+                {NAV_ITEMS.map((item, index) => (
                   <Box
-                    key={nav.label}
+                    key={item.label}
                     animation={`fadeInUp 0.3s ease ${index * 0.08}s both`}
                     css={{
                       "@keyframes fadeInUp": {
-                        from: {
-                          opacity: 0,
-                          transform: "translateY(20px)",
-                        },
-                        to: {
-                          opacity: 1,
-                          transform: "translateY(0)",
-                        },
+                        from: { opacity: 0, transform: "translateY(20px)" },
+                        to: { opacity: 1, transform: "translateY(0)" },
                       },
                     }}
                   >
                     <MobileNavItem
-                      label={nav.label}
-                      items={nav.items}
-                      path={nav.path}
-                      isOpen={openSubmenu === nav.label}
-                      onToggle={() => handleSubmenuToggle(nav.label)}
+                      item={item}
+                      isOpen={openSubmenu === item.label}
+                      onToggle={() => toggleSubmenu(item.label)}
                       onNavigate={closeMobileMenu}
                     />
                   </Box>
@@ -548,7 +438,7 @@ export const Navbar = () => {
                     rounded="full"
                     w="full"
                     onClick={() => {
-                      navigate("/contact-us");
+                      navigate(RouteName.CONTACT_US);
                       closeMobileMenu();
                     }}
                   />

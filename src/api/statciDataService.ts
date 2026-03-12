@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api } from "../lib/axios";
 
 export const getMoveSizes = () => {
   return api.get("/staticdata/move-sizes");

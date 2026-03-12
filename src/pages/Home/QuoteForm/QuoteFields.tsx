@@ -1,4 +1,4 @@
-import { Stack, } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import InputField from "../../../components/common/Input/Input";
 import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
@@ -102,8 +102,3 @@ const QuoteFormFields = ({
 };
 
 export default QuoteFormFields;
-
-
-
-
-

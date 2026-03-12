@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { use } from "react";
 import { Stack, SimpleGrid, Heading, Box } from "@chakra-ui/react";
 import InputField from "../../../../../components/common/Input/Input";
 import SelectField from "../../../../../components/common/Select/Select";
@@ -6,29 +6,16 @@ import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
 import DateInput from "../../../../../components/common/DateInput/DateInput";
 import RadioField from "../../../../../components/common/Radio/Radio";
 import SSNField from "../../../../../components/common/SsnInput/SsnInput";
-import { getStateInstant } from "../../../../../api/statciDataService"; 
-import { toStateOptions, type SelectOption } from "../../utils/selectOptionUtils";
 import { YES_NO_OPTIONS } from "./constants";
 import type { Step1PersonalInfoProps } from "./types";
+import { jobApplicationStaticDataPromise } from "../../../../../lib/queries";
 
 const Step1PersonalInfo = ({
   formData,
   errors,
   handleChange,
 }: Step1PersonalInfoProps) => {
-  const [stateOptions, setStateOptions] = useState<SelectOption[]>([]);
-
-  useEffect(() => {
-    const fetchStates = async () => {
-      try {
-        const response = await getStateInstant();
-        setStateOptions(toStateOptions(response.data || []));
-      } catch (error) {
-        console.error("Failed to fetch states:", error);
-      }
-    };
-    fetchStates();
-  }, []);
+  const { stateOptions } = use(jobApplicationStaticDataPromise);
 
   return (
     <Stack gap={8}>
@@ -136,7 +123,7 @@ const Step1PersonalInfo = ({
             />
             <SelectField
               label="State"
-              options={stateOptions} 
+              options={stateOptions}
               placeholder={stateOptions?.[0]?.label}
               value={formData.State}
               onValueChange={(d) => handleChange("State", d.value[0])}
@@ -160,7 +147,9 @@ const Step1PersonalInfo = ({
             <SSNField
               label="Social Security Number"
               value={formData.SocialSecurityNumber}
-              onChange={(digits) => handleChange("SocialSecurityNumber", digits)}
+              onChange={(digits) =>
+                handleChange("SocialSecurityNumber", digits)
+              }
               errorMessage={errors.SocialSecurityNumber}
             />
             <DateInput

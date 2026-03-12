@@ -1,6 +1,6 @@
 import { Grid, AspectRatio, Center, Spinner, Text } from "@chakra-ui/react";
 import { useVideoGrid } from "./useClientReview";
-import type { VideoCardProps, VideoGridProps } from "./DTOS";
+import type { VideoGridProps, VideoCardProps } from "./DTOs";
 
 const VideoGrid = ({ limit }: VideoGridProps) => {
   const { videos, isLoading } = useVideoGrid(limit);

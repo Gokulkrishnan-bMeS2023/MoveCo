@@ -1,164 +1,160 @@
 import { lazy } from "react";
-import type { AppRoute } from "../app/routes";
+import type { AppRoute } from "./routes";
+import { RouteName } from "./routeNames.ts";
 
 export const UrlPages: AppRoute[] = [
-  { path: "/", component: lazy(() => import("../pages/Home/Home")) },
+  { path: RouteName.HOME, component: lazy(() => import("../pages/Home/Home")) },
 
+  // About
   {
-    path: "/privacy-policy",
+    path: RouteName.PRIVACY_POLICY,
     component: lazy(() => import("../pages/PrivacyPolicy/PrivacyPolicy")),
   },
-
   {
-    path: "/about-us",
+    path: RouteName.ABOUT_US,
     component: lazy(() => import("../pages/AboutUs/AboutMoveCo/AboutUs")),
   },
-
   {
-    path: "/our-insurance",
+    path: RouteName.OUR_INSURANCE,
     component: lazy(() => import("../pages/AboutUs/OurInsurance/OurInsurance")),
   },
-
   {
-    path: "/our-standard",
+    path: RouteName.OUR_STANDARD,
     component: lazy(() => import("../pages/AboutUs/OurStandards/OurStandard")),
   },
-
   {
-    path: "/associate-code-of-conduct",
+    path: RouteName.ASSOCIATE_CODE_OF_CONDUCT,
     component: lazy(
       () =>
         import("../pages/AboutUs/AssociateCodeofConduct/AssociateCodeofConduct"),
     ),
   },
-
   {
-    path: "/supported-charity",
+    path: RouteName.SUPPORTED_CHARITY,
     component: lazy(
       () => import("../pages/AboutUs/SupportedCharity/SupportedCharity"),
     ),
   },
-
   {
-    path: "/the-ashley-watrous-foundation",
+    path: RouteName.ASHLEY_WATROUS_FOUNDATION,
     component: lazy(
       () =>
         import("../pages/AboutUs/SupportedCharity/TheAshleyWatrousFoundation/TheAshleyWatrousFoundation"),
     ),
   },
-
   {
-    path: "/sens-research-foundation",
+    path: RouteName.SENS_RESEARCH_FOUNDATION,
     component: lazy(
       () =>
         import("../pages/AboutUs/SupportedCharity/SensResearchFoundation/SensResearchFoundation"),
     ),
   },
-
   {
-    path: "/scottish-rite-hospital",
+    path: RouteName.SCOTTISH_RITE_HOSPITAL,
     component: lazy(
       () =>
         import("../pages/AboutUs/SupportedCharity/ScottishRiteHospital/ScottishRiteHospital"),
     ),
   },
-
   {
-    path: "/job-application",
+    path: RouteName.JOB_APPLICATION,
     component: lazy(
       () => import("../pages/AboutUs/JobApplication/JobApplication"),
     ),
   },
 
+  // Services
   {
-    path: "/professional-packing-services",
+    path: RouteName.PROFESSIONAL_PACKING,
     component: lazy(
       () =>
         import("../pages/services/ProfessionalPackingServices/ProfessionalPackingServices"),
     ),
   },
-
   {
-    path: "/storage",
+    path: RouteName.STORAGE,
     component: lazy(() => import("../pages/services/Storage/Storage")),
   },
-
   {
-    path: "/add-testimonial",
-    component: lazy(
-      () => import("../pages/Resources/AddTestimonial/AddTestimonial"),
-    ),
-  },
-
-  {
-    path: "/client-testimonial",
-    component: lazy(
-      () => import("../pages/Resources/ClientTestimonial/ClientTestimonial"),
-    ),
-  },
-
-  {
-    path: "/video-review",
-    component: lazy(() => import("../pages/Resources/VideoReview/VideoReview")),
-  },
-
-  {
-    path: "/product",
-    component: lazy(
-      () => import("../pages/services/MovingPackingSupplies/Product"),
-    ),
-  },
-
-  {
-    path: "/cart",
-    component: lazy(
-      () => import("../pages/services/MovingPackingSupplies/Cart"),
-    ),
-  },
-
-  {
-    path: "/in-home-move-estimate",
+    path: RouteName.IN_HOME_ESTIMATE,
     component: lazy(
       () => import("../pages/services/InHomeMoveEstimate/InHomeMoveEstimate"),
     ),
   },
-
   {
-    path: "/online-estimate",
+    path: RouteName.ONLINE_ESTIMATE,
     component: lazy(
       () =>
         import("../pages/services/InstantOnlineEstimate/InstantOnlineEstimate"),
     ),
   },
-
   {
-    path: "/move-information",
-    component: lazy(
-      () => import("../pages/services/InstantOnlineEstimate/pages/MoveInformation"),
-    ),
-  },
-
-  {
-    path: "/inventory",
-    component: lazy(
-      () => import("../pages/services/InstantOnlineEstimate/pages/Inventory"),
-    ),
-  },
-
-  {
-    path: "/contact-us",
-    component: lazy(() => import("../pages/ContactUs/ContactUs")),
-  },
-  {
-    path: "/product-and-services",
+    path: RouteName.PRODUCT_AND_SERVICES,
     component: lazy(
       () => import("../pages/services/ProductandServices/ProductandServices"),
     ),
   },
+
+  // Shop
   {
-    path: "/confirmation",
+    path: RouteName.PRODUCT,
     component: lazy(
-      () => import("../pages/services/InstantOnlineEstimate/pages/Confirmation/index"),
+      () => import("../pages/services/MovingPackingSupplies/Product"),
+    ),
+  },
+  {
+    path: RouteName.CART,
+    component: lazy(
+      () => import("../pages/services/MovingPackingSupplies/Cart"),
+    ),
+  },
+
+  // Resources
+  {
+    path: RouteName.ADD_TESTIMONIAL,
+    component: lazy(
+      () => import("../pages/Resources/AddTestimonial/AddTestimonial"),
+    ),
+  },
+  {
+    path: RouteName.CLIENT_TESTIMONIAL,
+    component: lazy(
+      () => import("../pages/Resources/ClientTestimonial/ClientTestimonial"),
+    ),
+  },
+  {
+    path: RouteName.VIDEO_REVIEW,
+    component: lazy(() => import("../pages/Resources/VideoReview/VideoReview")),
+  },
+
+  // Contact
+  {
+    path: RouteName.CONTACT_US,
+    component: lazy(() => import("../pages/ContactUs/ContactUs")),
+  },
+
+  // Protected
+  {
+    path: RouteName.MOVE_INFORMATION,
+    protected: true,
+    component: lazy(
+      () =>
+        import("../pages/services/InstantOnlineEstimate/pages/MoveInformation"),
+    ),
+  },
+  {
+    path: RouteName.INVENTORY,
+    protected: true,
+    component: lazy(
+      () => import("../pages/services/InstantOnlineEstimate/pages/Inventory"),
+    ),
+  },
+  {
+    path: RouteName.CONFIRMATION,
+    protected: true,
+    component: lazy(
+      () =>
+        import("../pages/services/InstantOnlineEstimate/pages/Confirmation/index"),
     ),
   },
 ];
