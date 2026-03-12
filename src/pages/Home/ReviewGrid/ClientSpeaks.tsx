@@ -8,39 +8,13 @@ import {
   Spinner,
   Center,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import { images } from "../../assets";
-import { getTestimonial } from "../../api/testimonialService";
-
-export interface ClientSpeak {
-  id: number;
-  firstName: string;
-  lastName: string;
-  comments: string;
-  image?: string;
-}
-
-interface ClientSpeaksProps {
-  limit?: number;
-}
+import { useState } from "react";
+import { images } from "../../../assets";
+import { useClientSpeaks } from "./useClientSpeaks";
+import type { ClientSpeak, ClientSpeaksProps } from "./DTOs";
 
 const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
-  const [testimonials, setTestimonials] = useState<ClientSpeak[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        const response = await getTestimonial();
-        setTestimonials(response.data || []);
-      } catch (error) {
-        console.error("Failed to fetch testimonials:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchTestimonials();
-  }, []);
+  const { testimonials, isLoading } = useClientSpeaks();
 
   const speaksToShow = limit ? testimonials.slice(0, limit) : testimonials;
 
@@ -60,6 +34,7 @@ const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
     );
   }
 
+  
   return (
     <Grid
       templateColumns={{
@@ -135,5 +110,4 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
     </Box>
   );
 };
-
 export default ClientSpeaks;

@@ -1,37 +1,9 @@
 import { Grid, AspectRatio, Center, Spinner, Text } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import { getYouTubeVideos } from "../../api/videoReviewService";
-
-export interface Video {
-  videoId: string;
-  title?: string;
-  thumbnail?: string;
-}
-
-interface VideoGridProps {
-  limit?: number;
-}
+import { useVideoGrid } from "./useClientReview";
+import type { VideoGridProps, VideoCardProps } from "./DTOs";
 
 const VideoGrid = ({ limit }: VideoGridProps) => {
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        if (videos.length === 0) {
-          setIsLoading(true);
-        }
-        const response = await getYouTubeVideos(limit || 10);
-        setVideos(response.data || []);
-      } catch (error) {
-        console.error("Failed to fetch videos:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchVideos();
-  }, [limit]);
+  const { videos, isLoading } = useVideoGrid(limit);
 
   if (isLoading && videos.length === 0) {
     return (
@@ -64,7 +36,7 @@ const VideoGrid = ({ limit }: VideoGridProps) => {
   );
 };
 
-const VideoCard = ({ video }: { video: Video }) => {
+const VideoCard = ({ video }: VideoCardProps) => {
   return (
     <AspectRatio ratio={16 / 9} rounded="2xl" overflow="hidden">
       <iframe

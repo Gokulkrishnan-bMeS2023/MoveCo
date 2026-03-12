@@ -1,7 +1,7 @@
 import { Heading, Flex, Container } from "@chakra-ui/react";
 import { useState } from "react";
-import VideoGrid from "../../Home/VideoGrid";
 import Button from "../../../components/common/Button/Button";
+import VideoGrid from "../../Home/VideoGrid/ClientReview";
 
 const VideoHome = () => {
   const [visibleCount, setVisibleCount] = useState(2); 
@@ -16,7 +16,7 @@ const VideoHome = () => {
           label="Load More"
           variant="primary"
           rounded="full"
-          onClick={() => setVisibleCount((prev) => prev + 4)} // +4 each click
+          onClick={() => setVisibleCount((prev) => prev + 4)} 
         />
       </Flex>
     </Container>
