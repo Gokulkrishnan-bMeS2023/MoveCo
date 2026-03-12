@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Container,
@@ -12,11 +13,58 @@ import Notes from "../../../components/common/Notes/Notes";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import Button from "../../../components/common/Button/Button";
 import { useNavigate } from "react-router-dom";
-import { useAddTestimonial } from "./useAddTestimonial";
+import type { TestimonialFormValues, TestimonialErrors } from "./DTOs";
+import { validateTestimonial } from "./validation";
+import { postTestimonial } from "../../../api/testimonialService";
+import { toaster } from "../../../components/ui/toaster";
 
 const AddTestimonial = () => {
   const navigate = useNavigate();
-  const { values, errors, handleChange, handleSubmit } = useAddTestimonial();
+  const [values, setValues] = useState<TestimonialFormValues>({
+    firstName: "",
+    lastName: "",
+    moveDate: "",
+    email: "",
+    comments: "",
+  });
+  const [errors, setErrors] = useState<TestimonialErrors>({});
+
+  const handleChange = (field: keyof TestimonialFormValues, value: string) => {
+    setValues((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
+  };
+
+  const handleSubmit = async () => {
+    const newErrors = validateTestimonial(values);
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    const payload = {
+      FirstName: values.firstName,
+      LastName: values.lastName,
+      MoveDate: values.moveDate,
+      Email: values.email,
+      Comments: values.comments,
+      IsActive: true,
+    } as any;
+    try {
+      const response = await postTestimonial(payload);
+      toaster.create({
+        title: response?.data?.message || "Thank you for your message.It has been sent.",
+        type: "success",
+      });
+      navigate("/");
+    } catch (error: any) {
+      toaster.create({
+        title:
+          error?.response?.data?.message ||
+          "Submission failed. Please try again.",
+        type: "error",
+      });
+    }
+  };
 
   return (
     <Container>

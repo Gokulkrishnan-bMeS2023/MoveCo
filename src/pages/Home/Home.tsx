@@ -4,17 +4,15 @@ import {
   Heading,
   Text,
   Container,
-  Image,
 } from "@chakra-ui/react";
 import VideoGrid from "./VideoGrid";
 import { useNavigate } from "react-router-dom";
 import ClientSpeaks from "./ReviewGrid";
 import Button from "../../components/common/Button/Button";
 import { MainBanner } from "./HomeBanner";
-import QuoteFormImage from "../../assets/quote-form-image.webp";
+import { QuoteForm } from "./QuoteForm";
 import Badge from "../../components/common/Badge/Badge";
 import { LuArrowUpRight } from "react-icons/lu";
-import { GetQuote } from "./QuoteForm/Quote";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -26,13 +24,7 @@ const Home = () => {
           </Box>
 
           <Box flex="3">
-            <Box>
-                  <Image src={QuoteFormImage} alt="Quote Form" w="100%" rounded="2xl" />
-            
-                  <Box bg="brand.white" p={6} mt={4} rounded="2xl">
-                    <GetQuote showEstimate={true} />
-                  </Box>
-                </Box>
+            <QuoteForm />
           </Box>
         </Flex>
 

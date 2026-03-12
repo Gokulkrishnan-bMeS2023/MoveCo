@@ -9,15 +9,21 @@ import {
   VStack,
   Flex,
 } from "@chakra-ui/react";
-import { useNavigate, useLocation } from "react-router-dom";
-import DateInput from "../../../../../components/common/DateInput/DateInput";
-import Notes from "../../../../../components/common/Notes/Notes";
-import Button from "../../../../../components/common/Button/Button";
 import InputField from "../../../../../components/common/Input/Input";
+import Notes from "../../../../../components/common/Notes/Notes";
+import DateInput from "../../../../../components/common/DateInput/DateInput";
+import Button from "../../../../../components/common/Button/Button";
 import SelectField from "../../../../../components/common/Select/Select";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  toOptions,
+  toStateOptions,
+} from "../../../InHomeMoveEstimate/selectOptionUtils";
+
 import { validateMoveInformation } from "../../validation/validation";
 import { useEffect } from "react";
 import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
+
 import {
   getMoveSizes,
   getTimeSlots,
@@ -26,28 +32,21 @@ import {
   getDoorToTruck,
   getFlightsOfStairs,
 } from "../../../../../api/statciDataService";
-import {
-  toOptions,
-  toStateOptions,
-} from "../../../InHomeMoveEstimate/selectOptionUtils";
 import type { MoveInformationDTO, MoveInformationErrors, SelectOption } from "./types";
 
 
-const MoveInformation = () => {
-
+const InHomeMoveEstimate = () => {
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const location = useLocation();
-  const data = location.state as any;
-
-  const initialValues: MoveInformationDTO = {
-    firstName: data?.firstName || "",
-    lastName: data?.lastName || "",
-    email: data?.email || "",
-    phone: data?.phone || "",
+  const [values, setValues] = useState<MoveInformationDTO>({
+    firstName: searchParams.get("firstName") || "",
+    lastName: searchParams.get("lastName") || "",
+    email: searchParams.get("email") || "",
+    phone: searchParams.get("phone") || "",
     homePhone: "",
     workPhone: "",
     cellPhone: "",
-    moveDate: data?.date || "",
+    moveDate: searchParams.get("moveDate") || "",
     moveTime: "",
     dropDate: "",
     dropTime: "",
@@ -68,34 +67,23 @@ const MoveInformation = () => {
     toZipCode: "",
     toStairs: "",
     toDistance: "",
-  };
+  });
 
-  const [values, setValues] = useState<MoveInformationDTO>(initialValues);
   const [errors, setErrors] = useState<MoveInformationErrors>({});
 
-  // =========================
-  // RELOAD → RESET FORM
-  // =========================
   useEffect(() => {
-    // Check if page was reloaded
-    const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
-    if (nav?.type === "reload") {
-      setValues(initialValues); // reset form
-      sessionStorage.removeItem("moveInfo"); // remove saved data
-    } else {
-      // Back/forward navigation → restore saved data
-      const saved = sessionStorage.getItem("moveInfo");
-      if (saved) setValues(JSON.parse(saved));
-    }
+    const saved = sessionStorage.getItem("moveInfo");
+    if (saved) setValues(JSON.parse(saved));
   }, []);
 
   const handleChange = (field: keyof MoveInformationDTO, value: string) => {
-    setValues((prev) => {
-      const updated = { ...prev, [field]: value };
-      sessionStorage.setItem("moveInfo", JSON.stringify(updated));
-      return updated;
-    });
-    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
+    const updated = { ...values, [field]: value };
+    setValues(updated);
+    sessionStorage.setItem("moveInfo", JSON.stringify(updated));
+
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: "" }));
+    }
   };
 
   const [moveSizeOptions, setMoveSizeOptions] = useState<SelectOption[]>([]);
@@ -103,7 +91,9 @@ const MoveInformation = () => {
   const [hearAboutOptions, setHearAboutOptions] = useState<SelectOption[]>([]);
   const [stateOptions, setStateOptions] = useState<SelectOption[]>([]);
   const [stairsOptions, setStairsOptions] = useState<SelectOption[]>([]);
-  const [doortoTruckOptions, setDoortoTruckOptions] = useState<SelectOption[]>([]);
+  const [doortoTruckOptions, setDoortoTruckOptions] = useState<SelectOption[]>(
+    [],
+  );
 
   const handleSubmit = () => {
     const newErrors = validateMoveInformation(values);
@@ -111,14 +101,18 @@ const MoveInformation = () => {
       setErrors(newErrors);
       return;
     }
-    sessionStorage.removeItem("moveInfo"); // clear on submit
+    setErrors({});
 
     const params = new URLSearchParams();
     (Object.keys(values) as Array<keyof MoveInformationDTO>).forEach((key) => {
-      if (values[key]) params.set(key, values[key]);
+      if (values[key]) {
+        params.set(key, values[key]);
+      }
     });
 
-    navigate(`/inventory?${params.toString()}`, { state: { fromApp: true } });
+    navigate(`/inventory?${params.toString()}`, {
+      state: { fromApp: true },
+    });
   };
 
   useEffect(() => {
@@ -511,4 +505,4 @@ const MoveInformation = () => {
   );
 };
 
-export default MoveInformation;
+export default InHomeMoveEstimate;

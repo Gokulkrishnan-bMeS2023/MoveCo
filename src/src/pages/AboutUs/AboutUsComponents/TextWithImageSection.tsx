@@ -1,0 +1,55 @@
+import { Box, SimpleGrid, Image, Flex } from "@chakra-ui/react";
+import type { ReactNode } from "react";
+import Badge from "../../../components/common/Badge/Badge";
+
+interface ImageTextSectionProps {
+  image: string;
+  alt?: string;
+  buttonLabel?: string;
+  content: ReactNode;
+  reverse?: boolean; 
+}
+
+const TextWithImageSection = ({
+  image,
+  alt = "section image",
+  buttonLabel,
+  content,
+  reverse = false,
+}: ImageTextSectionProps) => {
+  return (
+    <SimpleGrid
+      columns={{ base: 1, md: 2 }}
+      alignItems="center"
+      gap={{ base: 8, md: 24 }}  
+    >
+      <Box
+        w="100%"
+        order={{ base: 1, md: reverse ? 2 : 1 }}  
+      >
+        <Image
+          src={image}
+          alt={alt}
+          w="100%"
+          h="auto"
+          borderRadius="2xl"
+          loading="eager"
+          fetchPriority="high"
+        />
+      </Box>
+      <Box order={{ base: 2, md: reverse ? 1 : 2 }}>
+        {buttonLabel && (
+          <Flex justify={{ base: "center", md: "flex-start" }}>
+            <Badge label={buttonLabel} mb={4}/>
+            </Flex>
+        )}
+
+   <Box textAlign={{ base: "center", md: "left" }}>
+  {content}
+</Box>
+      </Box>
+    </SimpleGrid>
+  );
+};
+
+export default TextWithImageSection;

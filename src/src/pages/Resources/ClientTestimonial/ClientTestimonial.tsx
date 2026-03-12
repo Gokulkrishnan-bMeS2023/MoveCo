@@ -1,0 +1,28 @@
+import { Heading, Flex, Container } from "@chakra-ui/react";
+import { useState } from "react";
+import ClientSpeaks from "../../Home/ReviewGrid";
+import Button from "../../../components/common/Button/Button";
+
+const ClientTestimonial = () => {
+  const [visibleCount, setVisibleCount] = useState(3);
+
+  return (
+   <Container>
+      <Heading  mb={{base:4, lg:6}} as="h2" fontWeight="normal" color="brand.primary" textAlign={{base: "center", md: "left"}}>
+        Client Speaks
+      </Heading>
+
+      <ClientSpeaks limit={visibleCount} />
+      <Flex justify="center" mt={8}>
+        <Button
+          label="Load More"
+          variant="primary"
+          rounded="full"
+          onClick={() => setVisibleCount((prev) => prev + 3)}
+        />
+      </Flex>
+    </Container>
+  );
+};
+
+export default ClientTestimonial;

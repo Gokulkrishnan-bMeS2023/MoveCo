@@ -1,0 +1,135 @@
+import React from "react";
+import { Field, Input, InputGroup, Text } from "@chakra-ui/react";
+
+export type DateVariant =
+  | "all"
+  | "today-and-future"
+  | "future-only"
+  | "past-only"
+  | "today-and-past"; // ✅ add
+
+export interface DateInputProps {
+  label?: string;
+  placeholder?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isRequired?: boolean;
+  errorMessage?: string;
+  leftIcon?: React.ReactNode;
+  variant?: DateVariant;
+  min?: string; // ✅ add
+  max?: string; // ✅ add
+}
+
+const getToday = () => new Date().toISOString().split("T")[0];
+
+const getTomorrow = () => {
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  return d.toISOString().split("T")[0];
+};
+
+const getYesterday = () => {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return d.toISOString().split("T")[0];
+};
+
+const DateInput: React.FC<DateInputProps> = ({
+  label,
+  placeholder,
+  value,
+  onChange,
+  isRequired = false,
+  errorMessage,
+  leftIcon,
+  variant = "all",
+  min,
+  max,
+}) => {
+  const isInvalid = !!errorMessage;
+
+  const today = getToday();
+  const tomorrow = getTomorrow();
+  const yesterday = getYesterday();
+
+  let minDate: string | undefined;
+  let maxDate: string | undefined;
+
+  switch (variant) {
+    case "today-and-future":
+      minDate = today;
+      break;
+
+    case "future-only":
+      minDate = tomorrow;
+      break;
+
+    case "past-only":
+      maxDate = yesterday;
+      break;
+
+    case "today-and-past":
+      maxDate = today;
+      break;
+
+    default:
+      break;
+  }
+
+  return (
+    <Field.Root invalid={isInvalid} required={isRequired}>
+      {label && (
+        <Field.Label fontWeight="medium" display="block">
+          <Text as="span">
+            {label}
+            {isRequired && (
+              <Text
+                fontWeight="500"
+                textStyle="size-md"
+                as="span"
+                color="brand.red"
+                ml={1}
+              >
+                *
+              </Text>
+            )}
+          </Text>
+        </Field.Label>
+      )}
+
+      <InputGroup startElement={leftIcon}>
+        <Input
+          type="date"
+          value={value}
+          placeholder={placeholder}
+          ps={leftIcon ? "30px" : "10px"}
+          onChange={onChange}
+          min={min ?? minDate} // ✅ override support
+          max={max ?? maxDate}
+          onClick={(e) => e.currentTarget.showPicker()}
+          onKeyDown={(e) => e.preventDefault()}
+          _hover={{ borderColor: "brand.primary" }}
+          _focusVisible={{ borderColor: "brand.primary" }}
+          css={{
+            "&::-webkit-calendar-picker-indicator": {
+              display: "none",
+              WebkitAppearance: "none",
+            },
+            "&::-webkit-datetime-edit": {
+              color: value ? "inherit" : "gray.500",
+            },
+          }}
+        />
+      </InputGroup>
+
+      {isInvalid && (
+        <Field.ErrorText color="brand.red" fontWeight="400">
+          {errorMessage}
+        </Field.ErrorText>
+      )}
+    </Field.Root>
+  );
+};
+
+export default DateInput;
