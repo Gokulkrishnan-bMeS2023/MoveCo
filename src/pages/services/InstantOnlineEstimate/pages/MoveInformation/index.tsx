@@ -9,31 +9,19 @@ import {
   VStack,
   Flex,
 } from "@chakra-ui/react";
-import InputField from "../../../components/common/Input/Input";
-import Notes from "../../../components/common/Notes/Notes";
-import DateInput from "../../../components/common/DateInput/DateInput";
-import Button from "../../../components/common/Button/Button";
-import SelectField from "../../../components/common/Select/Select";
-import { useLocation, useNavigate} from "react-router-dom";
-import type { MoveInformationDTO, MoveInformationErrors } from "./DTOs";
-import { validateMoveInformation } from "./validation";
-import { useEffect } from "react";
-import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
-import InputField from "../../../../../components/common/Input/Input";
-import Notes from "../../../../../components/common/Notes/Notes";
+import { useNavigate, useLocation } from "react-router-dom";
 import DateInput from "../../../../../components/common/DateInput/DateInput";
+import Notes from "../../../../../components/common/Notes/Notes";
 import Button from "../../../../../components/common/Button/Button";
+import InputField from "../../../../../components/common/Input/Input";
 import SelectField from "../../../../../components/common/Select/Select";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   toOptions,
   toStateOptions,
 } from "../../../InHomeMoveEstimate/selectOptionUtils";
-
 import { validateMoveInformation } from "../../validation/validation";
 import { useEffect } from "react";
 import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
-
 import {
   getMoveSizes,
   getTimeSlots,
@@ -46,113 +34,6 @@ import type { MoveInformationDTO, MoveInformationErrors, SelectOption } from "./
 
 
 const MoveInformation = () => {
-
-// const navigate = useNavigate();
-//   const location = useLocation();
-//   const data = location.state as any;
-
-//   const [values, setValues] = useState<MoveInformationDTO>({
-//     firstName: data?.firstName || "",
-//     lastName: data?.lastName || "",
-//     email: data?.email || "",
-//     phone: data?.phone || "",
-//     homePhone: "",
-//     workPhone: "",
-//     cellPhone: "",
-//     moveDate: data?.date || "",
-//     moveTime: "",
-//     dropDate: "",
-//     dropTime: "",
-//     moveType: "",
-//     hearAbout: "",
-//     notes: "",
-//     fromAddress: "",
-//     fromApt: "",
-//     fromCity: "",
-//     fromState: "",
-//     fromZipCode: "",
-//     fromStairs: "",
-//     fromDistance: "",
-//     toAddress: "",
-//     toApt: "",
-//     toCity: "",
-//     toState: "",
-//     toZipCode: "",
-//     toStairs: "",
-//     toDistance: "",
-//   });
-
-//   const [errors, setErrors] = useState<MoveInformationErrors>({});
-
-//   const handleChange = (field: keyof MoveInformationDTO, value: string) => {
-//     const updated = { ...values, [field]: value };
-//     setValues(updated);
-//     sessionStorage.setItem("moveInfo", JSON.stringify(updated));
-
-//     if (errors[field]) {
-//       setErrors((prev) => ({ ...prev, [field]: "" }));
-//     }
-//   };
-
-//   const [moveSizeOptions, setMoveSizeOptions] = useState<SelectOption[]>([]);
-//   const [timeOptions, setTimeOptions] = useState<SelectOption[]>([]);
-//   const [hearAboutOptions, setHearAboutOptions] = useState<SelectOption[]>([]);
-//   const [stateOptions, setStateOptions] = useState<SelectOption[]>([]);
-//   const [stairsOptions, setStairsOptions] = useState<SelectOption[]>([]);
-//   const [doortoTruckOptions, setDoortoTruckOptions] = useState<SelectOption[]>(
-//     [],
-//   );
-
-//   const handleSubmit = () => {
-//     const newErrors = validateMoveInformation(values);
-//     if (Object.keys(newErrors).length > 0) {
-//       setErrors(newErrors);
-//       return;
-//     }
-//     setErrors({});
-
-//     const params = new URLSearchParams();
-//     (Object.keys(values) as Array<keyof MoveInformationDTO>).forEach((key) => {
-//       if (values[key]) {
-//         params.set(key, values[key]);
-//       }
-//     });
-
-//     navigate(`/inventory?${params.toString()}`, {
-//       state: { fromApp: true },
-//     });
-//   };
-
-//   useEffect(() => {
-//     const fetchStaticData = async () => {
-//       try {
-//         const [
-//           moveSizesResponse,
-//           timeSlotsResponse,
-//           hearAboutResponse,
-//           statesResponse,
-//           stairsResponse,
-//           doortoTruckResponse,
-//         ] = await Promise.all([
-//           getMoveSizes(),
-//           getTimeSlots(),
-//           getHearAbout(),
-//           getStateInstant(),
-//           getFlightsOfStairs(),
-//           getDoorToTruck(),
-//         ]);
-//         setMoveSizeOptions(toOptions(moveSizesResponse.data || []));
-//         setTimeOptions(toOptions(timeSlotsResponse.data || []));
-//         setHearAboutOptions(toOptions(hearAboutResponse.data || []));
-//         setStateOptions(toStateOptions(statesResponse.data || []));
-//         setStairsOptions(stairsResponse.data || []);
-//         setDoortoTruckOptions(doortoTruckResponse.data || []);
-//       } catch (error: any) {
-//         console.error("Failed to fetch static data:", error);
-//       }
-//     };
-//     fetchStaticData();
-//   }, []);
 
   const navigate = useNavigate();
   const location = useLocation();
