@@ -1,18 +1,14 @@
-// lib/queries.ts
-
 import {
   getMoveSizes,
   getTimeSlots,
   getHearAbout,
   getStateInstant,
+  getFlightsOfStairs,
+  getDoorToTruck,
 } from "../api/statciDataService";
-import {
-  toOptions,
-  toStateOptions,
-} from "../pages/services/InHomeMoveEstimate/selectOptionUtils";
+import { toOptions, toStateOptions } from "../utils/selectOptionUtils";
 
-// ⚠️ Defined OUTSIDE component — runs once, promise is reused
-export const staticDataPromise = Promise.all([
+const basePromise = Promise.all([
   getMoveSizes(),
   getTimeSlots(),
   getHearAbout(),
@@ -23,3 +19,21 @@ export const staticDataPromise = Promise.all([
   hearAboutOptions: toOptions(hearAbout.data ?? []),
   stateOptions: toStateOptions(states.data ?? {}),
 }));
+
+export const inHomeStaticDataPromise = basePromise;
+
+export const instantOnlineStaticDataPromise = Promise.all([
+  basePromise,
+  getFlightsOfStairs(),
+  getDoorToTruck(),
+]).then(([base, stairs, doorToTruck]) => ({
+  ...base,
+  stairsOptions: stairs.data ?? [],
+  doorToTruckOptions: doorToTruck.data ?? [],
+}));
+
+export const jobApplicationStaticDataPromise = basePromise.then(
+  ({ stateOptions }) => ({
+    stateOptions,
+  }),
+);

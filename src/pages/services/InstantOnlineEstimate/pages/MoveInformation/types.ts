@@ -1,5 +1,8 @@
-import type { MoveInformationDTO, MoveInformationErrors } from "../../types/DTOs";
-import type { SelectOption } from "../../../InHomeMoveEstimate/selectOptionUtils";
+import type { SelectOption } from "../../../../../utils/selectOptionUtils";
+import type {
+  MoveInformationDTO,
+  MoveInformationErrors,
+} from "../../types/DTOs";
 
 export interface MoveInformationState {
   values: MoveInformationDTO;

@@ -1,20 +1,10 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { postInHomeEstimate } from "../../../api/inhomeMoveEstimateService";
 import type { MoveEstimateErrors, MoveEstimateFormValues } from "./DTOs";
 import { validateMoveEstimate } from "./validation";
-import {
-  getMoveSizes,
-  getTimeSlots,
-  getHearAbout,
-  getStateInstant,
-} from "../../../api/statciDataService";
-import {
-  toOptions,
-  toStateOptions,
-  type SelectOption,
-} from "./selectOptionUtils";
 import { toaster } from "../../../components/ui/toaster";
+import { inHomeStaticDataPromise } from "../../../lib/queries";
 
 const initialState: MoveEstimateFormValues = {
   visitDate: "",
@@ -58,10 +48,6 @@ export const useInHomeEstimateForm = () => {
   });
 
   const [errors, setErrors] = useState<MoveEstimateErrors>({});
-  const [moveSizeOptions, setMoveSizeOptions] = useState<SelectOption[]>([]);
-  const [timeOptions, setTimeOptions] = useState<SelectOption[]>([]);
-  const [hearAboutOptions, setHearAboutOptions] = useState<SelectOption[]>([]);
-  const [stateOptions, setStateOptions] = useState<SelectOption[]>([]);
 
   useEffect(() => {
     if (location.state) {
@@ -69,30 +55,9 @@ export const useInHomeEstimateForm = () => {
     }
   }, [location.pathname, navigate]);
 
-  useEffect(() => {
-    const fetchStaticData = async () => {
-      try {
-        const [
-          moveSizesResponse,
-          timeSlotsResponse,
-          hearAboutResponse,
-          statesResponse,
-        ] = await Promise.all([
-          getMoveSizes(),
-          getTimeSlots(),
-          getHearAbout(),
-          getStateInstant(),
-        ]);
-        setMoveSizeOptions(toOptions(moveSizesResponse.data || []));
-        setTimeOptions(toOptions(timeSlotsResponse.data || []));
-        setHearAboutOptions(toOptions(hearAboutResponse.data || []));
-        setStateOptions(toStateOptions(statesResponse.data || []));
-      } catch (error: any) {
-        console.error("Failed to fetch static data:", error);
-      }
-    };
-    fetchStaticData();
-  }, []);
+  const { moveSizeOptions, timeOptions, hearAboutOptions, stateOptions } = use(
+    inHomeStaticDataPromise,
+  );
 
   const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
     setValues((prev) => ({ ...prev, [field]: value }));

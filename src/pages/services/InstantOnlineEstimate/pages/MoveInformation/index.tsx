@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import {
   Box,
   Container,
@@ -15,25 +15,11 @@ import DateInput from "../../../../../components/common/DateInput/DateInput";
 import Button from "../../../../../components/common/Button/Button";
 import SelectField from "../../../../../components/common/Select/Select";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import {
-  toOptions,
-  toStateOptions,
-} from "../../../InHomeMoveEstimate/selectOptionUtils";
-
 import { validateMoveInformation } from "../../validation/validation";
 import { useEffect } from "react";
 import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
-
-import {
-  getMoveSizes,
-  getTimeSlots,
-  getHearAbout,
-  getStateInstant,
-  getDoorToTruck,
-  getFlightsOfStairs,
-} from "../../../../../api/statciDataService";
-import type { MoveInformationDTO, MoveInformationErrors, SelectOption } from "./types";
-
+import type { MoveInformationDTO, MoveInformationErrors } from "./types";
+import { instantOnlineStaticDataPromise } from "../../../../../lib/queries";
 
 const InHomeMoveEstimate = () => {
   const [searchParams] = useSearchParams();
@@ -85,15 +71,14 @@ const InHomeMoveEstimate = () => {
       setErrors((prev) => ({ ...prev, [field]: "" }));
     }
   };
-
-  const [moveSizeOptions, setMoveSizeOptions] = useState<SelectOption[]>([]);
-  const [timeOptions, setTimeOptions] = useState<SelectOption[]>([]);
-  const [hearAboutOptions, setHearAboutOptions] = useState<SelectOption[]>([]);
-  const [stateOptions, setStateOptions] = useState<SelectOption[]>([]);
-  const [stairsOptions, setStairsOptions] = useState<SelectOption[]>([]);
-  const [doortoTruckOptions, setDoortoTruckOptions] = useState<SelectOption[]>(
-    [],
-  );
+  const {
+    moveSizeOptions,
+    timeOptions,
+    stateOptions,
+    stairsOptions,
+    doorToTruckOptions,
+    hearAboutOptions,
+  } = use(instantOnlineStaticDataPromise);
 
   const handleSubmit = () => {
     const newErrors = validateMoveInformation(values);
@@ -114,37 +99,6 @@ const InHomeMoveEstimate = () => {
       state: { fromApp: true },
     });
   };
-
-  useEffect(() => {
-    const fetchStaticData = async () => {
-      try {
-        const [
-          moveSizesResponse,
-          timeSlotsResponse,
-          hearAboutResponse,
-          statesResponse,
-          stairsResponse,
-          doortoTruckResponse,
-        ] = await Promise.all([
-          getMoveSizes(),
-          getTimeSlots(),
-          getHearAbout(),
-          getStateInstant(),
-          getFlightsOfStairs(),
-          getDoorToTruck(),
-        ]);
-        setMoveSizeOptions(toOptions(moveSizesResponse.data || []));
-        setTimeOptions(toOptions(timeSlotsResponse.data || []));
-        setHearAboutOptions(toOptions(hearAboutResponse.data || []));
-        setStateOptions(toStateOptions(statesResponse.data || []));
-        setStairsOptions(stairsResponse.data || []);
-        setDoortoTruckOptions(doortoTruckResponse.data || []);
-      } catch (error: any) {
-        console.error("Failed to fetch static data:", error);
-      }
-    };
-    fetchStaticData();
-  }, []);
 
   return (
     <Container>
@@ -380,7 +334,11 @@ const InHomeMoveEstimate = () => {
                 />
               </SimpleGrid>
             </SimpleGrid>
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 4, md: 6 }} alignItems="end">
+            <SimpleGrid
+              columns={{ base: 1, md: 4 }}
+              gap={{ base: 4, md: 6 }}
+              alignItems="end"
+            >
               <SelectField
                 label="State"
                 placeholder={stateOptions?.[0]?.label}
@@ -410,8 +368,8 @@ const InHomeMoveEstimate = () => {
               />
               <SelectField
                 label="Door to truck at this address?"
-                placeholder={doortoTruckOptions?.[0]?.label}
-                options={doortoTruckOptions}
+                placeholder={doorToTruckOptions?.[0]?.label}
+                options={doorToTruckOptions}
                 value={values.fromDistance}
                 onValueChange={(d) => handleChange("fromDistance", d.value[0])}
               />
@@ -458,7 +416,11 @@ const InHomeMoveEstimate = () => {
               </SimpleGrid>
             </SimpleGrid>
 
-            <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 4, md: 6 }} alignItems="end">
+            <SimpleGrid
+              columns={{ base: 1, md: 4 }}
+              gap={{ base: 4, md: 6 }}
+              alignItems="end"
+            >
               <SelectField
                 label="State"
                 placeholder={stateOptions?.[0]?.label}
@@ -488,8 +450,8 @@ const InHomeMoveEstimate = () => {
               />
               <SelectField
                 label="Truck to Door at this address?"
-                placeholder={doortoTruckOptions?.[0]?.label}
-                options={doortoTruckOptions}
+                placeholder={doorToTruckOptions?.[0]?.label}
+                options={doorToTruckOptions}
                 value={values.toDistance}
                 onValueChange={(d) => handleChange("toDistance", d.value[0])}
               />
