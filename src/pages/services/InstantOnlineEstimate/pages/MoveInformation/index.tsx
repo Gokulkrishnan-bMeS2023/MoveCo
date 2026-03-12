@@ -515,8 +515,6 @@
 
 
 
-
-
 import { useState } from "react";
 import {
   Box,
@@ -538,9 +536,11 @@ import {
   toOptions,
   toStateOptions,
 } from "../../../InHomeMoveEstimate/selectOptionUtils";
+ 
 import { validateMoveInformation } from "../../validation/validation";
 import { useEffect } from "react";
 import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
+ 
 import {
   getMoveSizes,
   getTimeSlots,

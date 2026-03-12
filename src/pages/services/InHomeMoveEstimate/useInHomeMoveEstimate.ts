@@ -69,30 +69,38 @@ export const useInHomeEstimateForm = () => {
     }
   }, [location.pathname, navigate]);
 
-  useEffect(() => {
-    const fetchStaticData = async () => {
-      try {
-        const [
-          moveSizesResponse,
-          timeSlotsResponse,
-          hearAboutResponse,
-          statesResponse,
-        ] = await Promise.all([
-          getMoveSizes(),
-          getTimeSlots(),
-          getHearAbout(),
-          getStateInstant(),
-        ]);
-        setMoveSizeOptions(toOptions(moveSizesResponse.data || []));
-        setTimeOptions(toOptions(timeSlotsResponse.data || []));
-        setHearAboutOptions(toOptions(hearAboutResponse.data || []));
-        setStateOptions(toStateOptions(statesResponse.data || []));
-      } catch (error: any) {
-        console.error("Failed to fetch static data:", error);
-      }
-    };
-    fetchStaticData();
-  }, []);
+ useEffect(() => {
+  const fetchStaticData = async () => {
+    try {
+      const [moveRes, timeRes, hearRes, stateRes] = await Promise.all([
+        getMoveSizes(),
+        getTimeSlots(),
+        getHearAbout(),
+        getStateInstant(),
+      ]);
+      const moveOpts = toOptions(moveRes.data || []);
+      const timeOpts = toOptions(timeRes.data || []);
+      const hearOpts = toOptions(hearRes.data || []);
+      const stateOpts = toStateOptions(stateRes.data || []);
+      setMoveSizeOptions(moveOpts);
+      setTimeOptions(timeOpts);
+      setHearAboutOptions(hearOpts);
+      setStateOptions(stateOpts);
+      setValues((prev: any) => ({
+        ...prev,
+        moveSize: moveOpts[0]?.value || prev.moveSize,
+        visitTime: timeOpts[0]?.value || prev.visitTime, 
+        hearAbout: hearOpts[0]?.value || prev.hearAbout,
+        state: stateOpts[0]?.value || prev.state,
+      }));
+
+    } catch (error: any) {
+      console.error("Failed to fetch static data:", error);
+    }
+  };
+
+  fetchStaticData();
+}, [setValues]); 
 
   const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
     setValues((prev) => ({ ...prev, [field]: value }));
