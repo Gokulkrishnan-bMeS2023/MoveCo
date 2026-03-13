@@ -42,9 +42,8 @@ export interface QuoteRequestDTO {
   heardBy: string;
   additionalInfo: string;
 
-  quoteId: number;
-
   inventories: InventoryItemDTO[];
+  recaptchaToken: string;
 }
 
 export const postOnlineEstimate = (data: QuoteRequestDTO) => {

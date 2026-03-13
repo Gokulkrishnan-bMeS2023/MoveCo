@@ -98,8 +98,6 @@ const Inventory = () => {
     }
   }, []);
 
-  
-
   const saveQuantities = (updated: Quantities) => {
     setQuantities(updated);
     sessionStorage.setItem("inventory", JSON.stringify(updated));
@@ -122,7 +120,6 @@ const Inventory = () => {
 
   const handleExpandAll = () =>
     setOpenItems(inventorySections.map((_, index) => `section-${index}`));
-
 
   const handleSubmit = async () => {
     const validationErrors = validateInventory(quantities);
@@ -172,9 +169,7 @@ const Inventory = () => {
       moveSize: values.moveType,
       heardBy: values.hearAbout,
       additionalInfo: values.notes,
-
-      quoteId: 0,
-
+      recaptchaToken: "test",
       inventories: Object.entries(quantities)
         .filter(([, qty]) => qty >= 1)
         .map(([id, qty]) => ({

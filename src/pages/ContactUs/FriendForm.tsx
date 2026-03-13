@@ -18,73 +18,74 @@ const FriendForm = () => {
   const {
     referralValues,
     referralErrors,
+    isReferralSubmitting,
     handleReferralChange,
     handleSubmitReferral,
   } = useContactForms();
-  return (
-    <>
-      <Card.Root variant="elevated" size="lg" h={"100%"}>
-        <Card.Body gap={{ base: 4, md: 6 }}>
-          <HStack gap={3} alignItems={"flex-start"}>
-            <Flex bg="brand.primary" px={3} py={2} borderRadius="md">
-              <Box color="brand.white">
-                <Icon
-                  as={FaUserFriends}
-                  boxSize={{ base: 5, md: 6 }}
-                  color="brand.white"
-                />
-              </Box>
-            </Flex>
-            <Heading as="h3" fontWeight="normal">
-              Tell a friend{" "}
-              <Text as="span" color="brand.primary">
-                about MoveCo
-              </Text>
-            </Heading>
-          </HStack>
 
-          <VStack gap={4} align="stretch">
-            <Text textStyle="size-lg">
-              To email a friend about MoveCo, fill out the information below
-            </Text>
-            <InputField
-              label="Your Name"
-              placeholder="Your Name"
-              value={referralValues.yourName}
-              onChange={(e) => handleReferralChange("yourName", e.target.value)}
-              errorMessage={referralErrors.yourName}
-              isRequired
-            />
-            <PhoneField
-              label="Friend's Phone Number"
-              value={referralValues.friendPhone}
-              onChange={(digits) => handleReferralChange("friendPhone", digits)}
-              errorMessage={referralErrors.friendPhone}
-              isRequired
-            />
-            <InputField
-              label="Friend's Email Address"
-              placeholder="Friend's Email Address"
-              type="email"
-              value={referralValues.friendEmail}
-              onChange={(e) =>
-                handleReferralChange("friendEmail", e.target.value)
-              }
-              errorMessage={referralErrors.friendEmail}
-              isRequired
-            />
-            <Box textAlign={{ base: "center", md: "right" }} mt={4}>
-              <Button
-                px="16"
-                variant="primary"
-                label="Send"
-                onClick={handleSubmitReferral}
+  return (
+    <Card.Root variant="elevated" size="lg" h="100%">
+      <Card.Body gap={{ base: 4, md: 6 }}>
+        <HStack gap={3} alignItems="flex-start">
+          <Flex bg="brand.primary" px={3} py={2} borderRadius="md">
+            <Box color="brand.white">
+              <Icon
+                as={FaUserFriends}
+                boxSize={{ base: 5, md: 6 }}
+                color="brand.white"
               />
             </Box>
-          </VStack>
-        </Card.Body>
-      </Card.Root>
-    </>
+          </Flex>
+          <Heading as="h3" fontWeight="normal">
+            Tell a friend{" "}
+            <Text as="span" color="brand.primary">
+              about MoveCo
+            </Text>
+          </Heading>
+        </HStack>
+
+        <VStack gap={4} align="stretch">
+          <Text textStyle="size-lg">
+            To email a friend about MoveCo, fill out the information below
+          </Text>
+          <InputField
+            label="Your Name"
+            placeholder="Your Name"
+            value={referralValues.yourName}
+            onChange={(e) => handleReferralChange("yourName", e.target.value)}
+            errorMessage={referralErrors.yourName}
+            isRequired
+          />
+          <PhoneField
+            label="Friend's Phone Number"
+            value={referralValues.friendPhone}
+            onChange={(digits) => handleReferralChange("friendPhone", digits)}
+            errorMessage={referralErrors.friendPhone}
+            isRequired
+          />
+          <InputField
+            label="Friend's Email Address"
+            placeholder="Friend's Email Address"
+            type="email"
+            value={referralValues.friendEmail}
+            onChange={(e) =>
+              handleReferralChange("friendEmail", e.target.value)
+            }
+            errorMessage={referralErrors.friendEmail}
+            isRequired
+          />
+          <Box textAlign={{ base: "center", md: "right" }} mt={4}>
+            <Button
+              px="16"
+              variant="primary"
+              label={isReferralSubmitting ? "Sending..." : "Send"}
+              onClick={handleSubmitReferral}
+              disabled={isReferralSubmitting}
+            />
+          </Box>
+        </VStack>
+      </Card.Body>
+    </Card.Root>
   );
 };
 
