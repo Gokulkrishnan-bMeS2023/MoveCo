@@ -1,14 +1,7 @@
-import {
-  Grid,
-  AspectRatio,
-  Center,
-  Text,
-  Skeleton,
-} from "@chakra-ui/react";
+import { Grid, AspectRatio, Center, Text, Skeleton } from "@chakra-ui/react";
 import type { VideoGridProps, VideoCardProps } from "./DTOs";
 
 const VideoGrid = ({ videos, isVideoLoading, error }: VideoGridProps) => {
-
   if (error) {
     return (
       <Center py={10}>

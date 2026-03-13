@@ -5,7 +5,7 @@ import type { Video } from "./DTOs";
 export const useVideoGrid = (page: number, pageSize: number) => {
   const [videos, setVideos] = useState<Video[]>([]);
   const [isVideoLoading, setIsVideoLoading] = useState(false);
-  const [error, setError] = useState<string >("");
+  const [error, setError] = useState<string>("");
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
@@ -24,9 +24,7 @@ export const useVideoGrid = (page: number, pageSize: number) => {
           thumbnail: item.thumbnail,
         }));
 
-        setVideos((prev) =>
-          page === 1 ? formatted : [...prev, ...formatted]
-        );
+        setVideos((prev) => (page === 1 ? formatted : [...prev, ...formatted]));
 
         setHasMore(items.length === pageSize);
       } catch (err) {
