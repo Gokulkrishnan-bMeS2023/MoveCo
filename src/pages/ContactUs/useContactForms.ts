@@ -82,8 +82,6 @@ export const useContactForms = () => {
         customerEmail: contactValues.email,
         telePhone: contactValues.phone,
         comments: contactValues?.message || "",
-        referralUrl:
-          window.location.href || "https://www.moveco.com/contact-us",
         recaptchaToken,
       };
 

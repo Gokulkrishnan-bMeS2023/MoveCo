@@ -40,7 +40,7 @@ const ProductCard = memo(
           h={{ base: "200px", sm: "250px", md: "300px" }}
         >
           <Image
-            src={images.product}
+            src={images[`p${product.id}` as keyof typeof images]}
             alt={product?.name || "Product"}
             w="100%"
             h="100%"

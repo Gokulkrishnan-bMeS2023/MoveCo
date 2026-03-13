@@ -7,6 +7,7 @@ export interface InstantEstimateRequestDTO {
   email: string;
   phoneNo: string;
   ipAddress: string;
+  recaptchaToken: string;
 }
 
 export const getQuote = () => {

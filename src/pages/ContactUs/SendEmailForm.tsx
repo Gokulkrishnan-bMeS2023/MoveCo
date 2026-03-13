@@ -44,7 +44,6 @@ const SendEmailForm = () => {
             </Text>
           </Heading>
         </HStack>
-
         <VStack gap={4} align="stretch">
           <Text textStyle="size-lg">
             Send us an email, we would love to hear from you!

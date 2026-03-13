@@ -11,7 +11,6 @@ interface ContactForm {
   customerEmail: string;
   name: string;
   telePhone: string;
-  referralUrl?: string;
   comments?: string;
   recaptchaToken: string;
 }

@@ -221,7 +221,7 @@ const CartItemCard = memo(
             {/* Product Image */}
             <Box position="relative" flexShrink={0}>
               <Image
-                src={images.product}
+                src={images[`p${item.id}` as keyof typeof images]}
                 alt={item.name}
                 boxSize={{ base: "80px", md: "100px" }}
                 objectFit="cover"
