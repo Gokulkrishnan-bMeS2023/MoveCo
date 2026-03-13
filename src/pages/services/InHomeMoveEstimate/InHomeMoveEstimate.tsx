@@ -119,7 +119,7 @@ const InHomeMoveEstimate = () => {
                 <SelectField
                   label="Preferred Time"
                   options={timeOptions}
-                  placeholder={timeOptions?.[0]?.label}
+                  placeholder={values.visitTime}
                   value={values.visitTime}
                   onValueChange={(e) => handleChange("visitTime", e.value[0])}
                   isRequired
@@ -138,7 +138,7 @@ const InHomeMoveEstimate = () => {
                 <SelectField
                   label="What do you estimate your move size to be?"
                   options={moveSizeOptions}
-                  placeholder={moveSizeOptions?.[0]?.label}
+                  placeholder={values.moveSize}
                   value={values.moveSize}
                   onValueChange={(e) => handleChange("moveSize", e.value[0])}
                   isRequired
@@ -147,7 +147,7 @@ const InHomeMoveEstimate = () => {
                 <SelectField
                   label="How did you hear about MoveCo.net?"
                   options={hearAboutOptions}
-                  placeholder={hearAboutOptions?.[0]?.label}
+                  placeholder={values.hearAbout}
                   value={values.hearAbout}
                   onValueChange={(e) => handleChange("hearAbout", e.value[0])}
                   errorMessage={errors.hearAbout}
@@ -274,7 +274,7 @@ const InHomeMoveEstimate = () => {
                   <SelectField
                     label="State"
                     options={stateOptions}
-                    placeholder={stateOptions?.[0]?.label}
+                    placeholder={values.state}
                     value={values.state}
                     onValueChange={(e) => handleChange("state", e.value[0])}
                     isRequired
