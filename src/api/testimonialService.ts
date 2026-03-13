@@ -7,11 +7,15 @@ export interface TestimonialPayload {
   email: string;
   comments: string;
 }
+export interface GetTestimonialsParams {
+  page?: number;
+  pageSize?: number;
+}
 
 export const postTestimonial = (data: TestimonialPayload) => {
   return api.post("/testimonials", data);
 };
 
-export const getTestimonial = () => {
-  return api.get("/testimonials");
+export const getTestimonial = (params?: GetTestimonialsParams) => {
+  return api.get("/testimonials", { params });
 };

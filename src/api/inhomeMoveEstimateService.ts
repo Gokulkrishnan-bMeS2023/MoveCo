@@ -19,7 +19,6 @@ export interface InHomeEstimatePayload {
   state: string;
   zipCode: string;
   additionalInfo: string;
-  quoteId: number;
 }
 
 export const postInHomeEstimate = (data: InHomeEstimatePayload) => {

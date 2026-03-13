@@ -5,7 +5,7 @@ export interface Video {
 }
 
 export interface VideoGridProps {
-  limit?: number;
+  limit: number;
 }
 
 export interface VideoCardProps {

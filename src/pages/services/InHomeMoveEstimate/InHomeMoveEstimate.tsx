@@ -17,6 +17,7 @@ import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
 import { useNavigate } from "react-router-dom";
 import { images } from "../../../assets";
 import { useInHomeEstimateForm } from "./useInHomeMoveEstimate";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const InHomeMoveEstimate = () => {
   const navigate = useNavigate();
@@ -305,7 +306,10 @@ const InHomeMoveEstimate = () => {
               </Stack>
             </Box>
           </SimpleGrid>
-
+<ReCAPTCHA
+  sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+  onChange={(token) => handleChange("recaptchaToken", token || "")}
+/>
           <Box textAlign={{ base: "center", md: "right" }}>
             <Button
               label="Send"

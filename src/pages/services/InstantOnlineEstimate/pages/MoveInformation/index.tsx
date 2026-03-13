@@ -24,6 +24,15 @@ import { instantOnlineStaticDataPromise } from "../../../../../lib/queries";
 const InHomeMoveEstimate = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const {
+    moveSizeOptions,
+    timeOptions,
+    stateOptions,
+    stairsOptions,
+    doorToTruckOptions,
+    hearAboutOptions,
+  } = use(instantOnlineStaticDataPromise);
+
   const [values, setValues] = useState<MoveInformationDTO>({
     firstName: searchParams.get("firstName") || "",
     lastName: searchParams.get("lastName") || "",
@@ -33,26 +42,26 @@ const InHomeMoveEstimate = () => {
     workPhone: "",
     cellPhone: "",
     moveDate: searchParams.get("moveDate") || "",
-    moveTime: "",
+    moveTime: timeOptions?.[0]?.value || "",
     dropDate: "",
-    dropTime: "",
-    moveType: "",
-    hearAbout: "",
+    dropTime: timeOptions?.[0]?.value ?? "",
+    moveType: moveSizeOptions?.[0]?.value ?? "",
+    hearAbout: hearAboutOptions?.[0]?.value ?? "",
     notes: "",
     fromAddress: "",
     fromApt: "",
     fromCity: "",
-    fromState: "",
+    fromState: stateOptions?.[0]?.value ?? "",
     fromZipCode: "",
-    fromStairs: "",
-    fromDistance: "",
+    fromStairs: stairsOptions?.[0]?.value ?? "",
+    fromDistance: doorToTruckOptions?.[0]?.value ?? "",
     toAddress: "",
     toApt: "",
     toCity: "",
-    toState: "",
+    toState: stateOptions?.[0]?.value ?? "",
     toZipCode: "",
-    toStairs: "",
-    toDistance: "",
+    toStairs: stairsOptions?.[0]?.value ?? "",
+    toDistance: doorToTruckOptions?.[0]?.value ?? "",
   });
 
   const [errors, setErrors] = useState<MoveInformationErrors>({});
@@ -71,15 +80,6 @@ const InHomeMoveEstimate = () => {
       setErrors((prev) => ({ ...prev, [field]: "" }));
     }
   };
-
-  const {
-    moveSizeOptions,
-    timeOptions,
-    stateOptions,
-    stairsOptions,
-    doorToTruckOptions,
-    hearAboutOptions,
-  } = use(instantOnlineStaticDataPromise);
 
   const handleSubmit = () => {
     const newErrors = validateMoveInformation(values);
@@ -232,7 +232,7 @@ const InHomeMoveEstimate = () => {
                 />
                 <SelectField
                   label="Move Time"
-                  placeholder={timeOptions?.[0]?.label}
+                  placeholder={values.moveTime}
                   options={timeOptions}
                   value={values.moveTime}
                   onValueChange={(d) => handleChange("moveTime", d.value[0])}
@@ -249,7 +249,7 @@ const InHomeMoveEstimate = () => {
                 />
                 <SelectField
                   label="Drop Time"
-                  placeholder={timeOptions?.[0]?.label}
+                  placeholder={values.dropTime}
                   options={timeOptions}
                   value={values.dropTime}
                   onValueChange={(d) => handleChange("dropTime", d.value[0])}
@@ -276,7 +276,7 @@ const InHomeMoveEstimate = () => {
                 <SelectField
                   label="Move Type"
                   options={moveSizeOptions}
-                  placeholder={moveSizeOptions?.[0]?.label}
+                  placeholder={values.moveType}
                   value={values.moveType}
                   onValueChange={(d) => handleChange("moveType", d.value[0])}
                 />
@@ -342,7 +342,7 @@ const InHomeMoveEstimate = () => {
             >
               <SelectField
                 label="State"
-                placeholder={stateOptions?.[0]?.label}
+                placeholder={values.fromState}
                 value={values.fromState}
                 onValueChange={(e) => handleChange("fromState", e.value[0])}
                 options={stateOptions}
@@ -362,14 +362,14 @@ const InHomeMoveEstimate = () => {
 
               <SelectField
                 label="How many flights of stairs at this address?"
-                placeholder={stairsOptions?.[0]?.label}
+                placeholder={values.fromStairs}
                 options={stairsOptions}
                 value={values.fromStairs}
                 onValueChange={(d) => handleChange("fromStairs", d.value[0])}
               />
               <SelectField
                 label="Door to truck at this address?"
-                placeholder={doorToTruckOptions?.[0]?.label}
+                placeholder={values.fromDistance}
                 options={doorToTruckOptions}
                 value={values.fromDistance}
                 onValueChange={(d) => handleChange("fromDistance", d.value[0])}
@@ -424,7 +424,7 @@ const InHomeMoveEstimate = () => {
             >
               <SelectField
                 label="State"
-                placeholder={stateOptions?.[0]?.label}
+                placeholder={values.toState}
                 value={values.toState}
                 onValueChange={(e) => handleChange("toState", e.value[0])}
                 options={stateOptions}
@@ -444,14 +444,14 @@ const InHomeMoveEstimate = () => {
 
               <SelectField
                 label="How many flights of stairs at this address?"
-                placeholder={stairsOptions?.[0]?.label}
+                placeholder={values.toStairs}
                 options={stairsOptions}
                 value={values.toStairs}
                 onValueChange={(d) => handleChange("toStairs", d.value[0])}
               />
               <SelectField
                 label="Truck to Door at this address?"
-                placeholder={doorToTruckOptions?.[0]?.label}
+                placeholder={values.toDistance}
                 options={doorToTruckOptions}
                 value={values.toDistance}
                 onValueChange={(d) => handleChange("toDistance", d.value[0])}
