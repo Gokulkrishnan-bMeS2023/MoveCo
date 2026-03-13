@@ -1,26 +1,21 @@
 import { api } from "../lib/axios";
 
-export interface Video {
-  videoId: string;
-  title?: string;
-  thumbnail?: string;
+export interface GetVideoParams {
+  page?: number;
+  pageSize?: number;
 }
 
-export interface YouTubeVideoResponse {
-  items: Video[];
-  nextPageToken?: string;
+export interface VideoResponse {
+  items: {
+    videoId: string;
+    title?: string;
+    thumbnail?: string;
+  }[];
 }
 
 export const getYouTubeVideos = async (
-  pageSize: number,
-  pageToken?: string
-): Promise<YouTubeVideoResponse> => {
-  const response = await api.get("/youtube/videos", {
-    params: {
-      pageSize,
-      pageToken,
-    },
-  });
-
-  return response.data;
+  params?: GetVideoParams
+): Promise<VideoResponse> => {
+  const { data } = await api.get("/youtube/videos", { params });
+  return data;
 };

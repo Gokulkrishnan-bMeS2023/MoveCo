@@ -9,11 +9,16 @@ import { GetQuote } from "./QuoteForm/Quote";
 import ClientSpeaks from "./ReviewGrid/ClientSpeaks";
 import VideoGrid from "./VideoGrid/ClientReview";
 import { useClientSpeaks } from "./ReviewGrid/useClientSpeaks";
+<<<<<<< HEAD
 import RecaptchaWrapper from "../../utils/RecaptchaWrapper";
+=======
+import { useVideoGrid } from "./VideoGrid/useClientReview";
+>>>>>>> f6266995f6d4a02625cc02a2bdf4e5b8027bbf94
 
 const Home = () => {
   const navigate = useNavigate();
   const { testimonials, isLoading } = useClientSpeaks(1, 3);
+  const { videos, isVideoLoading, error } = useVideoGrid(1,2);
   return (
     <Container>
       <Flex direction={{ base: "column", lg: "row" }} gap={6}>
@@ -61,6 +66,7 @@ const Home = () => {
             maxW={{ lg: "45%" }}
             textAlign={{ base: "center", lg: "left" }}
           >
+<<<<<<< HEAD
             What{" "}
             <Text as="span" color="brand.primary">
               Our Clients
@@ -71,6 +77,51 @@ const Home = () => {
             textStyle={"size-2xl"}
             textAlign={{ base: "center", lg: "right" }}
             maxW={{ lg: "45%" }}
+=======
+            <Heading
+              as="h1" fontWeight="normal"
+              maxW={{ lg: "45%" }}
+              textAlign={{ base: "center", lg: "left" }}
+            >
+              What{" "}
+              <Text as="span" color="brand.primary">
+                Our Clients
+              </Text>{" "}
+              Think About Us?
+            </Heading>
+
+            <Text
+              textStyle={"size-2xl"}
+              textAlign={{ base: "center", lg: "right" }}
+              maxW={{ lg: "45%" }}
+            >
+              Watch Reviews from satisfied clients, sharing their experiences and
+              successes with our services.
+            </Text>
+          </Flex>
+          <VideoGrid videos={videos} isVideoLoading={isVideoLoading} error={error} />
+        </Box>
+
+        <Box pt="sectionTop">
+          <Flex justify="space-between" align="center" mb={4}>
+            <Badge label="Client Speaks" />
+            <Button
+             textStyle="size-xl"
+              rounded="full"
+              variant="outline"
+              onClick={() => navigate("/client-testimonial")}
+              label="View all"
+              rightIcon={<LuArrowUpRight size={16} />}
+            />
+          </Flex>
+
+          <Flex
+            direction={{ base: "column", lg: "row" }}
+            justify="space-between"
+            align="center"
+           mb={{ base: 4, lg: 6 }}
+            gap={{ base: 4, lg: 12 }}
+>>>>>>> f6266995f6d4a02625cc02a2bdf4e5b8027bbf94
           >
             Watch Reviews from satisfied clients, sharing their experiences and
             successes with our services.

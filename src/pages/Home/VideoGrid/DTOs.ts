@@ -5,7 +5,9 @@ export interface Video {
 }
 
 export interface VideoGridProps {
-  limit: number;
+  videos: Video[];
+  isVideoLoading: boolean;
+  error: string;
 }
 
 export interface VideoCardProps {

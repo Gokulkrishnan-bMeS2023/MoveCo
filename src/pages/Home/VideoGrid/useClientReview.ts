@@ -1,106 +1,43 @@
-// // import { useEffect, useState } from "react";
-// // import { getYouTubeVideos } from "../../../api/videoReviewService";
-// // import type { Video } from "./DTOs";
-
-// // export const useVideoGrid = (limit?: number) => {
-// //   const [videos, setVideos] = useState<Video[]>([]);
-// //   const [isLoading, setIsLoading] = useState(true);
-
-// //   useEffect(() => {
-// //     const fetchVideos = async () => {
-// //       try {
-// //         if (videos.length === 0) {
-// //           setIsLoading(true);
-// //         }
-// //         const response = await getYouTubeVideos(limit ?? 10);
-// //         setVideos(response.data || []);
-// //       } catch (error) {
-// //         console.error("Failed to fetch videos:", error);
-// //       } finally {
-// //         setIsLoading(false);
-// //       }
-// //     };
-
-// //     fetchVideos();
-// //   }, [limit]);
-
-// //   return { videos, isLoading };
-// // };
-
-
-
-
-// import { useEffect, useState, useCallback } from "react";
-// import { getYouTubeVideos } from "../../../api/videoReviewService";
-// import type { Video } from "./DTOs";
-
-// export const useVideoGrid = (limit: number = 10) => {
-//   const [videos, setVideos] = useState<Video[]>([]);
-//   const [isLoading, setIsLoading] = useState(true);
-//   const [nextPageToken, setNextPageToken] = useState<string | null>(null);
-//   const [error, setError] = useState<string | null>(null);
-
-//   const fetchVideos = useCallback(
-//     async (token?: string) => {
-//       setIsLoading(true);
-//       setError(null);
-//       try {
-//         const response = await getYouTubeVideos(limit, token);
-//         const newVideos: Video[] = response.data.items || [];
-
-//         // Append new videos
-//         setVideos(prev => [...prev, ...newVideos]);
-
-//         // Save nextPageToken
-//         setNextPageToken(response.data.nextPageToken || null);
-//       } catch (err) {
-//         console.error("Failed to fetch videos:", err);
-//         setError("Failed to load videos");
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     },
-//     [limit]
-//   );
-
-//   useEffect(() => {
-//     // Initial fetch
-//     fetchVideos();
-//   }, [fetchVideos]);
-
-//   return { videos, isLoading, error, nextPageToken, fetchVideos };
-// };
-
-
-
-
-import { useEffect, useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { getYouTubeVideos } from "../../../api/videoReviewService";
 import type { Video } from "./DTOs";
 
-export const useVideoGrid = (limit: number) => {
+export const useVideoGrid = (page: number, pageSize: number) => {
   const [videos, setVideos] = useState<Video[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchVideos = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const data = await getYouTubeVideos(limit);
-      setVideos(data.items || []);
-    } catch (err) {
-      console.error("Video API Error:", err);
-      setError("Failed to fetch videos");
-    } finally {
-      setIsLoading(false);
-    }
-  }, [limit]);
+  const [isVideoLoading, setIsVideoLoading] = useState(false);
+  const [error, setError] = useState<string >("");
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    fetchVideos();
-  }, [fetchVideos]);
+    const fetchVideos = async () => {
+      setIsVideoLoading(true);
+      setError("");
 
-  return { videos, isLoading, error };
+      try {
+        const response = await getYouTubeVideos({ page, pageSize });
+
+        const items = response.items || [];
+
+        const formatted: Video[] = items.map((item: any) => ({
+          videoId: item.videoId,
+          title: item.title,
+          thumbnail: item.thumbnail,
+        }));
+
+        setVideos((prev) =>
+          page === 1 ? formatted : [...prev, ...formatted]
+        );
+
+        setHasMore(items.length === pageSize);
+      } catch (err) {
+        setError("Failed to load videos");
+      } finally {
+        setIsVideoLoading(false);
+      }
+    };
+
+    fetchVideos();
+  }, [page, pageSize]);
+
+  return { videos, isVideoLoading, error, hasMore };
 };

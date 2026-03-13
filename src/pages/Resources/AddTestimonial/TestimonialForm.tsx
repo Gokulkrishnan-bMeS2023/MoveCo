@@ -2,12 +2,11 @@ import { Stack, Heading, SimpleGrid, Box } from "@chakra-ui/react";
 import DateInput from "../../../components/common/DateInput/DateInput";
 import InputField from "../../../components/common/Input/Input";
 import Notes from "../../../components/common/Notes/Notes";
-import { useAddTestimonial } from "./useAddTestimonial";
 import Button from "../../../components/common/Button/Button";
+import { useTestimonialForm } from "./useTestimonialForm";
 
 export const TestimonialForm = () => {
-  const { values, errors, isSubmitting, handleChange, handleSubmit } =
-    useAddTestimonial();
+  const { values, errors, isSubmitting, handleChange, handleSubmit } = useTestimonialForm();
   return (
     <Box
       bg="brand.white"
