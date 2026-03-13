@@ -15,9 +15,11 @@ import { LuArrowUpRight } from "react-icons/lu";
 import { GetQuote } from "./QuoteForm/Quote";
 import ClientSpeaks from "./ReviewGrid/ClientSpeaks";
 import VideoGrid from "./VideoGrid/ClientReview";
+import { useClientSpeaks } from "./ReviewGrid/useClientSpeaks";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { testimonials, isLoading } = useClientSpeaks(1, 3);
   return (
       <Container>
         <Flex direction={{ base: "column", lg: "row" }} gap={6}>
@@ -120,7 +122,7 @@ const Home = () => {
               Read feedback from clients who have experienced our professional moving services.
             </Text>
           </Flex>
-          <ClientSpeaks limit={3} />
+          <ClientSpeaks testimonials={testimonials} isLoading={isLoading} />
         </Box>
       </Container>
   );

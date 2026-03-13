@@ -1,6 +1,6 @@
 import { use, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3"; // ← add
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { postInHomeEstimate } from "../../../api/inhomeMoveEstimateService";
 import type { MoveEstimateErrors, MoveEstimateFormValues } from "./DTOs";
 import { validateMoveEstimate } from "./validation";
@@ -49,7 +49,7 @@ export const useInHomeEstimateForm = () => {
   });
 
   const [errors, setErrors] = useState<MoveEstimateErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false); // ← add
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (location.state) {
@@ -132,7 +132,7 @@ export const useInHomeEstimateForm = () => {
         type: "error",
       });
     } finally {
-      setIsSubmitting(false); // ← add
+      setIsSubmitting(false);
     }
   };
 

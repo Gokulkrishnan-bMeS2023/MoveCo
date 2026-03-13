@@ -1,3 +1,237 @@
+// // import {
+// //   Grid,
+// //   Box,
+// //   Text,
+// //   Heading,
+// //   Flex,
+// //   Image,
+// //   Spinner,
+// //   Center,
+// // } from "@chakra-ui/react";
+// // import { useState } from "react";
+// // import { images } from "../../../assets";
+// // import { useClientSpeaks } from "./useClientSpeaks";
+// // import type { ClientSpeak, ClientSpeaksProps } from "./DTOs";
+
+// // const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
+// //   const { testimonials, isLoading } = useClientSpeaks();
+
+// //   const speaksToShow = limit ? testimonials.slice(0, limit) : testimonials;
+
+// //   if (isLoading) {
+// //     return (
+// //       <Center p={10}>
+// //         <Spinner color="brand.primary" size="xl" />
+// //       </Center>
+// //     );
+// //   }
+
+// //   if (testimonials.length === 0) {
+// //     return (
+// //       <Center p={10}>
+// //         <Text>No testimonials to display yet.</Text>
+// //       </Center>
+// //     );
+// //   }
+
+  
+// //   return (
+// //     <Grid
+// //       templateColumns={{
+// //         base: "1fr",
+// //         md: "repeat(2, 1fr)",
+// //         lg: "repeat(3, 1fr)",
+// //       }}
+// //       gap={6}
+// //       alignItems="start"
+// //     >
+// //       {speaksToShow?.map((client, index) => (
+// //         <ReviewCard key={index} client={client} />
+// //       ))}
+// //     </Grid>
+// //   );
+// // };
+
+// // const ReviewCard = ({ client }: { client: ClientSpeak }) => {
+// //   const [isHovered, setIsHovered] = useState(false);
+
+// //   return (
+// //     <Box
+// //       onMouseEnter={() => setIsHovered(true)}
+// //       onMouseLeave={() => setIsHovered(false)}
+// //       position="relative"
+// //       zIndex={isHovered ? 20 : 1}
+// //     >
+// //       <Box
+// //         bg="brand.white"
+// //         p={6}
+// //         rounded="2xl"
+// //         shadow={isHovered ? "2xl" : "sm"}
+// //         border="1px solid"
+// //         borderColor={isHovered ? "brand.primary" : "gray.100"}
+// //         transition="all 0.2s ease-in-out"
+// //         overflow="hidden"
+// //       >
+// //         <Flex align="center" gap={4} mb={4}>
+// //           <Image
+// //             src={client?.image || images?.profile}
+// //             boxSize="50px"
+// //             alt="profile"
+// //             borderRadius="full"
+// //             objectFit="cover"
+// //           />
+// //           <Heading as="h5">
+// //             {client?.firstName} {client?.lastName}
+// //           </Heading>
+// //         </Flex>
+
+// //         <Box
+// //           maxH={isHovered ? "none" : "100px"}
+// //           overflow="hidden"
+// //           position="relative"
+// //         >
+// //           <Text color="brand.secondary" lineHeight="1.6">
+// //             {client?.comments}
+// //           </Text>
+
+// //           {!isHovered && (
+// //             <Box
+// //               position="absolute"
+// //               bottom={0}
+// //               left={0}
+// //               right={0}
+// //               h="40px"
+// //               bgGradient="linear(to-t, white, transparent)"
+// //               pointerEvents="none"
+// //             />
+// //           )}
+// //         </Box>
+// //       </Box>
+// //     </Box>
+// //   );
+// // };
+// // export default ClientSpeaks;
+
+
+
+
+
+
+
+// import {
+//   Grid,
+//   Box,
+//   Text,
+//   Heading,
+//   Flex,
+//   Image,
+//   Spinner,
+//   Center,
+// } from "@chakra-ui/react";
+// import { useState } from "react";
+// import { images } from "../../../assets";
+// import type { ClientSpeak } from "./DTOs";
+
+// interface ClientSpeaksProps {
+//   testimonials: ClientSpeak[];
+//   isLoading: boolean;
+// }
+
+// const ClientSpeaks = ({ testimonials, isLoading }: ClientSpeaksProps) => {
+//   const safeTestimonials = Array.isArray(testimonials) ? testimonials : [];
+
+//   if (isLoading) {
+//     return (
+//       <Center p={10}>
+//         <Spinner color="brand.primary" size="xl" />
+//       </Center>
+//     );
+//   }
+
+//   if (safeTestimonials.length === 0) {
+//     return (
+//       <Center p={10}>
+//         <Text>No testimonials to display yet.</Text>
+//       </Center>
+//     );
+//   }
+
+//   return (
+//     <Grid
+//       templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }}
+//       gap={6}
+//       alignItems="start"
+//     >
+//       {safeTestimonials.map((client, index) => (
+//         <ReviewCard key={client.id || index} client={client} />
+//       ))}
+//     </Grid>
+//   );
+// };
+
+// const ReviewCard = ({ client }: { client: ClientSpeak }) => {
+//   const [isHovered, setIsHovered] = useState(false);
+
+//   return (
+//     <Box
+//       onMouseEnter={() => setIsHovered(true)}
+//       onMouseLeave={() => setIsHovered(false)}
+//       position="relative"
+//       zIndex={isHovered ? 20 : 1}
+//     >
+//       <Box
+//         bg="brand.white"
+//         p={6}
+//         rounded="2xl"
+//         shadow={isHovered ? "2xl" : "sm"}
+//         border="1px solid"
+//         borderColor={isHovered ? "brand.primary" : "gray.100"}
+//         transition="all 0.2s ease-in-out"
+//         overflow="hidden"
+//       >
+//         <Flex align="center" gap={4} mb={4}>
+//           <Image
+//             src={client?.image || images?.profile}
+//             boxSize="50px"
+//             alt={`${client.firstName} profile`}
+//             borderRadius="full"
+//             objectFit="cover"
+//           />
+//           <Heading as="h5" size="sm">
+//             {client?.firstName} {client?.lastName}
+//           </Heading>
+//         </Flex>
+
+//         <Box maxH={isHovered ? "none" : "100px"} overflow="hidden" position="relative">
+//           <Text color="brand.secondary" lineHeight="1.6">
+//             {client?.comments}
+//           </Text>
+
+//           {!isHovered && (
+//             <Box
+//               position="absolute"
+//               bottom={0}
+//               left={0}
+//               right={0}
+//               h="40px"
+//               bgGradient="linear(to-t, white, transparent)"
+//               pointerEvents="none"
+//             />
+//           )}
+//         </Box>
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default ClientSpeaks;
+
+
+
+
+
+
+
 import {
   Grid,
   Box,
@@ -10,15 +244,17 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { images } from "../../../assets";
-import { useClientSpeaks } from "./useClientSpeaks";
-import type { ClientSpeak, ClientSpeaksProps } from "./DTOs";
+import type { ClientSpeak } from "./DTOs";
 
-const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
-  const { testimonials, isLoading } = useClientSpeaks();
+interface ClientSpeaksProps {
+  testimonials: ClientSpeak[];
+  isLoading: boolean;
+}
 
-  const speaksToShow = limit ? testimonials.slice(0, limit) : testimonials;
+const ClientSpeaks = ({ testimonials, isLoading }: ClientSpeaksProps) => {
+  const safeTestimonials = Array.isArray(testimonials) ? testimonials : [];
 
-  if (isLoading) {
+  if (isLoading && safeTestimonials.length === 0) {
     return (
       <Center p={10}>
         <Spinner color="brand.primary" size="xl" />
@@ -26,7 +262,7 @@ const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
     );
   }
 
-  if (testimonials.length === 0) {
+  if (safeTestimonials.length === 0) {
     return (
       <Center p={10}>
         <Text>No testimonials to display yet.</Text>
@@ -34,19 +270,17 @@ const ClientSpeaks = ({ limit }: ClientSpeaksProps) => {
     );
   }
 
-  
   return (
     <Grid
       templateColumns={{
         base: "1fr",
-        md: "repeat(2, 1fr)",
-        lg: "repeat(3, 1fr)",
+        md: "repeat(2,1fr)",
+        lg: "repeat(3,1fr)",
       }}
       gap={6}
-      alignItems="start"
     >
-      {speaksToShow?.map((client, index) => (
-        <ReviewCard key={index} client={client} />
+      {safeTestimonials.map((client, index) => (
+        <ReviewCard key={client.id || index} client={client} />
       ))}
     </Grid>
   );
@@ -110,4 +344,5 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
     </Box>
   );
 };
+
 export default ClientSpeaks;

@@ -19,6 +19,7 @@ export interface InHomeEstimatePayload {
   state: string;
   zipCode: string;
   additionalInfo: string;
+  recaptchaToken: string;
 }
 
 export const postInHomeEstimate = (data: InHomeEstimatePayload) => {
