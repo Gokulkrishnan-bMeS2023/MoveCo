@@ -7,35 +7,40 @@ import { validateMoveEstimate } from "./validation";
 import { toaster } from "../../../components/ui/toaster";
 import { inHomeStaticDataPromise } from "../../../lib/queries";
 
-const initialState: MoveEstimateFormValues = {
-  visitDate: "",
-  visitTime: "",
-  moveDate: "",
-  moveSize: "",
-  hearAbout: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  homePhone: "",
-  cellPhone: "",
-  workPhone: "",
-  faxPhone: "",
-  fromAddress: "",
-  apt: "",
-  city: "",
-  state: "",
-  zipCode: "",
-  notes: "",
-  recaptchaToken: "",
-};
-
 export const useInHomeEstimateForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { executeRecaptcha } = useGoogleReCaptcha();
 
+  const { moveSizeOptions, timeOptions, hearAboutOptions, stateOptions } = use(
+    inHomeStaticDataPromise,
+  );
+
+  const getInitialState = (): MoveEstimateFormValues => ({
+    visitDate: "",
+    visitTime: timeOptions?.[0]?.value ?? "",
+    moveDate: "",
+    moveSize: moveSizeOptions?.[0]?.value ?? "",
+    hearAbout: hearAboutOptions?.[0]?.value ?? "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    homePhone: "",
+    cellPhone: "",
+    workPhone: "",
+    faxPhone: "",
+    fromAddress: "",
+    apt: "",
+    city: "",
+    state: stateOptions?.[0]?.value ?? "",
+    zipCode: "",
+    notes: "",
+    recaptchaToken: "",
+  });
   const [values, setValues] = useState<MoveEstimateFormValues>(() => {
     const data = location.state as any;
+    const initialState = getInitialState();
+
     if (!data) return initialState;
     return {
       ...initialState,
@@ -56,10 +61,6 @@ export const useInHomeEstimateForm = () => {
       navigate(location.pathname, { replace: true, state: null });
     }
   }, [location.pathname, navigate]);
-
-  const { moveSizeOptions, timeOptions, hearAboutOptions, stateOptions } = use(
-    inHomeStaticDataPromise,
-  );
 
   const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
     setValues((prev) => ({ ...prev, [field]: value }));
@@ -90,9 +91,7 @@ export const useInHomeEstimateForm = () => {
 
     try {
       setIsSubmitting(true);
-
       const recaptchaToken = await executeRecaptcha("inhome_estimate");
-
       const payload = {
         inHomeEstimateDate: values.visitDate,
         inHomeEstimateTimeRange: values.visitTime,
@@ -122,7 +121,7 @@ export const useInHomeEstimateForm = () => {
           "Please call the office at 972-250-1100 to give a deposit and confirm the schedule. Thank You!",
         type: "success",
       });
-      setValues(initialState);
+      setValues(getInitialState());
       setErrors({});
     } catch (error: any) {
       toaster.create({

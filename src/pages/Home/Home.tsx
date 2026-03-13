@@ -16,10 +16,12 @@ import { GetQuote } from "./QuoteForm/Quote";
 import ClientSpeaks from "./ReviewGrid/ClientSpeaks";
 import VideoGrid from "./VideoGrid/ClientReview";
 import { useClientSpeaks } from "./ReviewGrid/useClientSpeaks";
+import { useVideoGrid } from "./VideoGrid/useClientReview";
 
 const Home = () => {
   const navigate = useNavigate();
   const { testimonials, isLoading } = useClientSpeaks(1, 3);
+  const { videos, isVideoLoading, error } = useVideoGrid(1,2);
   return (
       <Container>
         <Flex direction={{ base: "column", lg: "row" }} gap={6}>
@@ -79,7 +81,7 @@ const Home = () => {
               successes with our services.
             </Text>
           </Flex>
-          <VideoGrid limit={2} />
+          <VideoGrid videos={videos} isVideoLoading={isVideoLoading} error={error} />
         </Box>
 
         <Box pt="sectionTop">

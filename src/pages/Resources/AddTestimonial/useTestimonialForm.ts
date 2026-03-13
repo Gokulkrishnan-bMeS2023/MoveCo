@@ -13,7 +13,7 @@ const initialState: TestimonialFormValues = {
   comments: "",
 };
 
-export const useAddTestimonial = () => {
+export const useTestimonialForm = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const [values, setValues] = useState<TestimonialFormValues>(initialState);
