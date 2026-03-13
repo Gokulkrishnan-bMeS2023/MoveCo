@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { validateContactForm, validateReferralForm } from "./contactValidation";
 import type { ContactFormValues, FormErrors, ReferralFormValues } from "./DTOs";
 import { postContact, postReferral } from "../../api/contactServices";
 import { toaster } from "../../components/ui/toaster";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const initialContactState: ContactFormValues = {
   name: "",
@@ -18,6 +19,8 @@ const initialReferralState: ReferralFormValues = {
 };
 
 export const useContactForms = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const [contactValues, setContactValues] =
     useState<ContactFormValues>(initialContactState);
   const [contactErrors, setContactErrors] = useState<
@@ -29,6 +32,9 @@ export const useContactForms = () => {
   const [referralErrors, setReferralErrors] = useState<
     FormErrors<ReferralFormValues>
   >({});
+
+  const [isContactSubmitting, setIsContactSubmitting] = useState(false);
+  const [isReferralSubmitting, setIsReferralSubmitting] = useState(false);
 
   const handleContactChange = (
     field: keyof ContactFormValues,
@@ -46,7 +52,7 @@ export const useContactForms = () => {
     setReferralErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-  const handleSubmitContact = async () => {
+  const handleSubmitContact = useCallback(async () => {
     const errors = validateContactForm(contactValues);
     setContactErrors(errors);
 
@@ -58,7 +64,19 @@ export const useContactForms = () => {
       return;
     }
 
+    if (!executeRecaptcha) {
+      toaster.create({
+        title: "reCAPTCHA not ready. Please try again.",
+        type: "error",
+      });
+      return;
+    }
+
     try {
+      setIsContactSubmitting(true);
+
+      const recaptchaToken = await executeRecaptcha("contact_form");
+
       const payload = {
         name: contactValues.name,
         customerEmail: contactValues.email,
@@ -66,6 +84,7 @@ export const useContactForms = () => {
         comments: contactValues?.message || "",
         referralUrl:
           window.location.href || "https://www.moveco.com/contact-us",
+        recaptchaToken,
       };
 
       const response = await postContact(payload);
@@ -75,16 +94,21 @@ export const useContactForms = () => {
         type: "success",
       });
     } catch (error: any) {
+      console.log(error);
+      console.error(error);
       toaster.create({
         title:
           error?.response?.data?.message ||
           "Submission failed. Please try again.",
         type: "error",
       });
+    } finally {
+      setIsContactSubmitting(false);
     }
-  };
+  }, [contactValues, executeRecaptcha]);
 
-  const handleSubmitReferral = async () => {
+  const handleSubmitReferral = useCallback(async () => {
+    // 1. validate form
     const errors = validateReferralForm(referralValues);
     setReferralErrors(errors);
 
@@ -96,11 +120,24 @@ export const useContactForms = () => {
       return;
     }
 
+    if (!executeRecaptcha) {
+      toaster.create({
+        title: "reCAPTCHA not ready. Please try again.",
+        type: "error",
+      });
+      return;
+    }
+
     try {
+      setIsReferralSubmitting(true);
+
+      const recaptchaToken = await executeRecaptcha("referral_form");
+
       const payload = {
         customerEmail: referralValues.friendEmail,
         name: referralValues.yourName,
         customerPhoneNo: referralValues.friendPhone,
+        recaptchaToken,
       };
 
       const response = await postReferral(payload);
@@ -110,20 +147,26 @@ export const useContactForms = () => {
         type: "success",
       });
     } catch (error: any) {
+      console.log(error);
+      console.error(error);
       toaster.create({
         title:
           error?.response?.data?.message ||
           "Submission failed. Please try again.",
         type: "error",
       });
+    } finally {
+      setIsReferralSubmitting(false);
     }
-  };
+  }, [referralValues, executeRecaptcha]);
 
   return {
     contactValues,
     contactErrors,
     referralValues,
     referralErrors,
+    isContactSubmitting,
+    isReferralSubmitting,
     handleContactChange,
     handleReferralChange,
     handleSubmitContact,

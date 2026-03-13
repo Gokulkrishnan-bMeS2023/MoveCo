@@ -11,7 +11,6 @@ import CardTemplate from "../../../../../pages/AboutUs/AboutUsComponents/CardTem
 import CommonAccordion from "../../../../AboutUs/AboutUsComponents/CommonAccordion";
 import { quoteIncludesData, quoteInfoSections } from "./data";
 import Badge from "../../../../../components/common/Badge/Badge";
-import ReCAPTCHA from "react-google-recaptcha";
 import TableSection from "./components/TableSection"; 
 
 const Confirmation = () => {
@@ -52,7 +51,7 @@ const Confirmation = () => {
         <Box pt="sectionTop">
           <Box bg="brand.gray/20" borderRadius="md" p={4} border="1px solid" borderColor="gray.200">
             <Flex align="center" gap={6} flexWrap="wrap">
-              <ReCAPTCHA sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} onChange={(val) => console.log(val)} />
+              {/* <ReCAPTCHA sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} onChange={(val) => console.log(val)} /> */}
               <Text textStyle="size-lg" flexWrap="nowrap">
                 You can reserve your move date by{" "}
                 <Text as="span" color="brand.primary" fontWeight="medium">clicking here</Text>

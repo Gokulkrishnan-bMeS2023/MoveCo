@@ -4,6 +4,7 @@ interface ReferralForm {
   customerEmail: string;
   name: string;
   customerPhoneNo: string;
+  recaptchaToken: string;
 }
 
 interface ContactForm {
@@ -12,6 +13,7 @@ interface ContactForm {
   telePhone: string;
   referralUrl?: string;
   comments?: string;
+  recaptchaToken: string;
 }
 
 export const postReferral = (data: ReferralForm) => {
