@@ -8,21 +8,16 @@ import {
   Card,
   Icon,
 } from "@chakra-ui/react";
-import { useContactForms } from "./useContactForms";
-import InputField from "../../components/common/Input/Input";
-import Notes from "../../components/common/Notes/Notes";
-import Button from "../../components/common/Button/Button";
 import { FaEnvelope } from "react-icons/fa";
-import PhoneField from "../../components/common/PhoneInput/PhoneInput";
+import InputField from "../../../components/common/Input/Input";
+import Notes from "../../../components/common/Notes/Notes";
+import Button from "../../../components/common/Button/Button";
+import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
+import { useContactForm } from "./useContactForm";
 
-const SendEmailForm = () => {
-  const {
-    contactValues,
-    contactErrors,
-    isContactSubmitting,
-    handleContactChange,
-    handleSubmitContact,
-  } = useContactForms();
+const ContactForm = () => {
+  const { values, errors, isSubmitting, handleChange, handleSubmit } =
+    useContactForm();
 
   return (
     <Card.Root variant="elevated" size="lg">
@@ -44,6 +39,7 @@ const SendEmailForm = () => {
             </Text>
           </Heading>
         </HStack>
+
         <VStack gap={4} align="stretch">
           <Text textStyle="size-lg">
             Send us an email, we would love to hear from you!
@@ -52,43 +48,48 @@ const SendEmailForm = () => {
             Just fill out the form, and a representative will get back to you as
             soon as possible
           </Text>
+
           <InputField
             label="Your Name"
-            value={contactValues.name}
-            onChange={(e) => handleContactChange("name", e.target.value)}
-            errorMessage={contactErrors.name}
-            isRequired
             placeholder="Your Name"
+            value={values.name}
+            onChange={(e) => handleChange("name", e.target.value)}
+            errorMessage={errors.name}
+            isRequired
           />
+
           <InputField
             label="Your Email"
-            type="email"
-            value={contactValues.email}
-            onChange={(e) => handleContactChange("email", e.target.value)}
-            errorMessage={contactErrors.email}
-            isRequired
             placeholder="Your Email"
+            type="email"
+            value={values.email}
+            onChange={(e) => handleChange("email", e.target.value)}
+            errorMessage={errors.email}
+            isRequired
           />
+
           <PhoneField
             label="Your Phone Number"
-            value={contactValues.phone}
-            onChange={(digits) => handleContactChange("phone", digits)}
-            errorMessage={contactErrors.phone}
+            value={values.phone}
+            onChange={(digits) => handleChange("phone", digits)}
+            errorMessage={errors.phone}
             isRequired
           />
+
           <Notes
             label="Your Message"
-            value={contactValues.message ?? ""}
-            onChange={(value) => handleContactChange("message", value)}
             placeholder="Your Message"
+            value={values.message ?? ""}
+            onChange={(value) => handleChange("message", value)}
           />
+
           <Box textAlign={{ base: "center", md: "right" }} mt={4}>
             <Button
               px="16"
               variant="primary"
-              label={isContactSubmitting ? "Sending..." : "Send"}
-              onClick={handleSubmitContact}
-              disabled={isContactSubmitting}
+              label={isSubmitting ? "Sending..." : "Send"}
+              onClick={handleSubmit}
+              disabled={isSubmitting}
             />
           </Box>
         </VStack>
@@ -97,4 +98,4 @@ const SendEmailForm = () => {
   );
 };
 
-export default SendEmailForm;
+export default ContactForm;

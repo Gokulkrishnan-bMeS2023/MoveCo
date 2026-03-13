@@ -15,8 +15,8 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import RecaptchaWrapper from "../../utils/RecaptchaWrapper";
 
-const SendEmailForm = React.lazy(() => import("./SendEmailForm"));
-const FriendForm = React.lazy(() => import("./FriendForm"));
+const SendEmailForm = React.lazy(() => import("./ContactForm/ContactForm"));
+const FriendForm = React.lazy(() => import("./ReferralForm/ReferralForm"));
 
 const ContactUsPage = () => {
   const location = useLocation();

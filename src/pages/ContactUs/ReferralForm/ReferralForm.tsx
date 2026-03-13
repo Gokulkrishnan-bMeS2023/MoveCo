@@ -9,19 +9,14 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { FaUserFriends } from "react-icons/fa";
-import { useContactForms } from "./useContactForms";
-import Button from "../../components/common/Button/Button";
-import InputField from "../../components/common/Input/Input";
-import PhoneField from "../../components/common/PhoneInput/PhoneInput";
+import InputField from "../../../components/common/Input/Input";
+import PhoneField from "../../../components/common/PhoneInput/PhoneInput";
+import Button from "../../../components/common/Button/Button";
+import { useReferralForm } from "./useReferralForm";
 
-const FriendForm = () => {
-  const {
-    referralValues,
-    referralErrors,
-    isReferralSubmitting,
-    handleReferralChange,
-    handleSubmitReferral,
-  } = useContactForms();
+const ReferralForm = () => {
+  const { values, errors, isSubmitting, handleChange, handleSubmit } =
+    useReferralForm();
 
   return (
     <Card.Root variant="elevated" size="lg" h="100%">
@@ -48,39 +43,41 @@ const FriendForm = () => {
           <Text textStyle="size-lg">
             To email a friend about MoveCo, fill out the information below
           </Text>
+
           <InputField
             label="Your Name"
             placeholder="Your Name"
-            value={referralValues.yourName}
-            onChange={(e) => handleReferralChange("yourName", e.target.value)}
-            errorMessage={referralErrors.yourName}
+            value={values.yourName}
+            onChange={(e) => handleChange("yourName", e.target.value)}
+            errorMessage={errors.yourName}
             isRequired
           />
+
           <PhoneField
             label="Friend's Phone Number"
-            value={referralValues.friendPhone}
-            onChange={(digits) => handleReferralChange("friendPhone", digits)}
-            errorMessage={referralErrors.friendPhone}
+            value={values.friendPhone}
+            onChange={(digits) => handleChange("friendPhone", digits)}
+            errorMessage={errors.friendPhone}
             isRequired
           />
+
           <InputField
             label="Friend's Email Address"
             placeholder="Friend's Email Address"
             type="email"
-            value={referralValues.friendEmail}
-            onChange={(e) =>
-              handleReferralChange("friendEmail", e.target.value)
-            }
-            errorMessage={referralErrors.friendEmail}
+            value={values.friendEmail}
+            onChange={(e) => handleChange("friendEmail", e.target.value)}
+            errorMessage={errors.friendEmail}
             isRequired
           />
+
           <Box textAlign={{ base: "center", md: "right" }} mt={4}>
             <Button
               px="16"
               variant="primary"
-              label={isReferralSubmitting ? "Sending..." : "Send"}
-              onClick={handleSubmitReferral}
-              disabled={isReferralSubmitting}
+              label={isSubmitting ? "Sending..." : "Send"}
+              onClick={handleSubmit}
+              disabled={isSubmitting}
             />
           </Box>
         </VStack>
@@ -89,4 +86,4 @@ const FriendForm = () => {
   );
 };
 
-export default FriendForm;
+export default ReferralForm;
