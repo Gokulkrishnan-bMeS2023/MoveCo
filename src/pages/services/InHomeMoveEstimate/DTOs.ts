@@ -17,8 +17,7 @@ export interface MoveEstimateFormValues {
   state: string;
   zipCode: string;
   notes: string;
-  quoteID: number;
-  // recaptchaToken: string;
+  recaptchaToken: string;
 }
 
 export type MoveEstimateErrors =

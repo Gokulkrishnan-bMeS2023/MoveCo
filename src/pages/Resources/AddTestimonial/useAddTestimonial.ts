@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { toaster } from "../../../components/ui/toaster";
 import type { TestimonialFormValues, TestimonialErrors } from "./DTOs";
 import { validateTestimonial } from "./validation";
@@ -13,8 +14,11 @@ const initialState: TestimonialFormValues = {
 };
 
 export const useAddTestimonial = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const [values, setValues] = useState<TestimonialFormValues>(initialState);
   const [errors, setErrors] = useState<TestimonialErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (field: keyof TestimonialFormValues, value: string) => {
     setValues((prev) => ({ ...prev, [field]: value }));
@@ -23,29 +27,47 @@ export const useAddTestimonial = () => {
 
   const handleSubmit = async () => {
     const newErrors = validateTestimonial(values);
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      toaster.create({
+        title: "Please fix the errors before submitting.",
+        type: "error",
+      });
       return;
     }
 
-    const payload = {
-      FirstName: values.firstName,
-      LastName: values.lastName,
-      MoveDate: values.moveDate,
-      Email: values.email,
-      Comments: values.comments,
-      IsActive: true,
-    } as any;
+    if (!executeRecaptcha) {
+      toaster.create({
+        title: "reCAPTCHA not ready. Please try again.",
+        type: "error",
+      });
+      return;
+    }
+
     try {
+      setIsSubmitting(true);
+
+      const recaptchaToken = await executeRecaptcha("add_testimonial");
+
+      const payload = {
+        FirstName: values.firstName,
+        LastName: values.lastName,
+        MoveDate: values.moveDate,
+        Email: values.email,
+        Comments: values.comments,
+        IsActive: true,
+        recaptchaToken,
+      } as any;
+
       const response = await postTestimonial(payload);
       toaster.create({
-        title:
-          response?.data?.message ||
-          "Thank you for your message!",
-          description: "It has been sent",
+        title: response?.data?.message || "Thank you for your message!",
+        description: "It has been sent",
         type: "success",
       });
-        setValues(initialState);
+      setValues(initialState);
+      setErrors({});
     } catch (error: any) {
       toaster.create({
         title:
@@ -53,8 +75,17 @@ export const useAddTestimonial = () => {
           "Submission failed. Please try again.",
         type: "error",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  return { values, errors, handleChange, handleSubmit, setValues };
+  return {
+    values,
+    errors,
+    isSubmitting,
+    handleChange,
+    handleSubmit,
+    setValues,
+  };
 };

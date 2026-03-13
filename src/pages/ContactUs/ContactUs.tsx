@@ -13,7 +13,7 @@ import ContactCard from "./ContactCard";
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import RecaptchaWrapper from "../../utils/RecaptchaWrapper";
 
 const SendEmailForm = React.lazy(() => import("./SendEmailForm"));
 const FriendForm = React.lazy(() => import("./FriendForm"));
@@ -33,128 +33,116 @@ const ContactUsPage = () => {
   }, [location]);
 
   return (
-    <GoogleReCaptchaProvider
-      reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-      scriptProps={{
-        async: false,
-        defer: false,
-        appendTo: "head",
-        nonce: undefined,
-      }}
-    >
-      <Container>
-        <HeroBanner bgImage={images.contact} title="Contact Us" />
-        <Box pt="sectionTop">
-          <Flex
-            direction={{ base: "column", lg: "row" }}
-            align="center"
-            justify="space-between"
-            gap={{ base: 4, lg: 10 }}
-            mb={{ base: 4, lg: 6 }}
-          >
-            <Box width={{ base: "100%", lg: "45%" }}>
-              <Heading
-                as="h1"
-                fontWeight="normal"
-                textAlign={{ base: "center", lg: "left" }}
-              >
-                Our{" "}
-                <Text as="span" color="brand.primary">
-                  Offices
-                </Text>
-              </Heading>
-            </Box>
-            <Box maxW={{ lg: "45%" }}>
-              <Text
-                textStyle="size-2xl"
-                textAlign={{ base: "center", lg: "right" }}
-              >
-                Visit us at any of our convenient locations across Texas.
-              </Text>
-            </Box>
-          </Flex>
-
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
-            <ContactCard
-              city="Dallas"
-              address="1439 Crescent Ave, Lewisville, TX-75057"
-              office="972-250-1100"
-              tollFree="800-590-0928"
-            />
-            <ContactCard city="Houston" office="281-825-5544" />
-            <ContactCard city="Austin" office="512-366-7901" />
-          </SimpleGrid>
-        </Box>
-        <Box pt="sectionTop">
-          <Box maxW={{ lg: "45%" }} mb={{ base: 4, lg: 6 }}>
+    <Container>
+      <HeroBanner bgImage={images.contact} title="Contact Us" />
+      <Box pt="sectionTop">
+        <Flex
+          direction={{ base: "column", lg: "row" }}
+          align="center"
+          justify="space-between"
+          gap={{ base: 4, lg: 10 }}
+          mb={{ base: 4, lg: 6 }}
+        >
+          <Box width={{ base: "100%", lg: "45%" }}>
             <Heading
               as="h1"
               fontWeight="normal"
-              textAlign={{ base: "center", md: "left" }}
+              textAlign={{ base: "center", lg: "left" }}
             >
-              Visit Our{" "}
+              Our{" "}
               <Text as="span" color="brand.primary">
-                Main Office
+                Offices
               </Text>
             </Heading>
+          </Box>
+          <Box maxW={{ lg: "45%" }}>
             <Text
               textStyle="size-2xl"
-              textAlign={{ base: "center", md: "left" }}
+              textAlign={{ base: "center", lg: "right" }}
             >
-              Located in Lewisville, Texas
+              Visit us at any of our convenient locations across Texas.
             </Text>
           </Box>
+        </Flex>
 
-          <Card.Root variant="elevated" overflow="hidden">
-            <iframe
-              title="MoveCo.net LLC Location"
-              src="https://www.google.com/maps?q=MoveCo.net+LLC,+1439+Crescent+Ave,+Lewisville,+TX+75057&output=embed"
-              width="100%"
-              height="450"
-              style={{ border: 0, display: "block" }}
-              loading="lazy"
-            />
-          </Card.Root>
-        </Box>
-        <Box pt="sectionTop">
-          <Flex
-            direction={{ base: "column", md: "row" }}
-            align={{ base: "flex-start", md: "center" }}
-            justify="space-between"
-            gap={{ base: 4, md: 10 }}
-            mb={{ base: 4, lg: 6 }}
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
+          <ContactCard
+            city="Dallas"
+            address="1439 Crescent Ave, Lewisville, TX-75057"
+            office="972-250-1100"
+            tollFree="800-590-0928"
+          />
+          <ContactCard city="Houston" office="281-825-5544" />
+          <ContactCard city="Austin" office="512-366-7901" />
+        </SimpleGrid>
+      </Box>
+      <Box pt="sectionTop">
+        <Box maxW={{ lg: "45%" }} mb={{ base: 4, lg: 6 }}>
+          <Heading
+            as="h1"
+            fontWeight="normal"
+            textAlign={{ base: "center", md: "left" }}
           >
-            <Box
-              width={{ base: "100%", lg: "45%" }}
-              textAlign={{ base: "center", md: "left" }}
-            >
-              <Heading as="h1" fontWeight="normal">
-                Send Us a{" "}
-                <Text as="span" color="brand.primary">
-                  Message
-                </Text>
-              </Heading>
-            </Box>
-            <Box width={{ base: "100%", lg: "35%" }}>
-              <Text
-                textStyle="size-2xl"
-                textAlign={{ base: "center", md: "right" }}
-              >
-                Fill out the form below and we will get back to you as soon as
-                possible.
-              </Text>
-            </Box>
-          </Flex>
+            Visit Our{" "}
+            <Text as="span" color="brand.primary">
+              Main Office
+            </Text>
+          </Heading>
+          <Text textStyle="size-2xl" textAlign={{ base: "center", md: "left" }}>
+            Located in Lewisville, Texas
+          </Text>
+        </Box>
 
+        <Card.Root variant="elevated" overflow="hidden">
+          <iframe
+            title="MoveCo.net LLC Location"
+            src="https://www.google.com/maps?q=MoveCo.net+LLC,+1439+Crescent+Ave,+Lewisville,+TX+75057&output=embed"
+            width="100%"
+            height="450"
+            style={{ border: 0, display: "block" }}
+            loading="lazy"
+          />
+        </Card.Root>
+      </Box>
+      <Box pt="sectionTop">
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          align={{ base: "flex-start", md: "center" }}
+          justify="space-between"
+          gap={{ base: 4, md: 10 }}
+          mb={{ base: 4, lg: 6 }}
+        >
+          <Box
+            width={{ base: "100%", lg: "45%" }}
+            textAlign={{ base: "center", md: "left" }}
+          >
+            <Heading as="h1" fontWeight="normal">
+              Send Us a{" "}
+              <Text as="span" color="brand.primary">
+                Message
+              </Text>
+            </Heading>
+          </Box>
+          <Box width={{ base: "100%", lg: "35%" }}>
+            <Text
+              textStyle="size-2xl"
+              textAlign={{ base: "center", md: "right" }}
+            >
+              Fill out the form below and we will get back to you as soon as
+              possible.
+            </Text>
+          </Box>
+        </Flex>
+        <RecaptchaWrapper>
           <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 6, md: 8 }}>
             <SendEmailForm />
             <Box id="friend-form">
               <FriendForm />
             </Box>
           </SimpleGrid>
-        </Box>
-      </Container>
-    </GoogleReCaptchaProvider>
+        </RecaptchaWrapper>
+      </Box>
+    </Container>
   );
 };
 

@@ -1,6 +1,7 @@
 import { Box, Heading, Text, Flex, Container } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import JobApplicationForm from "./Jobapplicationform";
+import RecaptchaWrapper from "../../../utils/RecaptchaWrapper";
 
 const JobApplication = () => {
   const navigate = useNavigate();
@@ -8,7 +9,11 @@ const JobApplication = () => {
     <Container>
       <Flex direction="column" align="flex-start" gap={4}>
         <Box maxW="800px" w="100%">
-          <Heading as="h1" fontWeight="normal" textAlign={{base: "center",lg:"left"}}>
+          <Heading
+            as="h1"
+            fontWeight="normal"
+            textAlign={{ base: "center", lg: "left" }}
+          >
             Join the {""}
             <Text as="span" color="brand.primary">
               MoveCo
@@ -17,7 +22,7 @@ const JobApplication = () => {
           </Heading>
         </Box>
         <Box w="100%">
-          <Text textStyle="size-lg" textAlign={{base: "center",lg:"left"}}>
+          <Text textStyle="size-lg" textAlign={{ base: "center", lg: "left" }}>
             All potential employees are evaluated without regard to race, color,
             religion, gender, national origin, age, marital or veteran status,
             the presence of a non-job related handicap or any other legally
@@ -36,7 +41,9 @@ const JobApplication = () => {
           </Text>
         </Box>
       </Flex>
-      <JobApplicationForm />
+      <RecaptchaWrapper>
+        <JobApplicationForm />
+      </RecaptchaWrapper>
     </Container>
   );
 };

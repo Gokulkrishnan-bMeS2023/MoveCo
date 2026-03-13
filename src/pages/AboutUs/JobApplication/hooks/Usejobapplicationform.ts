@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3"; // ← add
 import type {
   StepOneDTO,
   StepOneErrors,
@@ -13,7 +14,9 @@ import { postJobApplication } from "../../../../api/jobApplicationService";
 import { toaster } from "../../../../components/ui/toaster";
 
 export const useJobApplicationForm = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha(); // ← add
   const [page, setPage] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false); // ← add
 
   const initialFormData: StepOneDTO = {
     PositionSought: "",
@@ -69,9 +72,10 @@ export const useJobApplicationForm = () => {
   };
 
   const [formData, setFormData] = useState<StepOneDTO>(initialFormData);
-  const [stepTwoData, setStepTwoData] = useState<StepTwoDTO>(initialStepTwoData);
-  const [stepThreeData, setStepThreeData] = useState<StepThreeDTO>(initialStepThreeData);
-
+  const [stepTwoData, setStepTwoData] =
+    useState<StepTwoDTO>(initialStepTwoData);
+  const [stepThreeData, setStepThreeData] =
+    useState<StepThreeDTO>(initialStepThreeData);
   const [errors, setErrors] = useState<StepOneErrors>({});
   const [stepTwoErrors, setStepTwoErrors] = useState<StepTwoErrors>({});
 
@@ -173,101 +177,140 @@ export const useJobApplicationForm = () => {
   };
 
   const nextPage = async () => {
+    // ── Step 1 validation ──
     if (page === 0) {
       const validationErrors = validateStepOne(formData);
       if (Object.keys(validationErrors).length > 0) {
         setErrors(validationErrors);
+        toaster.create({
+          title: "Please fix the errors before continuing.",
+          type: "error",
+        });
         return;
       }
       setErrors({});
     }
 
+    // ── Step 2 validation ──
     if (page === 1) {
       const stepTwoValidationErrors = validateStepTwo(stepTwoData);
       if (Object.keys(stepTwoValidationErrors).length > 0) {
         setStepTwoErrors(stepTwoValidationErrors);
+        toaster.create({
+          title: "Please fix the errors before continuing.",
+          type: "error",
+        });
         return;
       }
       setStepTwoErrors({});
     }
 
+    // ── Step 3 — final submission ──
     if (page === 2) {
       if (!step3Ref.current?.validate()) return;
 
-      const formDataPayload = new FormData();
-
-      // Step 1
-      formDataPayload.append("positionSought", formData.PositionSought);
-      formDataPayload.append("learnPosition", formData.Howdidyoulearnabouttheposition);
-      formDataPayload.append("firstName", formData.firstName);
-      formDataPayload.append("lastName", formData.lastName);
-      formDataPayload.append("emailAddress", formData.email);
-      formDataPayload.append("homePhone", formData.HomePhone);
-      formDataPayload.append("cellPhone", formData.CellPhone);
-      formDataPayload.append("address", formData.Address);
-      formDataPayload.append("city", formData.City);
-      formDataPayload.append("state", formData.State);
-      formDataPayload.append("zipCode", formData.ZipCode);
-      formDataPayload.append("socialSecurityNumber", formData.SocialSecurityNumber);
-      formDataPayload.append("availableforWork", formData.Onwhatdatewouldyoubeavailableforwork);
-      formDataPayload.append("isUSCitizen", formData.citizen);
-      formDataPayload.append("convictedofaFelony", formData.felony);
-      formDataPayload.append("involuntarilyTerminated", formData.terminated);
-      formDataPayload.append("willSubmitPreEmploymentDrugScrnTest", formData.drugTest);
-
-      // Education
-      formDataPayload.append("schoolname", stepTwoData.education.schoolName);
-      formDataPayload.append("location", stepTwoData.education.location);
-      formDataPayload.append("years", stepTwoData.education.years);
-      formDataPayload.append("degreeReceived", stepTwoData.education.degree);
-      formDataPayload.append("major", stepTwoData.education.major);
-
-      // Experience 1
-      const exp1 = stepTwoData.experiences[0];
-      if (exp1) {
-        formDataPayload.append("employer", exp1.employer);
-        formDataPayload.append("jobTitle", exp1.jobTitle);
-        formDataPayload.append("datesEmployedFrom", exp1.from);
-        formDataPayload.append("datesEmployedTo", exp1.to);
-        formDataPayload.append("priorPositions", exp1.priorPosition);
-        formDataPayload.append("startingSalary", exp1.startSalary);
-        formDataPayload.append("endingSalary", exp1.endSalary);
-        formDataPayload.append("supervisorName", exp1.supervisorName);
-        formDataPayload.append("supervisorPhone", exp1.supervisorPhone);
-        formDataPayload.append("reasonforLeaving", exp1.reason);
-        formDataPayload.append("dutiesPerformed", exp1.duties);
-      }
-
-      const exp2 = stepTwoData.experiences[1];
-      if (exp2) {
-        formDataPayload.append("secondEmployer", exp2.employer);
-        formDataPayload.append("secondJobTitle", exp2.jobTitle);
-        formDataPayload.append("secondDatesEmployedFrom", exp2.from);
-        formDataPayload.append("secondDatesEmployedTo", exp2.to);
-        formDataPayload.append("secondPriorPositions", exp2.priorPosition);
-        formDataPayload.append("secondStartingSalary", exp2.startSalary);
-        formDataPayload.append("secondEndingSalary", exp2.endSalary);
-        formDataPayload.append("secondSupervisorName", exp2.supervisorName);
-        formDataPayload.append("secondSupervisorPhone", exp2.supervisorPhone);
-        formDataPayload.append("secondReasonforLeaving", exp2.reason);
-        formDataPayload.append("secondDutiesPerformed", exp2.duties);
-      }
-
-      if (stepThreeData.photoFile) {
-        formDataPayload.append("photoFile", stepThreeData.photoFile);
+      // ← check recaptcha ready
+      if (!executeRecaptcha) {
+        toaster.create({
+          title: "reCAPTCHA not ready. Please try again.",
+          type: "error",
+        });
+        return;
       }
 
       try {
-        const response = await postJobApplication(formDataPayload);
+        setIsSubmitting(true);
 
+        // ← get token immediately before submission
+        const recaptchaToken = await executeRecaptcha("job_application");
+
+        const formDataPayload = new FormData();
+
+        // Step 1
+        formDataPayload.append("positionSought", formData.PositionSought);
+        formDataPayload.append(
+          "learnPosition",
+          formData.Howdidyoulearnabouttheposition,
+        );
+        formDataPayload.append("firstName", formData.firstName);
+        formDataPayload.append("lastName", formData.lastName);
+        formDataPayload.append("emailAddress", formData.email);
+        formDataPayload.append("homePhone", formData.HomePhone);
+        formDataPayload.append("cellPhone", formData.CellPhone);
+        formDataPayload.append("address", formData.Address);
+        formDataPayload.append("city", formData.City);
+        formDataPayload.append("state", formData.State);
+        formDataPayload.append("zipCode", formData.ZipCode);
+        formDataPayload.append(
+          "socialSecurityNumber",
+          formData.SocialSecurityNumber,
+        );
+        formDataPayload.append(
+          "availableforWork",
+          formData.Onwhatdatewouldyoubeavailableforwork,
+        );
+        formDataPayload.append("isUSCitizen", formData.citizen);
+        formDataPayload.append("convictedofaFelony", formData.felony);
+        formDataPayload.append("involuntarilyTerminated", formData.terminated);
+        formDataPayload.append(
+          "willSubmitPreEmploymentDrugScrnTest",
+          formData.drugTest,
+        );
+
+        // Education
+        formDataPayload.append("schoolname", stepTwoData.education.schoolName);
+        formDataPayload.append("location", stepTwoData.education.location);
+        formDataPayload.append("years", stepTwoData.education.years);
+        formDataPayload.append("degreeReceived", stepTwoData.education.degree);
+        formDataPayload.append("major", stepTwoData.education.major);
+
+        // Experience 1
+        const exp1 = stepTwoData.experiences[0];
+        if (exp1) {
+          formDataPayload.append("employer", exp1.employer);
+          formDataPayload.append("jobTitle", exp1.jobTitle);
+          formDataPayload.append("datesEmployedFrom", exp1.from);
+          formDataPayload.append("datesEmployedTo", exp1.to);
+          formDataPayload.append("priorPositions", exp1.priorPosition);
+          formDataPayload.append("startingSalary", exp1.startSalary);
+          formDataPayload.append("endingSalary", exp1.endSalary);
+          formDataPayload.append("supervisorName", exp1.supervisorName);
+          formDataPayload.append("supervisorPhone", exp1.supervisorPhone);
+          formDataPayload.append("reasonforLeaving", exp1.reason);
+          formDataPayload.append("dutiesPerformed", exp1.duties);
+        }
+
+        // Experience 2
+        const exp2 = stepTwoData.experiences[1];
+        if (exp2) {
+          formDataPayload.append("secondEmployer", exp2.employer);
+          formDataPayload.append("secondJobTitle", exp2.jobTitle);
+          formDataPayload.append("secondDatesEmployedFrom", exp2.from);
+          formDataPayload.append("secondDatesEmployedTo", exp2.to);
+          formDataPayload.append("secondPriorPositions", exp2.priorPosition);
+          formDataPayload.append("secondStartingSalary", exp2.startSalary);
+          formDataPayload.append("secondEndingSalary", exp2.endSalary);
+          formDataPayload.append("secondSupervisorName", exp2.supervisorName);
+          formDataPayload.append("secondSupervisorPhone", exp2.supervisorPhone);
+          formDataPayload.append("secondReasonforLeaving", exp2.reason);
+          formDataPayload.append("secondDutiesPerformed", exp2.duties);
+        }
+
+        // Photo
+        if (stepThreeData.photoFile) {
+          formDataPayload.append("photoFile", stepThreeData.photoFile);
+        }
+
+        // ← append recaptcha token
+        formDataPayload.append("recaptchaToken", recaptchaToken);
+
+        const response = await postJobApplication(formDataPayload);
         toaster.create({
           title:
             response?.data?.message || "Application submitted successfully!",
           type: "success",
         });
-
         resetForm();
-
       } catch (error: any) {
         toaster.create({
           title:
@@ -275,6 +318,8 @@ export const useJobApplicationForm = () => {
             "Submission failed. Please try again.",
           type: "error",
         });
+      } finally {
+        setIsSubmitting(false); // ← add
       }
 
       return;
@@ -293,6 +338,7 @@ export const useJobApplicationForm = () => {
     stepTwoErrors,
     stepThreeData,
     step3Ref,
+    isSubmitting, // ← expose
     handleChange,
     handleEducationChange,
     handleExperienceChange,

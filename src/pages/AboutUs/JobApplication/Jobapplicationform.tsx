@@ -4,7 +4,6 @@ import Step1PersonalInfo from "./steps/Step1PersonalInfo";
 import Step2Address from "./steps/Step2Address";
 import Step3Experience from "./steps/Step3Experience";
 
-
 const steps = ["Personal Info", "Education", "Review"];
 
 const JobApplicationForm = () => {
@@ -16,6 +15,7 @@ const JobApplicationForm = () => {
     stepTwoErrors,
     stepThreeData,
     step3Ref,
+    isSubmitting,
     handleChange,
     handleEducationChange,
     handleExperienceChange,
@@ -79,7 +79,9 @@ const JobApplicationForm = () => {
                     w="40px"
                     h="40px"
                     borderRadius="full"
-                    bg={isCompleted || isActive ? "brand.primary" : "brand.white"}
+                    bg={
+                      isCompleted || isActive ? "brand.primary" : "brand.white"
+                    }
                     border="2px solid"
                     borderColor={
                       isCompleted || isActive ? "brand.primary" : "brand.gray"
@@ -87,7 +89,9 @@ const JobApplicationForm = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    color={isCompleted || isActive ? "brand.white" : "brand.gray"}
+                    color={
+                      isCompleted || isActive ? "brand.white" : "brand.gray"
+                    }
                     fontWeight="bold"
                     textStyle="sm"
                     transition="all 0.3s ease"
@@ -169,8 +173,9 @@ const JobApplicationForm = () => {
           color="white"
           _hover={{ bg: "brand.primary" }}
           onClick={nextPage}
+          disabled={isSubmitting}
         >
-          {page === 2 ? "Send" : "Next"}
+          {isSubmitting ? "Submitting..." : page === 2 ? "Submit" : "Next"}
         </Button>
       </Stack>
     </>
@@ -178,4 +183,3 @@ const JobApplicationForm = () => {
 };
 
 export default JobApplicationForm;
-
