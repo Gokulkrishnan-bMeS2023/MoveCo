@@ -38,3 +38,8 @@ export interface Step1PersonalInfoProps {
   errors: PersonalInfoErrors;
   handleChange: (field: keyof PersonalInfoForm, value: string) => void;
 }
+
+export const YES_NO_OPTIONS = [
+  { label: "Yes", value: "yes" },
+  { label: "No", value: "no" },
+];

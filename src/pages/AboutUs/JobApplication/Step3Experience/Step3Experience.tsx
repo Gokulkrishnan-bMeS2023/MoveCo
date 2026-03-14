@@ -1,11 +1,11 @@
 import { Stack, Input, Field, Heading, Text, Box } from "@chakra-ui/react";
 import { forwardRef, useImperativeHandle, useState, useRef } from "react";
-import CheckboxField from "../../../../../components/common/CheckBox/Checkbox";
-import { validatePhoto } from "../../validation/validation";
+import CheckboxField from "../../../../components/common/CheckBox/Checkbox";
+import { validatePhoto } from "../validation";
 import type {
   Step3ExperienceProps,
   Step3ExperienceRef,
-} from "./types";
+} from "./DTOs";
 
 
 const Step3Experience = forwardRef<Step3ExperienceRef, Step3ExperienceProps>(

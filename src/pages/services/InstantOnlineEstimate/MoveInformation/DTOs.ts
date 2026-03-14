@@ -1,8 +1,8 @@
-import type { SelectOption } from "../../../../../utils/selectOptionUtils";
+import type { SelectOption } from "../../../../utils/selectOptionUtils";
 import type {
   MoveInformationDTO,
   MoveInformationErrors,
-} from "../../types/DTOs";
+} from "../DTOs";
 
 export interface MoveInformationState {
   values: MoveInformationDTO;

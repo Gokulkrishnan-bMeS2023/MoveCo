@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { validateInventory } from "../../validation/validation";
-import { getQuote } from "../../../../../api/quotesServices";
+import { validateInventory } from "../validation";
+import { getQuote } from "../../../../api/quotesServices";
 import {
   postOnlineEstimate,
   type QuoteRequestDTO,
-} from "../../../../../api/onlineEstimateService";
-import { toaster } from "../../../../../components/ui/toaster"; // ← add
+} from "../../../../api/onlineEstimateService";
+import { toaster } from "../../../../components/ui/toaster"; 
 import type {
   Quantities,
   InventoryErrors,
   MoveInformationDTO,
   InventorySection,
-} from "./types";
+} from "./DTOs";
 
 export const useInventory = () => {
   const navigate = useNavigate();

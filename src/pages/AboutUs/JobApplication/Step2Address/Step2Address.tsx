@@ -8,11 +8,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import InputField from "../../../../../components/common/Input/Input";
-import DateInput from "../../../../../components/common/DateInput/DateInput";
-import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
-import Button from "../../../../../components/common/Button/Button";
-import type { Step2AddressProps } from "./types";
+import InputField from "../../../../components/common/Input/Input";
+import DateInput from "../../../../components/common/DateInput/DateInput";
+import PhoneField from "../../../../components/common/PhoneInput/PhoneInput";
+import Button from "../../../../components/common/Button/Button";
+import type { Step2AddressProps } from "./DTOs";
 
 const Step2Address: React.FC<Step2AddressProps> = ({
   education,

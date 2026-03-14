@@ -7,11 +7,11 @@ import {
   Stack,
   SimpleGrid,
 } from "@chakra-ui/react";
-import CardTemplate from "../../../../../pages/AboutUs/AboutUsComponents/CardTemplate";
-import CommonAccordion from "../../../../AboutUs/AboutUsComponents/CommonAccordion";
+import CardTemplate from "../../../AboutUs/AboutUsComponents/CardTemplate";
+import CommonAccordion from "../../../AboutUs/AboutUsComponents/CommonAccordion";
 import { quoteIncludesData, quoteInfoSections } from "./data";
-import Badge from "../../../../../components/common/Badge/Badge";
-import TableSection from "./components/TableSection"; 
+import Badge from "../../../../components/common/Badge/Badge";
+import TableSection from "./TableSection"; 
 
 const Confirmation = () => {
   return (

@@ -1,14 +1,13 @@
 import { use } from "react";
 import { Stack, SimpleGrid, Heading, Box } from "@chakra-ui/react";
-import InputField from "../../../../../components/common/Input/Input";
-import SelectField from "../../../../../components/common/Select/Select";
-import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
-import DateInput from "../../../../../components/common/DateInput/DateInput";
-import RadioField from "../../../../../components/common/Radio/Radio";
-import SSNField from "../../../../../components/common/SsnInput/SsnInput";
-import { YES_NO_OPTIONS } from "./constants";
-import type { Step1PersonalInfoProps } from "./types";
-import { jobApplicationStaticDataPromise } from "../../../../../lib/queries";
+import InputField from "../../../../components/common/Input/Input";
+import SelectField from "../../../../components/common/Select/Select";
+import PhoneField from "../../../../components/common/PhoneInput/PhoneInput";
+import DateInput from "../../../../components/common/DateInput/DateInput";
+import RadioField from "../../../../components/common/Radio/Radio";
+import SSNField from "../../../../components/common/SsnInput/SsnInput";
+import { YES_NO_OPTIONS, type Step1PersonalInfoProps } from "./DTOs";
+import { jobApplicationStaticDataPromise } from "../../../../lib/queries";
 
 const Step1PersonalInfo = ({
   formData,

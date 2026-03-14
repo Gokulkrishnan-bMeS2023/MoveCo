@@ -1,4 +1,4 @@
-import RecaptchaWrapper from "../../../../../utils/RecaptchaWrapper";
+import RecaptchaWrapper from "../../../../utils/RecaptchaWrapper";
 import InventoryContent from "./InventoryContent";
 
 const Inventory = () => {

@@ -1,4 +1,4 @@
-import type { InventorySection, MoveInformationDTO } from "../../types/DTOs";
+import type { InventorySection, MoveInformationDTO } from "../DTOs";
 export type Quantities = Record<string, number>;
 
 export interface InventoryErrors {

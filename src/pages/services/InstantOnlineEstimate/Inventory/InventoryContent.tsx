@@ -13,7 +13,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import Button from "../../../../../components/common/Button/Button";
+import Button from "../../../../components/common/Button/Button";
 import { useInventory } from "./useInventory";
 
 const InventoryContent = () => {

@@ -2,7 +2,7 @@ import type {
   EducationDTO,
   EmploymentExperienceDTO,
   EmploymentExperienceErrors,
-} from "../../types/DTOs";
+} from "../DTOs";
 
 export interface Step2AddressProps {
   education: EducationDTO;

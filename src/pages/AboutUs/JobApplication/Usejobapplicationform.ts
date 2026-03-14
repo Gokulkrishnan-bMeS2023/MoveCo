@@ -8,10 +8,10 @@ import type {
   StepThreeDTO,
   EmploymentExperienceDTO,
   EducationDTO,
-} from "../types/DTOs";
-import { validateStepOne, validateStepTwo } from "../validation/validation";
-import { postJobApplication } from "../../../../api/jobApplicationService";
-import { toaster } from "../../../../components/ui/toaster";
+} from "./DTOs";
+import { validateStepOne, validateStepTwo } from "./validation";
+import { postJobApplication } from "../../../api/jobApplicationService";
+import { toaster } from "../../../components/ui/toaster";
 
 export const useJobApplicationForm = () => {
   const { executeRecaptcha } = useGoogleReCaptcha(); // ← add

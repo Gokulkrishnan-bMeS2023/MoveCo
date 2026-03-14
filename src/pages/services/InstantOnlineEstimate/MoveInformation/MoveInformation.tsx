@@ -9,17 +9,17 @@ import {
   VStack,
   Flex,
 } from "@chakra-ui/react";
-import InputField from "../../../../../components/common/Input/Input";
-import Notes from "../../../../../components/common/Notes/Notes";
-import DateInput from "../../../../../components/common/DateInput/DateInput";
-import Button from "../../../../../components/common/Button/Button";
-import SelectField from "../../../../../components/common/Select/Select";
+import InputField from "../../../../components/common/Input/Input";
+import Notes from "../../../../components/common/Notes/Notes";
+import DateInput from "../../../../components/common/DateInput/DateInput";
+import Button from "../../../../components/common/Button/Button";
+import SelectField from "../../../../components/common/Select/Select";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { validateMoveInformation } from "../../validation/validation";
+import { validateMoveInformation } from "../validation";
 import { useEffect } from "react";
-import PhoneField from "../../../../../components/common/PhoneInput/PhoneInput";
-import type { MoveInformationDTO, MoveInformationErrors } from "./types";
-import { instantOnlineStaticDataPromise } from "../../../../../lib/queries";
+import PhoneField from "../../../../components/common/PhoneInput/PhoneInput";
+import type { MoveInformationDTO, MoveInformationErrors } from "./DTOs";
+import { instantOnlineStaticDataPromise } from "../../../../lib/queries";
 
 const InHomeMoveEstimate = () => {
   const [searchParams] = useSearchParams();
