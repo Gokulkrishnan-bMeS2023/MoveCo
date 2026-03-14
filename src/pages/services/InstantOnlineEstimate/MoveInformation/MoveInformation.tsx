@@ -1,4 +1,3 @@
-import { use, useState } from "react";
 import {
   Box,
   Container,
@@ -14,93 +13,22 @@ import Notes from "../../../../components/common/Notes/Notes";
 import DateInput from "../../../../components/common/DateInput/DateInput";
 import Button from "../../../../components/common/Button/Button";
 import SelectField from "../../../../components/common/Select/Select";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { validateMoveInformation } from "../validation";
-import { useEffect } from "react";
+import { useMoveInformationForm } from "./useMoveInformation";
 import PhoneField from "../../../../components/common/PhoneInput/PhoneInput";
-import type { MoveInformationDTO, MoveInformationErrors } from "./DTOs";
-import { instantOnlineStaticDataPromise } from "../../../../lib/queries";
 
 const InHomeMoveEstimate = () => {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const {
+    values,
+    errors,
+    handleChange,
+    handleSubmit,
     moveSizeOptions,
     timeOptions,
     stateOptions,
     stairsOptions,
     doorToTruckOptions,
     hearAboutOptions,
-  } = use(instantOnlineStaticDataPromise);
-
-  const [values, setValues] = useState<MoveInformationDTO>({
-    firstName: searchParams.get("firstName") || "",
-    lastName: searchParams.get("lastName") || "",
-    email: searchParams.get("email") || "",
-    phone: searchParams.get("phone") || "",
-    homePhone: "",
-    workPhone: "",
-    cellPhone: "",
-    moveDate: searchParams.get("moveDate") || "",
-    moveTime: timeOptions?.[0]?.value || "",
-    dropDate: "",
-    dropTime: timeOptions?.[0]?.value ?? "",
-    moveType: moveSizeOptions?.[0]?.value ?? "",
-    hearAbout: hearAboutOptions?.[0]?.value ?? "",
-    notes: "",
-    fromAddress: "",
-    fromApt: "",
-    fromCity: "",
-    fromState: stateOptions?.[0]?.value ?? "",
-    fromZipCode: "",
-    fromStairs: stairsOptions?.[0]?.value ?? "",
-    fromDistance: doorToTruckOptions?.[0]?.value ?? "",
-    toAddress: "",
-    toApt: "",
-    toCity: "",
-    toState: stateOptions?.[0]?.value ?? "",
-    toZipCode: "",
-    toStairs: stairsOptions?.[0]?.value ?? "",
-    toDistance: doorToTruckOptions?.[0]?.value ?? "",
-  });
-
-  const [errors, setErrors] = useState<MoveInformationErrors>({});
-
-  useEffect(() => {
-    const saved = sessionStorage.getItem("moveInfo");
-    if (saved) setValues(JSON.parse(saved));
-  }, []);
-
-  const handleChange = (field: keyof MoveInformationDTO, value: string) => {
-    const updated = { ...values, [field]: value };
-    setValues(updated);
-    sessionStorage.setItem("moveInfo", JSON.stringify(updated));
-
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: "" }));
-    }
-  };
-
-  const handleSubmit = () => {
-    const newErrors = validateMoveInformation(values);
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-    setErrors({});
-
-    const params = new URLSearchParams();
-    (Object.keys(values) as Array<keyof MoveInformationDTO>).forEach((key) => {
-      if (values[key]) {
-        params.set(key, values[key]);
-      }
-    });
-
-    navigate(`/inventory?${params.toString()}`, {
-      state: { fromApp: true },
-    });
-  };
-
+  } = useMoveInformationForm();
   return (
     <Container>
       <Box>
@@ -131,7 +59,6 @@ const InHomeMoveEstimate = () => {
         </Flex>
       </Box>
       <Stack gap={8}>
-        {/* ================= CONTACT INFO ================= */}
         <Box
           bg="white"
           p={{ base: 6, md: 8 }}

@@ -1,5 +1,5 @@
-import { use, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { use, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { postInHomeEstimate } from "../../../api/inhomeMoveEstimateService";
 import type { MoveEstimateErrors, MoveEstimateFormValues } from "./DTOs";
@@ -8,15 +8,42 @@ import { toaster } from "../../../components/ui/toaster";
 import { inHomeStaticDataPromise } from "../../../lib/queries";
 
 export const useInHomeEstimateForm = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const { moveSizeOptions, timeOptions, hearAboutOptions, stateOptions } = use(
     inHomeStaticDataPromise,
   );
 
+  const query = useMemo(
+    () => Object.fromEntries(searchParams.entries()),
+    [searchParams],
+  );
+
   const getInitialState = (): MoveEstimateFormValues => ({
+    visitDate: query.date ?? "",
+    visitTime: timeOptions?.[0]?.value ?? "",
+    moveDate: query.date ?? "",
+    moveSize: moveSizeOptions?.[0]?.value ?? "",
+    hearAbout: hearAboutOptions?.[0]?.value ?? "",
+    firstName: query.firstName ?? "",
+    lastName: query.lastName ?? "",
+    email: query.email ?? "",
+    homePhone: query.phone ?? "",
+    cellPhone: "",
+    workPhone: "",
+    faxPhone: "",
+    fromAddress: "",
+    apt: "",
+    city: "",
+    state: stateOptions?.[0]?.value ?? "",
+    zipCode: "",
+    notes: "",
+    recaptchaToken: "",
+  });
+
+  // Empty state (form reset)
+  const getEmptyState = (): MoveEstimateFormValues => ({
     visitDate: "",
     visitTime: timeOptions?.[0]?.value ?? "",
     moveDate: "",
@@ -37,35 +64,25 @@ export const useInHomeEstimateForm = () => {
     notes: "",
     recaptchaToken: "",
   });
-  const [values, setValues] = useState<MoveEstimateFormValues>(() => {
-    const data = location.state as any;
-    const initialState = getInitialState();
 
-    if (!data) return initialState;
-    return {
-      ...initialState,
-      firstName: data.firstName || "",
-      lastName: data.lastName || "",
-      email: data.email || "",
-      homePhone: data.phoneNumber || "",
-      visitDate: data.date || "",
-      moveDate: data.date || "",
-    };
-  });
+  const [values, setValues] = useState<MoveEstimateFormValues>(() =>
+    getInitialState(),
+  );
 
   const [errors, setErrors] = useState<MoveEstimateErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    if (location.state) {
-      navigate(location.pathname, { replace: true, state: null });
-    }
-  }, [location.pathname, navigate]);
-
   const handleChange = (field: keyof MoveEstimateFormValues, value: string) => {
-    setValues((prev) => ({ ...prev, [field]: value }));
+    setValues((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+
     if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: "" }));
+      setErrors((prev) => ({
+        ...prev,
+        [field]: "",
+      }));
     }
   };
 
@@ -91,7 +108,9 @@ export const useInHomeEstimateForm = () => {
 
     try {
       setIsSubmitting(true);
+
       const recaptchaToken = await executeRecaptcha("inhome_estimate");
+
       const payload = {
         inHomeEstimateDate: values.visitDate,
         inHomeEstimateTimeRange: values.visitTime,
@@ -115,14 +134,18 @@ export const useInHomeEstimateForm = () => {
       };
 
       const response = await postInHomeEstimate(payload);
+
       toaster.create({
         title:
           response?.data?.message ||
-          "Please call the office at 972-250-1100 to give a deposit and confirm the schedule. Thank You!",
+          "Please call the office at 972-250-1100 to confirm your schedule.",
         type: "success",
       });
-      setValues(getInitialState());
+
+      // Reset form properly
+      setValues(getEmptyState());
       setErrors({});
+      setSearchParams({});
     } catch (error: any) {
       toaster.create({
         title:

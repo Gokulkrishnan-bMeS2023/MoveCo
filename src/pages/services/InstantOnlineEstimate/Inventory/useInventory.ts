@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { validateInventory } from "../validation";
 import { getQuote } from "../../../../api/quotesServices";
@@ -7,7 +7,7 @@ import {
   postOnlineEstimate,
   type QuoteRequestDTO,
 } from "../../../../api/onlineEstimateService";
-import { toaster } from "../../../../components/ui/toaster"; 
+import { toaster } from "../../../../components/ui/toaster";
 import type {
   Quantities,
   InventoryErrors,
@@ -17,8 +17,8 @@ import type {
 
 export const useInventory = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { executeRecaptcha } = useGoogleReCaptcha();
-
   const [quantities, setQuantities] = useState<Quantities>({});
   const [openItems, setOpenItems] = useState<string[]>([]);
   const [errors, setErrors] = useState<InventoryErrors>({});
@@ -26,7 +26,7 @@ export const useInventory = () => {
     InventorySection[]
   >([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false); // ← add
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [values, setValues] = useState<MoveInformationDTO>({
     firstName: "",
     lastName: "",
@@ -59,9 +59,13 @@ export const useInventory = () => {
   });
 
   useEffect(() => {
-    const saved = sessionStorage.getItem("moveInfo");
-    if (saved) setValues(JSON.parse(saved));
-  }, []);
+    const params = Object.fromEntries(searchParams.entries());
+
+    setValues((prev) => ({
+      ...prev,
+      ...params,
+    }));
+  }, [searchParams]);
 
   useEffect(() => {
     const fetchInventory = async () => {
@@ -70,6 +74,7 @@ export const useInventory = () => {
         setInventorySections(response.data || []);
       } catch (error) {
         console.error("Failed to fetch inventory sections:", error);
+
         toaster.create({
           title: "Failed to load inventory. Please refresh.",
           type: "error",
@@ -78,30 +83,26 @@ export const useInventory = () => {
         setIsLoading(false);
       }
     };
+
     fetchInventory();
   }, []);
 
-  useEffect(() => {
-    const saved = sessionStorage.getItem("inventory");
-    if (saved) setQuantities(JSON.parse(saved));
-  }, []);
-
-  const saveQuantities = (updated: Quantities) => {
-    setQuantities(updated);
-    sessionStorage.setItem("inventory", JSON.stringify(updated));
-  };
-
   const increase = (inventoryID: number) => {
     const key = String(inventoryID);
-    saveQuantities({ ...quantities, [key]: (quantities[key] || 0) + 1 });
+
+    setQuantities((prev) => ({
+      ...prev,
+      [key]: (prev[key] || 0) + 1,
+    }));
   };
 
   const decrease = (inventoryID: number) => {
     const key = String(inventoryID);
-    saveQuantities({
-      ...quantities,
-      [key]: Math.max((quantities[key] || 0) - 1, 0),
-    });
+
+    setQuantities((prev) => ({
+      ...prev,
+      [key]: Math.max((prev[key] || 0) - 1, 0),
+    }));
   };
 
   const handleCollapseAll = () => setOpenItems([]);
@@ -114,25 +115,26 @@ export const useInventory = () => {
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+
       toaster.create({
         title: "Please add at least one item to your inventory.",
         type: "error",
       });
+
       return;
     }
-
-    if (!values) return;
 
     if (!executeRecaptcha) {
       toaster.create({
         title: "reCAPTCHA not ready. Please try again.",
         type: "error",
       });
+
       return;
     }
 
     try {
-      setIsSubmitting(true); // ← add
+      setIsSubmitting(true);
 
       const recaptchaToken = await executeRecaptcha("inventory_submit");
 
@@ -144,10 +146,12 @@ export const useInventory = () => {
         mobilePhone: values.cellPhone,
         workPhone: values.workPhone,
         homePhone: values.homePhone,
+
         moveDate: values.moveDate,
         moveTime: values.moveTime,
         dropDate: values.dropDate,
         dropTime: values.dropTime,
+
         fromAddress: values.fromAddress,
         address2: values.fromApt,
         city: values.fromCity,
@@ -155,6 +159,7 @@ export const useInventory = () => {
         zipCode: values.fromZipCode,
         flightOfStairs: values.fromStairs,
         doorToTruck: values.fromDistance,
+
         dropAddress: values.toAddress,
         dropAddress2: values.toApt,
         dropCity: values.toCity,
@@ -162,10 +167,13 @@ export const useInventory = () => {
         dropZipCode: values.toZipCode,
         dropFlightOfStairs: values.toStairs,
         dropDoorToTruck: values.toDistance,
+
         moveSize: values.moveType,
         heardBy: values.hearAbout,
         additionalInfo: values.notes,
+
         recaptchaToken,
+
         inventories: Object.entries(quantities)
           .filter(([, qty]) => qty >= 1)
           .map(([id, qty]) => ({
@@ -176,7 +184,6 @@ export const useInventory = () => {
 
       await postOnlineEstimate(finalPayload);
 
-      sessionStorage.clear();
       setQuantities({});
       setOpenItems([]);
       setErrors({});
@@ -189,6 +196,7 @@ export const useInventory = () => {
       navigate("/confirmation", { state: { fromApp: true } });
     } catch (error: any) {
       console.error(error);
+
       toaster.create({
         title:
           error?.response?.data?.message ||
@@ -196,7 +204,7 @@ export const useInventory = () => {
         type: "error",
       });
     } finally {
-      setIsSubmitting(false); // ← add
+      setIsSubmitting(false);
     }
   };
 
@@ -207,7 +215,7 @@ export const useInventory = () => {
     errors,
     inventorySections,
     isLoading,
-    isSubmitting, // ← add
+    isSubmitting,
     increase,
     decrease,
     handleCollapseAll,

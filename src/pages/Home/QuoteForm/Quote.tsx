@@ -1,12 +1,12 @@
-
 import { Heading, Text } from "@chakra-ui/react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { toaster } from "../../../components/ui/toaster"; // ← add
+import { toaster } from "../../../components/ui/toaster";
 import { postRequestCallback } from "../../../api/quotesServices";
 import QuoteFormFields from "../QuoteForm/QuoteFields";
 import { validateQuoteForm } from "../QuoteForm/validation";
+import { createQueryString } from "../../../utils/queryParams";
 import type { QuoteFormDTO } from "../QuoteForm/DTOs";
 
 interface QuoteFormProps {
@@ -15,51 +15,63 @@ interface QuoteFormProps {
 
 const GetQuote = ({ showEstimate = false }: QuoteFormProps) => {
   const navigate = useNavigate();
-  const location = useLocation() as any;
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const storageKey = showEstimate ? "instantQuoteForm" : "homeQuoteForm";
 
-  const [errors, setErrors] = useState<
-    Partial<Record<keyof QuoteFormDTO, string>>
-  >({});
+  const [errors, setErrors] =
+    useState<Partial<Record<keyof QuoteFormDTO, string>>>({});
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState<QuoteFormDTO>(() => {
     const saved = sessionStorage.getItem(storageKey);
+
     return saved
       ? JSON.parse(saved)
       : {
-          firstName: "",
-          lastName: "",
-          date: "",
-          phone: "",
-          email: "",
-          estimate: "Instant Online Estimate",
-        };
+        firstName: "",
+        lastName: "",
+        date: "",
+        phone: "",
+        email: "",
+        estimate: "Instant Online Estimate",
+      };
   });
 
-  useEffect(() => {
-    const handleBeforeUnload = () => sessionStorage.removeItem(storageKey);
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, [storageKey]);
-
+  // persist form
   useEffect(() => {
     sessionStorage.setItem(storageKey, JSON.stringify(formData));
   }, [formData, storageKey]);
 
+  // clear storage on refresh
   useEffect(() => {
-    if (location.state) {
-      navigate(location.pathname, { replace: true, state: null });
-    }
-  }, [location.pathname, navigate, location.state]);
+    const handleBeforeUnload = () => sessionStorage.removeItem(storageKey);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () =>
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [storageKey]);
 
   const handleChange = (field: keyof QuoteFormDTO, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }));
     }
+  };
+
+  const navigateWithQuery = (path: string, state?: any) => {
+    const query = createQueryString({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      date: formData.date,
+      phone: formData.phone,
+      email: formData.email,
+      estimate: formData.estimate ?? " ",
+    });
+
+    navigate(`${path}?${query}`, { state });
   };
 
   const handleSubmit = async () => {
@@ -67,28 +79,29 @@ const GetQuote = ({ showEstimate = false }: QuoteFormProps) => {
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+
       toaster.create({
         title: "Please fix the errors before submitting.",
         type: "error",
       });
+
       return;
     }
 
     setErrors({});
 
     if (!showEstimate || formData.estimate === "Instant Online Estimate") {
-      navigate("/move-information", {
-        state: { ...formData, fromApp: true },
+      navigateWithQuery("/move-information", {
+        fromApp: true,
       });
       return;
     }
 
     if (formData.estimate === "In-Home Move Estimate") {
-      navigate("/in-home-move-estimate", { state: formData });
+      navigateWithQuery("/in-home-move-estimate");
       return;
     }
 
-    // ← only "Request a call back" hits API
     if (formData.estimate === "Request a call back") {
       if (!executeRecaptcha) {
         toaster.create({
@@ -119,7 +132,6 @@ const GetQuote = ({ showEstimate = false }: QuoteFormProps) => {
           type: "success",
         });
 
-        // reset form after success
         setFormData({
           firstName: "",
           lastName: "",
@@ -129,8 +141,6 @@ const GetQuote = ({ showEstimate = false }: QuoteFormProps) => {
           estimate: "Instant Online Estimate",
         });
       } catch (error: any) {
-        console.error(error);
-        
         toaster.create({
           title:
             error?.response?.data?.message ||
