@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+import { use, useState, useRef, useEffect } from "react";
+import { jobApplicationStaticDataPromise } from "../../../lib/queries";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3"; // ← add
 import type {
   StepOneDTO,
@@ -13,10 +14,12 @@ import { validateStepOne, validateStepTwo } from "./validation";
 import { postJobApplication } from "../../../api/jobApplicationService";
 import { toaster } from "../../../components/ui/toaster";
 
+
 export const useJobApplicationForm = () => {
   const { executeRecaptcha } = useGoogleReCaptcha(); // ← add
   const [page, setPage] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false); // ← add
+  const { stateOptions } = use(jobApplicationStaticDataPromise);
 
   const initialFormData: StepOneDTO = {
     PositionSought: "",
@@ -28,7 +31,7 @@ export const useJobApplicationForm = () => {
     CellPhone: "",
     Address: "",
     City: "",
-    State: "",
+    State: stateOptions?.[0]?.value ?? "",
     ZipCode: "",
     SocialSecurityNumber: "",
     Onwhatdatewouldyoubeavailableforwork: "",
@@ -207,9 +210,15 @@ export const useJobApplicationForm = () => {
 
     // ── Step 3 — final submission ──
     if (page === 2) {
-      if (!step3Ref.current?.validate()) return;
+       if (!step3Ref.current?.validate()) {
+    toaster.create({
+      title: "Please fix the errors before submitting.",
+      type: "error",
+    });
+    return;
+  }
 
-      // ← check recaptcha ready
+      
       if (!executeRecaptcha) {
         toaster.create({
           title: "reCAPTCHA not ready. Please try again.",

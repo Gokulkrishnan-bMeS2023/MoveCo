@@ -356,6 +356,7 @@ const InHomeMoveEstimate = () => {
                 onValueChange={(e) => handleChange("toState", e.value[0])}
                 options={stateOptions}
               />
+              
               <InputField
                 label="Zip Code"
                 placeholder="Zip Code"
@@ -368,6 +369,7 @@ const InHomeMoveEstimate = () => {
                 errorMessage={errors.toZipCode}
                 isRequired
               />
+             
 
               <SelectField
                 label="How many flights of stairs at this address?"

@@ -79,7 +79,7 @@ export const quoteInfoSections = [
   {
     title: "Equipment & Operations",
     items: [
-      "Our trucks are well-maintained and equipped with high-quality pads, straps, and dollies. Our entire fleet is GPS tracked in real time.",
+      "Our trucks are well-maintained and equipped with high-quality pads, straps, and dollys. Our entire fleet is GPS tracked in real time.",
     ],
   },
   {

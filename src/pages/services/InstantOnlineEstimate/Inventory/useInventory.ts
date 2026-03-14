@@ -113,6 +113,8 @@ export const useInventory = () => {
   const handleSubmit = async () => {
     const validationErrors = validateInventory(quantities);
 
+    
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
 

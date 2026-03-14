@@ -1,6 +1,6 @@
 import { use, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-
+import { toaster } from "../../../../components/ui/toaster";
 import { validateMoveInformation } from "../validation";
 import type {
   MoveInformationDTO,
@@ -12,6 +12,7 @@ import { instantOnlineStaticDataPromise } from "../../../../lib/queries";
 export const useMoveInformationForm = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+ 
 
   const {
     moveSizeOptions,
@@ -86,12 +87,18 @@ export const useMoveInformationForm = () => {
   const handleSubmit = () => {
     const clientErrors = validateMoveInformation(values);
 
-    if (Object.keys(clientErrors).length > 0) {
-      setErrors(clientErrors);
-      return;
-    }
+      if (Object.keys(clientErrors).length > 0) {
+    setErrors(clientErrors);
 
-    setErrors({});
+    toaster.create({
+      title: "Please fix the errors before submitting.",
+      type: "error",
+    });
+
+    return;
+  }
+
+  setErrors({});
 
     const params = new URLSearchParams();
 
@@ -100,6 +107,8 @@ export const useMoveInformationForm = () => {
         params.set(key, value);
       }
     });
+
+    
 
     navigate(`/inventory?${params.toString()}`, {
       state: { fromApp: true },
