@@ -183,25 +183,7 @@ const AboutUs = () => {
               For more than 100 years experience, We move coast to coast under
               our own authority.
             </Text>
-            <Heading
-              as="h1"
-              fontWeight="normal"
-              maxW={{ lg: "45%" }}
-              textAlign={{ base: "center", lg: "left" }}
-            >
-              What Do You Get When you In{" "}
-              <Text as="span" color="brand.primary">
-                Choose Us?
-              </Text>
-            </Heading>
-            <Text
-              textStyle="size-2xl"
-              maxW={{ lg: "45%" }}
-              textAlign={{ base: "center", lg: "right" }}
-            >
-              For more than 100 years experience, We move coast to coast under
-              our own authority.
-            </Text>
+         
           </Flex>
           <CardTemplate data={features} />
         </Box>
@@ -248,25 +230,7 @@ const AboutUs = () => {
               For more than 100 years experience, We move coast to coast under
               our own authority.
             </Text>
-            <Heading
-              as="h1"
-              fontWeight="normal"
-              maxW={{ lg: "45%" }}
-              textAlign={{ base: "center", lg: "left" }}
-            >
-              Our{" "}
-              <Text as="span" color="brand.primary">
-                Standards
-              </Text>
-            </Heading>
-            <Text
-              textStyle="size-2xl"
-              maxW={{ lg: "45%" }}
-              textAlign={{ base: "center", lg: "right" }}
-            >
-              For more than 100 years experience, We move coast to coast under
-              our own authority.
-            </Text>
+          
           </Flex>
           <CardTemplate data={benefits} />
         </Box>
