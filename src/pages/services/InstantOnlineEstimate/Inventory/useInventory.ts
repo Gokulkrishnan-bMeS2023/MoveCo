@@ -113,8 +113,6 @@ export const useInventory = () => {
   const handleSubmit = async () => {
     const validationErrors = validateInventory(quantities);
 
-    
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
 
@@ -184,7 +182,9 @@ export const useInventory = () => {
           })),
       };
 
-      await postOnlineEstimate(finalPayload);
+      // API returns { quoteId: number }
+      const response = await postOnlineEstimate(finalPayload);
+      const quoteId = response.data.quoteId;
 
       setQuantities({});
       setOpenItems([]);
@@ -195,7 +195,8 @@ export const useInventory = () => {
         type: "success",
       });
 
-      navigate("/confirmation", { state: { fromApp: true } });
+      // Pass quoteId through navigation state so Confirmation can fetch real data
+      navigate("/confirmation", { state: { fromApp: true, quoteId } });
     } catch (error: any) {
       console.error(error);
 

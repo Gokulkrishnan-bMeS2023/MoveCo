@@ -11,122 +11,152 @@ import VideoGrid from "./VideoGrid/ClientReview";
 import { useClientSpeaks } from "./ReviewGrid/useClientSpeaks";
 import RecaptchaWrapper from "../../utils/RecaptchaWrapper";
 import { useVideoGrid } from "./VideoGrid/useClientReview";
+import FAQ from "./FAQ/FAQ";
+import ServiceSection from "./Servicesection/Servicesection";
 
 const Home = () => {
   const navigate = useNavigate();
   const { testimonials, isLoading } = useClientSpeaks(1, 3);
   const { videos, isVideoLoading, error } = useVideoGrid(1, 2);
   return (
-    <Container>
-      <Flex direction={{ base: "column", lg: "row" }} gap={6}>
-        <Box flex="7">
-          <MainBanner />
-        </Box>
-        <Box flex="3">
-          <Box>
-            <Image
-              src={QuoteFormImage}
-              alt="Quote Form"
-              w="100%"
-              rounded="2xl"
-            />
-            <Box bg="brand.white" p={6} mt={4} rounded="2xl">
-              <RecaptchaWrapper>
-                <GetQuote showEstimate={true} />
-              </RecaptchaWrapper>
+    <>
+      <Container>
+        <Flex direction={{ base: "column", lg: "row" }} gap={6}>
+          <Box flex="7">
+            <MainBanner />
+          </Box>
+          <Box flex="3">
+            <Box>
+              <Image
+                src={QuoteFormImage}
+                alt="Quote Form"
+                w="100%"
+                rounded="2xl"
+              />
+              <Box bg="brand.white" p={6} mt={4} rounded="2xl">
+                <RecaptchaWrapper>
+                  <GetQuote showEstimate={true} />
+                </RecaptchaWrapper>
+              </Box>
             </Box>
           </Box>
+        </Flex>
+        <Box pt="sectionTop">
+          <ServiceSection />
         </Box>
-      </Flex>
-      <Box pt="sectionTop">
-        <Flex justify="space-between" align="center" mb={4}>
-          <Badge label="Client Review" />
-          <Button
-            textStyle="size-xl"
-            rounded="full"
-            variant="outline"
-            onClick={() => navigate("/video-review")}
-            label="View all"
-            rightIcon={<LuArrowUpRight size={16} />}
+        <Box pt="sectionTop">
+          <Flex justify="space-between" align="center" mb={4}>
+            <Badge label="Client Review" />
+            <Button
+              textStyle="size-xl"
+              rounded="full"
+              variant="outline"
+              onClick={() => navigate("/video-review")}
+              label="View all"
+              rightIcon={<LuArrowUpRight size={16} />}
+            />
+          </Flex>
+          <Flex
+            direction={{ base: "column", lg: "row" }}
+            justify="space-between"
+            align="center"
+            mb={{ base: 4, lg: 6 }}
+            gap={{ base: 4, lg: 12 }}
+          >
+            <Heading
+              as="h1"
+              fontWeight="normal"
+              maxW={{ lg: "45%" }}
+              textAlign={{ base: "center", lg: "left" }}
+            >
+              What{" "}
+              <Text as="span" color="brand.primary">
+                Our Clients
+              </Text>{" "}
+              Think About Us?
+            </Heading>
+            <Text
+              textStyle={"size-2xl"}
+              textAlign={{ base: "center", lg: "right" }}
+              maxW={{ lg: "45%" }}
+            >
+              Watch Reviews from satisfied clients, sharing their experiences
+              and successes with our services.
+            </Text>
+          </Flex>
+          <VideoGrid
+            videos={videos}
+            isVideoLoading={isVideoLoading}
+            error={error}
           />
-        </Flex>
-        <Flex
-          direction={{ base: "column", lg: "row" }}
-          justify="space-between"
-          align="center"
-          mb={{ base: 4, lg: 6 }}
-          gap={{ base: 4, lg: 12 }}
-        >
-          <Heading
-            as="h1"
-            fontWeight="normal"
-            maxW={{ lg: "45%" }}
-            textAlign={{ base: "center", lg: "left" }}
+        </Box>
+        <Box pt="sectionTop">
+          <Flex justify="space-between" align="center" mb={4}>
+            <Badge label="Client Speaks" />
+            <Button
+              textStyle="size-xl"
+              rounded="full"
+              variant="outline"
+              onClick={() => navigate("/client-testimonial")}
+              label="View all"
+              rightIcon={<LuArrowUpRight size={16} />}
+            />
+          </Flex>
+          <Flex
+            direction={{ base: "column", lg: "row" }}
+            justify="space-between"
+            align="center"
+            mb={{ base: 4, lg: 6 }}
+            gap={{ base: 4, lg: 12 }}
           >
-            What{" "}
-            <Text as="span" color="brand.primary">
-              Our Clients
-            </Text>{" "}
-            Think About Us?
-          </Heading>
+            <Heading
+              as="h1"
+              fontWeight="normal"
+              maxW={{ lg: "45%" }}
+              textAlign={{ base: "center", lg: "left" }}
+            >
+              What{" "}
+              <Text as="span" color="brand.primary">
+                Our Clients
+              </Text>{" "}
+              Say About Us?
+            </Heading>
+            <Text
+              textStyle={"size-2xl"}
+              textAlign={{ base: "center", lg: "right" }}
+              maxW={{ lg: "45%" }}
+            >
+              Read feedback from clients who have experienced our professional
+              moving services.
+            </Text>
+          </Flex>
+          <ClientSpeaks testimonials={testimonials} isLoading={isLoading} />
+        </Box>
+      </Container>
+      <Box bg={"brand.white"}>
+        <Container>
+          <FAQ />
           <Text
-            textStyle={"size-2xl"}
-            textAlign={{ base: "center", lg: "right" }}
-            maxW={{ lg: "45%" }}
-          >
-            Watch Reviews from satisfied clients, sharing their experiences and
-            successes with our services.
-          </Text>
-        </Flex>
-        <VideoGrid
-          videos={videos}
-          isVideoLoading={isVideoLoading}
-          error={error}
-        />
-      </Box>
-      <Box pt="sectionTop">
-        <Flex justify="space-between" align="center" mb={4}>
-          <Badge label="Client Speaks" />
-          <Button
             textStyle="size-xl"
-            rounded="full"
-            variant="outline"
-            onClick={() => navigate("/client-testimonial")}
-            label="View all"
-            rightIcon={<LuArrowUpRight size={16} />}
-          />
-        </Flex>
-        <Flex
-          direction={{ base: "column", lg: "row" }}
-          justify="space-between"
-          align="center"
-          mb={{ base: 4, lg: 6 }}
-          gap={{ base: 4, lg: 12 }}
-        >
-          <Heading
-            as="h1"
-            fontWeight="normal"
-            maxW={{ lg: "45%" }}
-            textAlign={{ base: "center", lg: "left" }}
+            fontWeight={"medium"}
+            textAlign={"center"}
+            py={8}
           >
-            What{" "}
-            <Text as="span" color="brand.primary">
-              Our Clients
-            </Text>{" "}
-            Say About Us?
-          </Heading>
-          <Text
-            textStyle={"size-2xl"}
-            textAlign={{ base: "center", lg: "right" }}
-            maxW={{ lg: "45%" }}
-          >
-            Read feedback from clients who have experienced our professional
-            moving services.
+            Still have more questions? Contact our{" "}
+            <Text
+              as="span"
+              color="brand.primary"
+              textDecoration="underline"
+              cursor="pointer"
+              _hover={{ opacity: 0.8 }}
+              onClick={() => navigate("/associate-code-of-conduct")}
+            >
+              help center.
+            </Text>
           </Text>
-        </Flex>
-        <ClientSpeaks testimonials={testimonials} isLoading={isLoading} />
+        </Container>
       </Box>
-    </Container>
+    </>
   );
 };
 

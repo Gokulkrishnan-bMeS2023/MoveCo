@@ -27,7 +27,8 @@ const AboutUs = () => {
           _hover={{ opacity: 0.8 }}
           onClick={() => navigate("/video-review")}
         >
-          {" "}video testimonials{" "}
+          {" "}
+          video testimonials{" "}
         </Box>
         on our website, and choose us for your next move.
       </Text>
@@ -39,21 +40,22 @@ const AboutUs = () => {
       <Flex justify={{ base: "center", md: "flex-start" }}>
         <Badge label="Testimonials" mb={4} />
       </Flex>
-     <Text textStyle="size-3xl">
-        Our online 
-      <Box
+      <Text textStyle="size-3xl">
+        Our online
+        <Box
           as="span"
           color="brand.primary"
           cursor="pointer"
           _hover={{ opacity: 0.8 }}
           onClick={() => navigate("/client-testimonial")}
         >
-          {" "}testimonial board{" "}
+          {" "}
+          testimonial board{" "}
         </Box>
-       goes a step further. You can post your moving
-      experience for our future customers to see. You can also go to our website
-      & see over 10 years of customer reviews. Our crews make the difference. We
-      conduct background checks and random drug tests.
+        goes a step further. You can post your moving experience for our future
+        customers to see. You can also go to our website & see over 10 years of
+        customer reviews. Our crews make the difference. We conduct background
+        checks and random drug tests.
       </Text>
     </>
   );
@@ -78,21 +80,25 @@ const AboutUs = () => {
             justify="space-between"
             gap={{ base: 4, lg: 10 }}
           >
-              <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "left" }}>
-                What Do We Do 
-                In{" "}
-                <Text as="span" color="brand.primary">
-                  MoveCo?
-                </Text>
-              </Heading>
-              <Text
-                textStyle="size-2xl"
-                maxW={{ lg: "45%" }}
-                textAlign={{ base: "center", lg: "right" }}
-              >
-                For more than 100 years experience, We move coast to coast under
-                our own authority.
+            <Heading
+              as="h1"
+              fontWeight="normal"
+              maxW={{ lg: "45%" }}
+              textAlign={{ base: "center", lg: "left" }}
+            >
+              What Do We Do In{" "}
+              <Text as="span" color="brand.primary">
+                MoveCo?
               </Text>
+            </Heading>
+            <Text
+              textStyle="size-2xl"
+              maxW={{ lg: "45%" }}
+              textAlign={{ base: "center", lg: "right" }}
+            >
+              For more than 100 years experience, We move coast to coast under
+              our own authority.
+            </Text>
           </Flex>
 
           <ImageTextSection image={images.service1} content={missionContent} />
@@ -115,21 +121,25 @@ const AboutUs = () => {
             gap={{ base: 4, lg: 10 }}
             mb={{ base: 4, lg: 6 }}
           >
-              <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "left" }}>
-                What Do You Get
-                When you In{" "}
-                <Text as="span" color="brand.primary">
-                  Choose  Us?
-                </Text>
-              </Heading>
-              <Text
-                textStyle="size-2xl"
-                maxW={{ lg: "45%" }}
-                textAlign={{ base: "center", lg: "right" }}
-              >
-                For more than 100 years experience, We move coast to coast under
-                our own authority.
+            <Heading
+              as="h1"
+              fontWeight="normal"
+              maxW={{ lg: "45%" }}
+              textAlign={{ base: "center", lg: "left" }}
+            >
+              What Do You Get When you In{" "}
+              <Text as="span" color="brand.primary">
+                Choose Us?
               </Text>
+            </Heading>
+            <Text
+              textStyle="size-2xl"
+              maxW={{ lg: "45%" }}
+              textAlign={{ base: "center", lg: "right" }}
+            >
+              For more than 100 years experience, We move coast to coast under
+              our own authority.
+            </Text>
           </Flex>
           <CardTemplate data={features} />
         </Box>
@@ -155,20 +165,25 @@ const AboutUs = () => {
             justify="space-between"
             gap={{ base: 4, lg: 10 }}
           >
-              <Heading as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{ base: "center", lg: "left" }}>
-                Our {" "}
-                <Text as="span" color="brand.primary">
-                  Standards
-                </Text>
-              </Heading>
-              <Text
-                textStyle="size-2xl"
-                maxW={{ lg: "45%" }}
-                textAlign={{ base: "center", lg: "right" }}
-              >
-                For more than 100 years experience, We move coast to coast under
-                our own authority.
+            <Heading
+              as="h1"
+              fontWeight="normal"
+              maxW={{ lg: "45%" }}
+              textAlign={{ base: "center", lg: "left" }}
+            >
+              Our{" "}
+              <Text as="span" color="brand.primary">
+                Standards
               </Text>
+            </Heading>
+            <Text
+              textStyle="size-2xl"
+              maxW={{ lg: "45%" }}
+              textAlign={{ base: "center", lg: "right" }}
+            >
+              For more than 100 years experience, We move coast to coast under
+              our own authority.
+            </Text>
           </Flex>
           <CardTemplate data={benefits} />
         </Box>
