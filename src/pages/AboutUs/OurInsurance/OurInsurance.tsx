@@ -91,7 +91,7 @@ const OurInsurance = () => {
                   and give you peace of mind.
                 </Text>
             </Flex>
-            <CardTemplate data={coveredWays} />
+            <CardTemplate data={coveredWays} columns={{ base: 1, md: 2, lg: 3 }}/>
           </Box>
         </Box>
       </Container>
