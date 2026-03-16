@@ -65,6 +65,10 @@ import p14 from "./14.jpg";
 import p15 from "./15.jpg";
 import p16 from "./16.jpg";
 import p17 from "./17.jpg";
+import professionalSerivce from "./professionalService.webp";
+import packingService from "./packingservice.webp";
+import StorageService from "./storageservice.webp";
+
 
 export const images = {
   aboutUsBanner,
@@ -133,4 +137,7 @@ export const images = {
   p15,
   p16,
   p17,
+  professionalSerivce,
+  packingService,
+  StorageService,
 };

@@ -11,6 +11,7 @@ const ServiceCard = ({
   title: string;
   description: string;
 }) => (
+ 
   <Box
     borderRadius="2xl"
     overflow="hidden"
@@ -18,11 +19,14 @@ const ServiceCard = ({
     role="group"
     cursor="default"
     boxShadow="md"
+    bg="brand.primary"
+    display="flex" 
+    flexDirection="column"
+    h="100%"   
     transition="transform 0.3s ease, box-shadow 0.3s ease"
     _hover={{ transform: "translateY(-6px)", boxShadow: "xl" }}
   >
-    {/* Image */}
-    <Box h="240px" overflow="hidden">
+    <Box h="300px" overflow="hidden">
       <Image
         src={image}
         alt={title}
@@ -34,18 +38,16 @@ const ServiceCard = ({
       />
     </Box>
 
-    {/* Content */}
-    <Box bg="brand.primary" px={6} py={5}>
-      <Text
+    <Box p={8} flex="1">
+      <Heading as="h3"
         color="brand.white"
         fontWeight="semibold"
-        textStyle="size-2xl"
         lineHeight="short"
         mb={2}
       >
         {title}
-      </Text>
-      <Text textStyle="size-lg" color="brand.white">
+      </Heading>
+      <Text textStyle="size-xl" color="brand.white">
         {description}
       </Text>
     </Box>
@@ -86,7 +88,7 @@ const ServiceSection = () => {
         </Text>
       </Flex>
 
-      <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
+      <SimpleGrid columns={{ base: 1, lg: 3 }} gap={6}>
         {services.map((service) => (
           <ServiceCard key={service.title} {...service} />
         ))}

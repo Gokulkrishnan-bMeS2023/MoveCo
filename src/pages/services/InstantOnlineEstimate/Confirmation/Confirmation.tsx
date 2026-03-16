@@ -300,7 +300,6 @@ interface QuoteData {
   destination: QuoteAddress;
 }
 
-// ── Helpers ────────────────────────────────────────────────────────────────
 const fmt = (val: string | number | null | undefined, fallback = "-") => {
   if (val === null || val === undefined || val === "" || val === 0)
     return fallback;
@@ -344,18 +343,15 @@ const stairsLabel = (flights: number) =>
 const distanceLabel = (feet: number) =>
   feet === 0 ? "Less than 100 Feet" : `${feet} ft`;
 
-// ── Component ──────────────────────────────────────────────────────────────
 const Confirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const quoteId: number | undefined = location.state?.quoteId;
-
   const [quoteData, setQuoteData] = useState<QuoteData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Guard: must arrive from the app with a quoteId
     if (!location.state?.fromApp || !quoteId) {
       navigate("/", { replace: true });
       return;
@@ -380,7 +376,6 @@ const Confirmation = () => {
     fetchQuote();
   }, [quoteId, location.state, navigate]);
 
-  // ── Loading ──────────────────────────────────────────────────────────────
   if (isLoading) {
     return (
       <Center minH="60vh">
@@ -394,7 +389,6 @@ const Confirmation = () => {
     );
   }
 
-  // ── Error ────────────────────────────────────────────────────────────────
   if (error || !quoteData) {
     return (
       <Center minH="60vh">
@@ -412,7 +406,6 @@ const Confirmation = () => {
 
   const { quote, inventories, origin, destination } = quoteData;
 
-  // Build Google Maps embed src from lat/lng
   const mapSrc =
     origin?.latitude && destination?.latitude
       ? `https://www.google.com/maps?q=${origin.latitude},${origin.longitude}+to+${destination.latitude},${destination.longitude}&output=embed`
