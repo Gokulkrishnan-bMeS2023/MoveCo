@@ -41,55 +41,57 @@ const Home = () => {
             </Box>
           </Box>
         </Flex>
-        <Box pt="sectionTop">
+      </Container>
+      <Box bg={"brand.white"} px="-8">
+        <Container px={8} pt={6} pb={10}>
           <ServiceSection />
-        </Box>
-        <Box pt="sectionTop">
-          <Flex justify="space-between" align="center" mb={4}>
-            <Badge label="Client Review" />
-            <Button
-              textStyle="size-xl"
-              rounded="full"
-              variant="outline"
-              onClick={() => navigate("/video-review")}
-              label="View all"
-              rightIcon={<LuArrowUpRight size={16} />}
-            />
-          </Flex>
-          <Flex
-            direction={{ base: "column", lg: "row" }}
-            justify="space-between"
-            align="center"
-            mb={{ base: 4, lg: 6 }}
-            gap={{ base: 4, lg: 12 }}
-          >
-            <Heading
-              as="h1"
-              fontWeight="normal"
-              maxW={{ lg: "45%" }}
-              textAlign={{ base: "center", lg: "left" }}
-            >
-              What{" "}
-              <Text as="span" color="brand.primary">
-                Our Clients
-              </Text>{" "}
-              Think About Us?
-            </Heading>
-            <Text
-              textStyle={"size-2xl"}
-              textAlign={{ base: "center", lg: "right" }}
-              maxW={{ lg: "45%" }}
-            >
-              Watch Reviews from satisfied clients, sharing their experiences
-              and successes with our services.
-            </Text>
-          </Flex>
-          <VideoGrid
-            videos={videos}
-            isVideoLoading={isVideoLoading}
-            error={error}
+        </Container>
+      </Box>
+      <Container>
+        <Flex justify="space-between" align="center" mb={4}>
+          <Badge label="Client Review" />
+          <Button
+            textStyle="size-xl"
+            rounded="full"
+            variant="outline"
+            onClick={() => navigate("/video-review")}
+            label="View all"
+            rightIcon={<LuArrowUpRight size={16} />}
           />
-        </Box>
+        </Flex>
+        <Flex
+          direction={{ base: "column", lg: "row" }}
+          justify="space-between"
+          align="center"
+          mb={{ base: 4, lg: 6 }}
+          gap={{ base: 4, lg: 12 }}
+        >
+          <Heading
+            as="h1"
+            fontWeight="normal"
+            maxW={{ lg: "45%" }}
+            textAlign={{ base: "center", lg: "left" }}
+          >
+            What{" "}
+            <Text as="span" color="brand.primary">
+              Our Clients
+            </Text>{" "}
+            Think About Us?
+          </Heading>
+          <Text
+            textStyle={"size-2xl"}
+            textAlign={{ base: "center", lg: "right" }}
+            maxW={{ lg: "45%" }}
+          >
+            Watch Reviews from satisfied clients, sharing their experiences
+            and successes with our services.
+          </Text>
+        </Flex>
+        <VideoGrid
+          videos={videos}
+          isVideoLoading={isVideoLoading}
+          error={error}
+        />
         <Box pt="sectionTop">
           <Flex justify="space-between" align="center" mb={4}>
             <Badge label="Client Speaks" />

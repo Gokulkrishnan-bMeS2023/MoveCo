@@ -61,8 +61,6 @@ const ReviewCard = ({ client }: { client: ClientSpeak }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       position="relative"
-      // zIndex={isHovered ? 20 : 1}
-      pb="20px"
     >
       <Box
         bg="brand.white"
