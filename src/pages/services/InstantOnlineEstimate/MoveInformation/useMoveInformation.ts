@@ -2,17 +2,13 @@ import { use, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toaster } from "../../../../components/ui/toaster";
 import { validateMoveInformation } from "../validation";
-import type {
-  MoveInformationDTO,
-  MoveInformationErrors,
-} from "./DTOs";
+import type { MoveInformationDTO, MoveInformationErrors } from "./DTOs";
 
 import { instantOnlineStaticDataPromise } from "../../../../lib/queries";
 
 export const useMoveInformationForm = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
- 
 
   const {
     moveSizeOptions,
@@ -25,7 +21,7 @@ export const useMoveInformationForm = () => {
 
   const query = useMemo(
     () => Object.fromEntries(searchParams.entries()),
-    [searchParams]
+    [searchParams],
   );
 
   const getInitialState = (): MoveInformationDTO => ({
@@ -65,7 +61,7 @@ export const useMoveInformationForm = () => {
   });
 
   const [values, setValues] = useState<MoveInformationDTO>(() =>
-    getInitialState()
+    getInitialState(),
   );
 
   const [errors, setErrors] = useState<MoveInformationErrors>({});
@@ -86,30 +82,21 @@ export const useMoveInformationForm = () => {
 
   const handleSubmit = () => {
     const clientErrors = validateMoveInformation(values);
-
-      if (Object.keys(clientErrors).length > 0) {
-    setErrors(clientErrors);
-
-    toaster.create({
-      title: "Please fix the errors before submitting.",
-      type: "error",
-    });
-
-    return;
-  }
-
-  setErrors({});
-
+    if (Object.keys(clientErrors).length > 0) {
+      setErrors(clientErrors);
+      toaster.create({
+        title: "Please fix the errors before submitting.",
+        type: "error",
+      });
+      return;
+    }
+    setErrors({});
     const params = new URLSearchParams();
-
     Object.entries(values).forEach(([key, value]) => {
       if (value) {
         params.set(key, value);
       }
     });
-
-    
-
     navigate(`/inventory?${params.toString()}`, {
       state: { fromApp: true },
     });

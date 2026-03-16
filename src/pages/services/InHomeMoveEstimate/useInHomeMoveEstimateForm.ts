@@ -42,7 +42,6 @@ export const useInHomeEstimateForm = () => {
     recaptchaToken: "",
   });
 
-  // Empty state (form reset)
   const getEmptyState = (): MoveEstimateFormValues => ({
     visitDate: "",
     visitTime: timeOptions?.[0]?.value ?? "",
@@ -89,7 +88,6 @@ export const useInHomeEstimateForm = () => {
   const handleSubmit = async () => {
     const clientErrors = validateMoveEstimate(values);
     setErrors(clientErrors);
-
     if (Object.keys(clientErrors).length > 0) {
       toaster.create({
         title: "Please fix the errors before submitting.",
@@ -97,7 +95,6 @@ export const useInHomeEstimateForm = () => {
       });
       return;
     }
-
     if (!executeRecaptcha) {
       toaster.create({
         title: "reCAPTCHA not ready. Please try again.",
@@ -105,12 +102,9 @@ export const useInHomeEstimateForm = () => {
       });
       return;
     }
-
     try {
       setIsSubmitting(true);
-
       const recaptchaToken = await executeRecaptcha("inhome_estimate");
-
       const payload = {
         inHomeEstimateDate: values.visitDate,
         inHomeEstimateTimeRange: values.visitTime,
@@ -132,17 +126,13 @@ export const useInHomeEstimateForm = () => {
         additionalInfo: values.notes,
         recaptchaToken,
       };
-
       const response = await postInHomeEstimate(payload);
-
       toaster.create({
         title:
           response?.data?.message ||
           "Please call the office at 972-250-1100 to confirm your schedule.",
         type: "success",
       });
-
-      // Reset form properly
       setValues(getEmptyState());
       setErrors({});
       setSearchParams({});
