@@ -70,7 +70,7 @@ const AboutUs = () => {
           overlayOpacity={0.1}
         />
         <Box pt="sectionTop">
-          <Flex justify={{ base: "center", md: "flex-start" }}>
+         <Flex justify={{ base: "center", lg: "flex-start" }}>
             <Badge label="About Us" mb={4} />
           </Flex>
           <Flex

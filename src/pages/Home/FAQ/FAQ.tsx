@@ -1,12 +1,14 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import CommonAccordion from "../../AboutUs/AboutUsComponents/CommonAccordion";
 import Badge from "../../../components/common/Badge/Badge";
 import { professionalStandards } from "./data";
 
 const FAQ = () => {
   return (
-    <Box pt="sectionTop">
-      <Badge label="FAQs" />
+    <>
+      <Flex justify={{ base: "center", lg: "flex-start" }}>
+        <Badge label="FAQs" mb={4} />
+      </Flex>
       <Flex
         mb={{ base: 4, lg: 6 }}
         direction={{ base: "column", lg: "row" }}
@@ -36,7 +38,7 @@ const FAQ = () => {
         </Text>
       </Flex>
       <CommonAccordion sections={professionalStandards} />
-    </Box>
+    </>
   );
 };
 
