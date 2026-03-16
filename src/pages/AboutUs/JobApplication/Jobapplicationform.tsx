@@ -1,8 +1,9 @@
-import { Stack, Box, Button } from "@chakra-ui/react";
+import { Stack, Box } from "@chakra-ui/react";
 import { useJobApplicationForm } from "./Usejobapplicationform";
 import Step1PersonalInfo from "./Step1PersonalInfo/Step1PersonalInfo";
 import Step2Address from "./Step2Address/Step2Address";
 import Step3Experience from "./Step3Experience/Step3Experience";
+import Button from "../../../components/common/Button/Button";
 
 const steps = ["Personal Info", "Education", "Review"];
 const JobApplicationForm = () => {
@@ -28,10 +29,8 @@ const JobApplicationForm = () => {
 
   return (
     <>
-      {/* ── Progress Bar ── */}
       <Box py={10}>
         <Box position="relative">
-          {/* Base gray line */}
           <Box
             position="absolute"
             top="20px"
@@ -42,7 +41,6 @@ const JobApplicationForm = () => {
             zIndex={0}
           />
 
-          {/* Active progress line */}
           <Box
             position="absolute"
             top="20px"
@@ -60,7 +58,6 @@ const JobApplicationForm = () => {
             }
           />
 
-          {/* Step circles + labels */}
           <Stack
             direction="row"
             justify="space-between"
@@ -73,7 +70,6 @@ const JobApplicationForm = () => {
 
               return (
                 <Stack key={index} align="flex-start" gap={2} zIndex={1}>
-                  {/* Circle */}
                   <Box
                     w="40px"
                     h="40px"
@@ -98,7 +94,6 @@ const JobApplicationForm = () => {
                     {isCompleted ? "✓" : index + 1}
                   </Box>
 
-                  {/* Label */}
                   <Box
                     textStyle="xs"
                     fontWeight={isActive ? "600" : "400"}
@@ -117,7 +112,6 @@ const JobApplicationForm = () => {
         </Box>
       </Box>
 
-      {/* ── Step Content ── */}
       <Stack gap={8}>
         {page === 0 && (
           <Step1PersonalInfo
@@ -153,29 +147,23 @@ const JobApplicationForm = () => {
         )}
       </Stack>
 
-      {/* ── Navigation Buttons ── */}
       <Stack direction="row" justify="space-between" pt={10}>
         <Button
           variant="outline"
+          label="Prev"
           textStyle="sm"
-          color="brand.primary"
-          borderWidth="1px"
-          borderColor="brand.primary"
-          _hover={{ bg: "brand.primary", color: "white" }}
           onClick={prevPage}
           disabled={page === 0}
-        >
-          Prev
-        </Button>
+        />
+
         <Button
-          bg="brand.primary"
-          color="white"
-          _hover={{ bg: "brand.primary" }}
+          variant="primary"
+          label={
+            isSubmitting ? "Submitting..." : page === 2 ? "Submit" : "Next"
+          }
           onClick={nextPage}
           disabled={isSubmitting}
-        >
-          {isSubmitting ? "Submitting..." : page === 2 ? "Submit" : "Next"}
-        </Button>
+        />
       </Stack>
     </>
   );

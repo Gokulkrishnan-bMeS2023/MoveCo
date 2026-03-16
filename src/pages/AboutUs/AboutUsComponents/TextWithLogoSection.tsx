@@ -1,0 +1,119 @@
+import { Box, SimpleGrid, Flex, Text, Image } from "@chakra-ui/react";
+import type { ReactNode } from "react";
+import Badge from "../../../components/common/Badge/Badge";
+
+// --- Logo Panel Types ---
+interface LogoItem {
+  src: string;
+  alt: string;
+}
+
+interface LogoPanelColumn {
+  heading: string;
+  logos: [LogoItem, LogoItem]; 
+}
+
+interface TextWithLogoPanelProps {
+  leftColumn: LogoPanelColumn;
+  rightColumn: LogoPanelColumn;
+  buttonLabel?: string;
+  content: ReactNode;
+  reverse?: boolean;
+}
+
+
+const LogoCard = ({ column }: { column: LogoPanelColumn }) => {
+  return (
+    <Box
+      bg="white"
+      borderRadius="2xl"
+      boxShadow="md"
+      w="100%"
+      h="100%"
+    >
+      <Flex justify="center" align="center" py={5}>
+        <Text
+          textStyle="size-xl"
+          fontWeight="normal"
+          color="brand.primary"
+          textDecoration="underline"
+          textUnderlineOffset="3px"
+        >
+          {column.heading}
+        </Text>
+      </Flex>
+
+      <Flex justify="center" align="center" py={12} minH="200px">
+        <Image
+          src={column.logos[0].src}
+          alt={column.logos[0].alt}
+          maxH="120px"
+          maxW="80%"
+          objectFit="contain"
+        />
+      </Flex>
+
+      {/* Logo 2 */}
+      <Flex justify="center" align="center" py={12} minH="200px">
+        <Image
+          src={column.logos[1].src}
+          alt={column.logos[1].alt}
+          maxH="120px"
+          maxW="80%"
+          objectFit="contain"
+        />
+      </Flex>
+    </Box>
+  );
+};
+
+const LogoPanel = ({
+  leftColumn,
+  rightColumn,
+}: {
+  leftColumn: LogoPanelColumn;
+  rightColumn: LogoPanelColumn;
+}) => {
+  return (
+    <SimpleGrid columns={2} gap={4} w="100%" alignItems="stretch">
+      <LogoCard column={leftColumn} />
+      <LogoCard column={rightColumn} />
+    </SimpleGrid>
+  );
+};
+
+const TextWithLogoPanelSection = ({
+  leftColumn,
+  rightColumn,
+  buttonLabel,
+  content,
+  reverse = false,
+}: TextWithLogoPanelProps) => {
+  return (
+    <SimpleGrid
+      columns={{ base: 1, md: 2 }}
+      alignItems="center"
+      gap={{ base: 8, md: 24 }}
+    >
+      <Box
+        w="100%"
+        order={{ base: 1, md: reverse ? 2 : 1 }}
+      >
+        <LogoPanel leftColumn={leftColumn} rightColumn={rightColumn} />
+      </Box>
+
+      <Box order={{ base: 2, md: reverse ? 1 : 2 }}>
+        {buttonLabel && (
+          <Flex justify={{ base: "center", md: "flex-start" }}>
+            <Badge label={buttonLabel} mb={4} />
+          </Flex>
+        )}
+        <Box textAlign={{ base: "center", md: "left" }}>
+          {content}
+        </Box>
+      </Box>
+    </SimpleGrid>
+  );
+};
+
+export default TextWithLogoPanelSection;
