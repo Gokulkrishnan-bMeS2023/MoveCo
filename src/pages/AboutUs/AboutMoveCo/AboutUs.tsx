@@ -35,8 +35,6 @@ const AboutUs = () => {
         >
           {" "}
           video testimonials{" "}
-          {" "}
-          video testimonials{" "}
         </Box>
         on our website, and choose us for your next move.
       </Text>

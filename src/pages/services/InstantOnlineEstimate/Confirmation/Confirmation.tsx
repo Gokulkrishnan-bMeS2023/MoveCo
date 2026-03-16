@@ -441,7 +441,6 @@ const Confirmation = () => {
           </Box>
         </Flex>
 
-        {/* ── Quote Confirmation ── */}
         <Box
           bg="brand.white"
           p={{ base: 6, md: 8 }}
@@ -521,37 +520,35 @@ const Confirmation = () => {
 
         {/* ── Quote Includes ── */}
         <Box pt="sectionTop">
-          <Flex justify={{ base: "center", md: "flex-start" }}>
+          <Flex justify={{ base: "center", lg: "flex-start" }}>
             <Badge label="Includes" mb={4} />
           </Flex>
           <Flex
-            direction={{ base: "column", md: "row" }}
-            align={{ base: "flex-start", md: "center" }}
+            direction={{ base: "column", lg: "row" }}
             justify="space-between"
-            gap={{ base: 4, md: 10 }}
+            align="center"
             mb={{ base: 4, lg: 6 }}
+            gap={{ base: 4, lg: 12 }}
           >
-            <Box maxW="600px" w="100%">
               <Heading
-                as="h1"
-                fontWeight="normal"
-                textAlign={{ base: "center", md: "left" }}
+                 as="h1"
+              fontWeight="normal"
+              maxW={{ lg: "45%" }}
+              textAlign={{ base: "center", lg: "left" }}
               >
                 Your Quote{" "}
                 <Text as="span" color="brand.primary">
                   Includes
                 </Text>
               </Heading>
-            </Box>
-            <Box maxW="430px" w="100%">
               <Text
-                textStyle="size-2xl"
-                textAlign={{ base: "center", md: "right" }}
+                 textStyle={"size-2xl"}
+              textAlign={{ base: "center", lg: "right" }}
+              maxW={{ lg: "45%" }}
               >
                 Every quote covers insurance, protection, and full-service care
                 — no hidden costs, no surprises.
               </Text>
-            </Box>
           </Flex>
           <CardTemplate data={quoteIncludesData} />
         </Box>
@@ -819,43 +816,35 @@ const Confirmation = () => {
         </Box>
       </Container>
 
-      {/* ── What Your Quote Includes ── */}
-      <Box pt="sectionTop">
-        <Box bg="brand.white" px="-8">
-          <Container px={8} pt={4} pb={10}>
+      <Box bg={"brand.white"} px="-8">
+        <Container px={8} pt={4} pb={10}>
             <Flex
-              mb={{ base: 4, lg: 6 }}
-              direction={{ base: "column", md: "row" }}
-              align={{ base: "flex-start", md: "center" }}
-              justify="space-between"
-              gap={{ base: 4, md: 10 }}
+              direction={{ base: "column", lg: "row" }}
+            align="center"
+            justify="space-between"
+            gap={{ base: 4, lg: 10 }}
+            mb={{ base: 4, lg: 6 }}
             >
-              <Box maxW="600px" w="100%">
                 <Heading
-                  as="h1"
-                  fontWeight="normal"
-                  textAlign={{ base: "center", md: "left" }}
+                  as="h1" fontWeight="normal" maxW={{ lg: "45%" }} textAlign={{base: "center",lg:"left"}}
                 >
                   <Text as="span" color="brand.primary">
                     MoveCo <br />
                   </Text>
                   What Your Quote Includes
                 </Heading>
-              </Box>
-              <Box maxW="430px" w="100%">
                 <Text
                   textStyle="size-2xl"
-                  textAlign={{ base: "center", md: "right" }}
+                maxW={{ lg: "45%" }}
+                textAlign={{ base: "center", lg: "right" }}
                 >
                   Everything you need to know about your move — pricing, crew,
                   equipment, and customer protection
                 </Text>
-              </Box>
             </Flex>
             <CommonAccordion sections={quoteInfoSections} />
           </Container>
         </Box>
-      </Box>
     </>
   );
 };
