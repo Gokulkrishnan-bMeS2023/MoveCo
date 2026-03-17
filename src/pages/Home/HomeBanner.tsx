@@ -27,8 +27,8 @@ const MainBanner = () => {
           objectPosition="center"
           fetchPriority="high"
           loading="eager"
+          style={{ willChange: "transform", contentVisibility: "auto" }} // ✅ add performance hints
         />
-
         <Flex
           position="relative"
           zIndex={1}
@@ -137,6 +137,7 @@ const MainBanner = () => {
           objectPosition="center"
           fetchPriority="high"
           loading="eager"
+          style={{ willChange: "transform", contentVisibility: "auto" }} // ✅ add performance hints
         />
         <Stack gap={4} position="relative" zIndex={1}>
           <Heading as="h2">

@@ -1,18 +1,19 @@
+import { lazy } from "react";
 import { Box, Flex, Heading, Text, Container, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/common/Button/Button";
 import { MainBanner } from "./HomeBanner";
-import QuoteFormImage from "../../assets/quote-form-image.webp";
-import Badge from "../../components/common/Badge/Badge";
 import { LuArrowUpRight } from "react-icons/lu";
 import { GetQuote } from "./QuoteForm/Quote";
-import ClientSpeaks from "./ReviewGrid/ClientSpeaks";
-import VideoGrid from "./VideoGrid/ClientReview";
 import { useClientSpeaks } from "./ReviewGrid/useClientSpeaks";
-import RecaptchaWrapper from "../../utils/RecaptchaWrapper";
 import { useVideoGrid } from "./VideoGrid/useClientReview";
-import FAQ from "./FAQ/FAQ";
-import ServiceSection from "./Servicesection/Servicesection";
+import { images } from "../../assets";
+import Button from "../../components/common/Button/Button";
+import Badge from "../../components/common/Badge/Badge";
+import RecaptchaWrapper from "../../utils/RecaptchaWrapper";
+const ServiceSection = lazy(() => import("./Servicesection/Servicesection"));
+const VideoGrid = lazy(() => import("./VideoGrid/ClientReview"));
+const ClientSpeaks = lazy(() => import("./ReviewGrid/ClientSpeaks"));
+const FAQ = lazy(() => import("./FAQ/FAQ"));
 
 const Home = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const Home = () => {
           <Box flex="3">
             <Box>
               <Image
-                src={QuoteFormImage}
+                src={images.quoteFormImage}
                 alt="Quote Form"
                 w="100%"
                 h={"30%"}
@@ -84,8 +85,8 @@ const Home = () => {
             textAlign={{ base: "center", lg: "right" }}
             maxW={{ lg: "45%" }}
           >
-            Watch Reviews from satisfied clients, sharing their experiences
-            and successes with our services.
+            Watch Reviews from satisfied clients, sharing their experiences and
+            successes with our services.
           </Text>
         </Flex>
         <VideoGrid
