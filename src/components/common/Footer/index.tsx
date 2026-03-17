@@ -173,8 +173,8 @@ const TollFreeBox = memo(() => (
     <Image
       src="https://d3eaozktcyljdh.cloudfront.net/themes/custom/txdmv/logo.svg"
       alt="TX DMV Certified"
-      height="45px"
-      width="auto"
+      height={45}
+      w={250}
       objectFit="contain"
     />
     <Flex
@@ -334,8 +334,8 @@ const Footer = () => {
               <Image
                 src={images.MoveCo}
                 alt="MoveCo.Net Logo"
-                h="55px"
-                w="auto"
+                h={55}
+                width={54}
                 objectFit="contain"
                 filter="drop-shadow(0 2px 8px rgba(255, 215, 10, 0.2))"
               />
