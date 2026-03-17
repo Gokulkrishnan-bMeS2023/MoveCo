@@ -80,8 +80,13 @@ const LICENSING_INFO = [
 ];
 
 const SocialMediaIcons = memo(() => (
-  <Box pt={{base:1, md: 4}}>
-    <Heading as="h5" color="brand.warning" mb="4" textAlign={{base: "center",md: "left"}}>
+  <Box pt={{ base: 1, md: 4 }}>
+    <Heading
+      as="h5"
+      color="brand.warning"
+      mb="4"
+      textAlign={{ base: "center", md: "left" }}
+    >
       Follow Us
     </Heading>
     <Flex gap="3" justifyContent={RESPONSIVE_ALIGN}>
@@ -172,7 +177,13 @@ const TollFreeBox = memo(() => (
       width="auto"
       objectFit="contain"
     />
-    <Flex alignItems="center" gap="2" direction={"row"} justify={"center"} mt={{base: 0,md: 2}}>
+    <Flex
+      alignItems="center"
+      gap="2"
+      direction={"row"}
+      justify={"center"}
+      mt={{ base: 0, md: 2 }}
+    >
       <Text
         textStyle="size-md"
         color="brand.black"
@@ -186,7 +197,7 @@ const TollFreeBox = memo(() => (
         href="tel:8005900928"
         textStyle="size-3xl"
         color="brand.black"
-        _hover={{  textDecoration: "none" }}
+        _hover={{ textDecoration: "none" }}
         display="block"
         textAlign="center"
         letterSpacing="tight"
@@ -323,7 +334,8 @@ const Footer = () => {
               <Image
                 src={images.MoveCo}
                 alt="MoveCo.Net Logo"
-                height="55px"
+                h="55px"
+                w="auto"
                 objectFit="contain"
                 filter="drop-shadow(0 2px 8px rgba(255, 215, 10, 0.2))"
               />

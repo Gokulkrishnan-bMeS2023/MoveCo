@@ -36,6 +36,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
         src={`https://www.youtube.com/embed/${video.videoId}?rel=0`}
         title={video.title ?? "Client Video"}
         allowFullScreen
+        loading="lazy"
       />
     </AspectRatio>
   );

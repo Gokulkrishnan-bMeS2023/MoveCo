@@ -3,7 +3,7 @@ import {
   useToken,
   type ButtonProps,
   HStack,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -25,7 +25,7 @@ interface CommonButtonProps extends Omit<ButtonProps, "variant"> {
 const Button = ({
   label,
   variant,
-  textStyle= "size-md",
+  textStyle = "size-md",
   rounded = "md",
   px = 6,
   py = 5,
@@ -79,7 +79,7 @@ const Button = ({
 
   return (
     <ChakraButton
-    fontWeight="400"
+      fontWeight="400"
       rounded={rounded}
       px={px}
       py={py}
@@ -87,9 +87,10 @@ const Button = ({
       onClick={onClick}
       href={href}
       as={as}
-      role="group"
+      // role="group"
       {...styleProps}
       {...props}
+      aria-label={label ? label : "Button"}
     >
       {children ? (
         children

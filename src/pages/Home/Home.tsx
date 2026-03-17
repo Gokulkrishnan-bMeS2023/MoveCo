@@ -31,6 +31,7 @@ const Home = () => {
                 src={QuoteFormImage}
                 alt="Quote Form"
                 w="100%"
+                h={"30%"}
                 rounded="2xl"
               />
               <Box bg="brand.white" p={6} mt={4} rounded="2xl">

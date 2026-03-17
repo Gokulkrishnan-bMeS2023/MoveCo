@@ -46,7 +46,6 @@ import storage from "./Storage.webp";
 import truck2 from "./truck2.webp";
 import yt1 from "./yt1.webp";
 import yt2 from "./yt2.webp";
-import product from "./Product.webp";
 import pricing from "./pricing.webp";
 
 import p1 from "./1.jpg";
@@ -119,7 +118,6 @@ export const images = {
   truck2,
   yt1,
   yt2,
-  product,
   pricing,
   p1,
   p2,
