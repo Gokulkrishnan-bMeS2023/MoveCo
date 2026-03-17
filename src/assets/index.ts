@@ -26,8 +26,6 @@ import inHomeMove from "./in-home.webp";
 import insuranceBanner from "./insurance-banner.webp";
 import linking from "./Linking.webp";
 import logistics from "./Logistics.svg";
-import mainBannerBg from "./main-banner-bg.webp";
-import mainBannerMobile from "./main-banner-mobile.webp";
 import MFH from "./mfh.svg";
 import MoveCo from "./moveco.webp";
 import packaging from "./packaging.webp";
@@ -68,7 +66,6 @@ import professionalSerivce from "./professionalService.webp";
 import packingService from "./packingservice.webp";
 import StorageService from "./storageservice.webp";
 
-
 export const images = {
   aboutUsBanner,
   AMSA,
@@ -98,8 +95,8 @@ export const images = {
   insuranceBanner,
   linking,
   logistics,
-  mainBannerBg,
-  mainBannerMobile,
+  mainBannerBg: "/main-banner-bg.webp",
+  mainBannerMobile: "/main-banner-mobile.webp",
   MFH,
   MoveCo,
   packaging,
