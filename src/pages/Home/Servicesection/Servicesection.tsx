@@ -89,8 +89,8 @@ const ServiceSection = () => {
       </Flex>
 
       <SimpleGrid columns={{ base: 1, lg: 3 }} gap={6}>
-        {services.map((service) => (
-          <ServiceCard key={service.title} {...service} />
+        {services.map((service,index) => (
+          <ServiceCard key={index} {...service} />
         ))}
       </SimpleGrid>
     </>

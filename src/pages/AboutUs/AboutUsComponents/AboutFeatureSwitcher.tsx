@@ -1,6 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Box, Text, VStack, SimpleGrid, Image } from "@chakra-ui/react";
-import { motion, AnimatePresence } from "framer-motion";
 import OnlineImg from "../../../assets/img1.webp";
 import EstimateImg from "../../../assets/img2.webp";
 import MovingImg from "../../../assets/img3.webp";
@@ -8,12 +7,30 @@ import StorageImg from "../../../assets/img5.webp";
 import PackingImg from "../../../assets/img6.webp";
 import { useNavigate } from "react-router-dom";
 
-const MotionBox = motion(Box);
+const SLIDE_IN_STYLE = `
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(80px); }
+    to   { opacity: 1; transform: translateX(0);    }
+  }
+  .slide-in {
+    animation: slideIn 0.45s ease-in-out forwards;
+  }
+`;
 
 export default function AnimatedFeatureSwitcher() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [animKey, setAnimKey] = useState(0);
   const descriptionRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (document.getElementById("feature-switcher-styles")) return;
+    const style = document.createElement("style");
+    style.id = "feature-switcher-styles";
+    style.textContent = SLIDE_IN_STYLE;
+    document.head.appendChild(style);
+  }, []);
+
   const features = [
     {
       title: "Online real-time quote",
@@ -29,10 +46,10 @@ export default function AnimatedFeatureSwitcher() {
           >
             real-time move quotation software
           </Text>{" "}
-          allows you to create binding quotations just by specifying the inventory
-          you want to move and their locations. It is that simple, in minutes you
-          get your quotation number along with all the binding documents, sent
-          directly to your email inbox.
+          allows you to create binding quotations just by specifying the
+          inventory you want to move and their locations. It is that simple, in
+          minutes you get your quotation number along with all the binding
+          documents, sent directly to your email inbox.
         </Text>
       ),
       image: OnlineImg,
@@ -84,8 +101,8 @@ export default function AnimatedFeatureSwitcher() {
           >
             professional packing services
           </Text>{" "}
-          in which our professional movers will estimate the cost it will take to
-          pack your possessions safely in boxes.
+          in which our professional movers will estimate the cost it will take
+          to pack your possessions safely in boxes.
         </Text>
       ),
       image: EstimateImg,
@@ -95,16 +112,20 @@ export default function AnimatedFeatureSwitcher() {
       description: (
         <Text>
           When you plan a move, you certainly want to keep your possessions safe
-          and organized. Boxes, packing material, moving safety material, and all
-          the other rest of moving supplies are also sold here in our online
-          shop. You can visit our<Text
+          and organized. Boxes, packing material, moving safety material, and
+          all the other rest of moving supplies are also sold here in our online
+          shop. You can visit our
+          <Text
             as="span"
             color="brand.primary"
             cursor="pointer"
             _hover={{ opacity: 0.8 }}
             onClick={() => navigate("/product")}
-          >{" "}online Packing supply store </Text>and have them
-          delivered directly at your doorstep with FREE* shipping.
+          >
+            {" "}
+            online Packing supply store{" "}
+          </Text>
+          and have them delivered directly at your doorstep with FREE* shipping.
         </Text>
       ),
       image: MovingImg,
@@ -114,8 +135,9 @@ export default function AnimatedFeatureSwitcher() {
       description: (
         <Text>
           Moving from one house to another, and need an intermediate place to
-          store your belongings? Out of Lewisville area for a few months and want
-          to safely store your belongings? You can try MoveCo.Net as we offer{" "}
+          store your belongings? Out of Lewisville area for a few months and
+          want to safely store your belongings? You can try MoveCo.Net as we
+          offer{" "}
           <Text
             as="span"
             color="brand.primary"
@@ -156,6 +178,7 @@ export default function AnimatedFeatureSwitcher() {
 
   const handleTitleClick = (index: number) => {
     setActiveIndex(index);
+    setAnimKey((prev) => prev + 1);
 
     if (window.innerWidth < 768) {
       setTimeout(() => {
@@ -168,7 +191,12 @@ export default function AnimatedFeatureSwitcher() {
   };
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 2 }} gap={12} alignItems="start">
+    <SimpleGrid
+      columns={{ base: 1, md: 2 }}
+      gap={12}
+      alignItems="start"
+      overflow="hidden"
+    >
       <VStack align="start" gap={{ base: 1, md: 2 }}>
         {features.map((item, index) => (
           <Box
@@ -200,37 +228,31 @@ export default function AnimatedFeatureSwitcher() {
         ))}
       </VStack>
 
-      <Box ref={descriptionRef} w="100%" overflow="hidden">
-        <AnimatePresence mode="wait">
-          <MotionBox
-            key={activeIndex}
-            initial={{ x: 80, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -80, opacity: 0 }}
-            transition={{ duration: 0.45, ease: "easeInOut" }}
-          >
-            <Image
-              src={features[activeIndex].image}
-              alt={features[activeIndex].title}
-              borderRadius="2xl"
-              w="100%"
-              h={{ base: "220px", md: "360px" }}
-              objectFit="cover"
-              mb={6}
-            />
-
-            <Text
-              textStyle="size-xl"
-              fontWeight="bold"
-              color="brand.primary"
-              mb={3}
-            >
-              {features[activeIndex].title}
-            </Text>
-
-            {features[activeIndex].description}
-          </MotionBox>
-        </AnimatePresence>
+      <Box
+        ref={descriptionRef}
+        key={animKey}
+        className="slide-in"
+        w="100%"
+        overflow="hidden"
+      >
+        <Image
+          src={features[activeIndex].image}
+          alt={features[activeIndex].title}
+          borderRadius="2xl"
+          w="100%"
+          h={{ base: "220px", md: "360px" }}
+          objectFit="cover"
+          mb={6}
+        />
+        <Text
+          textStyle="size-xl"
+          fontWeight="bold"
+          color="brand.primary"
+          mb={3}
+        >
+          {features[activeIndex].title}
+        </Text>
+        {features[activeIndex].description}
       </Box>
     </SimpleGrid>
   );
