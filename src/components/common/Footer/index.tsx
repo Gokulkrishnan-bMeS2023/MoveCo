@@ -171,7 +171,7 @@ const TollFreeBox = memo(() => (
     py={2}
   >
     <Image
-      src="https://d3eaozktcyljdh.cloudfront.net/themes/custom/txdmv/logo.svg"
+      src={images.texasLog}
       alt="TX DMV Certified"
       height={45}
       w={250}

@@ -27,6 +27,7 @@ import insuranceBanner from "./insurance-banner.webp";
 import linking from "./Linking.webp";
 import logistics from "./Logistics.svg";
 import MFH from "./mfh.svg";
+import texasLog from "./Texaslogo.svg";
 import MoveCo from "./moveco.webp";
 import packaging from "./packaging.webp";
 import packer from "./packer.webp";
@@ -135,4 +136,5 @@ export const images = {
   professionalSerivce,
   packingService,
   StorageService,
+  texasLog,
 };
