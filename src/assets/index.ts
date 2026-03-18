@@ -30,7 +30,7 @@ import MFH from "./mfh.svg";
 import MoveCo from "./moveco.webp";
 import packaging from "./packaging.webp";
 import packer from "./packer.webp";
-import personalInformation from "./PersonalInformation.webp";
+import personalInformation from "./personalInformation.webp";
 import quoteFormImage from "./quote-form-image.webp";
 import scottishRite from "./scottish-rite.webp";
 import security from "./Security.webp";
