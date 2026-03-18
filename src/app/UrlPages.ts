@@ -4,8 +4,6 @@ import { RouteName } from "./routeNames.ts";
 
 export const UrlPages: AppRoute[] = [
   { path: RouteName.HOME, component: lazy(() => import("../pages/Home/Home")) },
-
-  // About
   {
     path: RouteName.PRIVACY_POLICY,
     component: lazy(() => import("../pages/PrivacyPolicy/PrivacyPolicy")),
@@ -62,8 +60,6 @@ export const UrlPages: AppRoute[] = [
       () => import("../pages/AboutUs/JobApplication/JobApplication"),
     ),
   },
-
-  // Services
   {
     path: RouteName.PROFESSIONAL_PACKING,
     component: lazy(
@@ -94,8 +90,6 @@ export const UrlPages: AppRoute[] = [
       () => import("../pages/services/ProductandServices/ProductandServices"),
     ),
   },
-
-  // Shop
   {
     path: RouteName.PRODUCT,
     component: lazy(
@@ -108,8 +102,6 @@ export const UrlPages: AppRoute[] = [
       () => import("../pages/services/MovingPackingSupplies/Cart"),
     ),
   },
-
-  // Resources
   {
     path: RouteName.ADD_TESTIMONIAL,
     component: lazy(
@@ -126,14 +118,10 @@ export const UrlPages: AppRoute[] = [
     path: RouteName.VIDEO_REVIEW,
     component: lazy(() => import("../pages/Resources/VideoReview/VideoReview")),
   },
-
-  // Contact
   {
     path: RouteName.CONTACT_US,
     component: lazy(() => import("../pages/ContactUs/ContactUs")),
   },
-
-  // Protected
   {
     path: RouteName.MOVE_INFORMATION,
     protected: true,
@@ -146,7 +134,8 @@ export const UrlPages: AppRoute[] = [
     path: RouteName.INVENTORY,
     protected: true,
     component: lazy(
-      () => import("../pages/services/InstantOnlineEstimate/Inventory/Inventory"),
+      () =>
+        import("../pages/services/InstantOnlineEstimate/Inventory/Inventory"),
     ),
   },
   {

@@ -35,6 +35,7 @@ export default function CommonAccordion({ sections }: CommonAccordionProps) {
               _hover={{
                 textDecoration: "underline",
                 textUnderlineOffset: "6px",
+                cursor: "pointer",
               }}
             >
               <Flex flex="1" align="center" justify="space-between">

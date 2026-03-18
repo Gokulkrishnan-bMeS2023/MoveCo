@@ -3,17 +3,19 @@ import { Box, Flex, Heading, Text, Container, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { MainBanner } from "./HomeBanner";
 import { LuArrowUpRight } from "react-icons/lu";
-import { GetQuote } from "./QuoteForm/Quote";
 import { useClientSpeaks } from "./ReviewGrid/useClientSpeaks";
 import { useVideoGrid } from "./VideoGrid/useClientReview";
 import { images } from "../../assets";
 import Button from "../../components/common/Button/Button";
 import Badge from "../../components/common/Badge/Badge";
-import RecaptchaWrapper from "../../utils/RecaptchaWrapper";
 const ServiceSection = lazy(() => import("./Servicesection/Servicesection"));
 const VideoGrid = lazy(() => import("./VideoGrid/ClientReview"));
 const ClientSpeaks = lazy(() => import("./ReviewGrid/ClientSpeaks"));
 const FAQ = lazy(() => import("./FAQ/FAQ"));
+const RecaptchaWrapper = lazy(() => import("../../utils/RecaptchaWrapper"));
+const GetQuote = lazy(() =>
+  import("./QuoteForm/Quote").then((m) => ({ default: m.GetQuote })),
+);
 
 const Home = () => {
   const navigate = useNavigate();

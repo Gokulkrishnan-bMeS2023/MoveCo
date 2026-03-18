@@ -1,39 +1,26 @@
 export const RouteName = {
-  // General
   HOME: "/",
   PRIVACY_POLICY: "/privacy-policy",
   CONTACT_US: "/contact-us",
-
-  // About
   ABOUT_US: "/about-us",
   OUR_INSURANCE: "/our-insurance",
   OUR_STANDARD: "/our-standard",
   ASSOCIATE_CODE_OF_CONDUCT: "/associate-code-of-conduct",
   JOB_APPLICATION: "/job-application",
-
-  // Supported Charity
   SUPPORTED_CHARITY: "/supported-charity",
   ASHLEY_WATROUS_FOUNDATION: "/the-ashley-watrous-foundation",
   SENS_RESEARCH_FOUNDATION: "/sens-research-foundation",
   SCOTTISH_RITE_HOSPITAL: "/scottish-rite-hospital",
-
-  // Services
   PROFESSIONAL_PACKING: "/professional-packing-services",
   STORAGE: "/storage",
   IN_HOME_ESTIMATE: "/in-home-move-estimate",
   ONLINE_ESTIMATE: "/online-estimate",
   PRODUCT_AND_SERVICES: "/product-and-services",
-
-  // Shop
   PRODUCT: "/product",
   CART: "/cart",
-
-  // Resources
   ADD_TESTIMONIAL: "/add-testimonial",
   CLIENT_TESTIMONIAL: "/client-testimonial",
   VIDEO_REVIEW: "/video-review",
-
-  // Protected
   MOVE_INFORMATION: "/move-information",
   INVENTORY: "/inventory",
   CONFIRMATION: "/confirmation",
