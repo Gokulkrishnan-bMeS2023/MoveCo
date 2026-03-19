@@ -195,8 +195,8 @@ export const useInventory = () => {
         type: "success",
       });
 
-      // Pass quoteId through navigation state so Confirmation can fetch real data
       navigate("/confirmation", { state: { fromApp: true, quoteId } });
+      sessionStorage.removeItem("instantQuoteForm");
     } catch (error: any) {
       console.error(error);
 

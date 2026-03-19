@@ -136,6 +136,7 @@ export const useInHomeEstimateForm = () => {
       setValues(getEmptyState());
       setErrors({});
       setSearchParams({});
+      sessionStorage.removeItem("homeQuoteForm");
     } catch (error: any) {
       toaster.create({
         title:
